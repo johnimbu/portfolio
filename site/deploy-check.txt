@@ -1,0 +1,1 @@
+Deploy check: commit pushed from Claude Code on 2026-10-27. Safe to delete.
