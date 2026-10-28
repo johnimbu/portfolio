@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+  <style>html, body { margin: 0; height: 100%; background: #0F1C20; } a { color: #9FD2D9; } a:hover { color: #FFFFFF; }</style>
+  <script>window.OM_SCENES = '[{"name":"Close","dur":3.2,"desc":"Rep closes out an IBM Midwest service request"},{"name":"Call","dur":3.2,"desc":"Incoming call toast, rep answers"},{"name":"Answer","dur":3.4,"desc":"New client opens in the sidebar, open SRs rail slides in"},{"name":"Split","dur":3.2,"desc":"Click split icon, SR screen opens on the right"},{"name":"Jump","dur":3.2,"desc":"Hover earlier clients and SRs in the sidebar"},{"name":"Queue","dur":3.6,"desc":"Zoom on the sidebar queue, fade to loop"}]';</script>
+  <script>window.OM_PLAYBACK = '{"mode":"loop"}';</script>
+  <script>window.TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{"motionEditor":true,"captions":true}/*EDITMODE-END*/;</script>
+</helmet>
+<div style="position: fixed; inset: 0;">
+  <x-import component-from-global-scope="AdpFlow" from="./animations-v3.jsx ./tweaks-panel.jsx ./flow-scene.jsx" hint-size="100%,100%"></x-import>
+</div>
+</x-dc>
+</body>
+</html>

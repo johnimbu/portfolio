@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+  <style>html, body { margin: 0; height: 100%; background: #141414; } a { color: #F2F2F2; } a:hover { color: #D7263D; }</style>
+  <script>window.OM_SCENES = '[{"name":"DSearch","dur":4.8,"desc":"Desktop: pick a date weeks out, day tabs swap to that weekend","nat":4},{"name":"DResults","dur":2.9,"desc":"Desktop: results scroll in, open Quick View","nat":2.4},{"name":"DQuick","dur":2.9,"desc":"Desktop: Quick View, open full show details","nat":2.4},{"name":"DDetail","dur":5.8,"desc":"Desktop: compare Fri and Sat, pick Sat, hand off","nat":4.8},{"name":"MSearch","dur":5.8,"desc":"Mobile: same search, desktop dims","nat":4.8},{"name":"MBrowse","dur":4.3,"desc":"Mobile: flip through two Quick Views","nat":3.6},{"name":"MBuy","dur":5,"desc":"Mobile: buy from Quick View, hand off, fade to loop","nat":4.2}]';</script>
+  <script>window.OM_PLAYBACK = '{"mode":"loop"}';</script>
+  <script>window.TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{"motionEditor":true,"captions":true}/*EDITMODE-END*/;</script>
+</helmet>
+<div style="position: fixed; inset: 0;">
+  <x-import component-from-global-scope="ScFlow" from="./animations-v3.jsx ./tweaks-panel.jsx ./flow-scene.jsx" hint-size="100%,100%"></x-import>
+</div>
+</x-dc>
+</body>
+</html>

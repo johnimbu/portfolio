@@ -1,0 +1,4 @@
+# Plain static site: no build step. Netlify publishes site/ on every push to main.
+[build]
+  publish = "site"
+  command = ""
