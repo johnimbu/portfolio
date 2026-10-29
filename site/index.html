@@ -10,7 +10,8 @@
 <helmet>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>John Imburgia, Product Design Leader</title>
+  <title>John Imburgia, Product Design Lead</title>
+  <meta name="description" content="John Imburgia, Product Design Lead: complex platforms, AI and growth. Case studies from Shopify Tax International, Scene+ Rewards, and Observatori, an AI research lab he founded." />
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
   <link rel="apple-touch-icon" href="assets/favicon.svg" />
   <script>
@@ -66,76 +67,66 @@
     <div style="{{ wrapStyle }}">
 
       <section style="{{ heroSectionStyle }}">
-        <div style="position:absolute;inset:0;background-image:url('assets/me.webp');background-size:cover;background-position:center;filter:grayscale(100%) contrast(108%) brightness(74%);"></div>
-        <div style="position:absolute;inset:0;background:linear-gradient(105deg, rgba(26,26,26,{{ heroOverlayAlpha }}) 0%, rgba(26,26,26,0.62) 45%, rgba(26,26,26,0.24) 100%);"></div>
-        <div style="position:absolute;inset:0;background:linear-gradient(to top, rgba(26,26,26,0.8) 0%, transparent 45%);"></div>
-        <div style="{{ heroContentStyle }}">
-          <div>
+        <div style="{{ heroGridStyle }}">
+          <div style="min-width:0;">
             <div style="{{ badgeStyle }}"></div>
-            <div style="color:rgba(245,239,224,0.55);font-size:13px;letter-spacing:0.14em;text-transform:uppercase;margin-bottom:18px;font-family:'Space Grotesk',sans-serif;font-weight:600;">Product Design · Growth · AI</div>
-            <h1 style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:clamp(2.2rem,5vw,4.2rem);line-height:0.98;color:#F5EFE0;text-transform:uppercase;letter-spacing:0.01em;margin:0 0 20px;">John Imburgia<span style="color:#05D9E8;">.</span></h1>
-            <p style="color:rgba(245,239,224,0.62);font-size:16px;line-height:1.65;max-width:38ch;margin:0;">Design leader with 10+ years across product, growth, and AI. I turn complex systems into clear experiences that ship and perform.</p>
-          </div>
-          <div>
-            <div style="display:flex;align-items:center;gap:10px;margin-bottom:20px;">
-              <a href="assets/John-Imburgia-Resume-2026.pdf" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;gap:10px;color:rgba(245,239,224,0.55);font-size:14px;" onMouseEnter="{{ ctEnter3 }}" onMouseLeave="{{ ctLeave }}" style-hover="color:#F5EFE0;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="{{ ctIcon3 }}" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"></path><path d="M14 2v4a2 2 0 0 0 2 2h4"></path><path d="M10 13h5"></path><path d="M10 17h5"></path></svg>Resume</a>
-            </div>
-            <div style="display:flex;align-items:center;gap:14px;margin-bottom:20px;">
-              <span style="font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:rgba(245,239,224,0.4);white-space:nowrap;">Contact info</span>
-              <span style="flex:1;height:1px;background:rgba(245,239,224,0.15);"></span>
-            </div>
-            <div style="{{ contactGridStyle }}">
-              <a href="https://www.linkedin.com/in/johnimbu/" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;gap:10px;color:rgba(245,239,224,0.55);font-size:14px;" onMouseEnter="{{ ctEnter0 }}" onMouseLeave="{{ ctLeave }}" style-hover="color:#F5EFE0;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="{{ ctIcon0 }}" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect width="4" height="12" x="2" y="9"></rect><circle cx="4" cy="4" r="2"></circle></svg>linkedin.com/in/johnimbu</a>
-              <a href="mailto:john.imbu@gmail.com" style="display:inline-flex;align-items:center;gap:10px;color:rgba(245,239,224,0.55);font-size:14px;" onMouseEnter="{{ ctEnter1 }}" onMouseLeave="{{ ctLeave }}" style-hover="color:#F5EFE0;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="{{ ctIcon1 }}" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;"><rect width="20" height="16" x="2" y="4" rx="2"></rect><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path></svg>john.imbu@gmail.com</a>
-              <a href="tel:847-767-1419" style="display:inline-flex;align-items:center;gap:10px;color:rgba(245,239,224,0.55);font-size:14px;" onMouseEnter="{{ ctEnter2 }}" onMouseLeave="{{ ctLeave }}" style-hover="color:#F5EFE0;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="{{ ctIcon2 }}" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>847-767-1419</a>
-              <span style="display:inline-flex;align-items:center;gap:10px;color:rgba(245,239,224,0.55);font-size:14px;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0"></path><circle cx="12" cy="10" r="3"></circle></svg>Chicago, IL</span>
-            </div>
-            <div style="display:flex;align-items:center;gap:14px;margin:28px 0 18px;">
-              <span style="font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:rgba(245,239,224,0.4);white-space:nowrap;">Featured case studies</span>
-              <span style="flex:1;height:1px;background:rgba(245,239,224,0.15);"></span>
-            </div>
-            <div style="display:flex;flex-wrap:wrap;gap:12px;">
-              <sc-for list="{{ heroCtas }}" as="c" hint-placeholder-count="3">
-                <button onClick="{{ c.open }}" style="{{ c.style }}" style-hover="border-color:rgba(5,217,232,0.65);color:#F5EFE0;"><sc-if value="{{ c.hasIcon }}" hint-placeholder-val="{{ false }}"><span style="{{ c.iconStyle }}"></span></sc-if>{{ c.title }}<span style="opacity:0.7;">{{ c.arrow }}</span></button>
-              </sc-for>
+            <div style="color:#05D9E8;font-size:13px;letter-spacing:0.18em;text-transform:uppercase;margin-bottom:16px;font-family:'Space Grotesk',sans-serif;font-weight:700;">Product Design Lead</div>
+            <h1 style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:clamp(2.6rem,6.4vw,5.2rem);line-height:0.95;color:#F5EFE0;text-transform:uppercase;letter-spacing:0.01em;margin:0 0 26px;">John Imburgia<span style="color:#05D9E8;">.</span></h1>
+            <p style="{{ heroLedeStyle }}">I make complex products easier to understand and use. I shape direction with product and engineering partners, then stay hands-on through interaction design, prototyping and delivery.</p>
+            <p style="font-size:16px;line-height:1.6;color:rgba(245,239,224,0.6);max-width:56ch;margin:0 0 32px;text-wrap:pretty;">Most recently: UX mission lead for Shopify Tax International, design lead for Scene+ at Arro Labs, and founder of Observatori.</p>
+            <div style="display:flex;flex-wrap:wrap;align-items:center;gap:12px 22px;">
+              <a href="assets/John-Imburgia-Resume-2026.pdf" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;gap:10px;padding:13px 22px;border-radius:999px;background:#F5EFE0;color:#141414;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:15px;" style-hover="background:#05D9E8;color:#141414;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"></path><path d="M14 2v4a2 2 0 0 0 2 2h4"></path></svg>Résumé (PDF)</a>
+              <a href="mailto:john.imbu@gmail.com" style="color:rgba(245,239,224,0.8);font-size:15px;border-bottom:1px solid rgba(245,239,224,0.3);padding-bottom:2px;" style-hover="color:#05D9E8;">john.imbu@gmail.com</a>
+              <a href="https://www.linkedin.com/in/johnimbu/" target="_blank" rel="noopener noreferrer" style="color:rgba(245,239,224,0.8);font-size:15px;border-bottom:1px solid rgba(245,239,224,0.3);padding-bottom:2px;" style-hover="color:#05D9E8;">LinkedIn ↗</a>
             </div>
           </div>
+          <div style="{{ heroPhotoStyle }}" role="img" aria-label="Portrait of John Imburgia"></div>
         </div>
       </section>
 
-      <section id="selected-moments" style="{{ smSectionStyle }}">
+      <section id="work" style="{{ workSectionStyle }}">
         <div style="max-width:1280px;margin:0 auto;">
-          <div style="display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:16px 40px;border-top:1px solid #1A1A1A;padding-top:22px;margin-bottom:56px;">
-            <h2 style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:clamp(2rem,4.6vw,3.6rem);line-height:0.95;letter-spacing:0.01em;text-transform:uppercase;color:#1A1A1A;margin:0;">Selected Moments<span style="color:#1F2DC2;">.</span></h2>
-            <p style="font-size:16px;line-height:1.55;color:rgba(26,26,26,0.7);max-width:36ch;margin:0;text-wrap:pretty;">Two case studies in depth, and six moments from the rest of my career.</p>
+          <div style="display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:16px 40px;border-top:1px solid #1A1A1A;padding-top:22px;margin-bottom:40px;">
+            <h2 style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:clamp(2rem,4.6vw,3.6rem);line-height:0.95;letter-spacing:0.01em;text-transform:uppercase;color:#1A1A1A;margin:0;">Selected work<span style="color:#1F2DC2;">.</span></h2>
+            <p style="font-size:16px;line-height:1.55;color:rgba(26,26,26,0.7);max-width:40ch;margin:0;text-wrap:pretty;">Three case studies in depth: two at scale with big teams, and one product I founded and built.</p>
           </div>
 
-          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,440px),1fr));gap:28px;">
-            <sc-for list="{{ featured }}" as="f" hint-placeholder-count="2">
-              <a href="{{ f.href }}" onClick="{{ f.open }}" onMouseEnter="{{ f.enter }}" onMouseLeave="{{ featLeave }}" onFocus="{{ f.enter }}" onBlur="{{ featLeave }}" style="display:flex;flex-direction:column;background:#161616;border-radius:14px;overflow:hidden;text-decoration:none;color:#F5EFE0;cursor:pointer;min-width:0;">
-                <div style="position:relative;aspect-ratio:16 / 10;overflow:hidden;background:#0E0E0E;">
-                  <div style="{{ f.imgStyle }}"></div>
+          <div style="{{ featGridStyle }}">
+            <sc-for list="{{ featured }}" as="f" hint-placeholder-count="3">
+              <a href="{{ f.href }}" aria-label="{{ f.aria }}" onClick="{{ f.open }}" onMouseEnter="{{ f.enter }}" onMouseLeave="{{ featLeave }}" onFocus="{{ f.enter }}" onBlur="{{ featLeave }}" style="{{ f.cardStyle }}">
+                <div ref="{{ f.frameRef }}" style="{{ f.frameStyle }}">
+                  <sc-if value="{{ f.isImg }}" hint-placeholder-val="{{ false }}">
+                    <img src="{{ f.shown }}" alt="{{ f.alt }}" loading="lazy" decoding="async" style="{{ f.imgStyle }}" />
+                  </sc-if>
+                  <sc-if value="{{ f.isEmbed }}" hint-placeholder-val="{{ false }}">
+                    <iframe src="{{ f.embed }}" title="{{ f.alt }}" tabIndex="-1" aria-hidden="true" loading="lazy" style="{{ f.embedStyle }}"></iframe>
+                  </sc-if>
+                  <span style="{{ f.badgeStyle }}">{{ f.badge }}</span>
                 </div>
-                <div style="padding:28px 30px 30px;display:flex;flex-direction:column;gap:16px;flex:1;">
+                <div style="padding:26px 28px 28px;display:flex;flex-direction:column;gap:14px;flex:1;">
                   <div style="display:flex;align-items:center;gap:10px;">
                     <span style="{{ f.logoStyle }}"></span>
-                    <span style="font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:12px;letter-spacing:0.18em;text-transform:uppercase;color:rgba(245,239,224,0.6);">Case study</span>
+                    <span style="font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:12px;letter-spacing:0.18em;text-transform:uppercase;color:rgba(245,239,224,0.6);">{{ f.kicker }}</span>
                   </div>
-                  <h3 style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:clamp(1.6rem,2.6vw,2.1rem);line-height:1.05;letter-spacing:-0.01em;margin:0;">{{ f.title }}</h3>
-                  <p style="font-size:16px;line-height:1.6;color:rgba(245,239,224,0.72);margin:0;max-width:52ch;text-wrap:pretty;">{{ f.desc }}</p>
+                  <h3 style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:clamp(1.5rem,2.2vw,1.9rem);line-height:1.05;letter-spacing:-0.01em;margin:0;">{{ f.title }}</h3>
+                  <p style="font-size:15px;line-height:1.6;color:rgba(245,239,224,0.74);margin:0;text-wrap:pretty;">{{ f.desc }}</p>
                   <div style="display:flex;align-items:baseline;gap:12px;border-top:1px solid rgba(245,239,224,0.14);padding-top:16px;margin-top:auto;">
-                    <span style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:28px;line-height:1;color:#E8B84B;">{{ f.metric }}</span>
-                    <span style="font-size:13px;line-height:1.4;color:rgba(245,239,224,0.6);">{{ f.metricLabel }}</span>
+                    <span style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:26px;line-height:1;color:#E8B84B;white-space:nowrap;">{{ f.metric }}</span>
+                    <span style="font-size:13px;line-height:1.4;color:rgba(245,239,224,0.62);">{{ f.metricLabel }}</span>
                   </div>
                   <span style="display:flex;align-items:center;gap:10px;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:15px;color:#F5EFE0;">Read the case study<span style="{{ f.arrowStyle }}">→</span></span>
                 </div>
               </a>
             </sc-for>
           </div>
+        </div>
+      </section>
 
-          <div style="display:flex;align-items:center;gap:14px;margin:120px 0 56px;">
-            <span style="font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:12px;letter-spacing:0.2em;text-transform:uppercase;color:rgba(26,26,26,0.7);white-space:nowrap;">Along the way</span>
-            <span style="flex:1;height:1px;background:rgba(26,26,26,0.2);"></span>
+      <section id="selected-moments" style="{{ smSectionStyle }}">
+        <div style="max-width:1280px;margin:0 auto;">
+          <div style="display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:16px 40px;border-top:1px solid #1A1A1A;padding-top:22px;margin-bottom:64px;">
+            <h2 style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:clamp(2rem,4.6vw,3.6rem);line-height:0.95;letter-spacing:0.01em;text-transform:uppercase;color:#1A1A1A;margin:0;">Selected moments<span style="color:#1F2DC2;">.</span></h2>
+            <p style="font-size:16px;line-height:1.55;color:rgba(26,26,26,0.7);max-width:40ch;margin:0;text-wrap:pretty;">Shorter stories that show the range: commerce, enterprise tools, medical games, and things I built myself.</p>
           </div>
 
           <div style="{{ snapGridStyle }}">
@@ -182,7 +173,14 @@
                     <span style="{{ m.viewStyle }}">{{ m.viewText }}</span>
                   </div>
                   <span style="font-size:13px;line-height:1.3;color:rgba(26,26,26,0.62);">{{ m.meta }}</span>
-                  <p style="{{ m.capStyle }}"><sc-for list="{{ m.capParts }}" as="cp" hint-placeholder-count="1"><span style="{{ cp.s }}">{{ cp.t }}</span></sc-for></p>
+                  <dl style="{{ m.capStyle }}">
+                    <sc-for list="{{ m.lines }}" as="ln" hint-placeholder-count="3">
+                      <div style="display:grid;grid-template-columns:76px minmax(0,1fr);gap:10px;align-items:baseline;">
+                        <dt style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:10px;letter-spacing:0.16em;text-transform:uppercase;color:{{ ln.color }};">{{ ln.k }}</dt>
+                        <dd style="margin:0;"><sc-for list="{{ ln.parts }}" as="cp" hint-placeholder-count="1"><span style="{{ cp.s }}">{{ cp.t }}</span></sc-for></dd>
+                      </div>
+                    </sc-for>
+                  </dl>
                 </div>
               </button>
             </sc-for>
@@ -190,11 +188,361 @@
         </div>
       </section>
 
+      <footer id="contact" style="{{ footerStyle }}">
+        <div style="max-width:1280px;margin:0 auto;display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:32px;">
+          <div>
+            <h2 style="font-family:'Space Grotesk',sans-serif;font-weight:500;font-size:clamp(1.8rem,3.2vw,2.6rem);line-height:1.1;letter-spacing:-0.01em;color:#F5EFE0;margin:0 0 14px;">Let's talk<span style="color:#05D9E8;">.</span></h2>
+            <p style="margin:0;font-size:16px;line-height:1.6;color:rgba(245,239,224,0.65);max-width:44ch;">Product Design Lead · Complex platforms, AI &amp; growth · ex‑Shopify. Based in Chicago.</p>
+          </div>
+          <ul style="list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:12px;font-size:16px;">
+            <li><a href="mailto:john.imbu@gmail.com" style="color:#F5EFE0;" style-hover="color:#05D9E8;">john.imbu@gmail.com</a></li>
+            <li><a href="https://www.linkedin.com/in/johnimbu/" target="_blank" rel="noopener noreferrer" style="color:#F5EFE0;" style-hover="color:#05D9E8;">linkedin.com/in/johnimbu ↗</a></li>
+            <li><a href="tel:847-767-1419" style="color:#F5EFE0;" style-hover="color:#05D9E8;">847-767-1419</a></li>
+            <li><a href="assets/John-Imburgia-Resume-2026.pdf" target="_blank" rel="noopener noreferrer" style="color:#F5EFE0;" style-hover="color:#05D9E8;">Résumé (PDF) ↗</a></li>
+          </ul>
+        </div>
+      </footer>
 
     </div>
   </sc-if>
 
-  <sc-if value="{{ isCase }}" hint-placeholder-val="{{ false }}">
+  <sc-if value="{{ subnavShow }}" hint-placeholder-val="{{ false }}">
+    <nav aria-label="Decisions in this case study" style="{{ subnavStyle }}">
+      <sc-for list="{{ subnavItems }}" as="sn" hint-placeholder-count="3">
+        <button onClick="{{ sn.go }}" aria-current="{{ sn.current }}" style="{{ sn.style }}" style-hover="color:#F5EFE0;">{{ sn.label }}</button>
+      </sc-for>
+    </nav>
+  </sc-if>
+
+  <sc-if value="{{ isStory }}" hint-placeholder-val="{{ false }}">
+    <main style="{{ caseWrapStyle }}">
+      <sc-for list="{{ storyBlocks }}" as="b" hint-placeholder-count="6">
+        <section id="{{ b.anchor }}" style="{{ b.wrap }}">
+
+          <sc-if value="{{ b.isHero }}" hint-placeholder-val="{{ false }}">
+            <div style="{{ b.inner }}">
+              <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:28px;">
+                <sc-for list="{{ b.tags }}" as="tag" hint-placeholder-count="3">
+                  <span style="padding:6px 14px;border-radius:999px;border:1px solid rgba(245,239,224,0.2);color:rgba(245,239,224,0.6);font-size:12px;letter-spacing:0.14em;text-transform:uppercase;font-family:'Space Grotesk',sans-serif;font-weight:500;">{{ tag }}</span>
+                </sc-for>
+              </div>
+              <h1 style="{{ b.titleStyle }}">{{ b.title }}<span style="color:{{ b.accent }};">.</span></h1>
+              <p style="{{ b.ledeStyle }}">{{ b.lede }}</p>
+              <sc-if value="{{ b.hasFacts }}" hint-placeholder-val="{{ true }}">
+                <dl style="{{ b.factsStyle }}">
+                  <sc-for list="{{ b.facts }}" as="f" hint-placeholder-count="3">
+                    <div style="min-width:0;">
+                      <dt style="font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:11px;letter-spacing:0.18em;text-transform:uppercase;color:rgba(245,239,224,0.45);margin-bottom:6px;">{{ f.k }}</dt>
+                      <dd style="margin:0;font-size:15px;line-height:1.5;color:#F5EFE0;">{{ f.v }}</dd>
+                    </div>
+                  </sc-for>
+                </dl>
+              </sc-if>
+            </div>
+          </sc-if>
+
+          <sc-if value="{{ b.isPair }}" hint-placeholder-val="{{ false }}">
+            <div style="{{ b.inner }}">
+              <sc-if value="{{ b.lede }}" hint-placeholder-val="{{ false }}">
+                <p style="{{ b.paraStyle }}">{{ b.lede }}</p>
+              </sc-if>
+              <div style="{{ b.row }}">
+                <sc-for list="{{ b.items }}" as="it" hint-placeholder-count="2">
+                  <figure style="{{ it.fig }}">
+                    <a href="{{ it.src }}" target="_blank" rel="noopener" aria-label="{{ it.openLabel }}" style="{{ it.frame }}">
+                      <img src="{{ it.src }}" alt="{{ it.alt }}" loading="lazy" decoding="async" style="display:block;width:100%;height:auto;" />
+                      <span style="{{ it.badgeStyle }}">{{ it.badge }}</span>
+                    </a>
+                    <figcaption style="font-size:13px;line-height:1.5;color:rgba(245,239,224,0.6);margin-top:12px;text-wrap:pretty;">{{ it.caption }}</figcaption>
+                  </figure>
+                </sc-for>
+              </div>
+            </div>
+          </sc-if>
+
+          <sc-if value="{{ b.isNative }}" hint-placeholder-val="{{ false }}">
+            <div ref="{{ b.mount }}" style="{{ b.nativeStyle }}"></div>
+          </sc-if>
+
+          <sc-if value="{{ b.isFacts }}" hint-placeholder-val="{{ false }}">
+            <div style="{{ b.inner }}">
+              <dl style="{{ b.factsStyle }}">
+                <sc-for list="{{ b.facts }}" as="f" hint-placeholder-count="3">
+                  <div style="min-width:0;">
+                    <dt style="font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:11px;letter-spacing:0.18em;text-transform:uppercase;color:rgba(245,239,224,0.45);margin-bottom:6px;">{{ f.k }}</dt>
+                    <dd style="margin:0;font-size:15px;line-height:1.5;color:#F5EFE0;">{{ f.v }}</dd>
+                  </div>
+                </sc-for>
+              </dl>
+            </div>
+          </sc-if>
+
+          <sc-if value="{{ b.isChapter }}" hint-placeholder-val="{{ false }}">
+            <div style="{{ b.inner }}">
+              <div style="display:flex;align-items:baseline;gap:18px;border-top:1px solid rgba(245,239,224,0.16);padding-top:22px;">
+                <span style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:14px;letter-spacing:0.2em;color:{{ b.accent }};">{{ b.num }}</span>
+                <span style="font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:12px;letter-spacing:0.2em;text-transform:uppercase;color:rgba(245,239,224,0.5);">{{ b.kicker }}</span>
+              </div>
+              <h2 style="{{ b.titleStyle }}">{{ b.title }}</h2>
+              <sc-if value="{{ b.lede }}" hint-placeholder-val="{{ false }}">
+                <p style="{{ b.ledeStyle }}">{{ b.lede }}</p>
+              </sc-if>
+            </div>
+          </sc-if>
+
+          <sc-if value="{{ b.isText }}" hint-placeholder-val="{{ false }}">
+            <div style="{{ b.inner }}">
+              <sc-if value="{{ b.kicker }}" hint-placeholder-val="{{ false }}">
+                <div style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:12px;letter-spacing:0.2em;text-transform:uppercase;color:{{ b.accent }};margin-bottom:14px;">{{ b.kicker }}</div>
+              </sc-if>
+              <sc-if value="{{ b.title }}" hint-placeholder-val="{{ false }}">
+                <h3 style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:clamp(1.4rem,2.4vw,2rem);line-height:1.15;letter-spacing:-0.01em;margin:0 0 18px;color:#F5EFE0;text-wrap:balance;">{{ b.title }}</h3>
+              </sc-if>
+              <sc-for list="{{ b.paras }}" as="p" hint-placeholder-count="2">
+                <p style="{{ b.paraStyle }}"><sc-for list="{{ p }}" as="sg" hint-placeholder-count="1"><span style="{{ sg.s }}">{{ sg.t }}</span></sc-for></p>
+              </sc-for>
+            </div>
+          </sc-if>
+
+          <sc-if value="{{ b.isMedia }}" hint-placeholder-val="{{ false }}">
+            <figure style="{{ b.inner }}">
+              <sc-if value="{{ b.m.badgeTop }}" hint-placeholder-val="{{ false }}">
+                <div style="margin-bottom:12px;"><span style="{{ b.m.badgeTopStyle }}">{{ b.m.badgeTop }}</span></div>
+              </sc-if>
+              <div style="{{ b.frame }}">
+                <sc-if value="{{ b.m.isImg }}" hint-placeholder-val="{{ false }}">
+                  <a href="{{ b.m.src }}" target="_blank" rel="noopener" aria-label="{{ b.m.openLabel }}" style="display:block;cursor:zoom-in;"><img src="{{ b.m.shown }}" alt="{{ b.m.alt }}" loading="lazy" decoding="async" style="{{ b.m.imgStyle }}" /></a>
+                </sc-if>
+                <sc-if value="{{ b.m.isEmbed }}" hint-placeholder-val="{{ false }}">
+                  <div style="{{ b.m.embedBox }}" onMouseLeave="{{ b.m.deactivate }}">
+                    <iframe src="{{ b.m.embed }}" title="{{ b.m.alt }}" loading="{{ b.m.loading }}" style="{{ b.m.embedStyle }}"></iframe>
+                    <sc-if value="{{ b.m.shieldShow }}" hint-placeholder-val="{{ false }}">
+                      <button onClick="{{ b.m.activate }}" aria-label="{{ b.m.shieldLabel }}" style="{{ b.m.shieldStyle }}"><span style="{{ b.m.pillStyle }}">Click to explore</span></button>
+                    </sc-if>
+                    <sc-if value="{{ b.m.doneShow }}" hint-placeholder-val="{{ false }}">
+                      <button onClick="{{ b.m.deactivate }}" style="{{ b.m.doneStyle }}">Done</button>
+                    </sc-if>
+                  </div>
+                </sc-if>
+                <sc-if value="{{ b.m.isMp4 }}" hint-placeholder-val="{{ false }}">
+                  <video src="{{ b.m.mp4 }}" poster="{{ b.m.poster }}" controls="{{ true }}" muted="{{ true }}" loop="{{ true }}" autoPlay="{{ b.m.autoplay }}" playsInline="{{ true }}" preload="metadata" aria-label="{{ b.m.alt }}" style="display:block;width:100%;height:auto;background:#000;"></video>
+                </sc-if>
+                <sc-if value="{{ b.m.badge }}" hint-placeholder-val="{{ false }}">
+                  <span style="{{ b.m.badgeStyle }}">{{ b.m.badge }}</span>
+                </sc-if>
+                <sc-if value="{{ b.m.canPause }}" hint-placeholder-val="{{ false }}">
+                  <button onClick="{{ b.m.toggle }}" aria-label="{{ b.m.toggleLabel }}" aria-pressed="{{ b.m.pressed }}" style="{{ b.m.toggleStyle }}" style-hover="border-color:rgba(245,239,224,0.6);">{{ b.m.toggleText }}</button>
+                </sc-if>
+              </div>
+              <figcaption style="{{ b.capRow }}">
+                <span style="font-size:13px;line-height:1.5;color:rgba(245,239,224,0.6);max-width:72ch;text-wrap:pretty;">{{ b.m.caption }}</span>
+                <sc-if value="{{ b.m.link }}" hint-placeholder-val="{{ false }}">
+                  <a href="{{ b.m.link.href }}" target="_blank" rel="noopener noreferrer" style="flex-shrink:0;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:13px;color:#05D9E8;white-space:nowrap;" style-hover="color:#F5EFE0;">{{ b.m.link.label }}</a>
+                </sc-if>
+              </figcaption>
+            </figure>
+          </sc-if>
+
+          <sc-if value="{{ b.isSplit }}" hint-placeholder-val="{{ false }}">
+            <div style="{{ b.inner }}">
+              <div style="{{ b.textCol }}">
+                <sc-if value="{{ b.kicker }}" hint-placeholder-val="{{ false }}">
+                  <div style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:12px;letter-spacing:0.2em;text-transform:uppercase;color:{{ b.accent }};margin-bottom:14px;">{{ b.kicker }}</div>
+                </sc-if>
+                <sc-if value="{{ b.title }}" hint-placeholder-val="{{ false }}">
+                  <h3 style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:clamp(1.4rem,2.4vw,2rem);line-height:1.15;letter-spacing:-0.01em;margin:0 0 18px;color:#F5EFE0;text-wrap:balance;">{{ b.title }}</h3>
+                </sc-if>
+                <sc-for list="{{ b.paras }}" as="p" hint-placeholder-count="2">
+                  <p style="{{ b.paraStyle }}"><sc-for list="{{ p }}" as="sg" hint-placeholder-count="1"><span style="{{ sg.s }}">{{ sg.t }}</span></sc-for></p>
+                </sc-for>
+              </div>
+              <figure style="{{ b.figStyle }}">
+                <sc-if value="{{ b.m.badgeTop }}" hint-placeholder-val="{{ false }}">
+                  <div style="margin-bottom:12px;"><span style="{{ b.m.badgeTopStyle }}">{{ b.m.badgeTop }}</span></div>
+                </sc-if>
+                <div style="{{ b.frame }}">
+                  <sc-if value="{{ b.m.isImg }}" hint-placeholder-val="{{ false }}">
+                    <a href="{{ b.m.src }}" target="_blank" rel="noopener" aria-label="{{ b.m.openLabel }}" style="display:block;cursor:zoom-in;"><img src="{{ b.m.shown }}" alt="{{ b.m.alt }}" loading="lazy" decoding="async" style="{{ b.m.imgStyle }}" /></a>
+                  </sc-if>
+                  <sc-if value="{{ b.m.isEmbed }}" hint-placeholder-val="{{ false }}">
+                    <div style="{{ b.m.embedBox }}" onMouseLeave="{{ b.m.deactivate }}">
+                      <iframe src="{{ b.m.embed }}" title="{{ b.m.alt }}" loading="{{ b.m.loading }}" style="{{ b.m.embedStyle }}"></iframe>
+                      <sc-if value="{{ b.m.shieldShow }}" hint-placeholder-val="{{ false }}">
+                        <button onClick="{{ b.m.activate }}" aria-label="{{ b.m.shieldLabel }}" style="{{ b.m.shieldStyle }}"><span style="{{ b.m.pillStyle }}">Click to explore</span></button>
+                      </sc-if>
+                      <sc-if value="{{ b.m.doneShow }}" hint-placeholder-val="{{ false }}">
+                        <button onClick="{{ b.m.deactivate }}" style="{{ b.m.doneStyle }}">Done</button>
+                      </sc-if>
+                    </div>
+                  </sc-if>
+                  <sc-if value="{{ b.m.isMp4 }}" hint-placeholder-val="{{ false }}">
+                    <video src="{{ b.m.mp4 }}" poster="{{ b.m.poster }}" controls="{{ true }}" muted="{{ true }}" loop="{{ true }}" autoPlay="{{ b.m.autoplay }}" playsInline="{{ true }}" preload="metadata" aria-label="{{ b.m.alt }}" style="display:block;width:100%;height:auto;background:#000;"></video>
+                  </sc-if>
+                  <sc-if value="{{ b.m.badge }}" hint-placeholder-val="{{ false }}">
+                    <span style="{{ b.m.badgeStyle }}">{{ b.m.badge }}</span>
+                  </sc-if>
+                  <sc-if value="{{ b.m.canPause }}" hint-placeholder-val="{{ false }}">
+                    <button onClick="{{ b.m.toggle }}" aria-label="{{ b.m.toggleLabel }}" aria-pressed="{{ b.m.pressed }}" style="{{ b.m.toggleStyle }}" style-hover="border-color:rgba(245,239,224,0.6);">{{ b.m.toggleText }}</button>
+                  </sc-if>
+                </div>
+                <figcaption style="font-size:13px;line-height:1.5;color:rgba(245,239,224,0.6);margin-top:12px;text-wrap:pretty;">{{ b.m.caption }}</figcaption>
+              </figure>
+            </div>
+          </sc-if>
+
+          <sc-if value="{{ b.isOptions }}" hint-placeholder-val="{{ false }}">
+            <div style="{{ b.inner }}">
+              <sc-if value="{{ b.title }}" hint-placeholder-val="{{ false }}">
+                <h3 style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:clamp(1.3rem,2.2vw,1.8rem);line-height:1.2;margin:0 0 8px;color:#F5EFE0;">{{ b.title }}</h3>
+              </sc-if>
+              <sc-if value="{{ b.lede }}" hint-placeholder-val="{{ false }}">
+                <p style="font-size:16px;line-height:1.6;color:rgba(245,239,224,0.7);margin:0 0 28px;max-width:70ch;">{{ b.lede }}</p>
+              </sc-if>
+              <div style="{{ b.grid }}">
+                <sc-for list="{{ b.items }}" as="o" hint-placeholder-count="3">
+                  <figure style="{{ o.card }}">
+                    <div style="{{ o.frame }}">
+                      <img src="{{ o.shown }}" alt="{{ o.alt }}" loading="lazy" decoding="async" style="display:block;width:100%;height:100%;object-fit:contain;" />
+                      <span style="{{ o.verdictStyle }}">{{ o.verdict }}</span>
+                    </div>
+                    <figcaption style="padding:16px 18px 18px;display:flex;flex-direction:column;gap:6px;">
+                      <span style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:16px;color:#F5EFE0;">{{ o.name }}</span>
+                      <span style="font-size:14px;line-height:1.5;color:rgba(245,239,224,0.68);">{{ o.note }}</span>
+                    </figcaption>
+                  </figure>
+                </sc-for>
+              </div>
+              <sc-if value="{{ b.canPause }}" hint-placeholder-val="{{ false }}">
+                <button onClick="{{ b.toggle }}" aria-pressed="{{ b.pressed }}" style="margin-top:16px;padding:8px 14px;border-radius:999px;border:1px solid rgba(245,239,224,0.25);background:none;color:rgba(245,239,224,0.8);font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:13px;cursor:pointer;" style-hover="border-color:rgba(245,239,224,0.6);">{{ b.toggleText }}</button>
+              </sc-if>
+            </div>
+          </sc-if>
+
+          <sc-if value="{{ b.isVersions }}" hint-placeholder-val="{{ false }}">
+            <div style="{{ b.inner }}">
+              <div role="tablist" aria-label="{{ b.title }}" style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px;">
+                <sc-for list="{{ b.tabs }}" as="v" hint-placeholder-count="4">
+                  <button role="tab" aria-selected="{{ v.on }}" onClick="{{ v.go }}" style="{{ v.style }}" style-hover="border-color:rgba(245,239,224,0.55);">{{ v.label }}</button>
+                </sc-for>
+              </div>
+              <div style="{{ b.frame }}" onMouseLeave="{{ b.sh.deactivate }}">
+                <iframe src="{{ b.cur.embed }}" title="{{ b.cur.label }}" loading="lazy" style="{{ b.vIframe }}"></iframe>
+                <sc-if value="{{ b.sh.shieldShow }}" hint-placeholder-val="{{ false }}">
+                  <button onClick="{{ b.sh.activate }}" aria-label="{{ b.sh.shieldLabel }}" style="{{ b.sh.shieldStyle }}"><span style="{{ b.sh.pillStyle }}">Click to explore</span></button>
+                </sc-if>
+                <sc-if value="{{ b.sh.doneShow }}" hint-placeholder-val="{{ false }}">
+                  <button onClick="{{ b.sh.deactivate }}" style="{{ b.sh.doneStyle }}">Done</button>
+                </sc-if>
+                <span style="{{ b.badgeStyle }}">{{ b.cur.badge }}</span>
+              </div>
+              <div style="{{ b.capRow }}">
+                <p style="margin:0;font-size:15px;line-height:1.6;color:rgba(245,239,224,0.78);max-width:72ch;text-wrap:pretty;"><strong style="color:#F5EFE0;">{{ b.cur.date }}</strong> {{ b.cur.note }}</p>
+                <a href="{{ b.cur.embed }}" target="_blank" rel="noopener noreferrer" style="flex-shrink:0;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:13px;color:#05D9E8;white-space:nowrap;" style-hover="color:#F5EFE0;">Open full screen ↗</a>
+              </div>
+            </div>
+          </sc-if>
+
+          <sc-if value="{{ b.isStats }}" hint-placeholder-val="{{ false }}">
+            <div style="{{ b.inner }}">
+              <sc-if value="{{ b.title }}" hint-placeholder-val="{{ false }}">
+                <div style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:12px;letter-spacing:0.2em;text-transform:uppercase;color:{{ b.accent }};margin-bottom:16px;">{{ b.title }}</div>
+              </sc-if>
+              <div style="{{ b.grid }}">
+                <sc-for list="{{ b.items }}" as="s" hint-placeholder-count="3">
+                  <div style="background:#0E0E0E;padding:24px 22px;display:flex;flex-direction:column;gap:8px;min-width:0;">
+                    <div style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:clamp(2rem,3.4vw,2.8rem);line-height:1;color:#E8B84B;letter-spacing:-0.02em;">{{ s.value }}</div>
+                    <div style="font-size:14px;line-height:1.45;color:rgba(245,239,224,0.78);">{{ s.label }}</div>
+                    <sc-if value="{{ s.context }}" hint-placeholder-val="{{ false }}">
+                      <div style="font-size:12px;line-height:1.45;color:rgba(245,239,224,0.5);font-style:italic;">{{ s.context }}</div>
+                    </sc-if>
+                  </div>
+                </sc-for>
+              </div>
+              <sc-if value="{{ b.note }}" hint-placeholder-val="{{ false }}">
+                <p style="font-size:14px;line-height:1.6;color:rgba(245,239,224,0.55);margin:14px 0 0;max-width:72ch;">{{ b.note }}</p>
+              </sc-if>
+            </div>
+          </sc-if>
+
+          <sc-if value="{{ b.isDecision }}" hint-placeholder-val="{{ false }}">
+            <div style="{{ b.inner }}">
+              <dl style="{{ b.grid }}">
+                <sc-for list="{{ b.rows }}" as="r" hint-placeholder-count="4">
+                  <div style="{{ r.style }}">
+                    <dt style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:{{ r.color }};margin-bottom:8px;">{{ r.k }}</dt>
+                    <dd style="margin:0;font-size:15px;line-height:1.6;color:rgba(245,239,224,0.86);text-wrap:pretty;">{{ r.v }}</dd>
+                  </div>
+                </sc-for>
+              </dl>
+            </div>
+          </sc-if>
+
+          <sc-if value="{{ b.isQuote }}" hint-placeholder-val="{{ false }}">
+            <blockquote style="{{ b.inner }}">
+              <p style="margin:0;font-family:'Space Grotesk',sans-serif;font-weight:500;font-size:clamp(1.5rem,3vw,2.4rem);line-height:1.25;color:#F5EFE0;text-wrap:balance;">“{{ b.text }}”</p>
+              <footer style="margin-top:16px;font-size:14px;color:rgba(245,239,224,0.55);">{{ b.by }}</footer>
+            </blockquote>
+          </sc-if>
+
+          <sc-if value="{{ b.isCols }}" hint-placeholder-val="{{ false }}">
+            <div style="{{ b.inner }}">
+              <div style="{{ b.grid }}">
+                <sc-for list="{{ b.items }}" as="c" hint-placeholder-count="3">
+                  <div style="border-top:2px solid {{ c.color }};padding-top:18px;min-width:0;">
+                    <sc-if value="{{ c.isPlain }}" hint-placeholder-val="{{ true }}"><div style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:18px;color:#F5EFE0;margin-bottom:10px;">{{ c.title }}</div></sc-if>
+                    <sc-if value="{{ c.isLink }}" hint-placeholder-val="{{ false }}"><button onClick="{{ c.go }}" style="display:block;padding:0;margin:0 0 10px;background:none;border:0;cursor:pointer;text-align:left;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:18px;color:#F5EFE0;" style-hover="color:#05D9E8;">{{ c.title }} ↓</button></sc-if>
+                    <p style="margin:0;font-size:15px;line-height:1.6;color:rgba(245,239,224,0.78);text-wrap:pretty;">{{ c.desc }}</p>
+                  </div>
+                </sc-for>
+              </div>
+            </div>
+          </sc-if>
+
+          <sc-if value="{{ b.isTimeline }}" hint-placeholder-val="{{ false }}">
+            <div style="{{ b.inner }}">
+              <ol style="list-style:none;margin:0;padding:0;display:flex;flex-direction:column;">
+                <sc-for list="{{ b.items }}" as="e" hint-placeholder-count="4">
+                  <li style="{{ b.rowStyle }}">
+                    <span style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:13px;letter-spacing:0.08em;color:{{ b.accent }};white-space:nowrap;">{{ e.date }}</span>
+                    <div style="min-width:0;">
+                      <div style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:16px;color:#F5EFE0;margin-bottom:4px;">{{ e.title }}</div>
+                      <p style="margin:0;font-size:15px;line-height:1.6;color:rgba(245,239,224,0.72);text-wrap:pretty;">{{ e.desc }}</p>
+                    </div>
+                  </li>
+                </sc-for>
+              </ol>
+            </div>
+          </sc-if>
+
+          <sc-if value="{{ b.isCallout }}" hint-placeholder-val="{{ false }}">
+            <div style="{{ b.inner }}">
+              <div style="border:1px solid {{ b.border }};background:{{ b.bg }};border-radius:14px;padding:22px 24px;display:flex;flex-direction:column;gap:8px;">
+                <span style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:{{ b.accent }};">{{ b.label }}</span>
+                <p style="margin:0;font-family:'Space Grotesk',sans-serif;font-weight:500;font-size:17px;line-height:1.5;color:#F5EFE0;text-wrap:pretty;">{{ b.text }}</p>
+              </div>
+            </div>
+          </sc-if>
+
+          <sc-if value="{{ b.isNext }}" hint-placeholder-val="{{ false }}">
+            <div style="{{ b.inner }}">
+              <button onClick="{{ goNext }}" style="{{ nextCardStyle }}" style-hover="border-color:rgba(5,217,232,0.5);">
+                <span style="{{ nextCoverStyle }}"></span>
+                <span style="{{ nextScrimStyle }}"></span>
+                <span style="position:relative;z-index:1;display:flex;flex-direction:column;align-items:flex-start;">
+                  <span style="font-size:11px;letter-spacing:0.18em;text-transform:uppercase;color:rgba(245,239,224,0.5);margin-bottom:8px;font-family:'Space Grotesk',sans-serif;font-weight:600;">{{ nextEyebrow }}</span>
+                  <span style="font-family:'Space Grotesk',sans-serif;font-size:26px;color:#F5EFE0;text-align:left;">{{ nextTitle }}</span>
+                </span>
+                <span style="position:relative;z-index:1;color:#05D9E8;font-size:24px;">→</span>
+              </button>
+            </div>
+          </sc-if>
+
+        </section>
+      </sc-for>
+    </main>
+  </sc-if>
+
+  <sc-if value="{{ isTiles }}" hint-placeholder-val="{{ false }}">
     <div style="{{ caseWrapStyle }}">
 
       <div ref="{{ scrollerRef }}" onScroll="{{ onScroll }}" style="{{ scrollerStyle }}">
@@ -805,21 +1153,46 @@ class Component extends DCLogic {
 
   featuredCopy = {
     'shopify-tax-international': {
-      desc: 'Led UX for a new tax product for EU and UK merchants, built from zero in one year. Merchants went from entering rates by hand to a product they trusted.',
-      metric: '1M+', metricLabel: 'Merchants using Shopify Tax'
+      kicker: 'Case study · Shopify',
+      desc: 'UX mission lead for international tax: turning EU and UK VAT rules into a product that shows merchants where they owe and what to do next.',
+      metric: 'EU + UK', metricLabel: '0 → 1 launch across five features',
+      media: { src: 'assets/shopify-eu-settings.webp', bg: '#F1F1F1', badge: 'Final design', alt: 'Shopify Taxes and duties settings for the European Union: Shopify Tax active, VAT collected in France and Germany, automated rate management and VAT invoices' }
     },
     'scene-plus-banking': {
-      desc: "Led design for a native card finder inside Scene+, one of Canada's largest loyalty programs with 15+ million members, replacing an inherited iframe experience.",
-      metric: '+190%', metricLabel: 'Lead generation'
+      kicker: 'Case study · Arro Labs for Scene+',
+      desc: "Led design for a native card-discovery experience inside Scene+, one of Canada's largest loyalty programs (15M+ members), replacing an inherited bank iframe.",
+      metric: '+221%', metricLabel: 'Referrals from Scene+ to bank partners',
+      media: { src: 'assets/scene-filter-table.gif', still: 'assets/scene-filter-table-still.webp', bg: '#FFFFFF', badge: 'Concept', alt: 'Scene+ card comparison with additive filters highlighting matching cards' }
+    },
+    'observatori': {
+      kicker: 'Founder · Live product',
+      desc: 'I founded and built an AI research lab where models from different companies investigate a question in public, challenge each other\'s claims, and show what survived.',
+      metric: 'Live', metricLabel: 'Trace each conclusion back to its evidence and the disagreement behind it',
+      media: { embed: 'observatori/05/replay/?edited#at=0.35', poster: 'assets/observatori-replay-poster.webp', badge: 'Live replay', alt: 'The Observatori replay: a star chart of studies and claims building itself' }
     }
   };
 
   moments = [
     {
+      label: 'Getting physicians through sign-up', meta: 'Level Ex, a Brainlab company · Lead UX Designer, UX Manager', cover: 'assets/levelex-registration.png', pos: 'center 22%',
+      slideRatio: 2000 / 2129, slideBg: '#FFFFFF',
+      slides: ['assets/levelex-registration.png', 'assets/levelex-orgchart.png'],
+      stat: '29% → 83%', statLabel: 'Verified registration, after the redesign shipped across every Level Ex game',
+      problem: "Physicians dropped out of registration before verifying their credentials, across every Level Ex game.",
+      did: "Led a UX team of designers, researchers and a copywriter. We redesigned universal registration: plain reasons for asking, contextual help, and sample play before sign-up.",
+      outcome: "Verified registration went from **29% to 83%**.",
+      caption: "I led the UX team at Level Ex, with designers, researchers and a copywriter reporting to me. Our universal registration redesign explained why we asked for credentials, added contextual help, and let physicians sample a game before committing. Verified registration went from **29% to 83%** across Level Ex games. Separately, I led UX on Top Derm, a dermatology training game built with clinicians to show conditions across skin tones. It reached **about 1 in 5 US dermatologists** with a **4.9** app rating.",
+      link: { label: 'Watch Top Derm ↗', href: 'https://www.youtube.com/watch?v=prc-1dTuISg' },
+      items: [{ src: 'assets/levelex-registration.png', caption: 'Registration problems and fixes: transparent calls to action, contextual help, and sample play' }, { src: 'assets/levelex-orgchart.png', caption: 'The UX team I built: designers, researchers and a copywriter' }]
+    },
+    {
       label: 'Selling to two kinds of buyers', meta: 'The Second City · UX Designer & Researcher', cover: 'assets/sc-browse-crop.png', pos: 'center top', mar: '4 / 5',
       slideRatio: 16 / 9, slideBg: '#FFFFFF',
       slides: ['assets/sc-browse-crop.png', 'assets/sc-insight-crop.png', 'assets/sc-mindmap-crop.png', 'assets/sc-flows.png', 'assets/sc-cover-qv3.png'],
-      caption: "I did a deep dive into The Second City's analytics and discovered desktop visitors planned shows weeks out, while mobile visitors wanted tonight's show, so I designed ticket browsing around both habits instead of forcing one path, and **ticket sales rose about 20%**.",
+      problem: "Desktop visitors planned shows weeks out. Mobile visitors wanted tonight's show. The site forced one path.",
+      did: "Found the split in The Second City's analytics and designed ticket browsing around both habits.",
+      outcome: "Ticket sales rose **about 20%** in the six months after launch.",
+      caption: "I dug into The Second City's analytics and found desktop visitors planned shows weeks out, while mobile visitors wanted tonight's show. So I designed ticket browsing around both habits instead of forcing one path. Ticket sales rose **about 20%** in the six months after launch.",
       items: [
         { src: 'assets/secondcity-cover.webp' },
         { src: 'assets/sc-research.png', caption: 'Analytics findings: mobile buyers want the soonest show, while desktop visitors research further out' },
@@ -827,15 +1200,23 @@ class Component extends DCLogic {
       ]
     },
     {
-      label: 'Designing for real clinical use', meta: 'Level Ex · Lead UX Designer, UX Manager', cover: 'https://i.ytimg.com/vi/prc-1dTuISg/maxresdefault.jpg', video: true,
-      stat: '29% → 83%', statLabel: 'Verified registration after a sign-up redesign shipped across every Level Ex game',
-      caption: "Dermatology training rarely showed conditions across the range of skin tones doctors actually see. I worked with clinicians on universal registration, the gameplay loops, and patient representation. Top Derm **reached about 1 in 5 US dermatologists** and **earned a 4.9 average app store rating**.",
-      items: [{ video: 'prc-1dTuISg', src: 'https://i.ytimg.com/vi/prc-1dTuISg/maxresdefault.jpg' }]
+      label: 'Putting the whole call on one screen', meta: 'ADP · UX Designer & Researcher', cover: 'assets/adp-journey.png', pos: 'center top',
+      slideRatio: 16 / 9, bg: '#0F1B1F',
+      slides: ['assets/adp-journey.png', 'assets/adp-interview.png', 'assets/adp-workshop.png', 'assets/adp-flow-cover2.png'],
+      quote: 'This new design is a huge leap in usability. Tell the designer I owe them a coke.', quoteBy: 'Account Manager, ADP Call Center', quoteImg: 'assets/adp-am-photo.png',
+      problem: "Call center reps juggled separate windows mid-call to piece together who a client was and what they needed.",
+      did: "Sat in on calls across several centers, then designed a split screen that opens on an incoming call with both in view.",
+      outcome: "Leadership backed it, and **ADP began folding the recommendations into associate tools nationwide**.",
+      caption: "Reps juggled separate windows mid-call to piece together who a client was and what they needed. After sitting in on calls, I designed a split screen that holds both, and **ADP began folding the recommendations into associate tools nationwide**.",
+      items: []
     },
     {
       label: 'Aligning the room', meta: 'Advicent · UX Designer & Researcher', cover: 'assets/advicent-c-matrix.png',
       slideRatio: 1800 / 826, slideBg: '#F4F4F4',
       slides: ['assets/advicent-c-matrix.png', 'assets/advicent-c-modes.png', 'assets/advicent-c-persona.png'],
+      problem: "Advicent's leaders each had a different idea of what to build next for their financial planning products.",
+      did: "Brought research with advisors and their clients into the room and surfaced the competing assumptions.",
+      outcome: "Leadership **agreed on a two-year roadmap**.",
       caption: "Advicent's leaders each had a different idea of what to build next for their suite of financial products. I brought research from advisors and their clients into the room, surfaced the competing assumptions, and helped the group **agree on a two-year roadmap**.",
       items: [
         { src: 'assets/mw-advicent-workshop.webp' },
@@ -844,22 +1225,17 @@ class Component extends DCLogic {
       ]
     },
     {
-      label: 'Solving a problem I kept running into', meta: 'Tintbox · Designer & Developer', cover: 'assets/tintbox-promo-tile.png', embed: 'tintbox-promo/promo.dc.html',
+      label: 'Solving a problem I kept running into', meta: 'Tintbox · Independent Chrome extension, designed, built and shipped', cover: 'assets/tintbox-promo-tile.png', embed: 'tintbox-promo/promo.dc.html',
       link: { label: 'Get Tintbox in the Chrome Web Store ↗', href: 'https://chromewebstore.google.com/detail/tintbox/dmlehnphpaoiebkcembfhfpbgnoldcgm' },
-      caption: 'Bright pages and screen shares kept causing visual discomfort, and no tool dimmed just the part of the screen that hurt. On my own time, I **designed, built, and shipped a Chrome extension** that does.',
+      problem: 'Bright pages and screen shares cause visual discomfort, and nothing dimmed just the part of the screen that hurt.',
+      did: 'On my own, I **designed, built and shipped a Chrome extension**: a movable box that dims, tints or blacks out whatever is under it.',
+      outcome: 'Free in the Chrome Web Store. Try it.',
+      caption: 'Bright pages and screen shares kept causing visual discomfort, and no tool dimmed just the part of the screen that hurt. On my own, I **designed, built and shipped a Chrome extension** that does. It\'s free in the Chrome Web Store.',
       items: [
         { src: 'assets/tintbox-hero.png' },
         { src: 'assets/tintbox-spotlight.png', caption: 'Outside mode dims everything except the box, to spotlight one area' },
         { src: 'assets/tintbox-filters.png', caption: 'Eight filters: dim, amber, rose, gray, invert, brighten, blur and blackout' }
       ]
-    },
-    {
-      label: 'Putting the whole call on one screen', meta: 'ADP · UX Designer & Researcher', cover: 'assets/adp-journey.png', pos: 'center top',
-      slideRatio: 16 / 9, bg: '#0F1B1F',
-      slides: ['assets/adp-journey.png', 'assets/adp-interview.png', 'assets/adp-workshop.png', 'assets/adp-flow-cover2.png'],
-      quote: 'This new design is a huge leap in usability. Tell the designer I owe them a coke.', quoteBy: 'Account Manager, ADP Call Center', quoteImg: 'assets/adp-am-photo.png',
-      caption: "Reps juggled separate windows mid-call to piece together who a client was and what they needed. After sitting in on calls, I designed a split screen that holds both, and **ADP began folding it into associate tools nationwide**.",
-      items: []
     },
     {
       label: 'Letting four brands share one store', meta: 'Smithfield Foods · UX / UI Design Lead', cover: 'assets/sf-moodboard.webp', pos: 'center top',
@@ -871,8 +1247,11 @@ class Component extends DCLogic {
           { name: 'On top', note: 'Each brand kept its own look and voice', color: '#E8B84B', steps: ['Smithfield', 'Eckrich', "Nathan's Famous", 'Kretschmar'] },
           { name: 'Underneath', note: 'Built once, themed per brand', color: '#05D9E8', steps: ['One cart', 'One design system', 'Shared components'] }
         ],
-        foot: 'The shared cart lifted average order value, and launching a new brand became a theming job instead of a rebuild.'
+        foot: 'Launching a new brand became a theming job instead of a rebuild.'
       },
+      problem: "Smithfield, Eckrich, Nathan's Famous and Kretschmar each needed a storefront, without four separate builds.",
+      did: "Led design on a shared cart and a design system themed per brand, working with each brand team.",
+      outcome: "**Four brands ran on one platform**, and customers still saw the brand they knew.",
       caption: "Smithfield, Eckrich, Nathan's Famous, and Kretschmar each needed a storefront without four separate builds. I led design on a shared cart and design system themed per brand, so **four brands ran on one platform** and customers still saw the brand they knew.",
       items: []
     }
@@ -889,7 +1268,7 @@ class Component extends DCLogic {
   }
 
   get caseStudies() {
-    const o = ['shopify-tax-international', 'scene-plus-banking'];
+    const o = ['shopify-tax-international', 'scene-plus-banking', 'observatori'];
     return this.allCaseStudies.filter(c => !c.hidden).sort((a, b) => o.indexOf(a.slug) - o.indexOf(b.slug));
   }
 
@@ -949,333 +1328,409 @@ class Component extends DCLogic {
   allCaseStudies = [
     {
       slug: 'scene-plus-banking',
-      tiles: [
-        {
-          label: 'Discovery', heading: 'The Problem',
-          paras: [
-            'Scene+ members with a Scotiabank or Tangerine card can double or triple their points. But finding the right card meant a clunky iframe pulled in from the bank that had nothing to do with Scene+. Members called it **"confusing"**, **"clunky"**, and **"doesn\'t feel like Scene+"**.',
-            '**The goal was a native Scene+ experience that made each card\'s value obvious in seconds.**'
-          ],
-          media: [{ src: 'assets/scene-current.png', caption: 'Current Scene+ rewards card experience', before: true }]
-        },
-        {
-          kind: 'team', label: 'Discovery', heading: 'Who Was Involved',
-          paras: [
-            'I was the principal product designer at Arro, working with our head of design, research lead, and UX/UI designers. I owned the design end to end, from AI prototypes and alignment workshops through research sessions and final UI in Figma.',
-            'On the client side, the Scene+ director of digital experiences had final sign-off. Scotiabank and Tangerine each had their own decision makers, and Havas was the development partner.',
-            'We had 16 weeks to go from discovery through build on responsive web, iOS, and Android.'
-          ],
-          team: {
-            tiers: [
-              { label: 'Final sign-off', chips: ['Scene+ Director of Digital Experiences'] },
-              { label: 'Decision makers', chips: ['Scene+ Digital', 'Scene+ Brand', 'Scene+ Partnerships', 'Scotiabank team', 'Tangerine team'] },
-              { label: 'Arro design', chips: [{ name: 'Principal Product Designer (me)', me: true }, 'Head of Design', 'Research Lead', 'UX/UI Designers'] },
-              { label: 'Development', chips: ['Havas: web, iOS, Android'] }
-            ],
-            total: '16 weeks',
-            phases: [
-              { name: 'Discovery', span: '2 wks', weeks: 2, color: '#4351E8' },
-              { name: 'Design', span: '6 wks', weeks: 6, color: '#05D9E8' },
-              { name: 'Build', span: '8 wks', weeks: 8, color: '#E8B84B' }
-            ]
-          }
-        },
-        {
-          label: 'Discovery', heading: 'Workshop & Alignment',
-          paras: [
-            'With three brands at the table, alignment came first. I ran a workshop with Scene+, Scotiabank, and Tangerine so all three teams co-authored the experience instead of just reviewing it.',
-            'Starting from the jobs to be done, I produced a **User Journey Map** across all three brands, and our PM wrote the **Business Requirements Document** that locked in scope.',
-            'Three requirements came out of it and shaped everything that follows: **make both banks easy to compare**, **show every eligible card and help members find theirs**, and **hold brand cohesion on every device**.'
-          ],
-          media: [
-            { src: 'assets/scene-journeymap.webp', caption: 'User Journey Map, cross-org alignment artifact' },
-            { src: 'assets/scene-brd.png', caption: 'Business Requirements Document, member comprehension focus' }
-          ]
-        },
-        {
-          label: 'Discovery', heading: 'Iterative Design and Detailed Documentation to Align Cross-Functional Teams',
-          paras: [
-            'To keep that alignment through design, we worked in the open. Each concept round went up on a shared board for both banks and Scene+ to review before we moved on.',
-            'I documented every Figma screen and prototype state in FigJam and collected feedback in place, so stakeholders could redirect early instead of catching up at the end.'
-          ],
-          media: [{ src: 'assets/scene-iterative-process.png', caption: 'Iterative design process across concept versions', contain: true }]
-        },
-        {
-          label: 'Requirement Execution (1 of 3)', heading: 'Make Both Banks Easy to Compare',
-          paras: [
-            'The first requirement was introducing the banks. The hero presents both partners before asking members to pick a card, so the partnership feels like a natural fit, not a sales pitch.',
-            'The bank switcher carries the same idea. Toggling between Scotiabank and Tangerine feels like a context shift, not a page load, and Scene+ stays constant throughout.',
-            'Behind it are three pages for SEO: one for Scene+ and one for each bank. The switcher updates the URL and remembers scroll position, with color shifts and motion between them.'
-          ],
-          media: [
-            { src: 'assets/scene-2banks.gif', caption: 'Two banks, one rewards program landing page', zoomLeft: true },
-            { src: 'assets/scene-feature-toggle.gif', caption: 'Scene+ bank switcher interaction', zoomLeft: true }
-          ]
-        },
-        {
-          label: 'Requirement Execution (2 of 3)', heading: 'Show Every Eligible Card, Help Members Find Theirs',
-          paras: [
-            'Next, members needed to see the full list of eligible bank cards and still find the right one. The old card finder was walls of fine print, so I added filter chips and row highlighting to help prospective applicants find the card that matches their lifestyle.',
-            'This ended up being the hardest alignment problem on the project. Early concepts used a standard reductive filter, and the banks didn\'t love their cards disappearing before a member might even see them.'
-          ],
-          pivot: 'We flipped the filters to additive. Every card stays on the page, each filter highlights the perks that match, and all three teams signed off.',
-          media: [
-            { src: 'assets/scene-card-grid.gif', caption: 'Where we started: a reductive filter. Each filter removes cards, which puts the emphasis on what a card cannot do.' },
-            { src: 'assets/scene-filter-table.gif', caption: 'What got alignment: additive filters. Every card stays visible, and each filter highlights more perks to build the case for a match.' }
-          ]
-        },
-        {
-          label: 'Requirement Execution (3 of 3)', heading: 'Hold Brand Cohesion on Every Device',
-          paras: [
-            'The last requirement was brand cohesion. The look had to carry the sophistication of the banks without losing the playfulness of Scene+. We iterated with stakeholders until we found the right mix.',
-            'To prepare for handoff, Havas requested five static Figma breakpoints of every screen. Because that felt slow and left engineering guessing between sizes, I built an AI demo to pitch fluid tokens, showing layouts scaling smoothly between a min and max state. We are now implementing them together.'
-          ],
-          pivotLabel: 'The handoff',
-          pivot: 'Every screen was fully annotated. As Havas built the experience, I attended their demos, tested dev builds, and worked with our PM to write new Jira tickets.',
-          media: [
-            { src: 'assets/scene-results-1.png', caption: 'Visual styles explored across the three brand palettes', contain: true },
-            { src: 'assets/scene-breakpoints.gif', caption: 'MVP launch: high fidelity responsive design from the mobile app through desktop web', contain: true },
-            { src: 'assets/scene-fluid-tokens.gif', caption: 'An AI-built demo I made for engineering: fluid tokens scale smoothly between min and max states with clamp()', contain: true }
-          ]
-        },
-        {
-          label: 'Results', heading: 'Tested with Real Users, Validated with Data',
-          paras: [
-            'Throughout the project, I worked closely with our researcher to run multiple AI-assisted user tests through User Interviews and VoicePanel, with over 100 participants. The results settled debates between teams and shaped a product that far outperformed the previous experience:'
-          ],
-          pivotLabel: 'What I\'d do differently',
-          pivot: 'Make validation testing a cross-team activity sooner. Debates across teams with different priorities stalled us. Once micro experiences were in front of users, we unblocked much faster.',
-          metrics: [
-            { value: '+122%', label: 'Pageviews' },
-            { value: '+190%', label: 'Lead generation' }
-          ],
-          note: '',
-          media: [
-            { src: 'assets/scene-test1.png', caption: 'An early test comparing two card layouts: Grid Click and Stack Scroll', contain: true },
-            { src: 'assets/scene-test1-results.png', caption: '75% preferred Stack Scroll, citing easier comparison and key details like APR and fees up front', contain: true },
-            { src: 'assets/scene-research-hub.gif', caption: 'The research hub I built with Claude Design so stakeholders could explore usability test and research findings themselves', contain: true }
-          ]
-        }
-      ],
-      intro: {
-        heading: 'Two Banks, One Rewards Program',
-        brand: 'Scene+ is one of Canada\'s largest loyalty programs, and its banking partnerships with Scotiabank and Tangerine are the fastest way for members to earn points.',
-        aim: 'was to replace an inherited, iframe-based card finder with a Scene+ native experience that made the value of each card obvious in seconds.'
-      },
+      story: true,
+      accent: '#9B7BFF',
       title: 'Scene+ Rewards',
       buttonIcon: 'assets/logo-sceneplus.png',
       buttonLabel: 'Scene+ Rewards',
-      tagline: "As Principal Product Designer at Arro Labs, I lead design for Scene+ Rewards, one of Canada's largest loyalty programs with 15+ million members. On one recent project, I led design for the new banking experience, which shipped in 16 weeks and lifted lead generation 190%.",
-      tags: ['Loyalty & Rewards', 'Fintech', 'Banking'],
+      cover: 'assets/scene-2banks-still.webp',
+      tags: ['Loyalty & rewards', 'Banking', 'Arro Labs'],
       roles: ['Principal Product Designer'],
-      cover: 'assets/scene-cover.webp',
-      challenge: [
-        "Scene+ is a rewards and loyalty program that partners with Scotiabank, allowing rewards members who also use Scotiabank cards to double or even triple their points. With the addition of Tangerine, a more accessible, fully online bank, Scene+ and its banking partners wanted to redesign the experience for discovering which cards work with the rewards program.",
-        "The core challenge was twofold: introduce both banks to rewards members who may be unfamiliar with one or both of them, and give each bank a dedicated space that reflects its unique identity and card offerings, while making the connection between the banks and the Scene+ program clear."
-      ],
-      approach: [
-        'To kick off the project, I conducted stakeholder interviews across both Scene+ and the partner banks to align on product requirements and build a shared understanding of the problem space. Alongside those conversations, I reviewed existing user feedback and support data tied to the current banking page. Users consistently felt the experience was foreign to the Scene+ ecosystem. It loaded inside an iframe, carried a completely different visual language, and required significantly more effort to compare and select a card than felt reasonable. Words like "confusing", "clunky", and "doesn\'t feel like Scene+" surfaced repeatedly. The source of the friction was clear: the card-finder had been inherited from the bank itself, dense with copy, heavily interactive, and designed in isolation from the rewards program\'s identity.',
-        "The experience felt purely transactional. It dropped members into unfamiliar bank territory without context, leaving them without a sense of how the bank and Scene+ worked together. The partners wanted a flow that moved cleanly between the Scene+ ecosystem and each bank's world, building trust as it went, so members could understand the relationship, feel confident in their options, and want to apply for a card that added to their rewards."
-      ],
-      highlights: [],
-      implementation: [
-        { title: 'A Responsive System', desc: "I designed the new card-finder as a native Scene+ experience across five breakpoints, from mobile app to desktop web, replacing the inherited bank iframe with a unified visual language, comparison table, and filtering system shared across both banking partners." }
-      ],
-      results: [],
-      gallery: [
-        { src: 'assets/scene-current.png', caption: 'Current Scene+ rewards card experience: dense, iframe-based, and disconnected from the Scene+ brand' },
-        { src: 'assets/scene-journeymap.webp', caption: 'Combined user flow and journey map spanning Scene+ and both banking partners' },
-        { src: 'assets/scene-breakpoints.png', caption: 'Responsive design across five breakpoints' },
-        { src: 'assets/scene-mobile-responsive.png', caption: 'Mobile-responsive banking experience' },
-        { src: 'assets/scene-iterative-process.png', caption: 'Workshop board tracking iterative design versions' }
+      blocks: [
+        {
+          t: 'hero', compact: true, title: 'Scene+ Rewards', tags: ['Scene+', 'Loyalty & banking', 'Arro Labs', '16 weeks'],
+          lede: 'When Tangerine joined Scotiabank as a Scene+ banking partner, the card finder needed to become a native Scene+ experience that represents both banks. I led its design at Arro Labs.'
+        },
+        {
+          t: 'facts',
+          facts: [
+            { k: 'My role', v: 'Principal Product Designer at Arro Labs. I lead design for Scene+ (15M+ members) and led this project end to end.' },
+            { k: 'Worked with', v: 'Arro\'s head of design, research lead and UX/UI designers; Scene+, Scotiabank and Tangerine stakeholders; Havas, who built it.' },
+            { k: 'Timeline', v: '16 weeks from discovery through build, across responsive web, iOS and Android.' }
+          ]
+        },
+        { t: 'native', src: 'scene-native/fragments/devices.html' },
+
+        { t: 'chapter', kicker: 'The challenge', title: 'One program, two banks, an inherited iframe' },
+        {
+          t: 'split',
+          paras: [
+            'Scene+ members had long earned faster with Scotiabank. When Tangerine joined as a second bank, the experience had to carry members\' trust in Scene+ over to both partners, represent each bank fairly, and hold two very different offerings: a full Scotiabank lineup and a single Tangerine card.',
+            'The existing card finder couldn\'t do that. It came from the bank, framed inside the Scene+ site, with walls of fine print. Members called it **"confusing"**, **"clunky"** and **"doesn\'t feel like Scene+"**.'
+          ],
+          m: { src: 'assets/scene-current.png', maxH: '520px', badge: 'Before', caption: 'The inherited, iframe-based card finder (top of the page).' }
+        },
+
+        { t: 'chapter', kicker: 'Aligning the teams', title: 'Three brands, deciding together', lede: 'Scene+ wanted members\' trust to carry over to its partners. Scotiabank wanted its full lineup seen. Tangerine wanted its one card to feel like plenty. All three had to sign off on one page.' },
+        {
+          t: 'text',
+          paras: [
+            'I ran a workshop with Scene+, Scotiabank and Tangerine so all three co-authored the experience instead of reviewing it, and built the journey map every team signed off on. After that, every concept round went up on one shared board, so partners could redirect early rather than late.',
+            'To move debates toward evidence, I used AI prototypes to put small pieces of the experience in front of people quickly. With our research lead, we ran AI-assisted unmoderated tests through User Interviews and VoicePanel, with over 100 participants.'
+          ]
+        },
+        { t: 'native', src: 'scene-native/fragments/gallery.html' },
+        {
+          t: 'split', flip: true,
+          paras: [
+            'I also built a research hub with Claude Design, so stakeholders at Scene+ and both banks could explore the findings themselves instead of waiting for a readout.'
+          ],
+          m: { src: 'assets/scene-research-hub.gif', still: 'assets/scene-research-hub-still.webp', bg: '#FFFFFF', badge: 'Built with AI', caption: 'The research hub stakeholders used to explore usability findings.' }
+        },
+
+        { t: 'chapter', kicker: 'Card discovery', title: 'Making cards easier to compare', lede: 'Two separate decisions: how filtering works, and how much detail each card shows. They were settled in different ways.' },
+        {
+          t: 'decision',
+          rows: [
+            ['Problem', 'Members needed to see every eligible card and still find theirs. The old finder buried the details that matter for comparison, like fees and APR.'],
+            ['Constraints', 'Bank partners didn\'t want their cards disappearing before members saw them, and every card carries a lot of information.'],
+            ['Options', 'Filtering: remove cards as filters apply, or keep every card visible and highlight matching benefits. Layout: a grid with details in a modal, or a list with details inline.'],
+            ['My part', 'Designed the concepts, ran alignment with all three partners, and worked with our researcher to put the layouts in front of members.'],
+            ['Decision', 'Stakeholders aligned on the additive filter as a concept. Research settled the layout: the final direction is a list that shows more inline.']
+          ]
+        },
+        {
+          t: 'options', ratio: 1.6, bg: '#FFFFFF', title: 'Filtering concepts',
+          items: [
+            { name: 'Reductive filter', src: 'assets/scene-card-grid.gif', still: 'assets/scene-card-grid-still.webp', verdict: 'Explored concept', note: 'Each filter removes cards. Banks pushed back.' },
+            { name: 'Additive filter', src: 'assets/scene-filter-table.gif', still: 'assets/scene-filter-table-still.webp', verdict: 'Stakeholder-aligned concept', chosen: true, note: 'Every card stays visible and filters highlight matching perks. The concept stakeholders aligned on.' }
+          ]
+        },
+        {
+          t: 'text', kicker: 'Where research changed the layout',
+          paras: [
+            'We tested a grid that opens each card in a modal against a list with every card\'s details inline. **75% of participants preferred the list**, citing easier comparison and seeing fees and APR up front. As one put it: "I hate that I have to open it, see what the benefits are, close it, and then go to the next one."'
+          ]
+        },
+        { t: 'native', src: 'scene-native/fragments/compare.html' },
+
+        { t: 'chapter', kicker: 'One experience, three brands', title: 'A shared system with room for each bank', lede: 'The heroes share one template while each brand gets its own color, artwork and card presentation. Scene+ stays constant across all three.' },
+        { t: 'native', src: 'scene-native/fragments/stages.html' },
+        {
+          t: 'split',
+          paras: [
+            'The bank switcher keeps the same idea in the product. Moving between Scotiabank and Tangerine changes context without a page load, while Scene+ stays put. Underneath are three pages for search, and the switcher updates the URL and remembers where you were.'
+          ],
+          m: { src: 'assets/scene-feature-toggle.gif', still: 'assets/scene-feature-toggle-still.webp', bg: '#000000', badge: 'Final design', caption: 'The bank switcher.' }
+        },
+        {
+          t: 'options', ratio: 2.2, bg: '#0E0E0E', title: 'Hero directions',
+          lede: 'We reviewed eight hero directions in the open with all three teams. Stakeholders chose the last: both cards side by side on a Scene+ purple swirl.',
+          items: [
+            { name: 'Full lineup', src: 'assets/scene-hero-direction-1.webp', verdict: 'Explored', note: 'Every card at once, on a warm gradient.' },
+            { name: 'Dark and focused', src: 'assets/scene-hero-direction-4.webp', verdict: 'Explored', note: 'Two cards on a deep purple field.' },
+            { name: 'Both cards, purple swirl', src: 'assets/scene-hero-direction-8.webp', verdict: 'Stakeholder-selected direction', chosen: true, note: 'Carried into the final design.' }
+          ]
+        },
+
+        { t: 'chapter', kicker: 'Delivery and impact', title: 'Shipped, and measured' },
+        {
+          t: 'text',
+          paras: [
+            'Every screen went to Havas fully annotated. As they built, I attended their demos, tested dev builds, and worked with our PM to write new tickets.'
+          ]
+        },
+        {
+          t: 'stats',
+          items: [
+            { value: '+221%', label: 'Referrals from Scene+ to Scotiabank and Tangerine', context: 'New experience vs. the old one' },
+            { value: '+188%', label: 'Page views', context: 'New Scotiabank page vs. the old page' },
+            { value: '+122%', label: 'Traffic after Banking was added to the web navigation', context: 'A separate navigation change' }
+          ],
+          note: 'Referrals are members sent on to the banks, not applications or new cardholders.'
+        },
+        {
+          t: 'callout', kind: 'lesson', label: 'What I\'d do differently',
+          text: 'Bring validation into cross-team decisions sooner. Debates between teams with different priorities stalled us; once small pieces were in front of members, we moved much faster.'
+        },
+        { t: 'next' }
       ]
     },
     {
       slug: 'shopify-tax-international',
-      tiles: [
-        {
-          label: 'Discovery', heading: 'The Problem',
-          paras: [
-            'Shopify had no international tax product. EU and UK merchants faced country-specific VAT rules, and the legacy product made them type in rates by hand, with no guidance and no view of where they owed tax.',
-            'Building **Shopify Tax International** was the Merchant Tax team\'s big mission for 2024.'
-          ],
-          media: [{ src: 'assets/shopify-manual.png', caption: "In Shopify's legacy tax product, merchants would need to manually type in tax rates.", before: true }]
-        },
-        {
-          kind: 'team', label: 'Discovery', heading: 'How the Mission Was Structured',
-          paras: [
-            'My team, Merchant Tax, was 60+ people responsible for every merchant-facing tax product at Shopify: in admin, in the Shop app, and in off-site integrations.',
-            'Each year, teams across Shopify identified the missions most critical to the company, and each mission was split into projects.',
-            '**In 2024 I was the UX mission lead for the Shopify Tax International mission.** I also championed projects within the mission itself, which just meant keeping them on track.'
-          ],
-          team: {
-            tiers: [
-              { label: 'Product group: Merchant Services', chips: ['Executive trifecta'] },
-              { label: 'Product area: Merchant Tax', chips: ['Director trifecta'] },
-              { label: 'Mission: International Tax', chips: [{ name: 'Staff trifecta (my team)', me: true }] },
-              { label: 'Project champions', chips: ['1 per project'] },
-              { label: 'Partner teams (consulted & informed)', chips: ['Tax experts', 'B2B', 'Split Cart', 'Product Create', 'Other tax missions'] }
-            ],
-            headTag: 'Trifectas: UX, Eng, PM (+/- Data, PMM)',
-            noTimeline: true
-          }
-        },
-        {
-          label: 'Discovery', heading: 'Deciding What to Build',
-          paras: [
-            'With the mission set, we had to figure out what to build. I interviewed Shopify\'s tax SMEs and international merchants, while my product and engineering counterparts mapped requirements, the current system, fallbacks, and integrations.',
-            'Then the whole mission team, about 20 people, met in Montréal to discuss the key problems we uncovered. Merchants didn\'t know when or how to collect tax. Every B2B order needed a specific invoice. We needed to know every product a merchant sold to apply reduced rates. And B2B orders shouldn\'t be taxed, so merchants needed to validate their business customers.',
-            'I led whiteboarding sessions to sketch user flows and lo-fi wireframes for each problem, and we codified them into the mission\'s five features: **liability insights**, **VAT registration**, **VAT invoices**, **B2B exemptions**, and **product categories**.'
-          ],
-          timelineOverlay: true,
-          team: {
-            total: '2024, 5 projects, 60+ team members',
-            phaseLabel: '2 to 3 months per project:',
-            projects: [
-              { name: 'Liability insights', start: 0, len: 3 },
-              { name: 'VAT registration', start: 2, len: 3 },
-              { name: 'VAT invoices', start: 4, len: 2.5 },
-              { name: 'B2B exemptions', start: 5.5, len: 2.5 },
-              { name: 'Product categories', start: 7.5, len: 3 }
-            ],
-            phases: [
-              { name: 'Proposal', span: 'Gate 1', weeks: 1, color: '#4351E8' },
-              { name: 'Prototype', span: 'Gate 2', weeks: 1, color: '#7B61FF' },
-              { name: 'Build', span: 'Gate 3', weeks: 1, color: '#05D9E8' },
-              { name: 'Deploy', span: 'EU + UK', weeks: 1, color: '#E8B84B' }
-            ]
-          },
-          media: [{ src: 'assets/shopify-workshop2.webp', caption: 'Cross-functional Shopify Tax workshop in Montréal' }]
-        },
-        {
-          label: 'Discovery', heading: 'A Hands-Off Vision',
-          paras: [
-            'I always like to start by aligning on the vision and what good actually looks like. We all agreed the future is **agentic workflows** that collect tax on a merchant\'s behalf.',
-            'Shopify already had Sidekick, an AI assistant that helps merchants build their store. The demand was for Sidekick to "do it for me": tell merchants when it\'s time to collect, deal with clunky government sites, turn on tax collection, optimize accuracy, and remit on their behalf.',
-            'An assistant can only act on what the product already handles. The five features were that foundation: a way for merchants to manage tax themselves first.'
-          ],
-          media: [{ src: 'assets/shopify-sidekick-vision.gif', bg: '#EFF0EF', caption: 'I recreated this vision in Claude Design; the original was built in Bolt. AI lets me build several working prototypes in a day, so I can iterate and test faster.', highlight: true }]
-        },
-        {
-          label: 'Feature Design (1 of 5)', heading: 'Liability Insights',
-          paras: [
-            'To reach that vision over time, we first needed a stronger foundation in the UI, so we started with the most complex feature: knowing where you owe tax, which became Liability Insights.',
-            'We tested a map, a list, and a table. The list won: it can show a different visualization per jurisdiction without breaking the page, and engineering favored it as a standard Polaris component.',
-            'Alerts fire by email and in admin at 80% of a threshold. Merchants understood it right away in testing, and it became the basis for a global standard.'
-          ],
-          pivotLabel: 'The handoff',
-          pivot: 'I designed in Figma, mostly with components from Shopify\'s Polaris design system. Anything new or bespoke was fully annotated in an experience brief, which engineers used to write their own tickets. I stayed on through build to answer questions and run visual QA.',
-          media: [
-            { src: 'assets/shopify-tli-map.gif', bg: '#E8E7E2', caption: 'Map: Shopify has tons of maps and it tested well visually, but it carried high dev effort.' },
-            { src: 'assets/shopify-tli-list.gif', bg: '#E8E7E2', caption: 'List: very utilitarian, but extensible and flexible enough to handle rules that differ by jurisdiction.' },
-            { src: 'assets/shopify-tli-table.gif', bg: '#E8E7E2', caption: 'Table: highly scannable, but it does not scale when rules are too different to standardize.' }
-          ]
-        },
-        {
-          label: 'Feature Design (2 of 5)', heading: 'VAT Registration',
-          paras: [
-            'Once Liability Insights uses a merchant\'s shop data to tell them they\'re liable, we need to help them register with the right tax authority. Registrations also change as a business grows: past 10,000 EUR in EU cross-border sales, a merchant either registers in each country or files once through the One Stop Shop scheme.',
-            'Both paths are valid, so the product explains the choice without making it. The admin stays quiet until sales trigger an action, then a banner names the country, the trigger, and what to update.'
-          ],
-          media: [
-            { src: 'assets/shopify-reg.gif', caption: 'Tax info is there when you need it. Popovers offer the flexibility to show different state-dependent visualizations.' },
-            { src: 'assets/shopify-oss.gif', caption: 'Order volume is tracked against thresholds, so merchants get told when it is time to update a registration.' }
-          ]
-        },
-        {
-          label: 'Feature Design (3 of 5)', heading: 'VAT Invoices',
-          paras: [
-            'Once merchants are collecting VAT, they\'re legally required to issue compliant VAT invoices for all B2B orders.',
-            'In Montréal we all assumed we\'d attach them to the order confirmation email. Then engineering flagged the problems: sync delays, template tech debt, customized merchant emails, and invoices that were hard to find later.'
-          ],
-          pivot: 'We weighed every entry point and moved invoices off email, onto the order confirmation page and order details in admin.',
-          parasAfter: [
-            'Merchants turn invoices on with a single toggle and can preview the template. Behind that, the generated invoice worked like a component with 27 states, one for each EU country, so every invoice met that country\'s legal requirements.'
-          ],
-          media: [
-            { src: 'assets/shopify-tradeoffs-mock.png', caption: 'How will merchants and buyers access VAT invoices? Tradeoffs for each entry point.', contain: true },
-            { src: 'assets/shopify-invoice-toggle.gif', caption: 'VAT invoice toggle in tax settings' },
-            { src: 'assets/shopify-invoice-template.png', caption: 'Required data audit: invoice fields by country, from the UK across all 27 EU countries', contain: true },
-            { src: 'assets/shopify-compliance.webp', caption: 'A generated VAT invoice, with the merchant\'s logo leading a neutral template', contain: true }
-          ]
-        },
-        {
-          label: 'Feature Design (4 of 5)', heading: 'B2B Exemptions',
-          paras: [
-            'B2B orders came with a second requirement beyond invoices: under VAT, the orders themselves are tax-exempt.',
-            'Merchants used to tick a checkbox to mark a customer as exempt, which put the risk on them. If they skipped tax they should have charged, they owed the tax plus fines.',
-            'I worked closely with engineering on a feature that sends the customer\'s VAT ID to the EU\'s VIES database for a real-time check that they are a registered business. If they are, the right exemption applies automatically, and the validated ID appears on the VAT invoice.'
-          ],
-          media: [{ src: 'assets/shopify-vat-id-validation.gif', caption: 'VAT ID validation on a customer record, applying the exemption automatically', contain: true }]
-        },
-        {
-          label: 'Feature Design (5 of 5)', heading: 'Product Category Exemptions',
-          paras: [
-            'The last piece was making sure merchants charge accurate tax for every product they sell. To know whether a product qualifies for a reduced rate, it has to be categorized correctly.',
-            'I worked closely with our data scientists and the bulk editor team on a view that used some of Shopify\'s AI integrations. Uncategorized products were categorized automatically. Anything too ambiguous for the AI brought merchants back into Shopify to approve a suggested category or search our taxonomy for the best fit.'
-          ],
-          media: [{ src: 'assets/shopify-product-categories.gif', caption: 'Bulk product categorization inside the tax experience' }]
-        },
-        {
-          label: 'Results', heading: 'Adoption, Trust, and Time Returned',
-          paras: [
-            'Merchants went from typing in rates by hand to a product they trusted. Adoption and compliance climbed, and tax support volume dropped.'
-          ],
-          metrics: [
-            { value: '90%', label: 'Of total addressable market (TAM) adopted Shopify Tax' },
-            { value: '1M+', label: 'Merchants using Shopify Tax' },
-            { value: 'Millions', label: 'Of VAT invoices generated within weeks of launch' }
-          ],
-          note: '',
-          pivotLabel: 'What I\'d do differently',
-          pivot: 'We held on too long to one principle: guide, never take control. Merchants kept saying "do it for me." Revisiting our principles sooner could have pushed even the MVP closer to hands-off tax automation.',
-          media: [
-            { src: 'assets/shopify-tax-launch-blog.png', caption: 'Shopify Tax launch announcement for the EU and UK', contain: true }
-          ]
-        }
-      ],
-      intro: {
-        heading: 'Compliance as a Growth Blocker',
-        brand: 'Shopify powers millions of merchants, and in 2024 international expansion was a company priority.',
-        aim: 'was to ship a 0–1 tax product that turned country by country VAT rules into a single system merchants could trust.'
-      },
+      story: true,
+      accent: '#3FBF8F',
       title: 'Shopify Tax International',
       buttonIcon: 'assets/logo-shopify.png',
       buttonLabel: 'Shopify Tax',
-      tagline: 'I was a Staff Product Designer at Shopify for 3+ years. From 2024 to 2025 I led UX for Shopify Tax International, a new tax product for EU and UK merchants that was built 0-1 in one year and adopted by 90% of eligible merchants.',
-      tags: ['Enterprise Software', 'FinTech', 'Global Markets', 'Tax Compliance'],
-      roles: ['Staff Product Designer', 'UX Mission Lead'],
-      cover: 'assets/shopify-hero.webp',
-      challenge: [
-        "One of Shopify's 2024 priorities was international expansion, but tax compliance quickly became a major blocker. EU and UK merchants faced country-specific VAT rules that made compliance confusing and time-consuming. Our challenge was to launch a 0–1 tax product that simplified this complexity and built confidence for merchants of all sizes."
-      ],
-      approach: [
-        "To better understand the key tax jobs-to-be-done for EU and UK merchants, I partnered with Shopify's internal tax experts and our product manager to conduct merchant interviews to uncover how merchants navigate VAT compliance and where Shopify's current offering fell short. We heard the same pain points repeatedly: uncertainty around when and where to collect tax, difficulty keeping registrations up to date, rigid invoicing across regions, and confusion managing B2B exemptions.",
-        "I took these findings and partnered with my product and engineering lead counterparts to run a cross-functional workshop in Montréal, turning insights into focus and aligning on the five most critical features to address key merchant pain points."
-      ],
-      highlights: [
-        { title: 'Tax Liability Insights', desc: 'Real-time tracking across jurisdictions' },
-        { title: 'VAT Registration', desc: 'Facilitate registration updates with alerts when eligibility changes' },
-        { title: 'VAT Invoices', desc: 'Flexible templates that adapt to region, language, and currency' },
-        { title: 'Product Category Exemptions', desc: 'Smart tagging with automated rate application' },
-        { title: 'B2B Tax Exemptions', desc: 'Automatic B2B onboarding with proper exemptions' }
-      ],
-      implementation: [
-        { title: 'VAT Registration Flows', desc: "Matched international VAT registration types, alerting merchants if they were ineligible for a registration type based on their shop's revenue." },
-        { title: 'VAT Invoice Template', desc: 'Designed a utilitarian VAT invoice template that dynamically presented information such as currency conversions and purchase order numbers, based on merchant settings. Merchants could also upload their own logo to personalize invoices.' },
-        { title: 'Product Categorization', desc: 'Implemented a flow and interaction for merchants to categorize products, automatically applying tax exemptions at checkout.' }
-      ],
-      results: [
-        '90% of merchants chose Shopify Tax over the free option or a third-party app, demonstrating strong preference and trust.',
-        'Merchants enabled VAT invoices at scale, reducing reliance on cumbersome third-party tools and generating millions of invoices within weeks.',
-        'In-admin liability tracking and VAT ID validation saved merchants significant time by reducing reliance on self-tracking and also increased compliance compared to legacy workflows.',
-        'Bulk product categorization improved tax accuracy at checkout and reduced support debt, since merchants could resolve tax accuracy issues proactively in fewer steps.',
-        "Support call data showed frustration with tax products dropped significantly, making it one of the very low friction surfaces at Shopify based on support volume."
-      ],
-      gallery: [
-        { src: 'assets/shopify-hero.webp', caption: 'Shopify Tax product' },
-        { src: 'assets/shopify-workshop.webp', caption: 'Our cross-functional workshop in Montréal' },
-        { src: 'assets/shopify-process.png', caption: 'Shopify Tax product development process' }
+      cover: 'assets/shopify-tli-list-still.png',
+      tags: ['Shopify', 'Tax compliance', 'EU + UK', '0 → 1'],
+      roles: ['Staff Product Designer', 'UX Mission Lead, International Tax'],
+      subnav: { after: 'decisions-glance', items: [{ target: 'decision-1', label: '1 · Obligations to actions' }, { target: 'decision-2', label: '2 · Country requirements' }, { target: 'decision-3', label: '3 · Automation vs. control' }] },
+      blocks: [
+        {
+          t: 'hero', title: 'Shopify Tax International', tags: ['Shopify', 'Tax compliance', 'EU + UK', '0 → 1'],
+          lede: 'EU and UK merchants were typing VAT rates in by hand, with no idea where they owed. I led UX for the mission that turned country-by-country rules into a product that tells merchants where they stand and what to do next.',
+          facts: [
+            { k: 'My role', v: 'Staff Product Designer. 3.5 years across multiple merchant tax products. UX mission lead for international tax, 2024 to 2025.' },
+            { k: 'Scope', v: 'EU and UK merchants. Five features, from liability tracking to VAT invoices.' },
+            { k: 'Worked with', v: 'Product and engineering leads, tax experts, data scientists, B2B, bulk editing and other tax teams.' }
+          ]
+        },
+        {
+          t: 'media', width: 'full',
+          m: { src: 'assets/shopify-eu-settings.webp', bg: '#F1F1F1', badge: 'Final design', caption: 'EU tax settings: one OSS registration, VAT collection by country, automated rates from product categories, and VAT invoices in one place.', alt: 'Shopify Taxes and duties settings for the European Union: Shopify Tax active, VAT collected in France and Germany, automated rate management and VAT invoices' }
+        },
+        {
+          t: 'text', kicker: 'Where this fits',
+          paras: [
+            'I helped bring Shopify Tax from 0 to 1, then worked across **international tax**, **automated filing**, and the **Shopify Tax Platform** as its capabilities grew, as designer and project champion on several initiatives.',
+            'In 2024, international tax was a company-priority mission, run by a trio of UX, product, and engineering leads. As the UX lead I owned the experience across its five projects: the research, the workshops that defined the features, the core flows, and design through build and QA.'
+          ]
+        },
+        {
+          t: 'cols', glance: true, id: 'decisions-glance',
+          items: [
+            { target: 'decision-1', title: '1 · Turn obligations into actions', desc: 'Liability insights and VAT registration: show where a merchant owes, and what to do about it.' },
+            { target: 'decision-2', title: '2 · Handle country-specific requirements quietly', desc: 'VAT invoices: one toggle for the merchant, country-specific requirements underneath.' },
+            { target: 'decision-3', title: '3 · Automate what can be verified', desc: 'B2B exemptions and product categories: let software decide where it can be sure, and keep merchants in control where it can\'t.' }
+          ]
+        },
+
+        { t: 'chapter', kicker: 'The problem', title: 'Tax rules nobody chose to learn', lede: 'Rules change by country, by product, and by who is buying. The old product handed all of that to the merchant.' },
+        {
+          t: 'split',
+          paras: [
+            'Shopify\'s legacy tax settings asked merchants to type in rates themselves, with no guidance and no view of where they owed tax.',
+            'In interviews, merchants kept saying the same four things. They didn\'t know **when or where to start collecting**, how to **keep registrations current**, what an **invoice had to contain**, or how to **treat business customers**.'
+          ],
+          m: { src: 'assets/shopify-manual.png', badge: 'Before', caption: 'The legacy experience: tax rates typed in by hand.' }
+        },
+        {
+          t: 'split', flip: true, kicker: 'Deciding what to build',
+          paras: [
+            'I interviewed Shopify\'s tax experts and international merchants while my product and engineering counterparts mapped requirements, the current system, fallbacks, and integrations.',
+            'Then about 20 of us met in Montréal. I led the whiteboarding that turned each problem into flows and lo-fi wireframes, and we codified them into five features. Each one answers one of three decisions.'
+          ],
+          m: { src: 'assets/shopify-workshop2.webp', caption: 'The mission team working through the problems in Montréal.', alt: 'Cross-functional Shopify Tax workshop in Montréal' }
+        },
+
+        { t: 'chapter', id: 'decision-1', kicker: 'Decision 1', title: 'Turn an obligation into an action', lede: 'Merchants don\'t think in tax law. They think: do I need to do something, and what?' },
+        {
+          t: 'decision',
+          rows: [
+            ['Problem', 'Whether a merchant owes tax somewhere depends on thresholds and rules that differ by country. Nothing in the product showed it.'],
+            ['Options', 'A map, a table, or a list of jurisdictions.'],
+            ['Constraints', 'Rules differ too much between jurisdictions to standardize into columns. A map carried high engineering cost.'],
+            ['My part', 'Designed and tested all three, and worked through feasibility with engineering.'],
+            ['Decision', 'A list. Each jurisdiction can show its own visualization without breaking the page, and it builds on a standard Polaris component engineering already supported.']
+          ]
+        },
+        {
+          t: 'options', ratio: 1.77, bg: '#E8E7E2',
+          items: [
+            { name: 'Map', src: 'assets/shopify-tli-map.gif', still: 'assets/shopify-tli-map-still.webp', verdict: 'Explored', note: 'Tested well visually, but carried high dev effort.' },
+            { name: 'List', src: 'assets/shopify-tli-list.gif', still: 'assets/shopify-tli-list-still.png', verdict: 'Chosen', chosen: true, note: 'Utilitarian, and flexible enough for rules that differ by jurisdiction.' },
+            { name: 'Table', src: 'assets/shopify-tli-table.gif', still: 'assets/shopify-tli-table-still.png', verdict: 'Explored', note: 'Highly scannable, but breaks when rules are too different to standardize.' }
+          ]
+        },
+        {
+          t: 'split', title: 'Then tell them when it changes',
+          paras: [
+            'Alerts fire by email and in admin at 80% of a threshold, naming the country, the trigger, and what to update. In testing, merchants understood them right away.',
+            'Detailed guidance lives in popovers that only open when a merchant asks for it. That pattern tested well and became the standard for showing complex tax guidance.',
+            'Registration isn\'t one path. In the EU, many merchants selling across borders can register in each country or report through the One Stop Shop scheme, and the right choice depends on the business. So the product explains the choice instead of making it.'
+          ],
+          m: { src: 'assets/shopify-reg.gif', still: 'assets/shopify-reg-still.png', badge: 'Final design', caption: 'Registration details are there when you need them, and quiet until then.' }
+        },
+        {
+          t: 'media',
+          m: { src: 'assets/shopify-oss.gif', still: 'assets/shopify-oss-still.png', badge: 'Final design', caption: 'Sales are tracked against thresholds, so merchants hear about a registration change when it matters.' }
+        },
+
+        { t: 'chapter', id: 'decision-2', kicker: 'Decision 2', title: 'Handle country-specific requirements without overwhelming merchants', lede: 'Invoice requirements differ across the UK and every EU country. The merchant should see one switch.' },
+        {
+          t: 'decision',
+          rows: [
+            ['Problem', 'Merchants who are registered for VAT and sell to businesses need invoices that meet each country\'s requirements.'],
+            ['Options', 'Attach invoices to the order confirmation email, the team\'s first instinct in Montréal. Or put them on the order status page and in order details in admin.'],
+            ['Constraints', 'Engineering flagged sync delays, email template debt, heavily customized merchant emails, and invoices that would be hard to find later.'],
+            ['My part', 'Mapped every entry point and its tradeoffs, and audited the required invoice fields across the UK and all 27 EU countries.'],
+            ['Decision', 'Move invoices off email. One toggle turns them on. Underneath, a single template with country-specific variations covers each country\'s requirements.']
+          ]
+        },
+        {
+          t: 'media', width: 'full',
+          m: { src: 'assets/shopify-tradeoffs-mock.png', badge: 'Working artifact', caption: 'How would merchants and buyers get to a VAT invoice? The tradeoffs of each entry point.' }
+        },
+        {
+          t: 'split',
+          paras: [
+            'For the merchant, it\'s a single setting with a preview of the template.',
+            'Behind it, the invoice works like a component with a state for each country, so every generated invoice carries the fields that country asks for.'
+          ],
+          m: { src: 'assets/shopify-invoice-toggle.gif', still: 'assets/shopify-invoice-toggle-still.webp', badge: 'Final design', caption: 'VAT invoices turn on from tax settings.' }
+        },
+        {
+          t: 'pair',
+          lede: 'From the audit to the invoice: a utilitarian template, so the required details stay easy to find. The merchant\'s logo leads, and fields like currency conversions and purchase order numbers appear based on the order and the merchant\'s settings.',
+          items: [
+            { src: 'assets/shopify-invoice-template.png', ratio: 2.5543, badge: 'Working artifact', caption: 'The required-fields audit: invoice data by country, from the UK across all 27 EU countries.' },
+            { src: 'assets/shopify-compliance.webp', ratio: 0.7065, badge: 'Final design', caption: 'A generated VAT invoice, with the merchant\'s logo leading a neutral template.', alt: 'A generated VAT invoice with the merchant logo at the top and order, tax and buyer details below' }
+          ]
+        },
+
+        { t: 'chapter', id: 'decision-3', kicker: 'Decision 3', title: 'Automate what software can verify. Keep merchants in control of the rest.', lede: 'Guidance alone leaves merchants holding the risk. Automation alone takes away their judgment where it still matters.' },
+        {
+          t: 'split', title: 'B2B: check it, don\'t ask merchants to vouch for it',
+          paras: [
+            'Many cross-border business sales are taxed differently from consumer sales, but only if the buyer really is a registered business.',
+            'Merchants used to tick a box to mark a customer exempt, and they carried the risk if it was wrong. I worked with engineering on a real-time check of the customer\'s VAT ID against the EU\'s VIES database. A valid ID applies the right treatment automatically and appears on the invoice.'
+          ],
+          m: { src: 'assets/shopify-vat-id-validation.gif', still: 'assets/shopify-vat-id-validation-still.png', bg: '#F1F1F1', badge: 'Final design', caption: 'VAT ID validation on a customer record.' }
+        },
+        {
+          t: 'split', flip: true, title: 'Products: AI where it\'s confident, the merchant where it isn\'t',
+          paras: [
+            'Reduced rates depend on what a product is, so products have to be categorized correctly.',
+            'With our data scientists and the bulk editor team, I designed a flow that used Shopify\'s AI to categorize what it could with confidence. Anything ambiguous brings the merchant back to approve a suggestion or search the taxonomy.'
+          ],
+          m: { src: 'assets/shopify-product-categories.gif', still: 'assets/shopify-product-categories-still.webp', badge: 'Final design', caption: 'Bulk product categorization inside the tax experience.' }
+        },
+        {
+          t: 'callout', kind: 'lesson', label: 'What I\'d do differently',
+          text: 'We held on too long to one principle: guide, never take control. Merchants kept saying "do it for me." Revisiting it sooner could have pushed even the first release closer to hands-off tax.'
+        },
+
+        { t: 'chapter', kicker: 'Where it\'s headed', title: '“Do it for me”', lede: 'We agreed early that the future is an assistant handling tax on a merchant\'s behalf. An assistant can only act on what the product already handles, and these five features were that foundation.' },
+        {
+          t: 'split',
+          paras: [
+            'Shopify already had Sidekick, an AI assistant for merchants. The vision: tell merchants when it\'s time to collect, deal with the government sites, turn on collection, and file on their behalf.',
+            'I first prototyped it in Bolt; the version here is a recreation made in Claude Design.'
+          ],
+          m: { src: 'assets/shopify-sidekick-vision.gif', still: 'assets/shopify-sidekick-vision-still.png', bg: '#EFF0EF', badge: 'Concept · recreated', caption: 'A Sidekick concept for handling tax on a merchant\'s behalf.' }
+        },
+
+        { t: 'chapter', kicker: 'Outcome', title: 'Shipped to EU and UK merchants', lede: 'Merchants went from typing in rates to a product that shows where they owe and walks them through what to do.' },
+        {
+          t: 'stats', title: 'International tax',
+          items: [{ value: 'Millions', label: 'VAT invoices generated within weeks of launch' }]
+        },
+        {
+          t: 'stats', title: 'Shopify Tax overall',
+          items: [
+            { value: '1M+', label: 'Merchants using Shopify Tax' },
+            { value: '90%', label: 'Of eligible merchants adopted Shopify Tax' }
+          ],
+          note: 'These describe the whole product this mission extended, not the international launch on its own.'
+        },
+        {
+          t: 'media',
+          m: { src: 'assets/shopify-tax-launch-blog.png', bg: '#FFFFFF', badge: 'Launched', caption: 'The Shopify Tax launch announcement for the EU and UK.' }
+        },
+        { t: 'next' }
+      ]
+    },
+    {
+      slug: 'observatori',
+      story: true,
+      accent: '#6FE0C0',
+      title: 'Observatori',
+      buttonIcon: 'assets/observatori-mark.svg',
+      buttonLabel: 'Observatori',
+      cover: 'assets/observatori-replay-poster.webp',
+      tags: ['Founder', 'AI product', 'Live'],
+      roles: ['Founder', 'Product designer', 'Builder'],
+      blocks: [
+        {
+          t: 'hero', compact: true, title: 'Observatori', tags: ['Founder', 'AI product', 'Live soft launch', '2026'],
+          lede: 'I kept carrying one AI\'s answer to another to compare them, and the reconciling was always left to me. Observatori gives that job to a team: models from different AI companies research a question together, in public, and show how they reached the answer.'
+        },
+        {
+          t: 'media', width: 'full',
+          m: { embed: 'observatori/05/replay/?edited#peek', ratio: 1.6, mRatio: 0.5, badge: 'Live product', caption: 'Investigation .05, running here: the actual replay from theobservatori.com. Press play, open a claim, or switch to the full replay.', alt: 'The Observatori replay of investigation .05, an interactive star chart of studies and claims', link: { label: 'Open on theobservatori.com ↗', href: 'https://www.theobservatori.com/investigations/05/replay/' } }
+        },
+        {
+          t: 'facts',
+          facts: [
+            { k: 'My role', v: 'Founder. I came up with the concept, set the rules the lab runs by, designed how people follow and judge an investigation, and built it with Claude Code: writing the plans, reviewing what came back, and sending it back when it wasn\'t right.' },
+            { k: 'Status', v: 'Live at theobservatori.com as an early soft launch, with five published investigations.' },
+            { k: 'Built', v: 'October 2026.' }
+          ]
+        },
+
+        { t: 'chapter', kicker: 'The system', title: 'A team of models, with code checking the work', lede: 'A Researcher finds studies and writes claims tied to exact quotes. A Skeptic from a different AI company tries to break them, and a Referee rules on disputes. Code, not a model, checks every quote and number before a brief is approved.' },
+        {
+          t: 'media', width: 'full',
+          m: { embed: 'observatori/pages/about/?only=%23process', auto: true, ratio: 1.25, mRatio: 0.5, badge: 'Live product · interactive', caption: 'How a question becomes a brief, from the About page. Pick any step to see what happens there.', alt: 'Interactive flow chart of how a question becomes a published brief and replay' }
+        },
+        {
+          t: 'text',
+          paras: [
+            'The goal isn\'t truth. Several models agreeing doesn\'t make something true. The goal is better-supported conclusions, where readers can see the evidence, the disagreement and the uncertainty, and judge for themselves.'
+          ]
+        },
+
+        { t: 'chapter', kicker: 'Decision 1', title: 'Make the evidence visible', lede: 'A run is about 90 minutes of searching, reading and arguing. The visual had to show whether the answer holds up, not just that agents were busy.' },
+        {
+          t: 'decision',
+          rows: [
+            ['Problem', 'An animation of agents at work says nothing about whether the answer holds up.'],
+            ['Options', 'A pixel-art lab with the agents as characters, or a star chart where the studies, claims and the links between them are the subject.'],
+            ['Decision', 'The star chart. Studies are stars, claims sit by the study they quote, contested claims turn red, and claims that fail a check go dim. The agents watch from an observers deck at the edge.']
+          ]
+        },
+        {
+          t: 'versions', width: 'wide', title: 'From characters to evidence',
+          items: [
+            { label: 'First concept · Big If True', embed: 'observatori/prototypes/big-if-true.html', date: 'First concept.', note: 'A pixel-art lab where the agents are characters walking between rooms. The evidence was a backdrop.', badge: 'Explored concept' },
+            { label: 'Star chart', embed: 'observatori/prototypes/constellation-v1.html', date: 'The switch.', note: 'The investigation as an evidence star chart: studies, claims and the lines between them.', badge: 'Prototype' },
+            { label: 'Observers deck', embed: 'observatori/prototypes/constellation-v4-observers.html', date: 'The direction carried forward.', note: 'The agents move outside the chart and watch it, so the evidence stays the subject.', badge: 'Prototype' }
+          ]
+        },
+
+        { t: 'chapter', kicker: 'Decision 2', title: 'Make a long investigation easier to follow', lede: '.05 ran 94 minutes, and even the full replay plays for about 17. Most people won\'t watch that.' },
+        {
+          t: 'text',
+          paras: [
+            'I added an edited replay, built only from recorded events in their recorded words and order, using selection rules I set. It\'s labeled "Edited replay · 8 min of 94", and the full replay is one click away. Watching the first cut myself, I found three problems and changed each one:'
+          ]
+        },
+        {
+          t: 'decision',
+          rows: [
+            ['Before', 'The cut started mid-run, so viewers met the argument before knowing the question or who was speaking.'],
+            ['After', 'It now opens on the question, and each agent\'s title card plays before its first line.'],
+            ['Before', 'Text typed in faster than anyone could read it.'],
+            ['After', 'Words type at the full replay\'s pace, and every entry holds for at least its reading time.'],
+            ['Before', 'A 5-minute cut dropped exchanges partway through an argument.'],
+            ['After', 'About 8 minutes, so arguments stay whole.']
+          ]
+        },
+
+        { t: 'chapter', kicker: 'Decision 3', title: 'Show the disagreement, and what was left out', lede: 'In .05, most claims didn\'t make the brief. Readers should be able to see that, and why.' },
+        {
+          t: 'stats',
+          items: [
+            { value: '14', label: 'Claims, every one challenged' },
+            { value: '3', label: 'Made the brief' },
+            { value: '7', label: 'Removed during review' },
+            { value: '4', label: 'Marked unsupported' }
+          ]
+        },
+        {
+          t: 'split',
+          paras: [
+            'Left out isn\'t the same as disproven. Some claims drop after a challenge, a Referee\'s ruling or a failed check, others because the studies don\'t support them, and the brief lists every one. The checker is always a model from a different company than the writer.',
+            'Wording rules limit causal language to effect claims backed by randomized or quasi-experimental studies, which is why the .05 finding speaks of **association, not that hype causes later weakness.** In the latest round I also made every flagged claim show its own text and the reason it was flagged.'
+          ],
+          m: { embed: 'observatori/05/brief/', ratio: 0.8, mRatio: 0.62, badge: 'Live product · published brief', caption: 'The .05 brief: claims tied to quotes, what was left out, and how it was checked.', alt: 'The published brief for Observatori investigation .05' }
+        },
+
+        { t: 'chapter', kicker: 'Where it stands', title: 'Built fast, still early' },
+        {
+          t: 'text',
+          paras: [
+            'I built Observatori in about a week. The direction moved quickly: the pixel lab became a star chart, a Skeptic and then a Referee joined, the site launched privately before going public, and the edited replay followed. When one run didn\'t answer its question, with 8 of 14 claims failing the number check, I took it down and tightened the checks.',
+            'It\'s live, but it hasn\'t been tested with an outside audience. What I want to learn next: whether people find the disagreement compelling or overwhelming, whether an edited replay builds trust, and which questions deserve a team rather than a single model.'
+          ]
+        },
+        {
+          t: 'callout', kind: 'lesson', label: 'What I learned',
+          text: 'Rules hold up better than requests. Quote checks, wording rules and who checks whom work because they\'re enforced, not asked for. And watching it as a viewer surfaced problems no test did.'
+        },
+        { t: 'next' }
       ]
     },
     {
@@ -1640,7 +2095,7 @@ class Component extends DCLogic {
   ];
 
   timelineEvents = [
-    { title: 'Staff Product Designer', company: 'Shopify | Chicago, IL (remote)', period: '3.5 years', description: 'Launched and led UX for Shopify Tax (90%+ adoption) and related 0-1 platforms, simplifying complex compliance workflows and generating millions in incremental revenue through growth efforts. Managed and mentored UX designers.', skills: ['UX/UI Design', 'Design Leadership', 'Research', 'Tax Solutions', 'International Markets'] },
+    { title: 'Staff Product Designer', company: 'Shopify | Chicago, IL (remote)', period: '3.5 years', description: 'Helped bring Shopify Tax from 0 to 1 and led UX for the international tax mission; worked across automated filing and the Shopify Tax Platform. Managed and mentored UX designers.', skills: ['UX/UI Design', 'Design Leadership', 'Research', 'Tax Solutions', 'International Markets'] },
     { title: 'UX Manager, UX Design Lead', company: 'Level Ex | Chicago, IL', period: '2 years', description: 'Directed UX for 5+ medical games, including Top Derm (4.9 rating during my tenure, used by 1 in 5 dermatologists). Increased verified registration from 29% to 83% across games. Managed and mentored a cross-discipline design team.', skills: ['UX Design', 'Team Management', 'Game Design', 'Product Strategy'] },
     { title: 'UX Designer II', company: 'Projekt202 / ORA Interactive | Chicago, IL', period: '3 Years', description: "Designed scalable systems and flagship experiences like Smithfield's multi-brand single-cart platform and The Second City's redesigned ticketing flow.", skills: ['UX/UI Design', 'UX Research', 'Usability Testing', 'Mobile & Web Design'] },
     { title: 'Digital Marketing Supervisor', company: 'Symmetri Marketing | Chicago, IL', period: '2 Years', description: 'Led UX design, marketing campaigns, and a cross-functional team that drove measurable lead growth for large B2B brands.', skills: ['UX/UI Design', 'Analytics', 'SEO', 'CRO', 'Team Leadership'] },
@@ -1765,6 +2220,8 @@ class Component extends DCLogic {
     this.onHashChange = () => {
       const h = window.location.hash.replace('#', '');
       const m = h.match(/^work\/(.+)$/);
+      if (window.__spnKill) window.__spnKill();
+      if (this.state.subnavShow) this.setState({ subnavShow: false, subnavCurrent: null });
       this.setState({ slug: m ? m[1] : null, tile: 0, lbTile: null, lbIdx: 0, mediaIdx: {}, story: null, snapLb: false });
       if (h === 'selected-moments') { setTimeout(() => this.scrollToMoments(false), 30); setTimeout(() => this.scrollToMoments(false), 320); }
       else window.scrollTo(0, 0);
@@ -1809,6 +2266,15 @@ class Component extends DCLogic {
         return;
       }
       if (!cs) return;
+      if (cs.story) {
+        if (e.key === 'Escape' && Object.keys(this.state.storyActive || {}).length) { e.preventDefault(); this.setState({ storyActive: {} }); return; }
+        const tag = (e.target && e.target.tagName) || '';
+        if (/INPUT|TEXTAREA|SELECT/.test(tag)) return;
+        if (e.key === 'ArrowRight') { e.preventDefault(); this.step(1); }
+        else if (e.key === 'ArrowLeft') { e.preventDefault(); this.step(-1); }
+        else if (e.key === 'Escape') { e.preventDefault(); this.navigate(null); }
+        return;
+      }
       if (e.key === 'ArrowRight') { e.preventDefault(); this.step(1); }
       else if (e.key === 'ArrowLeft') { e.preventDefault(); this.step(-1); }
       else if (e.key === 'ArrowDown' || e.key === 'PageDown' || e.key === ' ') { e.preventDefault(); this.stepTile(1); }
@@ -1817,7 +2283,8 @@ class Component extends DCLogic {
     };
     this.onWheel = () => {};
     this.onWinScroll = () => {
-      if (!this.state.mobile || !this.state.slug || this._depthPending) return;
+      const sc = this.caseStudies.find(c => c.slug === this.state.slug);
+      if ((!this.state.mobile && !(sc && sc.story)) || !this.state.slug || this._depthPending) return;
       this._depthPending = true;
       requestAnimationFrame(() => {
         this._depthPending = false;
@@ -1826,15 +2293,24 @@ class Component extends DCLogic {
       });
     };
     window.addEventListener('scroll', this.onWinScroll, { passive: true });
+    this.onSubnavScroll = () => { if (this._snPending) return; this._snPending = true; requestAnimationFrame(() => { this._snPending = false; this.updateSubnav(); }); };
+    window.addEventListener('scroll', this.onSubnavScroll, { passive: true });
     this.onTouchStart = (e) => { this.touchY = e.touches[0].clientY; };
     this.onTouchMove = () => {};
     document.addEventListener('click', this.onDocClick, true);
     window.addEventListener('hashchange', this.onHashChange);
+    this.onEmbedMsg = (e) => {
+      const d = e.data;
+      if (!d || !d.obsEmbed || !d.h || e.origin !== location.origin) return;
+      if ((this.state.embedH || {})[d.obsEmbed] !== d.h) this.setState(s => ({ embedH: { ...(s.embedH || {}), [d.obsEmbed]: d.h } }));
+    };
+    window.addEventListener('message', this.onEmbedMsg);
     window.addEventListener('resize', this.onResize);
     window.addEventListener('keydown', this.onKey);
     this.onWinBlur = () => setTimeout(() => {
       const a = document.activeElement;
       if (a && a.tagName === 'IFRAME' && (this.state.story || this.state.lbTile !== null || this.state.snapLb)) { this.hookEscape(a); a.blur(); window.focus(); }
+      else if (a && a.tagName === 'IFRAME' && Object.keys(this.state.storyActive || {}).length) this.hookEscape(a);
     }, 0);
     window.addEventListener('blur', this.onWinBlur);
     window.addEventListener('wheel', this.onWheel, { passive: true });
@@ -1915,7 +2391,9 @@ class Component extends DCLogic {
     Object.keys(this._gifs || {}).forEach(s => this.gifStop(s));
     document.removeEventListener('click', this.onDocClick, true);
     window.removeEventListener('scroll', this.onWinScroll);
+    window.removeEventListener('scroll', this.onSubnavScroll);
     window.removeEventListener('hashchange', this.onHashChange);
+    window.removeEventListener('message', this.onEmbedMsg);
     window.removeEventListener('resize', this.onResize);
     window.removeEventListener('keydown', this.onKey);
     window.removeEventListener('blur', this.onWinBlur);
@@ -2506,6 +2984,292 @@ class Component extends DCLogic {
     return tiles;
   }
 
+  // Long-form case studies (story: true): a list of blocks with their own layout, instead of the tile deck.
+  storyBadge(label) {
+    const l = String(label || '').toLowerCase();
+    const c = /live|shipped|launched|final/.test(l) ? '#05D9E8'
+      : /progress/.test(l) ? '#F0A43A'
+      : /vision|recreated/.test(l) ? '#E8B84B'
+      : /before/.test(l) ? '#E06C6C'
+      : '#A594FF';
+    return c;
+  }
+
+  // Interactive embeds let the page scroll through them until someone chooses to use them:
+  // click to take over, move away, press Esc or tap Done to hand scrolling back.
+  embedShield(key) {
+    const active = !!(this.state.storyActive || {})[key];
+    const set = (on) => this.setState(s => ((!!(s.storyActive || {})[key]) === on ? null : { storyActive: on ? { [key]: true } : {} }));
+    return {
+      active,
+      shieldShow: !active, doneShow: active,
+      shieldLabel: 'Interact with this demo',
+      activate: () => set(true),
+      deactivate: () => set(false),
+      shieldStyle: { position: 'absolute', inset: 0, zIndex: 3, display: 'flex', alignItems: 'flex-start', justifyContent: 'center', padding: '14px 0 0', background: 'transparent', border: 0, cursor: 'pointer' },
+      pillStyle: { padding: '9px 16px', borderRadius: '999px', background: 'rgba(14,14,14,0.86)', border: '1px solid rgba(245,239,224,0.3)', color: '#F5EFE0', fontFamily: "'Space Grotesk',sans-serif", fontWeight: 600, fontSize: '13px', backdropFilter: 'blur(6px)', boxShadow: '0 8px 24px rgba(0,0,0,0.35)' },
+      doneStyle: { position: 'absolute', left: '50%', top: '14px', transform: 'translateX(-50%)', zIndex: 3, padding: '8px 16px', borderRadius: '999px', background: '#F5EFE0', color: '#141414', border: 0, fontFamily: "'Space Grotesk',sans-serif", fontWeight: 700, fontSize: '13px', cursor: 'pointer', boxShadow: '0 8px 24px rgba(0,0,0,0.35)' }
+    };
+  }
+
+  storyMedia(m, key) {
+    if (!m) return null;
+    const sh = m.embed ? this.embedShield(key) : { active: false };
+    const reduced = this._reducedMotion == null ? (this._reducedMotion = !!(window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches)) : this._reducedMotion;
+    const plays = (this.state.storyPlay || {})[key];
+    const playing = plays == null ? !reduced : plays;
+    const isGif = /\.gif$/i.test(m.src || '') && !!m.still;
+    const mobile = this.state.mobile;
+    const badgeC = this.storyBadge(m.badge);
+    return {
+      ...m,
+      isImg: !!m.src && !m.embed && !m.mp4,
+      isEmbed: !!m.embed,
+      isMp4: !!m.mp4,
+      // small isolated components load with the page so they're drawn by the time you reach them
+      loading: m.auto ? 'eager' : 'lazy',
+      poster: m.poster || '',
+      autoplay: !reduced,
+      alt: m.alt || m.caption || '',
+      openLabel: 'Open full-size image: ' + (m.alt || m.caption || ''),
+      shown: isGif && !playing ? m.still : m.src,
+      // maxH crops a very tall image from the top instead of showing all of it
+      imgStyle: m.maxH
+        ? { display: 'block', width: '100%', height: m.maxH, objectFit: 'cover', objectPosition: 'top center', background: m.bg || 'transparent' }
+        : { display: 'block', width: '100%', height: m.fill ? '100%' : 'auto', objectFit: m.fill ? 'cover' : 'contain', background: m.bg || 'transparent' },
+      // isolated components (?only=) report their own height; everything else keeps its aspect ratio
+      embedBox: m.auto && (this.state.embedH || {})['/' + m.embed]
+        ? { position: 'relative', width: '100%', height: this.state.embedH['/' + m.embed] + 'px', background: 'transparent' }
+        : { position: 'relative', width: '100%', aspectRatio: String((mobile && m.mRatio) || m.ratio || 1.6), background: '#05070c' },
+      embedStyle: { position: 'absolute', inset: 0, width: '100%', height: '100%', border: 0, pointerEvents: sh.active ? 'auto' : 'none' },
+      shieldShow: !!m.embed && sh.shieldShow, doneShow: !!m.embed && sh.doneShow,
+      shieldLabel: sh.shieldLabel, activate: sh.activate, deactivate: sh.deactivate || (() => {}),
+      shieldStyle: sh.shieldStyle, pillStyle: sh.pillStyle, doneStyle: sh.doneStyle,
+      // embeds have their own chrome in the corners, so their label sits above the frame
+      badge: m.embed ? '' : (m.badge || ''),
+      badgeTop: m.embed ? (m.badge || '') : '',
+      badgeTopStyle: { display: 'inline-block', padding: '6px 12px', borderRadius: '999px', border: '1px solid ' + badgeC, color: badgeC, fontFamily: "'Space Grotesk',sans-serif", fontWeight: 700, fontSize: '11px', letterSpacing: '0.14em', textTransform: 'uppercase' },
+      badgeStyle: { position: 'absolute', top: '14px', left: '14px', zIndex: 2, padding: '6px 12px', borderRadius: '999px', background: 'rgba(14,14,14,0.86)', border: '1px solid ' + badgeC, color: badgeC, fontFamily: "'Space Grotesk',sans-serif", fontWeight: 700, fontSize: '11px', letterSpacing: '0.14em', textTransform: 'uppercase', pointerEvents: 'none', backdropFilter: 'blur(6px)' },
+      canPause: isGif,
+      pressed: String(!playing),
+      toggleText: playing ? 'Pause ❚❚' : 'Play ▶',
+      toggleLabel: playing ? 'Pause animation' : 'Play animation',
+      toggle: () => this.setState(s => ({ storyPlay: { ...(s.storyPlay || {}), [key]: !playing } })),
+      toggleStyle: { position: 'absolute', right: '14px', bottom: '14px', zIndex: 2, padding: '8px 14px', borderRadius: '999px', border: '1px solid rgba(245,239,224,0.3)', background: 'rgba(14,14,14,0.82)', color: '#F5EFE0', fontFamily: "'Space Grotesk',sans-serif", fontWeight: 600, fontSize: '12px', cursor: 'pointer', backdropFilter: 'blur(6px)' }
+    };
+  }
+
+  // Native sections (Scene+): markup plus the case study's own GSAP/ScrollTrigger scripts,
+  // mounted straight into the page so their scroll effects run on this page's scroll.
+  mountNative(el, src) {
+    if (!el || el.__spn === src) return;
+    el.__spn = src;
+    el.classList.add('spn');
+    if (!this._spnCss) {
+      this._spnCss = true;
+      ['scene-native/_astro/_slug_.lJcWsEfR.css', 'scene-native/_astro/_slug_.DX6-qYaw.css', 'scene-native/inline.css', 'scene-native/theme.css'].forEach(h => {
+        const l = document.createElement('link'); l.rel = 'stylesheet'; l.href = h; document.head.appendChild(l);
+      });
+      fetch('scene-native/fonts.json').then(r => r.json()).then(list => [...new Set(list)].forEach(h => {
+        const l = document.createElement('link'); l.rel = 'stylesheet'; l.href = h; document.head.appendChild(l);
+      })).catch(() => {});
+    }
+    // in-section anchor links (#priority-…) would change this site's hash route; scroll instead
+    el.addEventListener('click', (e) => {
+      // dense working artifacts (journey map, concept board) open full size
+      const img = e.target.closest && e.target.closest('[data-gallery] img');
+      if (img) { window.open(img.currentSrc || img.src, '_blank', 'noopener'); return; }
+      const a = e.target.closest && e.target.closest('a[href^="#"]');
+      if (!a) return;
+      const target = el.querySelector(a.getAttribute('href'));
+      e.preventDefault();
+      if (target) target.scrollIntoView({ behavior: this._reducedMotion ? 'auto' : 'smooth', block: 'start' });
+    });
+    fetch(src).then(r => r.text()).then(h => {
+      if (el.__spn !== src) return;
+      el.innerHTML = h;
+      clearTimeout(this._spnBootT);
+      this._spnBootT = setTimeout(() => { import('/scene-native/boot.js?v=' + Date.now()).catch(() => {}); }, 150);
+    });
+  }
+
+  jumpTo(id) {
+    const el = document.getElementById(id);
+    if (!el) return;
+    el.scrollIntoView({ behavior: this._reducedMotion ? 'auto' : 'smooth', block: 'start' });
+    // images above can finish loading mid-scroll and push the target down; land on it once things settle
+    const settle = () => { const top = el.getBoundingClientRect().top; if (Math.abs(top - 132) > 40) el.scrollIntoView({ behavior: 'auto', block: 'start' }); };
+    setTimeout(settle, 900); setTimeout(settle, 1800);
+  }
+
+  // Sub-nav for long case studies: shown once the at-a-glance strip has scrolled away, with the current section marked.
+  updateSubnav() {
+    const cs = this.caseStudies.find(c => c.slug === this.state.slug);
+    const sn = cs && cs.subnav;
+    let show = false, current = null;
+    if (sn) {
+      const strip = document.getElementById(sn.after);
+      show = !!strip && strip.getBoundingClientRect().bottom < 64;
+      sn.items.forEach(it => { const el = document.getElementById(it.target); if (el && el.getBoundingClientRect().top < 160) current = it.target; });
+    }
+    if (show !== !!this.state.subnavShow || current !== this.state.subnavCurrent) this.setState({ subnavShow: show, subnavCurrent: current });
+  }
+
+  storyRich(p) {
+    return String(p).split('**').map((t, k) => ({ t, s: k % 2 ? { color: '#F5EFE0', fontWeight: 700 } : null })).filter(x => x.t);
+  }
+
+  getStoryBlocks(cs) {
+    const mobile = this.state.mobile;
+    const pad = mobile ? '0 20px' : '0 64px';
+    const widths = { text: '760px', wide: '1200px', full: '1440px' };
+    const reduced = this._reducedMotion == null ? (this._reducedMotion = !!(window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches)) : this._reducedMotion;
+    const accent = cs.accent || '#05D9E8';
+    let chapterN = 0;
+    return cs.blocks.map((b, i) => {
+      const w = widths[b.width || (b.t === 'text' || b.t === 'quote' || b.t === 'callout' || b.t === 'timeline' ? 'text' : b.t === 'chapter' ? 'wide' : 'wide')];
+      const gapTop = b.t === 'chapter' ? (mobile ? 96 : 150) : b.t === 'hero' ? 0 : (mobile ? 36 : 56);
+      const o = {
+        ...b,
+        anchor: b.id || 'b' + i,
+        accent: b.accent || accent,
+        wrap: { padding: pad, marginTop: gapTop + 'px', boxSizing: 'border-box', scrollMarginTop: '132px' },
+        inner: { maxWidth: w, margin: '0 auto', width: '100%' },
+        paraStyle: { fontSize: mobile ? '17px' : '18px', lineHeight: 1.7, color: 'rgba(245,239,224,0.82)', margin: '0 0 18px', textWrap: 'pretty' },
+        paras: (b.paras || []).map(p => this.storyRich(p)),
+        isHero: b.t === 'hero', isChapter: b.t === 'chapter', isText: b.t === 'text', isMedia: b.t === 'media', isSplit: b.t === 'split',
+        isOptions: b.t === 'options', isVersions: b.t === 'versions', isStats: b.t === 'stats', isDecision: b.t === 'decision',
+        isFacts: b.t === 'facts',
+        isNative: b.t === 'native',
+        isPair: b.t === 'pair',
+        isQuote: b.t === 'quote', isCols: b.t === 'cols', isTimeline: b.t === 'timeline', isCallout: b.t === 'callout', isNext: b.t === 'next'
+      };
+      if (b.t === 'hero') {
+        o.wrap = { padding: mobile ? '120px 20px 0' : '170px 64px 0', boxSizing: 'border-box' };
+        o.inner = { maxWidth: '1200px', margin: '0 auto' };
+        o.titleStyle = { fontFamily: "'Space Grotesk',sans-serif", fontWeight: 700, fontSize: 'clamp(2.6rem,7vw,5.6rem)', lineHeight: 0.95, letterSpacing: '-0.03em', margin: '0 0 28px', color: '#F5EFE0' };
+        o.ledeStyle = { fontSize: mobile ? '19px' : '23px', lineHeight: 1.5, color: 'rgba(245,239,224,0.8)', maxWidth: '40ch', margin: '0 0 40px', textWrap: 'pretty' };
+      }
+      if (b.t === 'hero' || b.t === 'facts') {
+        o.factsStyle = { display: 'grid', gridTemplateColumns: mobile ? '1fr' : 'repeat(3, minmax(0,1fr))', gap: mobile ? '18px' : '32px', margin: 0, paddingTop: '24px', borderTop: '1px solid rgba(245,239,224,0.16)' };
+        o.hasFacts = !!(b.facts && b.facts.length);
+      }
+      if (b.t === 'hero' && b.compact) {
+        o.wrap = { padding: mobile ? '104px 20px 0' : '128px 64px 0', boxSizing: 'border-box' };
+        o.ledeStyle = { ...o.ledeStyle, margin: '0 0 8px', maxWidth: '52ch' };
+        o.titleStyle = { ...o.titleStyle, fontSize: 'clamp(2.4rem,5.4vw,4.4rem)', margin: '0 0 18px' };
+      }
+      if (b.t === 'chapter') {
+        chapterN++;
+        o.num = String(chapterN).padStart(2, '0');
+        o.titleStyle = { fontFamily: "'Space Grotesk',sans-serif", fontWeight: 700, fontSize: 'clamp(2rem,4.6vw,3.6rem)', lineHeight: 1.02, letterSpacing: '-0.02em', margin: '22px 0 0', color: '#F5EFE0', maxWidth: '20ch', textWrap: 'balance' };
+        o.ledeStyle = { fontSize: mobile ? '18px' : '21px', lineHeight: 1.5, color: 'rgba(245,239,224,0.7)', maxWidth: '52ch', margin: '20px 0 0', textWrap: 'pretty' };
+      }
+      if (b.t === 'media' || b.t === 'split') {
+        o.m = this.storyMedia(b.m, cs.slug + ':' + i);
+        // isolated components sit on the page itself, with no frame around them
+        o.frame = b.m && b.m.auto
+          ? { position: 'relative', overflow: 'hidden', borderRadius: '14px', border: '1px solid rgba(245,239,224,0.14)', background: '#0B0C10' }
+          : { position: 'relative', borderRadius: '14px', overflow: 'hidden', border: '1px solid rgba(245,239,224,0.14)', background: (b.m && b.m.bg) || '#141414' };
+        o.capRow = { display: 'flex', flexDirection: mobile ? 'column' : 'row', alignItems: mobile ? 'flex-start' : 'baseline', justifyContent: 'space-between', gap: '8px 24px', marginTop: '12px' };
+        if (b.t === 'media') o.inner = { ...o.inner, margin: '0 auto' };
+      }
+      if (b.t === 'split') {
+        o.inner = { maxWidth: '1200px', margin: '0 auto', display: mobile ? 'flex' : 'grid', flexDirection: 'column', gridTemplateColumns: b.flip ? 'minmax(0,1.25fr) minmax(0,1fr)' : 'minmax(0,1fr) minmax(0,1.25fr)', gap: mobile ? '24px' : '56px', alignItems: 'center' };
+        o.textCol = { minWidth: 0, order: !mobile && b.flip ? 1 : 0 };
+        o.figStyle = { margin: 0, minWidth: 0, order: !mobile && b.flip ? 0 : 1 };
+      }
+      if (b.t === 'options') {
+        const key = cs.slug + ':' + i;
+        const plays = (this.state.storyPlay || {})[key];
+        const playing = plays == null ? !reduced : plays;
+        const hasGif = (b.items || []).some(x => /\.gif$/i.test(x.src) && x.still);
+        o.grid = { display: 'grid', gridTemplateColumns: mobile ? '1fr' : 'repeat(' + Math.min(4, (b.items || []).length) + ', minmax(0,1fr))', gap: '18px' };
+        o.items = (b.items || []).map(x => {
+          const c = x.chosen ? '#05D9E8' : 'rgba(245,239,224,0.35)';
+          return {
+            ...x, alt: x.alt || x.name + ': ' + x.note,
+            shown: /\.gif$/i.test(x.src) && x.still && !playing ? x.still : x.src,
+            card: { margin: 0, borderRadius: '14px', overflow: 'hidden', background: '#141414', border: '1px solid ' + (x.chosen ? 'rgba(5,217,232,0.6)' : 'rgba(245,239,224,0.12)'), minWidth: 0 },
+            frame: { position: 'relative', aspectRatio: String(b.ratio || 1.6), background: x.bg || b.bg || '#E8E7E2' },
+            verdictStyle: { position: 'absolute', top: '10px', left: '10px', padding: '5px 10px', borderRadius: '999px', background: 'rgba(14,14,14,0.86)', border: '1px solid ' + c, color: c, fontFamily: "'Space Grotesk',sans-serif", fontWeight: 700, fontSize: '10px', letterSpacing: '0.14em', textTransform: 'uppercase' }
+          };
+        });
+        o.canPause = hasGif;
+        o.pressed = String(!playing);
+        o.toggleText = playing ? 'Pause animations ❚❚' : 'Play animations ▶';
+        o.toggle = () => this.setState(s => ({ storyPlay: { ...(s.storyPlay || {}), [key]: !playing } }));
+      }
+      if (b.t === 'versions') {
+        const k = Math.min((this.state.storyVer || {})[cs.slug + ':' + i] || 0, b.items.length - 1);
+        o.cur = b.items[k];
+        o.sh = this.embedShield(cs.slug + ':' + i + ':v');
+        o.vIframe = { position: 'absolute', inset: 0, width: '100%', height: '100%', border: 0, background: '#05070c', pointerEvents: o.sh.active ? 'auto' : 'none' };
+        o.tabs = b.items.map((v, n) => ({
+          label: v.label, on: String(n === k),
+          go: () => this.setState(s => ({ storyVer: { ...(s.storyVer || {}), [cs.slug + ':' + i]: n } })),
+          style: { padding: '9px 16px', borderRadius: '999px', cursor: 'pointer', fontFamily: "'Space Grotesk',sans-serif", fontWeight: 700, fontSize: '13px', border: '1px solid ' + (n === k ? accent : 'rgba(245,239,224,0.22)'), background: n === k ? accent : 'transparent', color: n === k ? '#0E0E0E' : 'rgba(245,239,224,0.8)' }
+        }));
+        o.frame = { position: 'relative', width: '100%', aspectRatio: mobile ? '3 / 4' : '16 / 10', borderRadius: '14px', overflow: 'hidden', border: '1px solid rgba(245,239,224,0.14)', background: '#05070c' };
+        const bc = this.storyBadge(o.cur.badge);
+        o.badgeStyle = { position: 'absolute', top: '14px', right: '14px', zIndex: 2, padding: '6px 12px', borderRadius: '999px', background: 'rgba(14,14,14,0.86)', border: '1px solid ' + bc, color: bc, fontFamily: "'Space Grotesk',sans-serif", fontWeight: 700, fontSize: '11px', letterSpacing: '0.14em', textTransform: 'uppercase', pointerEvents: 'none' };
+        o.capRow = { display: 'flex', flexDirection: mobile ? 'column' : 'row', alignItems: mobile ? 'flex-start' : 'baseline', justifyContent: 'space-between', gap: '8px 24px', marginTop: '14px' };
+      }
+      if (b.t === 'stats') {
+        o.grid = { display: 'grid', gridTemplateColumns: mobile ? '1fr 1fr' : 'repeat(' + b.items.length + ', minmax(0,1fr))', gap: '1px', background: 'rgba(232,184,75,0.22)', border: '1px solid rgba(232,184,75,0.22)', borderRadius: '14px', overflow: 'hidden' };
+        o.items = b.items.map(s => ({ context: '', ...s }));
+        o.note = b.note || '';
+        o.title = b.title || '';
+      }
+      if (b.t === 'decision') {
+        const colors = { Problem: '#E06C6C', Options: '#A594FF', Constraints: '#E8B84B', Constraint: '#E8B84B', 'My part': '#05D9E8', Decision: '#7BD88F', 'What I saw': '#E06C6C', "Why it didn't work": '#E8B84B', 'What changed': '#7BD88F', Before: '#E06C6C', After: '#7BD88F' };
+        o.grid = { display: 'grid', gridTemplateColumns: mobile ? '1fr' : '1fr 1fr', gap: '1px', margin: 0, background: 'rgba(245,239,224,0.1)', border: '1px solid rgba(245,239,224,0.1)', borderRadius: '14px', overflow: 'hidden' };
+        // two columns; the decision spans the row, and so does a leftover odd row before it
+        const isEnd = k => k === 'Decision' || k === 'What changed';
+        const plain = b.rows.filter(r => !isEnd(r[0]));
+        const lastPlain = plain.length % 2 === 1 ? plain[plain.length - 1][0] : null;
+        o.rows = b.rows.map(([k, v]) => ({ k, v, color: colors[k] || accent, style: { background: isEnd(k) ? '#10201A' : '#121212', padding: '20px 22px', gridColumn: !mobile && (isEnd(k) || k === lastPlain) ? '1 / -1' : 'auto' } }));
+      }
+      if (b.t === 'quote') o.inner = { ...o.inner, margin: '0 auto', padding: '0 0 0 24px', borderLeft: '3px solid ' + (b.accent || accent) };
+      if (b.t === 'cols') {
+        const cc = ['#05D9E8', '#E8B84B', '#A594FF', '#7BD88F'];
+        o.grid = { display: 'grid', gridTemplateColumns: mobile ? '1fr' : 'repeat(' + b.items.length + ', minmax(0,1fr))', gap: mobile ? '28px' : '36px' };
+        o.items = b.items.map((c, n) => ({
+          ...c, color: c.color || cc[n % cc.length], isLink: !!c.target, isPlain: !c.target,
+          go: () => this.jumpTo(c.target)
+        }));
+      }
+      if (b.t === 'timeline') o.rowStyle = { display: 'grid', gridTemplateColumns: mobile ? '1fr' : '110px minmax(0,1fr)', gap: mobile ? '4px' : '20px', padding: '18px 0', borderTop: '1px solid rgba(245,239,224,0.12)' };
+      if (b.t === 'callout') {
+        const kinds = { lesson: ['#A594FF', 'rgba(123,97,255,0.1)', 'rgba(123,97,255,0.55)'], warn: ['#F0A43A', 'rgba(240,164,58,0.08)', 'rgba(240,164,58,0.5)'], ok: ['#05D9E8', 'rgba(5,217,232,0.07)', 'rgba(5,217,232,0.45)'] };
+        const [a, bg, bd] = kinds[b.kind || 'lesson'];
+        o.accent = a; o.bg = bg; o.border = bd;
+      }
+      if (b.t === 'pair') {
+        // side by side at one shared height: each figure grows in proportion to its image's aspect ratio
+        o.inner = { maxWidth: '1200px', margin: '0 auto' };
+        o.row = { display: 'flex', flexDirection: mobile ? 'column' : 'row', gap: mobile ? '24px' : '24px', alignItems: 'flex-start' };
+        o.items = b.items.map(it => {
+          const c = this.storyBadge(it.badge);
+          return {
+            ...it, alt: it.alt || it.caption, openLabel: 'Open full-size image: ' + (it.alt || it.caption),
+            fig: { margin: 0, minWidth: 0, flex: mobile ? '0 0 auto' : it.ratio + ' 1 0', width: mobile ? '100%' : 'auto' },
+            frame: { position: 'relative', display: 'block', borderRadius: '14px', overflow: 'hidden', border: '1px solid rgba(245,239,224,0.14)', background: it.bg || '#FFFFFF', cursor: 'zoom-in' },
+            badgeStyle: { position: 'absolute', top: '12px', left: '12px', padding: '5px 11px', borderRadius: '999px', background: 'rgba(14,14,14,0.86)', border: '1px solid ' + c, color: c, fontFamily: "'Space Grotesk',sans-serif", fontWeight: 700, fontSize: '10px', letterSpacing: '0.14em', textTransform: 'uppercase', pointerEvents: 'none' }
+          };
+        });
+      }
+      if (b.t === 'native') {
+        // a section ported with its own markup and scroll animations; full width, no frame
+        o.wrap = { padding: 0, marginTop: (mobile ? 40 : 64) + 'px' };
+        o.nativeStyle = { width: '100%' };
+        o.mount = (el) => this.mountNative(el, b.src);
+      }
+      if (b.t === 'next') o.wrap ={ ...o.wrap, marginTop: mobile ? '96px' : '140px', paddingBottom: mobile ? '80px' : '120px' };
+      return o;
+    });
+  }
+
   onScrollTick = () => {
     if (!this.scroller || this.state.mobile || this._rafPending || this._programmatic) return;
     this._rafPending = true;
@@ -2548,6 +3312,7 @@ class Component extends DCLogic {
       const side = l.side && !mobile;
       this.measure(m.cover);
       return {
+        lines: [['Problem', m.problem, '#A8343A'], ['What I did', m.did, '#1F2DC2'], ['Outcome', m.outcome, '#2E7D5B']].filter(x => x[1]).map(([k, t, color]) => ({ k, color, parts: String(t).split(/\*\*(.+?)\*\*/g).map((p, n) => ({ t: p, s: n % 2 ? { fontWeight: 600, color: '#1A1A1A' } : null })).filter(p => p.t) })),
         label: m.label, meta: m.meta || '', caption: m.caption, capParts: ((c, bold) => String(c || '').split(/\*\*(.+?)\*\*/g).map((t, k) => ({ t, s: k % 2 ? { fontWeight: 600, color: bold } : null })).filter(p => p.t))(m.caption, '#1A1A1A'),
         aria: 'Open ' + (m.meta || m.label),
         viewText: m.video || m.anim || m.embed ? 'Play →' : 'View →',
@@ -2579,25 +3344,45 @@ class Component extends DCLogic {
           opacity: h || mobile ? 1 : 0, transform: h || mobile ? 'none' : 'translateX(-4px)', transition: 'opacity 300ms ease, transform 300ms ' + ease
         },
         capStyle: {
-          fontSize: '15px', lineHeight: 1.55, margin: 0, maxWidth: '54ch', textWrap: 'pretty',
+          display: 'flex', flexDirection: 'column', gap: '8px',
+          fontSize: '14px', lineHeight: 1.5, margin: '4px 0 0', maxWidth: '58ch', textWrap: 'pretty',
           color: h ? '#1A1A1A' : 'rgba(26,26,26,0.72)', transform: h ? 'none' : 'translateY(2px)',
           transition: 'color 300ms ease, transform 300ms ' + ease
         }
       };
     });
-    const order = ['shopify-tax-international', 'scene-plus-banking'];
+    const order = ['shopify-tax-international', 'scene-plus-banking', 'observatori'];
+    const rm = this._reducedMotion == null ? (this._reducedMotion = !!(window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches)) : this._reducedMotion;
     const featured = order.map((slug, i) => {
       const c = cs.find(x => x.slug === slug);
       if (!c) return null;
-      const copy = this.featuredCopy[slug], h = this.state.featHover === i;
+      const copy = this.featuredCopy[slug], md = copy.media || {}, h = this.state.featHover === i;
+      const fw = (this.state.featW || {})[i] || 400;
+      const embed = !!md.embed && !rm;
       return {
         title: c.title, href: '#work/' + slug, ...copy,
-        open: (e) => { e.preventDefault(); this.trackNav('selected_moments', slug); this.navigate(slug); this.maybeFlashNav(); },
+        alt: md.alt || c.title,
+        aria: c.title + ': read the case study',
+        isEmbed: embed,
+        isImg: !embed,
+        embed: md.embed || '',
+        shown: md.embed ? md.poster : (rm && md.still ? md.still : md.src),
+        badge: md.badge || '',
+        open: (e) => { e.preventDefault(); this.trackNav('selected_work', slug); this.navigate(slug); this.maybeFlashNav(); },
         enter: () => this.setState({ featHover: i }),
-        imgStyle: {
-          position: 'absolute', inset: 0, backgroundImage: 'url("' + c.cover + '")', backgroundSize: 'cover', backgroundPosition: 'center',
-          transform: h ? 'scale(1.03)' : 'scale(1)', transition: 'transform 700ms ' + ease
+        frameRef: (el) => {
+          if (!el) return;
+          const measure = () => { const w = el.offsetWidth; if (w && (this.state.featW || {})[i] !== w) this.setState(s2 => ({ featW: { ...(s2.featW || {}), [i]: w } })); };
+          if (el.__jiFeat) return;
+          el.__jiFeat = true;
+          if (window.ResizeObserver) new ResizeObserver(measure).observe(el);
+          requestAnimationFrame(measure);
         },
+        cardStyle: { display: 'flex', flexDirection: 'column', background: '#161616', borderRadius: '14px', overflow: 'hidden', textDecoration: 'none', color: '#F5EFE0', cursor: 'pointer', minWidth: 0, outlineOffset: '4px', transform: h ? 'translateY(-4px)' : 'none', boxShadow: h ? '0 24px 48px -20px rgba(26,26,26,0.55)' : '0 10px 30px -22px rgba(26,26,26,0.5)', transition: 'transform 400ms ' + ease + ', box-shadow 400ms ' + ease },
+        frameStyle: { position: 'relative', aspectRatio: '16 / 10', overflow: 'hidden', background: md.bg || '#05070c' },
+        imgStyle: { position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: md.fit || 'cover', objectPosition: md.fit ? 'center' : 'top left', transform: h ? 'scale(1.03)' : 'scale(1)', transformOrigin: 'top left', transition: 'transform 700ms ' + ease },
+        embedStyle: { position: 'absolute', top: 0, left: 0, width: '1024px', height: '640px', border: 0, pointerEvents: 'none', transformOrigin: 'top left', transform: 'scale(' + (fw / 1024) + ')' },
+        badgeStyle: { position: 'absolute', bottom: '12px', right: '12px', padding: '5px 11px', borderRadius: '999px', background: 'rgba(14,14,14,0.86)', border: '1px solid rgba(5,217,232,0.7)', color: '#05D9E8', fontFamily: "'Space Grotesk',sans-serif", fontWeight: 700, fontSize: '10px', letterSpacing: '0.14em', textTransform: 'uppercase', pointerEvents: 'none' },
         logoStyle: {
           display: 'block', width: '24px', height: '24px', flexShrink: 0, borderRadius: '50%',
           background: '#fff url("' + c.buttonIcon + '") center / 14px 14px no-repeat'
@@ -2716,7 +3501,10 @@ class Component extends DCLogic {
       moments, featured, print,
       snapLeave: () => this.setState({ snapHover: null }),
       featLeave: () => this.setState({ featHover: null }),
-      smSectionStyle: { background: '#EFE7D0', padding: mobile ? '88px 22px 110px' : '150px 40px 180px' },
+      smSectionStyle: { background: '#EFE7D0', padding: mobile ? '40px 20px 100px' : '80px 40px 160px' },
+      workSectionStyle: { background: '#EFE7D0', padding: mobile ? '48px 20px 40px' : '48px 40px 60px' },
+      featGridStyle: { display: 'grid', gridTemplateColumns: mobile ? '1fr' : (this.state.vw || 1440) < 1180 ? 'repeat(2, minmax(0,1fr))' : 'repeat(3, minmax(0,1fr))', gap: mobile ? '24px' : '28px' },
+      footerStyle: { background: '#141414', padding: mobile ? '64px 20px 72px' : '96px 40px 104px' },
       snapGridStyle: {
         display: 'grid', gridTemplateColumns: mobile ? '1fr' : 'repeat(12, minmax(0, 1fr))',
         columnGap: '28px', rowGap: mobile ? '56px' : '88px', alignItems: 'start'
@@ -2735,7 +3523,9 @@ class Component extends DCLogic {
     const mobile = this.state.mobile;
     const narrow = (this.state.vw || 1440) < 640;
 
-    const tiles = current ? this.getTiles(current) : [];
+    const isStory = !!(current && current.story);
+    const tiles = current && !isStory ? this.getTiles(current) : [];
+    const storyBlocks = isStory ? this.getStoryBlocks(current) : [];
 
     const lbSet = this.state.snapLb || (current && this.state.lbTile !== null) ? this.lbGroup() : [];
     const lbItem = lbSet[Math.min(this.state.lbIdx, Math.max(0, lbSet.length - 1))];
@@ -2906,6 +3696,22 @@ class Component extends DCLogic {
       story,
       isHome: !isCase,
       isCase,
+      isStory,
+      isTiles: isCase && !isStory,
+      subnavShow: !!(isStory && current.subnav && this.state.subnavShow),
+      subnavStyle: {
+        position: 'fixed', top: narrow ? '53px' : '65px', left: 0, right: 0, zIndex: 45, display: 'flex', justifyContent: mobile ? 'flex-start' : 'center', gap: '6px',
+        padding: mobile ? '8px 12px' : '8px 24px', overflowX: 'auto', scrollbarWidth: 'none', whiteSpace: 'nowrap',
+        background: 'rgba(14,14,14,0.9)', backdropFilter: 'blur(8px)', borderBottom: '1px solid rgba(245,239,224,0.1)'
+      },
+      subnavItems: isStory && current.subnav ? current.subnav.items.map(it => {
+        const on = this.state.subnavCurrent === it.target;
+        return {
+          label: it.label, current: on ? 'true' : 'false', go: () => this.jumpTo(it.target),
+          style: { flexShrink: 0, padding: '7px 14px', borderRadius: '999px', cursor: 'pointer', fontFamily: "'Space Grotesk',sans-serif", fontWeight: 600, fontSize: '13px', border: '1px solid ' + (on ? 'rgba(5,217,232,0.6)' : 'rgba(245,239,224,0.16)'), background: on ? 'rgba(5,217,232,0.12)' : 'transparent', color: on ? '#F5EFE0' : 'rgba(245,239,224,0.7)' }
+        };
+      }) : [],
+      storyBlocks,
       current,
       nextCase,
       nextTitle: nextCase ? nextCase.title : '',
@@ -2991,19 +3797,30 @@ class Component extends DCLogic {
         display: 'flex', alignItems: 'center', gap: '6px', whiteSpace: 'nowrap'
       },
       nextBtnLabel: (nextCase && nextCase.slug === 'more-work')
-        ? (narrow ? 'More Work →' : "More Things I've Made →")
+        ? (narrow ? 'More →' : 'Selected moments →')
         : (narrow ? 'Next →' : 'Next Case Study →'),
       heroSectionStyle: {
-        position: 'relative', minHeight: '100vh', height: mobile ? 'auto' : '100vh',
-        overflow: 'hidden', display: 'flex', flexDirection: 'column', justifyContent: 'flex-end'
+        position: 'relative', background: '#141414', overflow: 'hidden',
+        padding: narrow ? '64px 20px 48px' : (mobile ? '80px 32px 56px' : '72px 40px 64px'),
+        animation: this.introRun ? 'none' : 'jiHeroFade 900ms cubic-bezier(0.16,1,0.3,1) both'
+      },
+      heroGridStyle: {
+        maxWidth: '1280px', margin: '0 auto', display: 'grid',
+        gridTemplateColumns: mobile ? '1fr' : 'minmax(0,1.5fr) minmax(0,1fr)', gap: mobile ? '36px' : '64px', alignItems: 'center'
+      },
+      heroLedeStyle: { fontSize: narrow ? '20px' : 'clamp(1.25rem,1.9vw,1.6rem)', lineHeight: 1.45, color: '#F5EFE0', maxWidth: '34ch', margin: '0 0 18px', textWrap: 'pretty', fontWeight: 500 },
+      heroPhotoStyle: {
+        width: '100%', aspectRatio: mobile ? '16 / 9' : '4 / 5', maxHeight: mobile ? '220px' : '400px', borderRadius: '14px',
+        backgroundImage: "url('assets/john-portrait.webp')", backgroundSize: '135% auto', backgroundPosition: '72% 16%', backgroundRepeat: 'no-repeat',
+        filter: 'grayscale(100%) contrast(108%) brightness(92%)', border: '1px solid rgba(245,239,224,0.12)'
       },
       contactGridStyle: {
         display: 'grid', gridTemplateColumns: narrow ? '1fr' : '1fr 1fr',
         gap: narrow ? '14px' : '16px 24px', marginBottom: '28px'
       },
       badgeStyle: {
-        width: narrow ? '96px' : '132px', height: narrow ? '96px' : '132px',
-        marginBottom: narrow ? '20px' : '26px',
+        width: narrow ? '76px' : '96px', height: narrow ? '76px' : '96px',
+        marginBottom: narrow ? '18px' : '22px',
         backgroundImage: "url('assets/badge.png')", backgroundSize: 'contain',
         backgroundPosition: 'center', backgroundRepeat: 'no-repeat',
         animation: this.introRun ? 'none' : 'jiBadgeSpin 1200ms cubic-bezier(0.22,1,0.36,1) 120ms both'

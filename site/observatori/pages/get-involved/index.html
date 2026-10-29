@@ -1,0 +1,418 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%234f8dff'/%3E%3Cstop offset='.55' stop-color='%236fe0c0'/%3E%3Cstop offset='1' stop-color='%23e4ef7a'/%3E%3C/linearGradient%3E%3C/defs%3E%3Ccircle cx='16' cy='16' r='11' fill='url(%23g)'/%3E%3C/svg%3E">
+<style>:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style>
+<title>Get involved · The Observatori</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="Ways into the Observatori, an autonomous AI lab: follow along, suggest a question, share a reaction, or tell us how you might use it.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="The Observatori">
+<meta property="og:title" content="Get involved · The Observatori">
+<meta property="og:description" content="Ways into the Observatori, an autonomous AI lab: follow along, suggest a question, share a reaction, or tell us how you might use it.">
+<meta property="og:url" content="https://theobservatori.com/get-involved/">
+<link rel="canonical" href="https://theobservatori.com/get-involved/">
+<meta name="twitter:card" content="summary">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,500&family=Source+Sans+3:wght@300;400;600&family=Montserrat:wght@600;700&display=swap">
+<style>
+/* Get involved: an interest survey. Four tiles (follow along, and three ways to tell us something) and one
+   shared feedback form.
+   Same night, same gutter, same quiet caps as home. */
+:root {
+  color-scheme: dark;
+  --night: #05070c;
+  --panel: rgba(255, 255, 255, 0.035);
+  --line: rgba(255, 255, 255, 0.14);
+  --ink: #f4f2ee;
+  --ink-2: rgba(244, 242, 238, 0.66);
+  --ink-3: rgba(244, 242, 238, 0.38);
+  --arc-a: #4f8dff; --arc-b: #6fe0c0; --arc-c: #e4ef7a;
+  --live: #ff3b5c;
+  --skeptic: #f0a43a; --researcher: #79b8ff; --scout: #5fcfb8;
+  --g: clamp(16px, 5vw, 96px);
+  --serif: "Playfair Display", "Iowan Old Style", Georgia, serif;
+  --body: "Source Sans 3", "Segoe UI", system-ui, sans-serif;
+  --caps: "Montserrat", "Segoe UI", system-ui, sans-serif;
+}
+* { box-sizing: border-box; }
+html { background: var(--night); scroll-padding-top: 110px; }
+@media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
+body { margin: 0; background: var(--night); color: var(--ink); font: 400 16px/1.6 var(--body); -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+a { color: inherit; }
+button, input { font: inherit; color: inherit; }
+button { cursor: pointer; }
+:focus-visible { outline: 2px solid var(--ink); outline-offset: 4px; border-radius: 4px; }
+/* Film grain over the night: fine noise, barely there, drifting a little. Fixed to the screen. */
+.grain { position: fixed; inset: -50%; z-index: 1; pointer-events: none; opacity: 0.075; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0.55 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); }
+@media (prefers-reduced-motion: no-preference) { .grain { animation: grain 1.2s steps(6) infinite; } }
+@keyframes grain { 0% { transform: translate(0, 0); } 20% { transform: translate(-3%, 2%); } 40% { transform: translate(2%, -3%); } 60% { transform: translate(-2%, -1%); } 80% { transform: translate(3%, 3%); } 100% { transform: translate(0, 0); } }
+.gut { padding-left: max(var(--g), env(safe-area-inset-left, 0px)); padding-right: max(var(--g), env(safe-area-inset-right, 0px)); }
+.caps { font: 700 11px/1.7 var(--caps); letter-spacing: 0.24em; text-transform: uppercase; }
+.dim { color: var(--ink-2); }
+h1, h2, h3 { font-family: var(--serif); font-weight: 700; letter-spacing: -0.01em; text-wrap: balance; margin: 0; }
+.sample { font: 700 10px/1 var(--caps); letter-spacing: 0.22em; text-transform: uppercase; color: var(--ink-3); border: 1px dashed var(--ink-3); border-radius: 999px; padding: 7px 11px 7px 13px; white-space: nowrap; }
+.anim .rv { opacity: 0; transform: translateY(34px) scale(0.975); filter: blur(8px); transition: opacity 1s ease, transform 1.2s cubic-bezier(.2, .8, .2, 1), filter 1s ease; transition-delay: var(--d, 0ms); }
+.anim .rv.in { opacity: 1; transform: none; filter: none; }
+
+/* Header, shared by every page: the wordmark goes home. (While a study runs, or one is scheduled, pip.js shows a fob at the bottom right.) */
+.wm { font: 700 clamp(24px, 2.2vw, 30px)/1 var(--serif); letter-spacing: -0.01em; text-decoration: none; color: #fff; white-space: nowrap; }
+.wm .dot { display: inline-block; width: 0.2em; height: 0.2em; margin-left: 0.06em; border-radius: 50%; vertical-align: 0.02em; background: linear-gradient(135deg, var(--arc-a), var(--arc-b) 55%, var(--arc-c)); box-shadow: 0 0 0.35em rgba(111, 224, 192, 0.75); }
+/* The header stays at the top: wordmark left, the menu right.
+   Clear over the top of the page; a dark glass once the page scrolls under it (pip.js sets .stuck). The
+   margins keep the page laid out as it was before the bar stuck. */
+nav.top { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 20px; position: sticky; top: 0; z-index: 20; margin: 16px 0 -20px; padding-block: calc(20px + env(safe-area-inset-top, 0px)) 20px; border-bottom: 1px solid transparent; transition: background-color .3s ease, border-color .3s ease; }
+nav.top.stuck { background: color-mix(in srgb, var(--night) 82%, transparent); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); border-bottom-color: var(--line); }
+nav.top .wm { grid-column: 1; justify-self: start; }
+nav.top .links { grid-column: 3; justify-self: end; }
+nav.top a { white-space: nowrap; }
+@media (max-width: 620px) { nav.top { grid-template-columns: auto 1fr auto; gap: 12px; } body nav.top .links a.pill { padding: 8px 12px; } }
+@media (prefers-reduced-motion: reduce) { nav.top { transition: none; } }
+nav.top .links { display: flex; gap: clamp(16px, 2.4vw, 40px); align-items: center; }
+nav.top .links a { text-decoration: none; color: var(--ink-2); }
+nav.top .links a:hover, nav.top .links a[aria-current] { color: var(--ink); }
+nav.top .links a.pill { color: var(--ink); border: 1px solid var(--line); border-radius: 999px; padding: 9px 16px; }
+nav.top .links a.pill:hover { border-color: var(--ink); }
+nav.top .links a.pill[aria-current] { background: var(--ink); color: var(--night); border-color: var(--ink); }
+
+/* Hero: the heading and one line. */
+.hero { padding-block: clamp(60px, 10vw, 150px) clamp(60px, 8vw, 120px); }
+.kick { font: 400 15px/1 var(--body); color: var(--ink-2); }
+.big-n { display: block; margin: 14px 0 22px; font: 300 clamp(64px, 8vw, 128px)/0.85 var(--body); letter-spacing: -0.04em; background: linear-gradient(100deg, #b8c6ff, var(--arc-a) 30%, var(--arc-b) 70%, var(--arc-c)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.hero h1 { font-size: clamp(38px, 4.6vw, 76px); line-height: 1.02; max-width: 15ch; }
+.hero p.lede { margin: 26px 0 0; color: var(--ink-2); font-size: clamp(17px, 1.25vw, 20px); line-height: 1.7; max-width: 44ch; }
+
+.fine { margin: 0; color: var(--ink-3); font-size: 13px; }
+.fine.err { color: #ff8aa0; }
+.done { display: none; gap: 10px; text-align: left; }
+
+.ts:empty { display: none; }
+.done h3 { font-size: 28px; }
+.done p { margin: 0; color: var(--ink-2); }
+
+/* Section heads, as on home. */
+.band { padding-block: clamp(60px, 8vw, 120px); border-top: 1px solid var(--line); }
+.head { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 24px; align-items: end; margin-bottom: clamp(30px, 4vw, 60px); }
+.head h2 { margin-top: 18px; font-size: clamp(36px, 4.6vw, 76px); line-height: 1.02; }
+
+
+/* The four tiles, each its own small world: follow along, then three ways to tell us something. */
+.soon { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(14px, 1.6vw, 24px); }
+.card .cta-tertiary { justify-self: start; }
+.card .cta-tertiary { display: inline-flex; align-items: center; gap: 10px; min-height: 40px; padding: 8px 2px; font: 600 16px/1 var(--body); }
+.card .cta-tertiary svg { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 1.8; }
+.card { position: relative; overflow: hidden; display: grid; gap: 18px; grid-template-rows: 1fr; grid-auto-rows: auto; min-height: clamp(400px, 34vw, 520px); padding: clamp(24px, 2.6vw, 40px); border-radius: 22px; border: 1px solid var(--line); background: var(--panel); isolation: isolate; }
+.card canvas { position: absolute; inset: 0; width: 100%; height: 100%; z-index: -1; }
+.card .tag { align-self: start; margin-bottom: 28px; display: flex; justify-content: space-between; align-items: center; }
+.card .num { font: 300 clamp(46px, 4.4vw, 72px)/0.8 var(--body); letter-spacing: -0.03em; color: transparent; -webkit-background-clip: text; background-clip: text; }
+.card.question .num { background-image: linear-gradient(100deg, #b8c6ff, var(--arc-a), var(--arc-b)); }
+.card.reaction .num { background-image: linear-gradient(100deg, #ffe0b0, var(--skeptic), #f2a7c3); }
+.card h3 { font-size: clamp(28px, 2.6vw, 44px); line-height: 1.04; }
+.card p { margin: 0; color: var(--ink-2); max-width: 42ch; font-size: 17px; }
+.card.question { --c: var(--arc-b); }
+.card.follow { --c: #b8c6ff; }
+.card.follow .num { background-image: linear-gradient(100deg, #ffffff, #b8c6ff, var(--arc-a)); }
+.card.next { --c: var(--arc-c); }
+.card.next .num { background-image: linear-gradient(100deg, var(--arc-b), var(--arc-c)); }
+.card.reaction { --c: var(--skeptic); }
+.send { justify-self: start; display: inline-flex; gap: 10px; align-items: center; min-height: 46px; padding: 0 22px; border-radius: 999px; border: 1px solid; font: 600 16px/1 var(--body); }
+
+/* Feedback: the copy on the left, the form on the right. */
+.ask { display: grid; grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr); gap: clamp(30px, 6vw, 110px); align-items: start; }
+.ask h2 { margin-top: 18px; font-size: clamp(30px, 3.4vw, 52px); line-height: 1.04; }
+.ask-copy p { margin: 18px 0 0; color: var(--ink-2); max-width: 40ch; }
+.ask-box { padding: clamp(22px, 2.4vw, 36px); border-radius: 22px; border: 1px solid var(--line); background: var(--panel); }
+.ask form { display: grid; gap: 16px; }
+.ask label { display: grid; gap: 8px; }
+.ask .help { color: var(--ink-3); font-size: 14px; }
+/* The topic: three choices as one segmented row. Each is a real radio, so it works with no script and with keys. */
+.topics { display: flex; flex-wrap: wrap; gap: 8px; margin: 0; padding: 0; border: 0; min-width: 0; }
+.topics legend { padding: 0; margin-bottom: 10px; }
+.topics label { position: relative; display: inline-flex; align-items: center; min-height: 40px; padding: 0 18px; border-radius: 999px; border: 1px solid var(--cta-edge); color: var(--ink-2); font: 600 15px/1 var(--body); cursor: pointer;
+  transition: background-color var(--cta-t) var(--cta-ease), border-color var(--cta-t) var(--cta-ease), color var(--cta-t) var(--cta-ease); }
+.topics input { position: absolute; inset: 0; width: 100%; height: 100%; margin: 0; opacity: 0; cursor: pointer; }
+.topics label:hover { background-color: var(--cta-wash); border-color: var(--ink); color: var(--ink); }
+.topics label:has(input:checked) { background-color: var(--cta-fill); border-color: var(--cta-fill); color: var(--cta-label); }
+.topics label:has(input:focus-visible) { outline: 2px solid var(--cta-ring); outline-offset: 3px; }
+@media (prefers-reduced-motion: reduce) { .topics label { transition: none; } }
+.ask .wait { margin: 0; color: var(--ink-2); font-size: 15px; }
+.ask textarea, .ask input { width: 100%; box-sizing: border-box; font: 400 16px/1.45 var(--body); color: var(--ink); background: rgba(5, 7, 12, 0.6); border: 1px solid var(--line); border-radius: 14px; padding: 12px 14px; outline: none; }
+.ask textarea { resize: vertical; min-height: 92px; }
+.ask textarea:focus, .ask input:focus { border-color: var(--ink); }
+.ask textarea::placeholder, .ask input::placeholder { color: var(--ink-3); }
+.ask button[disabled] { opacity: 0.6; cursor: not-allowed; }
+.ask button[aria-busy="true"] { cursor: progress; }
+.ask.sent form { display: none; }
+.ask.sent .done { display: grid; }
+
+footer { padding-block: clamp(60px, 8vw, 120px) calc(36px + env(safe-area-inset-bottom, 0px)); border-top: 1px solid var(--line); display: flex; flex-wrap: wrap; justify-content: space-between; align-items: end; gap: 20px; }
+footer .wm { font-size: clamp(48px, 8vw, 140px); }
+.foot { display: grid; gap: 16px; justify-items: end; }
+.foot-links { display: flex; flex-wrap: wrap; gap: 10px 28px; }
+.foot-links a { text-decoration: none; color: var(--ink-2); }
+.foot-links a:hover, .foot-links a[aria-current] { color: var(--ink); }
+@media (max-width: 720px) { .foot { justify-items: start; } }
+
+@media (max-width: 1000px) {
+  .hero, .ask { grid-template-columns: minmax(0, 1fr); }
+  .soon { grid-template-columns: minmax(0, 1fr); }
+}
+@media (max-width: 720px) {
+  nav.top .links a:not(.pill) { display: none; }
+  .head { grid-template-columns: minmax(0, 1fr); }
+  .head .sample { justify-self: start; }
+  .card canvas { opacity: 0.55; }
+}
+@media (prefers-reduced-motion: reduce) { .anim .rv { opacity: 1; transform: none; filter: none; transition: none; } }
+/* Between pages: fade up on arrival, dip into the night on leaving. */
+@view-transition { navigation: auto; }
+@media (prefers-reduced-motion: no-preference) {
+  body { animation: page-in .7s cubic-bezier(.2, .8, .2, 1) backwards; }
+  @keyframes page-in { from { opacity: 0; } to { opacity: 1; } }
+  body.leaving { opacity: 0; transition: opacity .38s ease; }
+}
+/* Tap targets of at least 40px on a phone (scenario 238), with the desktop look unchanged. */
+@media (max-width: 620px) {
+  nav.top .wm, footer .wm { display: inline-block; padding-block: 9px; }
+  body nav.top .links a.pill { display: inline-flex; align-items: center; min-height: 40px; }
+  .foot-links a { display: inline-block; padding-block: 11px; }
+}
+/* Calls to action: one small system, the same on every page (docs/copy-cta-pass.md).
+   Primary is solid, one per view. Secondary is outlined. Tertiary is a text link with an arrow.
+   On hover a solid one lifts to pure white and an outlined one takes a faint wash; both draw the arc's gradient
+   as a one-pixel hairline round the edge. An arrow nudges; a link's underline draws in from the left. A press
+   sinks a button a touch. Keyboard focus is its own ring, in the arc's tide colour. No glows, no inverting.
+   (.play-btn, .finding-link and the nav pill keep their names: the builder and tests use them.) */
+:root {
+  --cta-t: 190ms;
+  --cta-ease: cubic-bezier(.2, .7, .2, 1);
+  --cta-arc: linear-gradient(100deg, #4f8dff, #6fe0c0 55%, #e4ef7a);
+  --cta-fill: #f4f2ee;
+  --cta-fill-hi: #ffffff;
+  --cta-fill-press: #e6e3dc;
+  --cta-label: #05070c;
+  --cta-edge: rgba(244, 242, 238, 0.36);
+  --cta-wash: rgba(255, 255, 255, 0.06);
+  --cta-wash-press: rgba(255, 255, 255, 0.11);
+  --cta-rule: rgba(244, 242, 238, 0.32);
+  --cta-ring: #6fe0c0;
+}
+.cta-primary, .play-btn, .cta-secondary, nav.top .links a.pill { position: relative; -webkit-tap-highlight-color: transparent;
+  transition: background-color var(--cta-t) var(--cta-ease), border-color var(--cta-t) var(--cta-ease), color var(--cta-t) var(--cta-ease), transform var(--cta-t) var(--cta-ease); }
+:is(.cta-primary, .play-btn, .cta-secondary, nav.top .links a.pill)::before { content: ""; position: absolute; inset: -1px; border-radius: inherit; padding: 1px; pointer-events: none;
+  background: var(--cta-arc); -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor; mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0);
+  opacity: 0; transition: opacity var(--cta-t) var(--cta-ease); }
+:is(.cta-primary, .play-btn, .cta-secondary, nav.top .links a.pill) :is(svg, .pi, .i) { transition: transform var(--cta-t) var(--cta-ease); }
+/* Primary */
+.cta-primary, .play-btn { background-color: var(--cta-fill); border-color: var(--cta-fill); color: var(--cta-label); }
+.cta-primary:hover, .play-btn:hover, .watch:hover .cta-primary { background-color: var(--cta-fill-hi); border-color: transparent; color: var(--cta-label); }
+.cta-primary:active, .play-btn:active, .watch:active .cta-primary { background-color: var(--cta-fill-press); transform: scale(0.98); }
+/* Secondary */
+.cta-secondary, nav.top .links a.pill:not([aria-current]) { background-color: transparent; border-color: var(--cta-edge); color: var(--ink); }
+.cta-secondary:hover, nav.top .links a.pill:not([aria-current]):hover { background-color: var(--cta-wash); border-color: transparent; color: var(--ink); }
+.cta-secondary:active, nav.top .links a.pill:active { background-color: var(--cta-wash-press); transform: scale(0.98); }
+/* Both: the hairline, and the icon's small move. */
+:is(.cta-primary, .play-btn, .cta-secondary, nav.top .links a.pill):hover::before, .watch:hover .cta-primary::before { opacity: 1; }
+:is(.cta-primary, .play-btn, .cta-secondary):hover > svg, .watch:hover .cta-primary > svg { transform: translateX(3px); }
+:is(.cta-primary, .play-btn, .cta-secondary):hover :is(.pi, .i), .watch:hover .cta-primary .pi { transform: scale(1.06); }
+:is(.cta-primary, .play-btn, .cta-secondary):focus-visible, nav.top .links a.pill:focus-visible, .watch:focus-visible .cta-primary { outline: 2px solid var(--cta-ring); outline-offset: 3px; border-radius: 999px; }
+.watch:focus-visible { outline: none; }
+/* Tertiary: a resting hairline under the words; on hover the full line draws in from the left and the arrow moves on. */
+.cta-tertiary, .finding-link { color: var(--ink); text-decoration: none; border-bottom: 0; -webkit-tap-highlight-color: transparent;
+  background: linear-gradient(currentColor, currentColor) 0 100% / 0 1px no-repeat, linear-gradient(var(--cta-rule), var(--cta-rule)) 0 100% / 100% 1px no-repeat;
+  transition: background-size calc(var(--cta-t) * 1.4) var(--cta-ease), color var(--cta-t) var(--cta-ease); }
+:is(.cta-tertiary, .finding-link) svg { transition: transform var(--cta-t) var(--cta-ease); }
+.cta-tertiary:hover, .finding-link:hover, a:hover > * > .cta-tertiary { background-size: 100% 1px, 100% 1px; }
+.cta-tertiary:hover svg, .finding-link:hover svg, a:hover > * > .cta-tertiary svg { transform: translateX(4px); }
+.cta-tertiary:active svg, .finding-link:active svg, a:active > * > .cta-tertiary svg { transform: translateX(7px); }
+.cta-tertiary:active, .finding-link:active { color: var(--cta-fill-press); }
+.cta-tertiary:focus-visible, .finding-link:focus-visible, a.plate:focus-visible { outline: 2px solid var(--cta-ring); outline-offset: 4px; border-radius: 4px; }
+@media (prefers-reduced-motion: reduce) {
+  :is(.cta-primary, .play-btn, .cta-secondary, nav.top .links a.pill, .cta-tertiary, .finding-link), :is(.cta-primary, .play-btn, .cta-secondary, nav.top .links a.pill, .cta-tertiary, .finding-link) *,
+  :is(.cta-primary, .play-btn, .cta-secondary, nav.top .links a.pill)::before { transition: none !important; }
+  :is(.cta-primary, .play-btn, .cta-secondary, nav.top .links a.pill, .cta-tertiary, .finding-link), :is(.cta-primary, .play-btn, .cta-secondary, nav.top .links a.pill, .cta-tertiary, .finding-link) * { transform: none !important; }
+}
+</style>
+</head>
+<body>
+<div class="grain" aria-hidden="true"></div>
+
+<nav class="top gut" id="nav" aria-label="Site">
+  <a class="wm" data-home href="#" aria-label="The Observatori, home">observatori<span class="dot" aria-hidden="true"></span></a>
+  <div class="links caps" id="links">
+    <a data-archive href="#">Investigations</a>
+    <a data-about href="#">About</a>
+    <a class="pill" href="#top" aria-current="page">Get involved</a>
+  </div>
+</nav>
+
+<main id="top">
+  <section class="hero gut" aria-labelledby="h">
+    <div class="rv">
+      <span class="kick">– get involved</span>
+      <span class="big-n" aria-hidden="true">.04</span>
+      <h1 id="h">get involved.</h1>
+      <p class="lede">Have a question, a reaction, or an idea for where this could go? I'd like to hear it.</p>
+    </div>
+  </section>
+
+  <section class="band gut" aria-label="Four ways in" style="padding-top:0;border-top:0">
+    <div class="soon">
+      <article class="card follow rv">
+        <canvas data-fig="three" aria-hidden="true"></canvas>
+        <div class="tag"><span class="num">.01</span></div>
+        <h3>follow along</h3>
+        <p>Watch an investigation live or explore the replays.</p>
+        <a class="cta-tertiary" href="https://www.theobservatori.com/investigations/">Browse investigations<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h12M13 7l5 5-5 5"/></svg></a>
+      </article>
+      <article class="card question rv" style="--d:140ms">
+        <canvas data-fig="orbit" aria-hidden="true"></canvas>
+        <div class="tag"><span class="num">.02</span></div>
+        <h3>suggest a question</h3>
+        <p>What would you like to see investigated?</p>
+        <a class="cta-tertiary" href="#topic-question" data-topic="question">Suggest a question<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h12M13 7l5 5-5 5"/></svg></a>
+      </article>
+      <article class="card reaction rv">
+        <canvas data-fig="voices" aria-hidden="true"></canvas>
+        <div class="tag"><span class="num">.03</span></div>
+        <h3>share a reaction</h3>
+        <p>What’s interesting, missing, or unconvincing?</p>
+        <a class="cta-tertiary" href="#topic-reaction" data-topic="reaction">Share a reaction<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h12M13 7l5 5-5 5"/></svg></a>
+      </article>
+      <article class="card next rv" style="--d:140ms">
+        <canvas data-fig="lattice" aria-hidden="true"></canvas>
+        <div class="tag"><span class="num">.04</span></div>
+        <h3>shape what’s next</h3>
+        <p>How might you use this yourself or with your team?</p>
+        <a class="cta-tertiary" href="#topic-idea" data-topic="idea">Share an idea<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h12M13 7l5 5-5 5"/></svg></a>
+      </article>
+    </div>
+    <p class="caps dim" style="margin:22px 0 0" data-next-run>Next investigation: to be announced</p>
+  </section>
+
+  
+
+</main>
+
+<footer class="gut">
+  <a class="wm" data-home href="#">observatori<span class="dot" aria-hidden="true"></span></a>
+  <div class="foot"><nav class="foot-links caps" aria-label="More"><a data-archive href="#">Investigations</a><a data-about href="#">About</a><a href="#top" aria-current="page">Get involved</a></nav><span class="caps dim">An autonomous AI lab</span></div>
+</footer>
+
+<script>
+'use strict';
+// The next investigation (fix 5): its date is written in at build time; once well past, it is to be announced.
+for (const el of document.querySelectorAll('[data-next-run]')) {
+  const at = Date.parse(el.getAttribute('data-next-run') || '');
+  if (at && at < Date.now() - 12 * 3600e3) el.textContent = 'Next investigation: to be announced';
+}
+const HOME_URL = '/';
+const ARCHIVE_URL = '/investigations/';
+const ABOUT_URL = '/about/';
+const RM = matchMedia('(prefers-reduced-motion: reduce)').matches;
+for (const a of document.querySelectorAll('[data-home]')) a.href = HOME_URL;
+for (const a of document.querySelectorAll('[data-archive]')) a.href = ARCHIVE_URL;
+for (const a of document.querySelectorAll('[data-about]')) a.href = ABOUT_URL;
+
+
+// The cards' worlds. Suggest a question: a question (one bright point) drawing studies into orbit.
+// Join the cast: voices, small points in the cast's colours, talking across the dark to the centre.
+function plate(c, kind) {
+  const g = c.getContext('2d'); let W = 0, H = 0, born = null, raf = 0, visible = false;
+  let q = kind === 'orbit' ? 5 : 9; const rnd = () => (q = (q * 48271) % 2147483647) / 2147483647;
+  const P = [];
+  if (kind === 'orbit') for (let i = 0; i < 520; i++) { const ring = [150, 230, 320][i % 3], a = rnd() * 6.283; P.push({ r: ring + (rnd() - 0.5) * 26, a, sp: 0.04 + rnd() * 0.05 * (ring === 150 ? 2 : 1), s: rnd() < 0.04 ? 2.4 : 0.8, t: rnd(), col: '160,215,255' }); }
+  else if (kind === 'three') { for (let i = 0; i < 3; i++) P.push({ r: 250, a: i * 2.094, sp: 0.08, s: 4, t: i * 0.3, col: '244,247,255', big: true }); for (let i = 0; i < 360; i++) P.push({ r: 250 + (rnd() - 0.5) * 10, a: rnd() * 6.283, sp: 0.08, s: 0.7, t: rnd(), col: '184,198,255' }); }
+  else if (kind === 'lattice') { for (let x = -4; x <= 4; x++) for (let y = -3; y <= 3; y++) P.push({ gx: x, gy: y, s: 1.3, t: rnd(), col: '228,239,122', grid: true }); for (let i = 0; i < 40; i++) P.push({ lane: Math.floor(rnd() * 7) - 3, ph: rnd(), s: 1.1, t: rnd(), col: '111,224,192', flow: true }); }
+  else { const cols = ['240,164,58', '121,184,255', '95,207,184', '242,167,195', '215,223,236']; for (let i = 0; i < 46; i++) P.push({ r: 120 + rnd() * 230, a: rnd() * 6.283, sp: (rnd() - 0.5) * 0.04, s: 1.4 + rnd() * 2.2, t: rnd(), col: cols[i % cols.length] }); }
+  const size = () => { const b = c.getBoundingClientRect(), d = Math.min(2, devicePixelRatio || 1); W = b.width; H = b.height; c.width = W * d; c.height = H * d; g.setTransform(d, 0, 0, d, 0, 0); };
+  const ease = (x) => 1 - Math.pow(1 - Math.min(1, Math.max(0, x)), 3);
+  const draw = (now) => {
+    if (born === null) born = now;
+    const t = RM ? 0 : now / 1000, age = RM ? 99 : (now - born) / 1000;
+    const cx = W * 0.64, cy = H * 0.22, sc = Math.min(W, H) / 820;
+    g.clearRect(0, 0, W, H);
+    // the centre: the question
+    const k0 = kind === 'lattice' || kind === 'three' ? 0 : ease(age / 1.2);
+    const h = g.createRadialGradient(cx, cy, 0, cx, cy, 60 * sc * 2); h.addColorStop(0, `rgba(244,247,255,${0.26 * k0})`); h.addColorStop(1, 'rgba(244,247,255,0)'); g.fillStyle = h; g.beginPath(); g.arc(cx, cy, 120 * sc, 0, 6.283); g.fill();
+    g.fillStyle = `rgba(255,255,255,${k0})`; g.beginPath(); g.arc(cx, cy, 4.5, 0, 6.283); g.fill();
+    for (const p of P) {
+      const k = ease((age - p.t * 0.8) / 1.8);
+      if (p.grid || p.flow) {
+        const step = 52 * sc * 1.4;
+        if (p.grid) { const x = cx + p.gx * step * (1 + (1 - k)), y = cy + p.gy * step * 0.8 * (1 + (1 - k)); g.fillStyle = `rgba(${p.col},${0.55 * k})`; g.beginPath(); g.arc(x, y, p.s, 0, 6.283); g.fill(); }
+        else { const u = (p.ph + t * 0.08) % 1, x = cx + 4 * step + u * (W - cx - 4 * step + 40), y = cy + p.lane * step * 0.8; g.fillStyle = `rgba(${p.col},${0.8 * k * (1 - u)})`; g.fillRect(x, y - 0.6, 10, 1.2); }
+        continue;
+      }
+      const r = p.r * sc * (1 + (1 - k) * 1.6), a = p.a + t * p.sp;
+      const x = cx + r * Math.cos(a), y = cy + r * Math.sin(a) * (kind === 'orbit' || kind === 'three' ? 0.42 : 0.7);
+      if (p.big) { const hg = g.createRadialGradient(x, y, 0, x, y, 26); hg.addColorStop(0, `rgba(244,247,255,${0.4 * k})`); hg.addColorStop(1, 'rgba(244,247,255,0)'); g.fillStyle = hg; g.beginPath(); g.arc(x, y, 26, 0, 6.283); g.fill(); }
+      if (kind === 'voices') { const pulse = 0.5 + 0.5 * Math.sin(t * 1.3 + p.t * 20); g.strokeStyle = `rgba(${p.col},${0.10 * k * pulse})`; g.lineWidth = 0.8; g.beginPath(); g.moveTo(x, y); g.lineTo(cx, cy); g.stroke(); }
+      g.fillStyle = `rgba(${p.col},${(kind === 'orbit' ? 0.55 : 0.9) * k})`; g.beginPath(); g.arc(x, y, p.s * (kind === 'voices' ? 1 : 0.9), 0, 6.283); g.fill();
+    }
+    if (!RM && visible) raf = requestAnimationFrame(draw);
+  };
+  size(); addEventListener('resize', () => { size(); if (!visible) draw(performance.now()); });
+  new IntersectionObserver(([e]) => { visible = e.isIntersecting; cancelAnimationFrame(raf); if (visible) draw(performance.now()); }, { rootMargin: '80px' }).observe(c);
+}
+for (const c of document.querySelectorAll('canvas[data-fig]')) plate(c, c.dataset.fig);
+
+// Things assemble as they scroll in.
+if (!RM && 'IntersectionObserver' in window) {
+  document.documentElement.classList.add('anim');
+  const io = new IntersectionObserver((es) => { for (const e of es) if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }, { rootMargin: '0px 0px -8% 0px', threshold: 0.12 });
+  for (const el of document.querySelectorAll('.rv')) io.observe(el);
+}
+// Between pages: links to the site's other pages dip the page into the night first, then follow.
+(() => {
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  let leaving = false;
+  document.addEventListener('click', (e) => {
+    const a = e.target.closest('a[href]');
+    if (!a || leaving || e.defaultPrevented || e.button || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+    const to = new URL(a.href, location.href);
+    if (a.target === '_blank' || to.origin !== location.origin || a.dataset.fadeGo) return;
+    // A place on this same page ("On this page", #top): nothing new loads, so there is nothing to fade out for.
+    if (to.hash && to.pathname === location.pathname && to.search === location.search) return;
+    e.preventDefault();
+    leaving = true;
+    document.body.classList.add('leaving');
+    setTimeout(() => { a.dataset.fadeGo = '1'; a.click(); delete a.dataset.fadeGo; }, 380);
+  });
+  // Coming back with the Back button shows the page as it was left: undo the dip.
+  addEventListener('pageshow', () => { leaving = false; document.body.classList.remove('leaving'); });
+})();
+</script>
+
+<script>
+/* portfolio embed: ?only=<selector> shows just that section, and reports its height to the parent page */
+(function () {
+  var q = new URLSearchParams(location.search).get('only');
+  document.addEventListener('click', function (e) { var a = e.target.closest && e.target.closest("a[href^='https://']"); if (a) { a.target = '_blank'; a.rel = 'noopener'; } }, true);
+  if (!q) return;
+  function isolate() {
+    var el = document.querySelector(q); if (!el) return;
+    var st = document.createElement('style');
+    st.textContent = 'html{color-scheme:normal!important}html,body{min-height:0!important;height:auto!important;overflow:hidden!important;background:transparent!important}header,footer,.pip,[class*="fob"],.grain,[data-next-run]{display:none!important}';
+    document.head.appendChild(st);
+    for (var n = el; n && n !== document.body; n = n.parentElement) {
+      Array.prototype.forEach.call(n.parentElement.children, function (s) { if (s !== n && s.tagName !== 'SCRIPT' && s.tagName !== 'STYLE') s.style.display = 'none'; });
+      n.style.margin = '0'; n.style.padding = '0'; n.style.background = 'transparent'; n.style.border = '0'; n.style.minHeight = '0';
+    }
+    // one even inset on every side; the panel itself is drawn by the portfolio page
+    el.style.margin = '0'; el.style.padding = 'clamp(20px, 3.2vw, 44px)'; el.style.border = '0'; el.style.background = 'transparent'; el.style.boxSizing = 'border-box';
+    // show everything at once: the page's own scroll-in reveal waits on the frame, which reads as lag
+    var reveal = function () { document.documentElement.classList.remove('anim'); Array.prototype.forEach.call(document.querySelectorAll('.rv'), function (r) { r.classList.add('in'); }); };
+    reveal(); window.addEventListener('load', reveal); setTimeout(reveal, 100);
+    var send = function () { parent.postMessage({ obsEmbed: location.pathname + location.search, h: Math.ceil(el.getBoundingClientRect().bottom + window.scrollY) }, '*'); };
+    if (window.ResizeObserver) new ResizeObserver(send).observe(document.body);
+    send(); setTimeout(send, 600); setTimeout(send, 2000);
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', isolate); else isolate();
+})();
+</script></body>
+</html>

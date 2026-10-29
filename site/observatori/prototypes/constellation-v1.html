@@ -1,0 +1,976 @@
+<title>Big If True Constellation</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one full-screen star chart. Overlays sit in the corners: the question top left,
+   the field notes bottom left, the speaker line bottom center, the player bar along the bottom,
+   and an inspector that slides in from the right (a bottom sheet on phones).
+   A deliberate single dark look: it is a night sky. */
+:root {
+  color-scheme: dark;
+  --sky: #070b16;           /* ground */
+  --sky-2: #0d1426;         /* panels */
+  --ink: #e6ecf7;           /* text */
+  --ink-dim: #8e9bb6;       /* secondary text */
+  --rule: rgba(160, 180, 220, 0.16);
+  --star: #f4f7ff;          /* sources and the question */
+  --researcher: #6cb6ff;
+  --skeptic: #f2b04a;
+  --editor: #b79cff;
+  --scout: #63d6bd;
+  --check: #dfe6f2;         /* the lab's code */
+  --contra: #ff7b6e;        /* contradicting evidence */
+  --display: "Bricolage Grotesque", "Avenir Next", "Segoe UI", system-ui, sans-serif;
+  --body: "IBM Plex Sans", "Segoe UI", system-ui, sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+}
+html, body { height: 100%; }
+body { background: var(--sky); color: var(--ink); font: 15px/1.5 var(--body); overflow: hidden; -webkit-font-smoothing: antialiased; }
+#sky { position: fixed; inset: 0; width: 100%; height: 100%; display: block; touch-action: none; cursor: grab; }
+#sky.dragging { cursor: grabbing; }
+#sky.pointing { cursor: pointer; }
+button { font: inherit; color: inherit; background: none; border: 0; cursor: pointer; }
+button:focus-visible, [tabindex]:focus-visible { outline: 2px solid var(--researcher); outline-offset: 2px; border-radius: 6px; }
+.sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+/* Top left: wordmark, question, clock */
+.masthead { position: fixed; top: calc(14px + env(safe-area-inset-top, 0px)); left: max(16px, env(safe-area-inset-left, 0px)); max-width: min(520px, calc(100% - 140px)); pointer-events: none; }
+.wordmark { font: 700 12px/1 var(--display); letter-spacing: 0.22em; color: var(--ink-dim); display: flex; gap: 10px; align-items: center; }
+.wordmark i { font-style: normal; color: var(--scout); font-weight: 500; letter-spacing: 0.08em; }
+.question { margin: 8px 0 0; font: 600 clamp(18px, 2.3vw, 26px)/1.18 var(--display); letter-spacing: -0.01em; text-wrap: balance; }
+.clock { margin-top: 6px; font: 500 12px/1 var(--mono); color: var(--ink-dim); letter-spacing: 0.04em; }
+
+.topright { position: fixed; top: calc(14px + env(safe-area-inset-top, 0px)); right: max(16px, env(safe-area-inset-right, 0px)); display: flex; gap: 6px; }
+.chip { font: 500 12px/1 var(--body); padding: 8px 11px; border-radius: 999px; border: 1px solid var(--rule); background: rgba(13, 20, 38, 0.7); backdrop-filter: blur(8px); color: var(--ink); }
+.chip:hover { border-color: rgba(160, 180, 220, 0.4); }
+.chip[aria-pressed="true"] { background: var(--ink); color: var(--sky); border-color: var(--ink); }
+
+/* Legend: the atlas key */
+.legend { position: fixed; top: calc(56px + env(safe-area-inset-top, 0px)); right: max(16px, env(safe-area-inset-right, 0px)); width: 260px; max-width: calc(100% - 32px); padding: 14px 16px; border-radius: 12px; border: 1px solid var(--rule); background: rgba(10, 15, 30, 0.92); backdrop-filter: blur(10px); font-size: 13px; }
+.legend h2 { margin: 0 0 10px; font: 600 11px/1 var(--body); letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-dim); }
+.legend ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+.legend li { display: grid; grid-template-columns: 34px 1fr; gap: 10px; align-items: center; }
+.legend canvas { width: 34px; height: 18px; }
+.legend .agents { margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--rule); display: grid; grid-template-columns: 1fr 1fr; gap: 6px 10px; }
+.legend .agents span { display: flex; gap: 7px; align-items: center; }
+.dot { width: 9px; height: 9px; border-radius: 50%; display: inline-block; flex: none; box-shadow: 0 0 10px currentColor; background: currentColor; }
+
+/* Bottom left: field notes (headline, tally, the room's readout) */
+.notes { position: fixed; left: max(16px, env(safe-area-inset-left, 0px)); bottom: calc(84px + env(safe-area-inset-bottom, 0px)); width: 292px; padding: 14px 16px 12px; border-radius: 12px; border: 1px solid var(--rule); background: rgba(10, 15, 30, 0.78); backdrop-filter: blur(10px); }
+.notes .eyebrow { font: 600 10.5px/1 var(--body); letter-spacing: 0.16em; text-transform: uppercase; color: var(--ink-dim); display: flex; justify-content: space-between; }
+.notes .headline { margin: 8px 0 10px; font: 600 16px/1.25 var(--display); }
+.readout { margin: 0; font: 400 11.5px/1.55 var(--mono); color: #b9c6dd; white-space: pre-wrap; min-height: 3.1em; max-height: 9.6em; overflow: hidden; }
+.readout .ok { color: var(--scout); } .readout .no { color: var(--contra); }
+.tally { margin-top: 10px; padding-top: 10px; border-top: 1px solid var(--rule); display: flex; flex-wrap: wrap; gap: 4px 12px; font: 500 12px/1.3 var(--mono); color: var(--ink-dim); font-variant-numeric: tabular-nums; }
+.tally b { color: var(--ink); font-weight: 500; }
+
+/* Bottom center: who is talking */
+.line { position: fixed; left: 50%; bottom: calc(92px + env(safe-area-inset-bottom, 0px)); transform: translateX(-50%); width: min(620px, calc(100% - 660px)); min-width: 340px; text-align: center; pointer-events: none; transition: opacity .35s ease; }
+.line .who { font: 600 12px/1 var(--body); letter-spacing: 0.12em; text-transform: uppercase; display: inline-flex; gap: 8px; align-items: center; }
+.line .intro { display: block; margin-top: 4px; font: 400 12px/1.35 var(--body); color: var(--ink-dim); letter-spacing: 0; text-transform: none; }
+.line .text { margin: 8px 0 0; font: 500 clamp(16px, 1.7vw, 20px)/1.4 var(--body); text-wrap: balance; text-shadow: 0 1px 14px rgba(0, 0, 0, 0.9); }
+.line.check .text { font-family: var(--mono); font-size: clamp(14px, 1.4vw, 17px); }
+.skip { position: fixed; left: 50%; top: 42%; transform: translate(-50%, -50%); font: 700 clamp(22px, 3vw, 34px)/1 var(--display); color: var(--ink); letter-spacing: -0.01em; pointer-events: none; opacity: 0; transition: opacity .5s ease; text-shadow: 0 2px 30px #000; }
+.skip.on { opacity: 1; }
+
+/* Player bar */
+.bar { position: fixed; left: 0; right: 0; bottom: 0; padding: 10px max(16px, env(safe-area-inset-right, 0px)) calc(12px + env(safe-area-inset-bottom, 0px)) max(16px, env(safe-area-inset-left, 0px)); display: flex; gap: 14px; align-items: center; background: linear-gradient(to top, rgba(7, 11, 22, 0.96), rgba(7, 11, 22, 0)); }
+.bar .ctl { width: 36px; height: 36px; border-radius: 50%; display: grid; place-items: center; flex: none; }
+.bar .ctl:hover { background: rgba(160, 180, 220, 0.12); }
+.bar .play { width: 44px; height: 44px; background: var(--ink); color: var(--sky); }
+.bar .play:hover { background: #fff; }
+.bar svg { width: 18px; height: 18px; fill: currentColor; }
+.chapters { flex: 1; min-width: 0; display: flex; gap: 4px; align-items: center; }
+.chapters button { flex: 1; height: 26px; position: relative; padding: 0; }
+.chapters button::before { content: ""; position: absolute; left: 0; right: 0; top: 11px; height: 4px; border-radius: 2px; background: rgba(160, 180, 220, 0.18); }
+.chapters button .fill { position: absolute; left: 0; top: 11px; height: 4px; border-radius: 2px; background: var(--ink); width: 0; }
+.chapters button:hover::before { background: rgba(160, 180, 220, 0.38); }
+.chapters button .tip { position: absolute; bottom: 30px; left: 50%; transform: translateX(-50%); white-space: nowrap; font: 500 12px/1 var(--body); padding: 6px 9px; border-radius: 6px; background: var(--sky-2); border: 1px solid var(--rule); opacity: 0; pointer-events: none; transition: opacity .15s; }
+.chapters button:hover .tip, .chapters button:focus-visible .tip { opacity: 1; }
+.bar .speed { font: 500 12px/1 var(--mono); padding: 8px 10px; border-radius: 999px; border: 1px solid var(--rule); flex: none; }
+.bar .explore { font: 600 13px/1 var(--body); padding: 10px 14px; border-radius: 999px; border: 1px solid var(--rule); flex: none; }
+.bar .explore[aria-pressed="true"] { background: var(--scout); color: var(--sky); border-color: var(--scout); }
+
+/* Inspector */
+.inspector { position: fixed; top: calc(60px + env(safe-area-inset-top, 0px)); right: max(16px, env(safe-area-inset-right, 0px)); bottom: calc(76px + env(safe-area-inset-bottom, 0px)); width: 360px; max-width: calc(100% - 32px); overflow-y: auto; padding: 18px 18px 22px; border-radius: 14px; border: 1px solid var(--rule); background: rgba(10, 15, 30, 0.94); backdrop-filter: blur(14px); z-index: 5; }
+.inspector .close { position: absolute; top: 10px; right: 10px; width: 32px; height: 32px; border-radius: 50%; display: grid; place-items: center; color: var(--ink-dim); }
+.inspector .close:hover { background: rgba(160, 180, 220, 0.12); color: var(--ink); }
+.inspector .kind { font: 600 10.5px/1 var(--body); letter-spacing: 0.16em; text-transform: uppercase; color: var(--ink-dim); }
+.inspector h3 { margin: 8px 34px 10px 0; font: 600 19px/1.25 var(--display); text-wrap: balance; }
+.inspector p { margin: 0 0 12px; }
+.meta { display: grid; grid-template-columns: auto 1fr; gap: 4px 12px; margin: 0 0 14px; font-size: 13px; }
+.meta dt { color: var(--ink-dim); } .meta dd { margin: 0; }
+.pill { display: inline-block; font: 600 11px/1 var(--body); letter-spacing: 0.06em; padding: 5px 8px; border-radius: 999px; border: 1px solid currentColor; text-transform: uppercase; }
+.inspector h4 { margin: 18px 0 8px; font: 600 11px/1 var(--body); letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-dim); }
+.ev { margin: 0 0 10px; padding: 10px 12px; border-radius: 10px; background: rgba(160, 180, 220, 0.06); border: 1px solid var(--rule); font-size: 13.5px; }
+.ev .rel { font: 600 10.5px/1 var(--body); letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 6px; display: flex; justify-content: space-between; gap: 8px; }
+.ev blockquote { margin: 0; font-style: normal; color: var(--ink); }
+.ev .from { margin-top: 6px; font-size: 12px; color: var(--ink-dim); }
+.ev button.link, .linkish { color: var(--researcher); text-decoration: underline; text-underline-offset: 2px; padding: 0; text-align: left; }
+.fine { font-size: 12px; color: var(--ink-dim); }
+
+/* Catalog: every object on the chart, as a list */
+.catalog { position: fixed; top: calc(56px + env(safe-area-inset-top, 0px)); right: max(16px, env(safe-area-inset-right, 0px)); width: 300px; max-width: calc(100% - 32px); max-height: calc(100% - 160px); overflow-y: auto; padding: 12px 8px; border-radius: 12px; border: 1px solid var(--rule); background: rgba(10, 15, 30, 0.95); z-index: 6; }
+.catalog h2 { margin: 2px 8px 8px; font: 600 11px/1 var(--body); letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-dim); }
+.catalog button { display: grid; grid-template-columns: 40px 1fr; gap: 8px; width: 100%; text-align: left; padding: 7px 8px; border-radius: 8px; font-size: 13px; }
+.catalog button:hover { background: rgba(160, 180, 220, 0.1); }
+.catalog code { font: 500 12px/1.4 var(--mono); color: var(--ink-dim); }
+
+/* End: verdict and brief */
+.verdict { position: fixed; left: 50%; top: 50%; transform: translate(-50%, -50%); text-align: center; width: min(560px, calc(100% - 32px)); pointer-events: none; }
+.verdict::before { content: ""; position: absolute; inset: -40% -30%; z-index: -1; background: radial-gradient(closest-side, rgba(7, 11, 22, 0.88), rgba(7, 11, 22, 0.6) 60%, rgba(7, 11, 22, 0)); }
+.verdict .k { font: 600 11px/1 var(--body); letter-spacing: 0.18em; text-transform: uppercase; color: var(--scout); }
+.verdict h2 { margin: 10px 0 10px; font: 700 clamp(28px, 4.4vw, 52px)/1.04 var(--display); letter-spacing: -0.02em; text-wrap: balance; text-shadow: 0 4px 40px #000; }
+.verdict p { margin: 0 auto 18px; max-width: 46ch; color: #c9d3e6; text-shadow: 0 2px 20px #000; }
+.verdict .acts { display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; pointer-events: auto; }
+.verdict .acts button { padding: 11px 16px; border-radius: 999px; font: 600 14px/1 var(--body); border: 1px solid var(--rule); background: rgba(13, 20, 38, 0.8); }
+.verdict .acts button.primary { background: var(--ink); color: var(--sky); border-color: var(--ink); }
+.verdict .sign { margin-top: 16px; font: 500 12px/1 var(--mono); color: var(--ink-dim); }
+.brief { position: fixed; left: 50%; bottom: 0; transform: translateX(-50%); width: min(680px, 100%); max-height: 78%; overflow-y: auto; padding: 22px max(22px, env(safe-area-inset-right, 0px)) calc(24px + env(safe-area-inset-bottom, 0px)) max(22px, env(safe-area-inset-left, 0px)); border-radius: 18px 18px 0 0; background: #0c1322; border: 1px solid var(--rule); border-bottom: 0; z-index: 7; box-shadow: 0 -20px 60px rgba(0, 0, 0, 0.6); }
+.brief .kind { font: 600 11px/1 var(--body); letter-spacing: 0.16em; text-transform: uppercase; color: var(--ink-dim); }
+.brief h2 { margin: 8px 40px 12px 0; font: 700 26px/1.15 var(--display); }
+.brief h3 { margin: 20px 0 8px; font: 600 15px/1.3 var(--display); }
+.brief p { margin: 0 0 10px; max-width: 66ch; }
+.brief .key { font: 500 11.5px/1 var(--mono); padding: 3px 6px; border-radius: 5px; border: 1px solid var(--rule); color: var(--researcher); margin-right: 6px; vertical-align: 1px; }
+.brief .close { position: absolute; top: 14px; right: 14px; width: 34px; height: 34px; border-radius: 50%; display: grid; place-items: center; }
+.brief .close:hover { background: rgba(160, 180, 220, 0.12); }
+
+.hint { position: fixed; left: 50%; top: calc(16px + env(safe-area-inset-top, 0px)); transform: translateX(-50%); font: 500 12px/1 var(--body); color: var(--ink-dim); padding: 8px 12px; border-radius: 999px; background: rgba(13, 20, 38, 0.8); border: 1px solid var(--rule); pointer-events: none; }
+
+@media (max-width: 900px) {
+  .line { width: calc(100% - 32px); min-width: 0; bottom: calc(196px + env(safe-area-inset-bottom, 0px)); }
+  .notes { width: auto; right: max(16px, env(safe-area-inset-right, 0px)); bottom: calc(74px + env(safe-area-inset-bottom, 0px)); padding: 10px 14px; }
+  .notes .readout, .notes .tally { display: none; }
+  .notes .headline { margin: 6px 0 0; font-size: 15px; }
+  .notes.open .readout, .notes.open .tally { display: block; }
+  .notes.open .tally { display: flex; }
+  .inspector { top: auto; left: 0; right: 0; bottom: 0; width: auto; max-width: none; max-height: 70%; border-radius: 18px 18px 0 0; padding-bottom: calc(22px + env(safe-area-inset-bottom, 0px)); padding-left: max(18px, env(safe-area-inset-left, 0px)); padding-right: max(18px, env(safe-area-inset-right, 0px)); }
+  .bar .speed { display: none; }
+  .hint { display: none; }
+  .masthead { max-width: calc(100% - 150px); }
+  .wordmark i { display: none; }
+}
+@media (max-width: 480px) {
+  .bar { gap: 8px; }
+  .bar .prev, .bar .next { display: none; }
+  .bar .explore { padding: 10px 11px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .line, .skip { transition: none; }
+}
+</style>
+
+<canvas id="sky" aria-hidden="true"></canvas>
+
+<header class="masthead">
+  <div class="wordmark">BIG IF TRUE <i>constellation prototype</i></div>
+  <h1 class="question" id="question"></h1>
+  <div class="clock" id="clock"></div>
+</header>
+
+<div class="topright">
+  <button class="chip" id="legendBtn" aria-pressed="false" aria-controls="legend">Key</button>
+  <button class="chip" id="catalogBtn" aria-pressed="false" aria-controls="catalog">Catalog</button>
+</div>
+
+<aside class="legend" id="legend" hidden aria-label="Chart key">
+  <h2>How to read the chart</h2>
+  <ul>
+    <li><canvas data-key="source" width="68" height="36"></canvas><span>A study. Bigger means a stronger design or a larger sample.</span></li>
+    <li><canvas data-key="claim" width="68" height="36"></canvas><span>A claim. Brightness is its certainty.</span></li>
+    <li><canvas data-key="supports" width="68" height="36"></canvas><span>A quoted passage supports the claim</span></li>
+    <li><canvas data-key="qualifies" width="68" height="36"></canvas><span>A passage that limits or qualifies it</span></li>
+    <li><canvas data-key="contradicts" width="68" height="36"></canvas><span>A study that cuts against it</span></li>
+    <li><canvas data-key="contested" width="68" height="36"></canvas><span>Contested: kept, with both sides shown</span></li>
+    <li><canvas data-key="removed" width="68" height="36"></canvas><span>Left out: failed a check</span></li>
+  </ul>
+  <div class="agents">
+    <span><i class="dot" style="color:var(--scout)"></i>Scout</span>
+    <span><i class="dot" style="color:var(--researcher)"></i>Researcher</span>
+    <span><i class="dot" style="color:var(--skeptic)"></i>Skeptic</span>
+    <span><i class="dot" style="color:var(--editor)"></i>Editor</span>
+    <span style="grid-column:1/-1"><i class="dot" style="color:var(--check)"></i>The lab's code (checks)</span>
+  </div>
+</aside>
+
+<nav class="catalog" id="catalog" hidden aria-label="Everything on the chart">
+  <h2>On the chart now</h2>
+  <div id="catalogList"></div>
+</nav>
+
+<section class="notes" id="notes" aria-label="Field notes">
+  <div class="eyebrow"><span>Field notes</span><span id="beatNo"></span></div>
+  <div class="headline" id="headline"></div>
+  <pre class="readout" id="readout"></pre>
+  <div class="tally" id="tally"></div>
+</section>
+
+<div class="line" id="line" aria-live="polite">
+  <div class="who" id="who"></div>
+  <p class="text" id="lineText"></p>
+</div>
+<div class="skip" id="skip"></div>
+<div class="hint" id="hint" hidden>Drag to turn the chart. Click any star to look inside.</div>
+
+<div class="verdict" id="verdict" hidden>
+  <div class="k">The verdict</div>
+  <h2 id="verdictText"></h2>
+  <p id="answerText"></p>
+  <div class="acts">
+    <button class="primary" id="readBrief">Read the brief</button>
+    <button id="exploreBtn2">Explore the evidence</button>
+    <button id="replay">Watch again</button>
+  </div>
+  <div class="sign" id="sign"></div>
+</div>
+
+<article class="brief" id="brief" hidden aria-label="The brief">
+  <button class="close" id="briefClose" aria-label="Close the brief"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M6.4 5 5 6.4 10.6 12 5 17.6 6.4 19l5.6-5.6 5.6 5.6 1.4-1.4-5.6-5.6L19 6.4 17.6 5 12 10.6z"/></svg></button>
+  <div class="kind">Approved brief</div>
+  <h2 id="briefTitle"></h2>
+  <div id="briefBody"></div>
+</article>
+
+<aside class="inspector" id="inspector" hidden aria-label="Details">
+  <button class="close" id="inspClose" aria-label="Close details"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M6.4 5 5 6.4 10.6 12 5 17.6 6.4 19l5.6-5.6 5.6 5.6 1.4-1.4-5.6-5.6L19 6.4 17.6 5 12 10.6z"/></svg></button>
+  <div id="inspBody"></div>
+</aside>
+
+<div class="bar" role="group" aria-label="Playback">
+  <button class="ctl prev" id="prev" aria-label="Previous line"><svg viewBox="0 0 24 24"><path d="M6 6h2v12H6zm3.5 6 8.5 6V6z"/></svg></button>
+  <button class="ctl play" id="play" aria-label="Pause"><svg viewBox="0 0 24 24" id="playIcon"><path d="M6 5h4v14H6zm8 0h4v14h-4z"/></svg></button>
+  <button class="ctl next" id="next" aria-label="Next line"><svg viewBox="0 0 24 24"><path d="M6 18l8.5-6L6 6zm9.5-12h2v12h-2z"/></svg></button>
+  <div class="chapters" id="chapters"></div>
+  <button class="speed" id="speed" aria-label="Playback speed">1×</button>
+  <button class="explore" id="explore" aria-pressed="false">Explore</button>
+</div>
+
+<script>
+'use strict';
+// ─────────────────────────────────────────────────────────────────────────────
+// The record. Investigation 70fd6ba8 (production), run October 24, 2026, times Central.
+// Sources, claims, evidence links, disputes and independence concerns were read from the lab's
+// database; the script lines are the same ones the sprite replay plays (src/lab/stories/wfh.ts).
+// Nothing on the chart changes except at one of these recorded beats.
+// ─────────────────────────────────────────────────────────────────────────────
+const AGENTS = {
+  scout:      { name: 'Scout',      color: '#63d6bd', model: 'Claude Sonnet 5.5', job: 'Finds the questions worth checking. This one came from the founder.' },
+  researcher: { name: 'Researcher', color: '#6cb6ff', model: 'Claude Sonnet 5.5', job: 'Searches, reads, and writes the claims.' },
+  skeptic:    { name: 'Skeptic',    color: '#f2b04a', model: 'Gemini 3.1 Pro (preview)', job: 'Tries to break every claim. A different model, on purpose.' },
+  editor:     { name: 'Editor',     color: '#b79cff', model: 'Claude Sonnet 5.5', job: 'Writes the brief from the claims that survive.' },
+};
+
+const SOURCES = {
+  trip:   { label: 'Trip.com trial', title: 'Hybrid working from home improves retention without damaging performance', venue: 'Nature', year: 2024, design: 'Randomized trial', n: 1612, cluster: 'hybrid', pos: [250, -60, 60], weight: 1.0, relied: true },
+  trip2:  { label: 'Trip.com trial, NBER write-up', title: 'How Hybrid Working From Home Works Out', venue: 'National Bureau of Economic Research', year: 2022, design: 'Randomized trial (same trial)', dupOf: 'trip', pos: [330, -130, 110], weight: 0.6 },
+  bangla: { label: 'Bangladesh NGO trial', title: 'Is Hybrid Work the Best of Both Worlds? Evidence from a Field Experiment', venue: 'The Review of Economics and Statistics', year: 2024, design: 'Randomized trial', n: 148, cluster: 'hybrid', pos: [330, 120, 150], weight: 0.62 },
+  chennai:{ label: 'Chennai trial', title: 'Working from Home, Worker Sorting and Development', venue: 'National Bureau of Economic Research', year: 2023, design: 'Randomized trial', cluster: 'remote', pos: [-260, -10, 30], weight: 0.9, relied: true },
+  us:     { label: 'US worker survey', title: 'Why Working from Home Will Stick', venue: 'National Bureau of Economic Research', year: 2021, design: 'Survey', n: 30000, cluster: 'self', pos: [-60, 175, -230], weight: 0.72, relied: true },
+  us2:    { label: 'US worker survey, earlier version', title: 'Why Working From Home Will Stick', venue: 'Preprint', year: 2020, design: 'Survey (same study)', dupOf: 'us', pos: [-140, 240, -280], weight: 0.5 },
+  uk:     { label: 'UK panel survey', title: 'Worker productivity during Covid-19 and adaptation to working from home', venue: 'European Economic Review', year: 2024, design: 'Survey', cluster: 'self', pos: [90, 190, -200], weight: 0.62, relied: true },
+  japan:  { label: 'Japanese firms survey', title: 'Productivity dynamics of work from home: Firm-level evidence from Japan', venue: 'Journal of Evolutionary Economics', year: 2024, design: 'Survey of firms', n: 961, cluster: 'self', pos: [20, 95, -320], weight: 0.6 },
+  review: { label: 'Systematic review', title: 'The Impact of Work-from-Home on Employee Performance and Productivity: A Systematic Review', venue: 'Sustainability', year: 2023, design: 'Systematic review', n: 26, cluster: 'review', pos: [-70, -215, -170], weight: 0.66 },
+};
+
+const CLAIMS = {
+  C1: { text: 'In a randomized trial, allowing graduate employees at one Chinese tech firm to work from home two days a week did not change performance review grades over the following two years (null equivalence tests).', pop: '1,612 graduate employees in engineering, marketing and finance', materiality: 'material', certainty: 'moderate', src: 'trip', off: [-20, -40, 10] },
+  C2: { text: 'In the same trial, hybrid working from home had no effect on lines of code written by computer engineers and no significant difference in promotions over two years.', pop: '653 computer engineers (code); all participants (promotions)', materiality: 'material', certainty: 'moderate', src: 'trip', off: [25, 20, -30] },
+  C3: { text: 'Hybrid working from home reduced quit rates by about one-third and raised job satisfaction in the Trip.com trial.', pop: '1,612 graduate employees', materiality: 'supporting', certainty: 'moderate', src: 'trip', off: [10, 35, 50] },
+  C4: { text: 'In a randomized trial of data-entry workers in Chennai, India, those assigned to full-time work from home were 18% less productive than those assigned to the office, partly from slower learning at home.', pop: 'Data-entry workers randomly assigned to home or office', materiality: 'material', certainty: 'moderate', src: 'chennai', off: [0, -30, 20] },
+  C5: { text: 'Workers who preferred WFH were more negatively affected by WFH assignment than those preferring the office, suggesting self-selection can matter for outcomes.', pop: 'Data-entry workers', materiality: 'supporting', certainty: 'low', src: 'chennai', off: [-10, 40, -30] },
+  C6: { text: 'In a small randomized field experiment at a Bangladeshi NGO, intermediate hybrid work (about two office days a week) improved self-reported satisfaction and work-life balance, with no significant difference in manager-rated performance.', pop: '148 HR and microfinance employees', materiality: 'supporting', certainty: 'low', src: 'bangla', off: [0, 10, 10] },
+  C7: { text: "US survey respondents' self-assessed efficiency working from home during the pandemic was mostly equal or better than in the office; the authors project a productivity boost from post-pandemic WFH, a projection from self-reports rather than measured output.", pop: 'Over 30,000 American workers', materiality: 'supporting', certainty: 'low', src: 'us', off: [-20, 0, 20] },
+  C8: { text: 'In UK panel survey data, workers on average reported being at least as productive as before the pandemic, with wide variation; the IV and fixed-effects estimates showed no clear WFH effect on productivity.', pop: 'UK workers in the Understanding Society COVID module', materiality: 'supporting', certainty: 'low', src: 'uk', off: [20, 0, 20] },
+  C9: { text: 'Japanese firms rated WFH productivity as about 20% lower than at the usual workplace, though ratings rose between 2020 and 2021; this is a subjective firm assessment.', pop: 'Japanese firms with 50 or more employees', materiality: 'supporting', certainty: 'low', src: 'japan', off: [-25, -10, 30] },
+  C9v2: { key: 'C9 (rewrite)', text: "In a panel survey of Japanese firms, firms rated their employees' WFH productivity at about 20% lower than at the usual workplace in late 2021, after an improvement of about 11 percentage points from 2020; this is a subjective firm assessment, not an objective measure.", pop: 'Japanese firms that responded to the survey (sampling frame: firms with 50 or more regular employees)', materiality: 'supporting', certainty: 'low', src: 'japan', off: [40, -30, 50], version: 2 },
+  C10: { text: 'A systematic review of 26 pandemic-era studies found WFH impacts depend on task type, industry and home setting, with most studies reporting positive impacts and few finding no difference or negative ones; the evidence is mainly survey-based.', pop: 'Employees in 26 included studies', materiality: 'supporting', certainty: 'low', src: 'review', off: [0, 10, 20] },
+  C11: { text: 'Interpretation: the evidence does not support a single answer. Fully remote work on independent tasks shows productivity losses in the one RCT shown, while hybrid schedules of about two home days a week show no measured performance penalty in the trials shown, with retention and satisfaction gains. These trials are small in number and limited to specific firms.', pop: 'Office and data-entry workers in the studies shown', materiality: 'material', certainty: 'low', fixed: [-10, -95, 140] },
+};
+
+// Evidence links: claim, relation, source, the exact quoted passage.
+const LINKS = [
+  ['C1', 'supports', 'trip', 'Null equivalence tests showed that hybrid working did not affect performance grades over the next two years of reviews.'],
+  ['C2', 'supports', 'trip', 'Finally, null equivalence tests showed that hybrid working had no effect on the lines of code written by computer-engineer employees.'],
+  ['C2', 'supports', 'trip', 'We found no evidence for a difference in promotions over the next two years overall, or for any major employee subgroup.'],
+  ['C3', 'supports', 'trip', 'We found that hybrid working improved job satisfaction and reduced quit rates by one-third.'],
+  ['C4', 'supports', 'chennai', 'We first find that the productivity of workers randomly assigned to WFH is 18%lower than those in the office.'],
+  ['C4', 'supports', 'chennai', 'Two-thirds of the effect manifests itself from the first day of work with the remainder due to quicker learning in the office.'],
+  ['C5', 'supports', 'chennai', 'workers who prefer WFH are substantially less productive at home than the office (27% less compared to 13% less for workers who prefer the office)'],
+  ['C6', 'qualifies', 'bangla', 'However, none of these effects is significant at the 10% level, owing to our small sample size.'],
+  ['C7', 'supports', 'us', 'Forty-five percent of workers say they were about as efficient WFH during the pandemic as working on business premises before the pandemic. However, 40 percent say they are more efficient when WFH'],
+  ['C7', 'qualifies', 'us', 'Our estimates for the efficiency impact of the COVID-induced shift to WFH are surely imperfect.'],
+  ['C8', 'supports', 'uk', "On average, workers report being at least as productive as before the pandemic's onset."],
+  ['C8', 'qualifies', 'uk', 'For this group, the positive effect of WFH disappears.'],
+  ['C9', 'supports', 'japan', 'the mean productivity of WFH improved by more than 10 percentage points, although it was still approximately 20% lower than that of conventional workplaces'],
+  ['C9', 'qualifies', 'japan', "A limitation of this study is that the productivity of WFH is the firms' subjective assessment."],
+  ['C9v2', 'supports', 'japan', 'the mean productivity of WFH improved by more than 10 percentage points, although it was still approximately 20% lower than that of conventional workplaces'],
+  ['C9v2', 'qualifies', 'japan', "A limitation of this study is that the productivity of WFH is the firms' subjective assessment."],
+  ['C10', 'supports', 'review', 'with a majority reporting a positive impact and few documenting no difference or a negative impact'],
+  ['C10', 'qualifies', 'review', 'this review included some studies that were survey-based, online, and cross-sectional.'],
+  ['C11', 'supports', 'trip', 'These results indicate that a hybrid schedule with two days a week working from home does not damage performance.'],
+  ['C11', 'contradicts', 'chennai', 'Our results add experimental evidence to the burgeoning literature showing the potential negative productivity impacts of WFH.'],
+];
+
+const STORY = {
+  question: 'Is working from home making people less productive, or more?',
+  verdict: 'It depends on how much you’re home.',
+  answer: 'Two days a week at home showed no measured penalty. Full time at home cost 18% in the one trial that tested it.',
+  cost: '$1.87',
+  brief: {
+    title: 'Working from home and productivity',
+    sections: [
+      { heading: 'In short', lines: [['C11', 'The evidence does not support a single answer: fully remote work on independent tasks shows productivity losses in the one randomized trial shown, but hybrid schedules of about two home days a week show no measured performance penalty in the trials shown, with retention and satisfaction gains.']] },
+      { heading: 'Hybrid schedule trial', lines: [
+        ['C1', 'In a randomized trial of 1,612 graduate employees at Trip.com in Shanghai, allowing work from home two days a week did not change performance review grades over the following two years (null equivalence tests).'],
+        ['C2', 'In the same trial, hybrid working from home had no effect on lines of code written by 653 computer engineers and no significant difference in promotions over two years.'],
+        ['C3', 'Hybrid working from home reduced quit rates by about one-third and raised job satisfaction in the Trip.com trial.'] ] },
+      { heading: 'Full-time home work trial', lines: [
+        ['C4', 'In a randomized trial of data-entry workers in Chennai, India, those assigned to full-time work from home were 18% less productive than those assigned to the office, partly from slower learning at home.'],
+        ['C5', 'Among the data-entry workers in Chennai, those who preferred work from home were more negatively affected by work-from-home assignment than those preferring the office, suggesting self-selection can matter for outcomes.'] ] },
+      { heading: 'Survey evidence', lines: [
+        ['C7', 'US survey respondents’ self-assessed efficiency working from home during the pandemic was mostly equal or better than in the office, and the authors project a productivity boost, a projection from self-reports rather than measured output.'],
+        ['C8', 'In UK panel survey data, workers on average reported being at least as productive as before the pandemic, with wide variation, and the IV and fixed-effects estimates showed no clear productivity result for working from home.'] ] },
+      { heading: 'Taken together', lines: [['C11', 'Taken together, the evidence does not support a single answer: fully remote work on independent tasks shows productivity losses in the one randomized trial shown, but hybrid schedules show no measured performance penalty in the trials shown, and these trials are small in number and limited to specific firms.']] },
+    ],
+  },
+};
+
+// The beats. `state` says what the chart holds once the beat has played; `focus` on a line
+// says where the speaking agent goes. Screens are the same readouts the sprite rooms show.
+const BEATS = [
+  { id: 'question', clock: '4:26 PM', title: 'A question everyone has an opinion on', headline: 'New question · $5 budget', cast: ['scout'],
+    screen: ['NEW QUESTION', '“Is working from home making people', ' less productive, or more?”', 'budget ............ $5.00'],
+    lines: [
+      { who: 'scout', focus: ['Q'], text: 'New question on the desk. Not one of mine: this one came from the founder.' },
+      { who: 'scout', focus: ['Q'], text: 'Working from home: less productive, or more? Big if true. Let’s find out.' } ] },
+  { id: 'search', clock: '4:27 PM', title: 'The pile', headline: '9 searches · 55,144 results', tally: { searches: 9 }, cast: ['researcher'],
+    screen: ['> working from home randomized controlled', '  trial productivity        55,144 results', '> hybrid work experiment productivity', '                            20,479 results', '> telework job performance (PubMed)', '                                 3 results'],
+    lines: [
+      { who: 'researcher', focus: ['dust'], text: 'Fifty-five thousand results for the first search. Okay. I’m going to need a smaller pile.' },
+      { who: 'researcher', focus: ['dust'], text: 'Trials first. If someone flipped a coin to decide who worked from home, I want to read it.' } ] },
+  { id: 'reading', clock: '4:28 PM', title: 'Two studies walk into a lab', headline: '7 sources kept', tally: { sources: 7 }, cast: ['researcher'],
+    screen: ['KEPT', '· Hybrid working from home improves', '  retention… (Nature, 2024)', '· Working from Home, Worker Sorting…', '· Is Hybrid Work the Best of Both Worlds?', '· Why Working from Home Will Stick', '· …and 3 more'],
+    lines: [
+      { who: 'researcher', focus: ['chennai'], text: 'Chennai, India. Data-entry workers randomly sent home full time were 18% less productive. Ouch.' },
+      { who: 'researcher', focus: ['trip'], text: 'Trip.com, Shanghai. Two days a week at home, and performance grades didn’t budge for two years. Quit rates fell by a third.' },
+      { who: 'researcher', focus: ['trip', 'chennai'], text: 'So one trial says home costs you and the other says it doesn’t. Huh. Though they’re not testing the same thing: full time versus two days.' },
+      { who: 'researcher', focus: ['chennai'], text: 'And in Chennai, the people who wanted to work from home took the bigger hit. 27% down versus 13%. Nobody tell my manager.' } ] },
+  { id: 'independence', clock: '4:28 PM', title: 'One study is not two studies', headline: 'One study, not two', cast: ['researcher'],
+    screen: ['Trip.com trial ........ 2 write-ups', '    ↳ counted once', 'US worker survey ...... 2 versions', '    ↳ counted once'],
+    lines: [
+      { who: 'researcher', focus: ['trip2', 'trip'], text: 'Wait. Two of my sources are the same Trip.com trial written up twice. That’s one study, not two.' },
+      { who: 'researcher', focus: ['us2', 'us'], text: 'Same with the survey of 30,000 Americans. Two versions, one survey.' } ] },
+  { id: 'skeptic', clock: '5:33 PM', title: 'Nobody checks their own work', headline: '10 of 11 claims hold', tally: { claims: 11, held: 10 }, cast: ['researcher', 'skeptic'],
+    screen: ['CLAIMS FOR REVIEW ........ 11', 'C1 ✓  C2 ✓  C3 ✓  C4 ✓  C5 ✓', 'C6 ✓  C7 ✓  C8 ✓  C10 ✓ C11 ✓', 'C9 …', 'code: C6, C10 not backed by a passage'],
+    lines: [
+      { who: 'skeptic', focus: ['Q'], text: 'Eleven claims. Let’s see which ones survive me.' },
+      { who: 'skeptic', focus: ['C1', 'C4', 'C7'], text: 'C1 holds. C4 holds. C7, fine, and at least they admit it’s self-reported. Ten for ten. This is getting annoying.' } ] },
+  { id: 'fifty', clock: '5:33 PM', title: 'Where did fifty come from?', headline: 'C9: overstated, conceded', cast: ['researcher', 'skeptic'],
+    screen: ['C9  “Japanese firms with 50 or more', '     employees rated WFH productivity', '     about 20% lower…”', 'SOURCE  firm size: less than 100', '        employees, …'],
+    lines: [
+      { who: 'skeptic', focus: ['C9'], text: 'Here we go. C9: “firms with 50 or more employees.” The survey’s smallest size group is “less than 100 employees.” Where did fifty come from?' },
+      { who: 'researcher', focus: ['C9'], text: 'Fair. I’ll narrow it.' } ] },
+  { id: 'contested', clock: '6:20 PM', title: 'Not every argument has a winner', headline: 'C11 kept, marked contested', tally: { contested: 1 }, cast: ['researcher'],
+    screen: ['C11  “The evidence does not support', '      a single answer…”', 'CONTRADICTING STUDIES ...... 1', 'INDEPENDENT OF SUPPORT ..... 1', '→ CONTESTED'],
+    lines: [
+      { who: 'check', label: 'Verifier', focus: ['C11', 'chennai'], text: 'One independent study cuts against the overall answer.' },
+      { who: 'researcher', focus: ['C11'], text: 'The claim already says there’s no single answer. I’m keeping it.' } ] },
+  { id: 'numbers', clock: '6:54 PM', title: 'The part nobody can argue with', headline: 'C9 left out', tally: { dropped: 1 }, cast: ['researcher', 'skeptic'],
+    screen: ['NUMBER CHECK  C9, rewrite', '20 ............ found in passage', '11 ............ not found', '2020 .......... not found', '2021 .......... not found', '→ C9 left out'],
+    lines: [
+      { who: 'check', label: 'Number check', focus: ['C9v2'], text: '“11”, “2020” and “2021” don’t appear in the passage.' },
+      { who: 'skeptic', focus: ['C9v2'], text: 'I’d say I told you so. Technically, the spreadsheet did.' } ] },
+  { id: 'brief', clock: '10:27 PM', title: 'The brief writes itself (twice)', headline: 'Draft 2 passes', tally: { drafts: 2 }, cast: ['editor'],
+    screen: ['BRIEF · draft 1', '✕ population wider than the study', '✕ “effect of” on a survey', '✕ contested point, one side only', 'BRIEF · draft 2', '✓ every sentence traced to a claim'],
+    lines: [
+      { who: 'editor', focus: ['Q'], text: 'Okay, what are we working with. Ten claims standing, one of them contested. I’m using eight.' },
+      { who: 'editor', focus: ['C7', 'C8'], text: 'Three misses. I called a survey result an “effect.” A survey can’t show cause. That one’s on me.' },
+      { who: 'editor', focus: ['Q'], text: 'Draft two. Clean.' } ] },
+  { id: 'approved', clock: '11:08 PM', title: 'One last look, then out the door', headline: '4 of 4 sources clear · approved', tally: { approved: true }, cast: ['editor'],
+    screen: ['RECHECKING SOURCES WITH CROSSREF', '· retracted? no   · corrected? no', '· 4 of 4 clear', 'ALL RULES HOLD → APPROVED', 'spent: $1.87 of $5.00'],
+    lines: [
+      { who: 'editor', focus: ['trip', 'chennai', 'us', 'uk'], text: 'Four for four, clean. I’d hit publish myself, but they don’t let me near that button.' } ] },
+];
+const BRIEF_CLAIMS = ['C1', 'C2', 'C3', 'C4', 'C5', 'C7', 'C8', 'C11'];
+
+// What the chart holds after beat b (0-based). Pure: the chart is a function of the beat.
+function chartAt(b) {
+  const s = { dust: 0, sources: {}, claims: {}, links: false, verdict: false, crossref: false };
+  if (b >= 0) s.q = true;
+  if (b >= 1) s.dust = b === 1 ? 1 : 0;
+  if (b >= 2) for (const k of ['trip', 'trip2', 'bangla', 'chennai', 'us', 'us2', 'uk', 'japan', 'review']) s.sources[k] = { merged: false };
+  if (b >= 3) { s.sources.trip2.merged = true; s.sources.us2.merged = true; }
+  if (b >= 4) {
+    s.links = true;
+    for (const k of ['C1','C2','C3','C4','C5','C6','C7','C8','C9','C10','C11']) s.claims[k] = { status: 'held', skeptic: 'holds' };
+    s.claims.C6 = { status: 'unsupported', skeptic: 'holds', why: 'No supporting passage was linked. Its only passage qualifies it.' };
+    s.claims.C10 = { status: 'unsupported', skeptic: 'holds', why: 'The number 26 is not in any of its quoted passages.' };
+    s.claims.C9 = { status: 'pending', skeptic: 'pending' };
+  }
+  if (b >= 5) s.claims.C9 = { status: 'revising', skeptic: 'overstated', why: 'The survey’s smallest size group is “less than 100 employees,” so the 50-employee minimum is unsupported. Conceded.' };
+  if (b >= 6) s.claims.C11 = { status: 'contested', skeptic: 'holds', why: 'One independent study (the Chennai trial) cuts against it. Defended, and kept as contested by the cautious rule.' };
+  if (b >= 7) {
+    s.claims.C9 = { status: 'removed', skeptic: 'overstated', why: 'Conceded and rewritten. The rewrite failed the number check, so C9 is left out.' };
+    s.claims.C9v2 = { status: 'removed', skeptic: '—', why: '“11”, “2020” and “2021” do not appear in the quoted passage.' };
+  }
+  if (b >= 8) s.brief = true;
+  if (b >= 9) { s.crossref = true; s.verdict = true; }
+  return s;
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Scene graph
+// ─────────────────────────────────────────────────────────────────────────────
+const RM = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const canvas = document.getElementById('sky');
+const ctx = canvas.getContext('2d');
+let W = 0, H = 0, DPR = 1;
+
+const add = (a, b) => [a[0] + b[0], a[1] + b[1], a[2] + b[2]];
+const lerp3 = (a, b, t) => [a[0] + (b[0] - a[0]) * t, a[1] + (b[1] - a[1]) * t, a[2] + (b[2] - a[2]) * t];
+
+const nodes = {};
+function mk(id, type, pos, extra) { nodes[id] = Object.assign({ id, type, pos, home: pos, a: 0, r: 0, glow: 0, sel: 0, pulse: 0, tgt: { a: 0, r: 0, glow: 0 } }, extra); }
+mk('Q', 'question', [0, 0, 0], { label: 'The question' });
+for (const [k, s] of Object.entries(SOURCES)) mk(k, 'source', s.pos, { label: s.label, data: s });
+for (const [k, c] of Object.entries(CLAIMS)) {
+  const p = c.fixed ? c.fixed : add(lerp3([0, 0, 0], SOURCES[c.src].pos, 0.55), c.off);
+  mk(k, 'claim', p, { label: c.key || k, key: c.key || k, data: c });
+}
+const linkObjs = LINKS.map(([c, rel, s, passage], i) => ({ i, c, rel, s, passage, prog: 0, tgt: 0, a: 0 }));
+// Faint dust for the search results: 55,144 results drawn as 900 motes.
+const dust = [];
+{ let seed = 7; const rnd = () => (seed = (seed * 16807) % 2147483647) / 2147483647;
+  for (let i = 0; i < 900; i++) { const u = rnd() * 2 - 1, th = rnd() * Math.PI * 2, rr = 300 + rnd() * 170, q = Math.sqrt(1 - u * u);
+    dust.push({ p: [rr * q * Math.cos(th), rr * u * 0.8, rr * q * Math.sin(th)], tw: rnd() * 6.28 }); } }
+let dustA = 0, dustT = 0;
+const field = []; // fixed background stars, for depth
+{ let seed = 99; const rnd = () => (seed = (seed * 48271) % 2147483647) / 2147483647;
+  for (let i = 0; i < 260; i++) field.push({ x: rnd(), y: rnd(), z: 0.2 + rnd() * 0.8, b: rnd() }); }
+
+const agents = {};
+for (const [k, a] of Object.entries(AGENTS)) agents[k] = { id: k, ...a, pos: [0, -360, 260], tgt: [0, -360, 260], a: 0, ta: 0, speak: 0, trail: [] };
+
+// Camera
+const cam = { yaw: -0.35, pitch: 0.28, tyaw: -0.35, tpitch: 0.28, zoom: 1, tzoom: 1, cx: 0, cy: 0, tcx: 0, tcy: 0 };
+function project(p) {
+  const cy = Math.cos(cam.yaw), sy = Math.sin(cam.yaw), cp = Math.cos(cam.pitch), sp = Math.sin(cam.pitch);
+  let x = p[0] * cy - p[2] * sy, z = p[0] * sy + p[2] * cy, y = p[1];
+  const y2 = y * cp - z * sp; z = y * sp + z * cp; y = y2;
+  const D = 1050, f = 860 * cam.zoom * (W < 600 ? Math.min(W * 1.35, H * 0.8) : Math.min(W, H)) / 820;
+  const s = f / (D + z);
+  return { x: W / 2 + (x - cam.cx) * s, y: H * 0.47 + (y - cam.cy) * s, s, z };
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Applying a chart state to the scene (targets; the frame loop eases toward them)
+// ─────────────────────────────────────────────────────────────────────────────
+let chart = chartAt(-1);
+const CERT = { high: 1, moderate: 0.82, low: 0.6, very_low: 0.45 };
+function applyChart(c, instant) {
+  chart = c;
+  const Q = nodes.Q; Q.tgt = c.q ? { a: 1, r: 13, glow: 1 } : { a: 0, r: 0, glow: 0 };
+  for (const k of Object.keys(SOURCES)) {
+    const n = nodes[k], s = c.sources[k];
+    if (!s) { n.tgt = { a: 0, r: 0, glow: 0 }; continue; }
+    const base = 5 + n.data.weight * 9;
+    if (s.merged) { n.tgt = { a: 0, r: base * 0.4, glow: 0 }; n.mergeTo = n.data.dupOf; }
+    else { n.tgt = { a: 1, r: base, glow: 0.8 }; n.mergeTo = null; }
+    if (n.data.dupOf && !s.merged) n.tgt.a = 0.85;
+    n.crossref = c.crossref && n.data.relied;
+  }
+  for (const k of Object.keys(CLAIMS)) {
+    const n = nodes[k], st = c.claims[k];
+    if (!st) { n.tgt = { a: 0, r: 0, glow: 0 }; n.status = null; continue; }
+    n.status = st.status; n.state = st;
+    const bright = CERT[n.data.certainty] || 0.6;
+    const r = n.data.materiality === 'material' ? 7.5 : 5.5;
+    if (st.status === 'removed' || st.status === 'unsupported') n.tgt = { a: 0.42, r: r * 0.85, glow: 0 };
+    else n.tgt = { a: bright, r, glow: bright };
+    if (c.brief && BRIEF_CLAIMS.includes(k)) n.tgt.glow = 1, n.tgt.a = Math.max(n.tgt.a, 0.92);
+    // Removed claims drift outward from the question; brief claims draw in a little.
+    const home = n.home;
+    n.goal = st.status === 'removed' ? lerp3([0, 0, 0], home, 1.35) : (c.brief && BRIEF_CLAIMS.includes(k) ? lerp3([0, 0, 0], home, 0.82) : home);
+  }
+  for (const l of linkObjs) {
+    const st = c.claims[l.c];
+    l.tgt = c.links && st ? 1 : 0;
+    l.fade = st && (st.status === 'removed' || st.status === 'unsupported') ? 0.25 : 1;
+    if (l.rel === 'contradicts' && !(st && st.status === 'contested')) l.fade = 0.35;
+  }
+  if (instant) {
+    for (const n of Object.values(nodes)) { n.a = n.tgt.a; n.r = n.tgt.r; n.glow = n.tgt.glow; if (n.goal) n.pos = n.goal; }
+    for (const l of linkObjs) l.prog = l.tgt;
+    dustA = c.dust;
+  }
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Playback
+// ─────────────────────────────────────────────────────────────────────────────
+const SPEEDS = [1, 1.5, 2];
+const P = { beat: 0, line: -1, phase: 'arrive', t: 0, dur: 0, playing: true, speed: 1, explore: false, ended: false, seen: new Set() };
+const lineDur = (text) => Math.max(2800, 1500 + text.length * 50);
+const screenDur = (s) => s.reduce((t, l) => t + 120 + l.length * 12, 0) + 600;
+const GAPS = { 4: 'An hour later', 8: '3½ hours later' };
+
+const $ = (id) => document.getElementById(id);
+$('question').textContent = STORY.question;
+
+// Chapters
+BEATS.forEach((b, i) => {
+  const btn = document.createElement('button');
+  btn.setAttribute('aria-label', `Chapter ${i + 1}: ${b.title}`);
+  btn.innerHTML = `<span class="fill"></span><span class="tip">${i + 1}. ${b.title}</span>`;
+  btn.addEventListener('click', () => goBeat(i));
+  $('chapters').appendChild(btn);
+});
+
+function goBeat(i, autoplay = true) {
+  closeEnd();
+  P.beat = Math.max(0, Math.min(BEATS.length - 1, i));
+  P.line = -1; P.ended = false;
+  // Snap to the state before this beat, then let this beat's change animate in.
+  applyChart(chartAt(P.beat - 1), true);
+  startBeat();
+  if (autoplay && !P.playing) togglePlay(true);
+}
+
+function startBeat() {
+  const b = BEATS[P.beat];
+  P.phase = GAPS[P.beat] ? 'skip' : 'arrive'; P.t = 0;
+  P.dur = P.phase === 'skip' ? 1900 : 1500;
+  if (P.phase === 'skip') { $('skip').textContent = GAPS[P.beat]; $('skip').classList.add('on'); }
+  $('clock').textContent = `Oct 24 · ${b.clock}`;
+  $('headline').textContent = b.title;
+  $('beatNo').textContent = `${P.beat + 1} / ${BEATS.length}`;
+  $('readout').textContent = '';
+  renderTally();
+  setLine(null);
+  // Cast: who is on the chart for this beat
+  for (const a of Object.values(agents)) a.ta = b.cast.includes(a.id) ? 1 : 0;
+  if (P.phase === 'arrive') beginArrive();
+}
+function beginArrive() {
+  applyChart(chartAt(P.beat), false);
+  if (P.beat === 1) dustT = 0;
+  const b = BEATS[P.beat];
+  const first = b.lines.find((l) => l.focus);
+  if (first) aimCamera(first.focus);
+  for (const id of b.cast) { const a = agents[id]; if (a.a < 0.05) { a.pos = add(focusPoint(first ? first.focus : ['Q']), [0, -140, 120]); } }
+  // Everyone on stage drifts toward the first focus point
+  b.cast.forEach((id, k) => { agents[id].tgt = add(focusPoint(first ? first.focus : ['Q']), offsetFor(k)); });
+}
+function offsetFor(k) { return [[-46, -40, 30], [52, -30, -20], [0, 50, 40]][k % 3]; }
+function focusPoint(focus) {
+  if (!focus || !focus.length) return [0, 0, 0];
+  if (focus[0] === 'dust') return [0, -330, 120];
+  const ps = focus.map((f) => (nodes[f] ? nodes[f].pos : [0, 0, 0]));
+  return ps.reduce((a, p) => add(a, p.map((v) => v / ps.length)), [0, 0, 0]);
+}
+function aimCamera(focus) {
+  const p = focusPoint(focus);
+  // Pan part of the way toward the focus, and turn so it faces the viewer a little more.
+  const yawTo = Math.atan2(p[0], -p[2] || -1);
+  const wish = -yawTo * 0.25 + cam.tyaw * 0.75;
+  cam.tyaw = Number.isFinite(wish) ? wish : cam.tyaw;
+  cam.tcx = 0; cam.tcy = 0;
+  cam.tzoom = focus[0] === 'dust' ? 0.86 : (focus.length === 1 && focus[0] !== 'Q' ? 1.12 : 1);
+}
+
+function setLine(l, isFirstForAgent) {
+  const el = $('line');
+  if (!l) { el.style.opacity = 0; for (const a of Object.values(agents)) a.speakT = 0; return; }
+  el.style.opacity = 1;
+  el.classList.toggle('check', l.who === 'check');
+  const who = $('who');
+  if (l.who === 'check') { who.innerHTML = `<i class="dot" style="color:var(--check)"></i>${l.label} <span style="color:var(--ink-dim);letter-spacing:.06em">· the lab's code</span>`; who.style.color = 'var(--check)'; }
+  else {
+    const a = AGENTS[l.who];
+    who.style.color = a.color;
+    who.innerHTML = `<i class="dot" style="color:${a.color}"></i>${a.name}` + (isFirstForAgent ? `<span class="intro">${a.model} · ${a.job}</span>` : '');
+    for (const g of Object.values(agents)) g.speakT = g.id === l.who ? 1 : 0;
+  }
+  $('lineText').textContent = l.text;
+}
+
+function nextLine() {
+  const b = BEATS[P.beat];
+  P.line++;
+  if (P.line >= b.lines.length) return endBeat();
+  const l = b.lines[P.line];
+  P.phase = 'line'; P.t = 0; P.dur = lineDur(l.text) + (l.who !== 'check' && !P.seen.has(l.who) ? 900 : 0);
+  const first = l.who !== 'check' && !P.seen.has(l.who);
+  if (l.who !== 'check') P.seen.add(l.who);
+  setLine(l, first);
+  if (l.focus) {
+    aimCamera(l.focus);
+    const fp = focusPoint(l.focus);
+    if (l.who !== 'check') {
+      agents[l.who].tgt = add(fp, [0, -38, 34]);
+      b.cast.filter((c) => c !== l.who).forEach((c, k) => { agents[c].tgt = add(fp, offsetFor(k + 1)); });
+    }
+    for (const f of l.focus) if (nodes[f]) nodes[f].pulse = 1;
+  }
+}
+function endBeat() {
+  if (P.beat < BEATS.length - 1) { P.beat++; P.line = -1; startBeat(); return; }
+  P.phase = 'end'; P.ended = true; setLine(null); showEnd();
+}
+
+function renderTally() {
+  const t = {}; BEATS.slice(0, P.beat + 1).forEach((b) => Object.assign(t, b.tally || {}));
+  const parts = [];
+  if (t.searches) parts.push(`<span><b>${t.searches}</b> searches</span>`);
+  if (t.sources) parts.push(`<span><b>${t.sources}</b> studies</span>`);
+  if (t.claims) parts.push(`<span><b>${t.claims}</b> claims</span>`);
+  if (t.held) parts.push(`<span><b>${t.held}</b> held</span>`);
+  if (t.dropped) parts.push(`<span><b>${t.dropped}</b> dropped</span>`);
+  if (t.contested) parts.push(`<span><b>${t.contested}</b> contested</span>`);
+  if (t.drafts) parts.push(`<span><b>${t.drafts}</b> drafts</span>`);
+  if (t.approved) parts.push(`<span><b>approved</b></span>`);
+  $('tally').innerHTML = parts.join('') || '<span>Nothing yet</span>';
+  [...$('chapters').children].forEach((c, i) => { c.querySelector('.fill').style.width = i < P.beat ? '100%' : (i === P.beat ? '0%' : '0%'); });
+}
+function renderReadout(progress) {
+  const b = BEATS[P.beat];
+  const full = b.screen.join('\n');
+  const n = Math.floor(full.length * Math.min(1, progress));
+  const esc = full.slice(0, n).replace(/[&<>]/g, (ch) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;' }[ch]))
+    .replace(/(✓|found in passage|clear|APPROVED)/g, '<span class="ok">$1</span>').replace(/(✕|not found|left out)/g, '<span class="no">$1</span>');
+  $('readout').innerHTML = esc + (progress < 1 && P.playing ? '▍' : '');
+}
+
+function tick(dt) {
+  if (!P.playing || P.explore || P.ended) return;
+  P.t += dt * P.speed;
+  const fill = $('chapters').children[P.beat]?.querySelector('.fill');
+  if (P.phase === 'skip') {
+    if (P.t >= P.dur) { $('skip').classList.remove('on'); P.phase = 'arrive'; P.t = 0; P.dur = 1500; beginArrive(); }
+  } else if (P.phase === 'arrive') {
+    renderReadout(P.t / P.dur * 0.35);
+    if (P.t >= P.dur) { P.phase = 'screen'; P.t = 0; P.dur = screenDur(BEATS[P.beat].screen); }
+  } else if (P.phase === 'screen') {
+    renderReadout(0.35 + 0.65 * (P.t / P.dur));
+    if (P.t >= P.dur) { renderReadout(1); nextLine(); }
+  } else if (P.phase === 'line') {
+    if (P.t >= P.dur) nextLine();
+  }
+  if (fill) {
+    const b = BEATS[P.beat], total = b.lines.length + 1;
+    const step = P.phase === 'line' ? P.line + 1 + Math.min(1, P.t / P.dur) : Math.min(1, P.t / (P.dur || 1)) * (P.phase === 'screen' ? 1 : 0.3);
+    fill.style.width = `${Math.min(100, (step / total) * 100)}%`;
+  }
+}
+
+function togglePlay(force) {
+  P.playing = typeof force === 'boolean' ? force : !P.playing;
+  if (P.playing && P.explore) setExplore(false);
+  if (P.playing && P.ended) { goBeat(0); return; }
+  $('play').setAttribute('aria-label', P.playing ? 'Pause' : 'Play');
+  $('playIcon').innerHTML = P.playing ? '<path d="M6 5h4v14H6zm8 0h4v14h-4z"/>' : '<path d="M7 5v14l12-7z"/>';
+}
+$('play').addEventListener('click', () => togglePlay());
+$('next').addEventListener('click', () => { if (P.ended) return; if (P.phase !== 'line') { renderReadout(1); $('skip').classList.remove('on'); if (P.phase !== 'screen') beginArrive(); } nextLine(); });
+$('prev').addEventListener('click', () => { if (P.line > 0) { P.line -= 2; nextLine(); } else goBeat(P.beat - (P.line < 0 ? 1 : 0)); });
+$('speed').addEventListener('click', () => { P.speed = SPEEDS[(SPEEDS.indexOf(P.speed) + 1) % SPEEDS.length]; $('speed').textContent = `${P.speed}×`; });
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Explore mode, the end card, the brief
+// ─────────────────────────────────────────────────────────────────────────────
+function setExplore(on) {
+  P.explore = on;
+  $('explore').setAttribute('aria-pressed', String(on));
+  $('hint').hidden = !on;
+  if (on) { if (P.playing) togglePlay(false); setLine(null); $('verdict').hidden = true; }
+  else if (P.ended) showEnd();
+}
+$('explore').addEventListener('click', () => setExplore(!P.explore));
+$('exploreBtn2').addEventListener('click', () => setExplore(true));
+$('replay').addEventListener('click', () => { P.seen.clear(); goBeat(0); });
+
+function showEnd() {
+  $('verdictText').textContent = STORY.verdict;
+  $('answerText').textContent = STORY.answer;
+  $('sign').textContent = `Spent ${STORY.cost} of $5 · approved by code, not a model`;
+  $('verdict').hidden = false;
+  $('chapters').lastChild.querySelector('.fill').style.width = '100%';
+  togglePlay(false); $('play').setAttribute('aria-label', 'Watch again');
+  cam.tzoom = 0.92;
+}
+function closeEnd() { $('verdict').hidden = true; $('brief').hidden = true; }
+$('readBrief').addEventListener('click', () => {
+  $('briefTitle').textContent = STORY.brief.title;
+  $('briefBody').innerHTML = STORY.brief.sections.map((s) => `<h3>${s.heading}</h3>` + s.lines.map(([k, t]) => `<p><button class="key" data-node="${k}" aria-label="Show ${k} on the chart">${k}</button>${t}</p>`).join('')).join('');
+  $('brief').hidden = false; $('verdict').hidden = true;
+});
+$('briefClose').addEventListener('click', () => { $('brief').hidden = true; if (P.ended && !P.explore) $('verdict').hidden = false; });
+$('briefBody').addEventListener('click', (e) => { const k = e.target.closest('[data-node]')?.dataset.node; if (k) { $('brief').hidden = true; setExplore(true); inspect(k); } });
+
+// Inspector
+let selected = null;
+const REL = { supports: ['Supports', '#9fd0ff'], qualifies: ['Qualifies', '#c4cde0'], contradicts: ['Cuts against', '#ff7b6e'] };
+const STATUS = {
+  held: ['Holds', '#63d6bd'], pending: ['Under review', '#f2b04a'], revising: ['Conceded, being rewritten', '#f2b04a'],
+  contested: ['Contested', '#ff7b6e'], removed: ['Left out', '#8e9bb6'], unsupported: ['Unsupported', '#8e9bb6'],
+};
+const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+function inspect(id) {
+  const n = nodes[id]; if (!n || n.a < 0.05 && !(n.type === 'claim' && chart.claims[id])) return;
+  selected = id;
+  let h = '';
+  if (n.type === 'question') {
+    h = `<div class="kind">The question</div><h3>${esc(STORY.question)}</h3>
+      <dl class="meta"><dt>Asked by</dt><dd>The founder</dd><dt>Budget</dt><dd>$5.00</dd><dt>Spent</dt><dd>${P.beat >= 9 ? STORY.cost : 'in progress'}</dd></dl>
+      ${chart.verdict ? `<h4>Verdict</h4><p>${esc(STORY.verdict)} ${esc(STORY.answer)}</p>` : ''}
+      <p class="fine">Stars around it are studies the Researcher kept. Diamonds are the claims it drew from them.</p>`;
+  } else if (n.type === 'source') {
+    const s = n.data;
+    const dup = s.dupOf ? `<p class="fine">Same study as the <button class="linkish" data-go="${s.dupOf}">${esc(SOURCES[s.dupOf].label)}</button>. The lab counts it once.</p>` : '';
+    const ev = LINKS.filter((l) => l[2] === id && chart.claims[l[0]]);
+    h = `<div class="kind">Study · ${esc(s.design)}</div><h3>${esc(s.title)}</h3>
+      <dl class="meta"><dt>Published</dt><dd>${esc(s.venue)}, ${s.year}</dd>${s.n ? `<dt>Sample</dt><dd>${s.n.toLocaleString()}${s.design.startsWith('Systematic') ? ' studies' : ''}</dd>` : ''}${s.relied ? `<dt>In the brief</dt><dd>Yes${chart.crossref ? ' · rechecked with Crossref: not retracted, not corrected' : ''}</dd>` : ''}</dl>
+      ${dup}${ev.length ? '<h4>Passages quoted from it</h4>' + ev.map(([c, rel, , q]) => `<div class="ev"><div class="rel" style="color:${REL[rel][1]}"><span>${REL[rel][0]} <button class="link" data-go="${c}">${esc(CLAIMS[c].key || c)}</button></span></div><blockquote>“${esc(q)}”</blockquote></div>`).join('') : (s.dupOf ? '' : '<p class="fine">No passages quoted from it yet.</p>')}`;
+  } else {
+    const c = n.data, st = chart.claims[id] || {};
+    const [sl, sc] = STATUS[st.status] || ['', '#fff'];
+    const ev = LINKS.filter((l) => l[0] === id);
+    h = `<div class="kind">Claim ${esc(n.key)} · ${c.materiality === 'material' ? 'material' : 'supporting'}</div>
+      <h3 style="font-size:16px;line-height:1.4;font-family:var(--body);font-weight:500">${esc(c.text)}</h3>
+      <p><span class="pill" style="color:${sc}">${sl}</span></p>
+      <dl class="meta"><dt>About</dt><dd>${esc(c.pop)}</dd><dt>Certainty</dt><dd>${c.certainty}</dd><dt>Skeptic</dt><dd>${esc(st.skeptic || '')}</dd>${BRIEF_CLAIMS.includes(id) && chart.brief ? '<dt>In the brief</dt><dd>Yes</dd>' : ''}</dl>
+      ${st.why ? `<h4>Why</h4><p>${esc(st.why)}</p>` : ''}
+      <h4>Evidence</h4>${ev.map(([, rel, s, q]) => `<div class="ev"><div class="rel" style="color:${REL[rel][1]}"><span>${REL[rel][0]}</span></div><blockquote>“${esc(q)}”</blockquote><div class="from">From the <button class="link" data-go="${s}">${esc(SOURCES[s].label)}</button></div></div>`).join('')}`;
+  }
+  $('inspBody').innerHTML = h;
+  $('inspector').hidden = false;
+  closePanels();
+}
+$('inspBody').addEventListener('click', (e) => { const g = e.target.closest('[data-go]')?.dataset.go; if (g) inspect(g); });
+$('inspClose').addEventListener('click', () => { $('inspector').hidden = true; selected = null; });
+
+function closePanels() { for (const [btn, el] of [['legendBtn', 'legend'], ['catalogBtn', 'catalog']]) { $(btn).setAttribute('aria-pressed', 'false'); $(el).hidden = true; } }
+function togglePanel(btn, el) { const on = $(el).hidden; closePanels(); if (on) { $(el).hidden = false; $(btn).setAttribute('aria-pressed', 'true'); if (el === 'catalog') renderCatalog(); } }
+$('legendBtn').addEventListener('click', () => togglePanel('legendBtn', 'legend'));
+$('catalogBtn').addEventListener('click', () => togglePanel('catalogBtn', 'catalog'));
+function renderCatalog() {
+  const items = [];
+  if (nodes.Q.tgt.a > 0) items.push(['Q', '?', 'The question']);
+  for (const k of Object.keys(SOURCES)) if (chart.sources[k]) items.push([k, 'study', SOURCES[k].label + (SOURCES[k].dupOf ? ' (duplicate)' : '')]);
+  for (const k of Object.keys(CLAIMS)) if (chart.claims[k]) items.push([k, CLAIMS[k].key ? 'C9′' : k, `${(STATUS[chart.claims[k].status] || [''])[0]} · ${CLAIMS[k].text.slice(0, 64)}…`]);
+  $('catalogList').innerHTML = items.map(([id, tag, t]) => `<button data-go="${id}"><code>${tag}</code><span>${esc(t)}</span></button>`).join('');
+}
+$('catalogList').addEventListener('click', (e) => { const g = e.target.closest('[data-go]')?.dataset.go; if (g) { if (P.playing) togglePlay(false); inspect(g); } });
+
+// Field notes expand on phones
+$('notes').addEventListener('click', () => $('notes').classList.toggle('open'));
+
+// Keyboard
+addEventListener('keydown', (e) => {
+  if (e.target.closest && e.target.closest('input,textarea')) return;
+  if (e.key === ' ' && !(e.target instanceof HTMLButtonElement)) { e.preventDefault(); togglePlay(); }
+  else if (e.key === 'ArrowRight') $('next').click();
+  else if (e.key === 'ArrowLeft') $('prev').click();
+  else if (e.key === 'Escape') { $('inspector').hidden = true; selected = null; closePanels(); }
+});
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Pointer: drag to turn, click to inspect, hover to light up neighbors
+// ─────────────────────────────────────────────────────────────────────────────
+let drag = null, hover = null, lastInteract = -1e9;
+function pick(x, y) {
+  let best = null, bd = 1e9;
+  for (const n of Object.values(nodes)) {
+    if (n.a < 0.15 || !n.proj) continue;
+    const d = Math.hypot(n.proj.x - x, n.proj.y - y), rr = Math.max(14, n.r * n.proj.s * 1.6 + 8);
+    if (d < rr && d < bd) { bd = d; best = n.id; }
+  }
+  return best;
+}
+canvas.addEventListener('pointerdown', (e) => { drag = { x: e.clientX, y: e.clientY, yaw: cam.tyaw, pitch: cam.tpitch, moved: false }; canvas.setPointerCapture(e.pointerId); });
+canvas.addEventListener('pointermove', (e) => {
+  if (drag) {
+    const dx = e.clientX - drag.x, dy = e.clientY - drag.y;
+    if (Math.hypot(dx, dy) > 4) { drag.moved = true; canvas.classList.add('dragging'); }
+    cam.tyaw = drag.yaw + dx * 0.006; cam.tpitch = Math.max(-0.7, Math.min(0.9, drag.pitch + dy * 0.004));
+    lastInteract = performance.now();
+  } else { hover = pick(e.clientX, e.clientY); canvas.classList.toggle('pointing', !!hover); }
+});
+canvas.addEventListener('pointerup', (e) => {
+  canvas.classList.remove('dragging');
+  if (drag && !drag.moved) { const id = pick(e.clientX, e.clientY); if (id) { if (P.playing) togglePlay(false); inspect(id); } else { $('inspector').hidden = true; selected = null; } }
+  drag = null;
+});
+canvas.addEventListener('wheel', (e) => { e.preventDefault(); cam.tzoom = Math.max(0.6, Math.min(1.9, cam.tzoom * (e.deltaY > 0 ? 0.92 : 1.08))); lastInteract = performance.now(); }, { passive: false });
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Drawing
+// ─────────────────────────────────────────────────────────────────────────────
+function resize() {
+  DPR = Math.min(2, devicePixelRatio || 1); W = innerWidth; H = innerHeight;
+  canvas.width = W * DPR; canvas.height = H * DPR; ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
+}
+addEventListener('resize', resize); resize();
+
+const hex = (c, a) => { const n = parseInt(c.slice(1), 16); return `rgba(${n >> 16 & 255},${n >> 8 & 255},${n & 255},${a})`; };
+function glowDot(x, y, r, color, a, g) {
+  if (g > 0.01) { const gr = ctx.createRadialGradient(x, y, 0, x, y, r * 4.2); gr.addColorStop(0, hex(color, 0.45 * a * g)); gr.addColorStop(1, hex(color, 0)); ctx.fillStyle = gr; ctx.beginPath(); ctx.arc(x, y, r * 4.2, 0, 6.283); ctx.fill(); }
+  ctx.fillStyle = hex(color, a); ctx.beginPath(); ctx.arc(x, y, r, 0, 6.283); ctx.fill();
+}
+function diamond(x, y, r, fill, stroke, a) {
+  ctx.beginPath(); ctx.moveTo(x, y - r); ctx.lineTo(x + r, y); ctx.lineTo(x, y + r); ctx.lineTo(x - r, y); ctx.closePath();
+  if (fill) { ctx.fillStyle = hex(fill, a); ctx.fill(); }
+  if (stroke) { ctx.strokeStyle = hex(stroke, a); ctx.lineWidth = 1.4; ctx.stroke(); }
+}
+const neighbors = (id) => { const s = new Set([id]); for (const l of linkObjs) if (l.prog > 0.5) { if (l.c === id) s.add(l.s); if (l.s === id) s.add(l.c); } return s; };
+
+let last = performance.now(), T = 0;
+function frame(now) {
+  const dt = Math.min(64, now - last); last = now; T += dt;
+  tick(dt);
+  const k = RM ? 1 : 1 - Math.pow(0.0025, dt / 1000);      // easing factor per frame
+  const kSlow = RM ? 1 : 1 - Math.pow(0.12, dt / 1000);
+  // Camera: a slow turn while the chart is idle; it never moves a node.
+  if (!RM && !drag && now - lastInteract > 3500 && !P.explore) cam.tyaw += dt * 0.000035;
+  cam.yaw += (cam.tyaw - cam.yaw) * kSlow; cam.pitch += (cam.tpitch - cam.pitch) * kSlow; cam.zoom += (cam.tzoom - cam.zoom) * kSlow;
+
+  for (const n of Object.values(nodes)) {
+    n.a += (n.tgt.a - n.a) * k; n.r += (n.tgt.r - n.r) * k; n.glow += (n.tgt.glow - n.glow) * k;
+    if (n.goal) n.pos = lerp3(n.pos, n.goal, kSlow * 0.6);
+    if (n.mergeTo) n.pos = lerp3(n.pos, nodes[n.mergeTo].pos, k * 0.5); else if (n.type === 'source') n.pos = lerp3(n.pos, n.home, k * 0.5);
+    n.pulse = Math.max(0, n.pulse - dt / 1600);
+    n.sel += ((selected === n.id ? 1 : 0) - n.sel) * k;
+  }
+  for (const l of linkObjs) { l.prog += (l.tgt - l.prog) * (RM ? 1 : 1 - Math.pow(0.08, dt / 1000)); }
+  dustA += (chart.dust - dustA) * (RM ? 1 : 1 - Math.pow(0.15, dt / 1000));
+  if (chart.dust) dustT = Math.min(1, dustT + dt / 2200);
+  for (const a of Object.values(agents)) {
+    a.a += (a.ta - a.a) * k; a.pos = lerp3(a.pos, a.tgt, RM ? 1 : 1 - Math.pow(0.03, dt / 1000));
+    a.speak = (a.speak || 0) + (((a.speakT || 0) && $('line').style.opacity === '1' ? 1 : 0) - (a.speak || 0)) * k;
+    a.trail.push(a.pos); if (a.trail.length > 18) a.trail.shift();
+  }
+
+  // Ground and field stars
+  ctx.fillStyle = '#070b16'; ctx.fillRect(0, 0, W, H);
+  const vg = ctx.createRadialGradient(W / 2, H * 0.47, 0, W / 2, H * 0.47, Math.max(W, H) * 0.7);
+  vg.addColorStop(0, 'rgba(30,44,84,0.35)'); vg.addColorStop(1, 'rgba(7,11,22,0)'); ctx.fillStyle = vg; ctx.fillRect(0, 0, W, H);
+  for (const f of field) {
+    const x = ((f.x * W + cam.yaw * 60 * f.z) % W + W) % W, y = ((f.y * H + cam.pitch * 40 * f.z) % H + H) % H;
+    ctx.fillStyle = `rgba(200,212,240,${0.12 + 0.3 * f.b * f.z})`; ctx.fillRect(x, y, f.z * 1.4, f.z * 1.4);
+  }
+
+  // Search results as dust
+  if (dustA > 0.01) {
+    for (let i = 0; i < dust.length; i++) {
+      const d = dust[i]; if (i / dust.length > dustT && chart.dust) continue;
+      const p = project(d.p); const a = dustA * (0.25 + 0.2 * Math.sin(T / 900 + d.tw));
+      ctx.fillStyle = `rgba(150,180,235,${a * Math.min(1, p.s * 1.2)})`; ctx.fillRect(p.x, p.y, 1.6 * p.s + 0.4, 1.6 * p.s + 0.4);
+    }
+  }
+
+  for (const n of Object.values(nodes)) n.proj = project(n.pos);
+  const hl = hover || selected ? neighbors(hover || selected) : null;
+
+  // Edges
+  for (const l of linkObjs) {
+    if (l.prog < 0.01) continue;
+    const A = nodes[l.c].proj, B = nodes[l.s].proj; if (!A || !B) continue;
+    const ex = A.x + (B.x - A.x) * l.prog, ey = A.y + (B.y - A.y) * l.prog;
+    let alpha = 0.55 * l.fade * Math.min(nodes[l.c].a + 0.3, 1);
+    if (hl) alpha *= hl.has(l.c) && hl.has(l.s) ? 1.7 : 0.25;
+    ctx.save(); ctx.lineWidth = l.rel === 'contradicts' ? 1.8 : 1.2;
+    if (l.rel === 'supports') ctx.strokeStyle = `rgba(159,208,255,${alpha})`;
+    else if (l.rel === 'qualifies') { ctx.strokeStyle = `rgba(196,205,224,${alpha * 0.8})`; ctx.setLineDash([3, 5]); }
+    else { ctx.strokeStyle = `rgba(255,123,110,${alpha * 1.3})`; ctx.setLineDash([7, 4]); ctx.lineDashOffset = RM ? 0 : -T / 60; }
+    ctx.beginPath(); ctx.moveTo(A.x, A.y); ctx.lineTo(ex, ey); ctx.stroke(); ctx.restore();
+  }
+  // Claims tether to the question, faintly: every claim answers it
+  for (const k2 of Object.keys(CLAIMS)) {
+    const n = nodes[k2]; if (n.a < 0.02) continue; const Q = nodes.Q.proj;
+    ctx.strokeStyle = `rgba(160,180,220,${0.07 * n.a})`; ctx.lineWidth = 1; ctx.beginPath(); ctx.moveTo(Q.x, Q.y); ctx.lineTo(n.proj.x, n.proj.y); ctx.stroke();
+  }
+
+  // Nodes back to front
+  const order = Object.values(nodes).filter((n) => n.a > 0.01).sort((a, b) => b.proj.z - a.proj.z);
+  for (const n of order) {
+    const p = n.proj, r = Math.max(0.5, n.r * p.s), dim = hl && !hl.has(n.id) ? 0.3 : 1, a = n.a * dim;
+    if (n.pulse > 0) { ctx.strokeStyle = `rgba(255,255,255,${n.pulse * 0.5 * a})`; ctx.lineWidth = 1.2; ctx.beginPath(); ctx.arc(p.x, p.y, r + 6 + (1 - n.pulse) * 22, 0, 6.283); ctx.stroke(); }
+    if (n.sel > 0.02) { ctx.strokeStyle = `rgba(255,255,255,${0.8 * n.sel})`; ctx.lineWidth = 1.5; ctx.beginPath(); ctx.arc(p.x, p.y, r + 7, 0, 6.283); ctx.stroke(); }
+    if (n.type === 'question') {
+      glowDot(p.x, p.y, r * 0.5, '#f4f7ff', a, 1);
+      ctx.strokeStyle = hex('#f4f7ff', 0.7 * a); ctx.lineWidth = 1.5; ctx.beginPath(); ctx.arc(p.x, p.y, r, 0, 6.283); ctx.stroke();
+      ctx.strokeStyle = hex('#f4f7ff', 0.2 * a); ctx.beginPath(); ctx.arc(p.x, p.y, r * 1.9, 0, 6.283); ctx.stroke();
+      if (chart.verdict) { ctx.strokeStyle = hex('#63d6bd', 0.5 * a); ctx.lineWidth = 2; ctx.beginPath(); ctx.arc(p.x, p.y, r * 2.6, 0, 6.283); ctx.stroke(); }
+    } else if (n.type === 'source') {
+      glowDot(p.x, p.y, r, '#f4f7ff', a, n.glow);
+      if (n.data.dupOf && !n.mergeTo) { ctx.strokeStyle = hex('#f2b04a', 0.7 * a); ctx.setLineDash([2, 3]); ctx.lineWidth = 1.2; ctx.beginPath(); ctx.arc(p.x, p.y, r + 5, 0, 6.283); ctx.stroke(); ctx.setLineDash([]); }
+      if (chart.sources[n.data.dupOf ? 'x' : n.id] && (n.id === 'trip' || n.id === 'us') && chart.sources[n.id === 'trip' ? 'trip2' : 'us2']?.merged) {
+        ctx.strokeStyle = hex('#f4f7ff', 0.35 * a); ctx.lineWidth = 1; ctx.beginPath(); ctx.arc(p.x, p.y, r + 5, 0, 6.283); ctx.stroke();
+      }
+      if (n.crossref) { ctx.strokeStyle = hex('#63d6bd', (0.5 + 0.3 * Math.sin(T / 500)) * a); ctx.lineWidth = 1.5; ctx.beginPath(); ctx.arc(p.x, p.y, r + 9, 0, 6.283); ctx.stroke(); }
+    } else {
+      const st = n.status;
+      if (st === 'removed' || st === 'unsupported') diamond(p.x, p.y, r * 1.25, null, '#8e9bb6', a);
+      else if (st === 'contested') {
+        glowDot(p.x, p.y, r * 0.2, '#ffffff', 0, 0);
+        const g1 = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, r * 4); g1.addColorStop(0, hex('#ff7b6e', 0.35 * a)); g1.addColorStop(1, hex('#ff7b6e', 0)); ctx.fillStyle = g1; ctx.beginPath(); ctx.arc(p.x, p.y, r * 4, 0, 6.283); ctx.fill();
+        ctx.save(); ctx.beginPath(); ctx.rect(p.x - r * 2, p.y - r * 2, r * 2, r * 4); ctx.clip(); diamond(p.x, p.y, r * 1.3, '#9fd0ff', null, a); ctx.restore();
+        ctx.save(); ctx.beginPath(); ctx.rect(p.x, p.y - r * 2, r * 2, r * 4); ctx.clip(); diamond(p.x, p.y, r * 1.3, '#ff7b6e', null, a); ctx.restore();
+      } else {
+        const col = st === 'pending' || st === 'revising' ? '#f2b04a' : '#cfe6ff';
+        const g1 = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, r * 3.6); g1.addColorStop(0, hex(col, 0.32 * a * n.glow)); g1.addColorStop(1, hex(col, 0)); ctx.fillStyle = g1; ctx.beginPath(); ctx.arc(p.x, p.y, r * 3.6, 0, 6.283); ctx.fill();
+        diamond(p.x, p.y, r * 1.25, col, null, a);
+        if (st === 'revising') { ctx.save(); ctx.setLineDash([2, 3]); diamond(p.x, p.y, r * 2.1, null, '#f2b04a', a * 0.8); ctx.restore(); }
+      }
+      if (st === 'removed') { ctx.strokeStyle = hex('#8e9bb6', a); ctx.lineWidth = 1.2; ctx.beginPath(); ctx.moveTo(p.x - r * 1.4, p.y - r * 1.4); ctx.lineTo(p.x + r * 1.4, p.y + r * 1.4); ctx.stroke(); }
+    }
+    // Labels
+    const showLabel = n.type !== 'question' && (n.type === 'claim' || p.s > 0.62 || hl?.has(n.id) || n.sel > 0.1 || n.pulse > 0);
+    if (showLabel && a > 0.2) {
+      const lab = n.type === 'claim' ? n.key.replace(' (rewrite)', '′') : n.label;
+      ctx.font = n.type === 'claim' ? '500 11px "IBM Plex Mono", monospace' : '500 12px "IBM Plex Sans", sans-serif';
+      ctx.fillStyle = n.type === 'claim' ? `rgba(200,214,240,${Math.min(1, a + 0.1)})` : `rgba(230,236,247,${Math.min(0.95, a)})`;
+      ctx.textAlign = 'left'; ctx.textBaseline = 'middle';
+      ctx.fillText(lab, p.x + r * 1.5 + 7, p.y + (n.type === 'source' ? 0 : 1));
+    }
+  }
+
+  // Agents
+  for (const ag of Object.values(agents)) {
+    if (ag.a < 0.02) continue;
+    const pts = ag.trail.map(project);
+    for (let i = 1; i < pts.length; i++) { ctx.strokeStyle = hex(ag.color, (i / pts.length) * 0.35 * ag.a); ctx.lineWidth = 2 * (i / pts.length); ctx.beginPath(); ctx.moveTo(pts[i - 1].x, pts[i - 1].y); ctx.lineTo(pts[i].x, pts[i].y); ctx.stroke(); }
+    const p = project(ag.pos), r = 7 * p.s + 2;
+    glowDot(p.x, p.y, r, ag.color, ag.a, 1.2 + ag.speak * 0.8);
+    if (ag.speak > 0.05 && !RM) { const w = (T / 900) % 1; ctx.strokeStyle = hex(ag.color, (1 - w) * 0.6 * ag.speak * ag.a); ctx.lineWidth = 1.5; ctx.beginPath(); ctx.arc(p.x, p.y, r + 4 + w * 18, 0, 6.283); ctx.stroke(); }
+    ctx.font = '600 10.5px "IBM Plex Sans", sans-serif'; ctx.textAlign = 'center'; ctx.textBaseline = 'top';
+    ctx.fillStyle = hex(ag.color, 0.9 * ag.a); ctx.fillText(ag.name.toUpperCase(), p.x, p.y + r + 6);
+  }
+  // A search beam from the Researcher into the dust
+  if (P.beat === 1 && dustA > 0.05 && agents.researcher.a > 0.2) {
+    const p = project(agents.researcher.pos);
+    for (let i = 0; i < 9; i++) { const d = dust[(i * 97 + Math.floor(T / 700) * 13) % dust.length]; const q = project(d.p); ctx.strokeStyle = `rgba(108,182,255,${0.14 * dustA})`; ctx.lineWidth = 1; ctx.beginPath(); ctx.moveTo(p.x, p.y); ctx.lineTo(q.x, q.y); ctx.stroke(); }
+  }
+  requestAnimationFrame(frame);
+}
+
+// Legend swatches
+for (const c of document.querySelectorAll('.legend canvas')) {
+  const g = c.getContext('2d'), kind = c.dataset.key; g.scale(2, 2);
+  const L = (col, dash) => { g.strokeStyle = col; g.lineWidth = 1.4; g.setLineDash(dash || []); g.beginPath(); g.moveTo(2, 9); g.lineTo(32, 9); g.stroke(); };
+  const D = (x, y, r, fill, stroke) => { g.beginPath(); g.moveTo(x, y - r); g.lineTo(x + r, y); g.lineTo(x, y + r); g.lineTo(x - r, y); g.closePath(); if (fill) { g.fillStyle = fill; g.fill(); } if (stroke) { g.strokeStyle = stroke; g.stroke(); } };
+  if (kind === 'source') { g.fillStyle = '#f4f7ff'; g.beginPath(); g.arc(9, 9, 6, 0, 6.283); g.fill(); g.beginPath(); g.arc(25, 9, 3, 0, 6.283); g.fill(); }
+  if (kind === 'claim') { D(9, 9, 6, '#cfe6ff'); D(25, 9, 6, 'rgba(207,230,255,0.5)'); }
+  if (kind === 'supports') L('#9fd0ff');
+  if (kind === 'qualifies') L('#c4cde0', [3, 4]);
+  if (kind === 'contradicts') L('#ff7b6e', [6, 3]);
+  if (kind === 'contested') { g.save(); g.beginPath(); g.rect(10, 0, 7, 18); g.clip(); D(17, 9, 7, '#9fd0ff'); g.restore(); g.save(); g.beginPath(); g.rect(17, 0, 8, 18); g.clip(); D(17, 9, 7, '#ff7b6e'); g.restore(); }
+  if (kind === 'removed') { D(17, 9, 6, null, '#8e9bb6'); g.strokeStyle = '#8e9bb6'; g.beginPath(); g.moveTo(10, 2); g.lineTo(24, 16); g.stroke(); }
+}
+
+applyChart(chartAt(-1), true);
+startBeat();
+requestAnimationFrame(frame);
+</script>

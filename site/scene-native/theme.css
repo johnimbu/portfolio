@@ -1,0 +1,92 @@
+/* Portfolio theme for the native Scene+ sections: the case study's motion and structure,
+   in this site's colors and type. Product mockups (phones, browser windows, cards) keep their
+   own Scene+ and bank styling. */
+.spn {
+  --spn-bg: #0E0E0E;
+  --spn-card: #161616;
+  --spn-ink: #F5EFE0;
+  --spn-ink-dim: rgba(245, 239, 224, 0.72);
+  --spn-line: rgba(245, 239, 224, 0.14);
+  --spn-accent: #E8B84B;
+  color: var(--spn-ink);
+}
+
+/* backgrounds: the cream bands become the page's own dark */
+.spn section[style*="#EFEFDC"],
+.spn [class~="bg-neutral-greens-200"],
+.spn [class~="bg-greens-900"] { background-color: var(--spn-bg) !important; }
+.spn [class*="bg-arro-greens-"],
+.spn [class*="bg-greens-"] { background-color: #141414 !important; }
+.spn [class*="bg-[#EEF08F]"],
+.spn [style*="#EEF08F"] { background: var(--spn-accent) !important; }
+.spn [class*="border-[#EEF08F]"] { border-color: var(--spn-accent) !important; }
+.spn [class*="text-greens-"],
+.spn [class*="text-arro-greens-800"] { color: var(--spn-ink) !important; }
+
+/* cream panels and tiles become dark cards */
+.spn [class~="bg-[#FFFDF6]"] { background-color: var(--spn-card) !important; box-shadow: none !important; outline: 1px solid var(--spn-line); }
+
+/* type: the display serif and the grotesk become this site's fonts */
+.spn [class~="font-display"] { font-family: 'Space Grotesk', sans-serif !important; font-weight: 700 !important; letter-spacing: -0.02em; }
+.spn [class~="font-grotesk"] { font-family: 'Manrope', sans-serif !important; }
+
+/* text colors */
+.spn [class~="text-primary-800"],
+.spn [class~="text-arro-greens-800"],
+.spn [class~="text-greens-900"] { color: var(--spn-ink) !important; }
+.spn .network-label { color: var(--spn-ink-dim) !important; }
+.spn [class~="text-primary-800/80"] { color: var(--spn-ink-dim) !important; }
+.spn [class~="text-arro-greens-800/25"] { color: rgba(245, 239, 224, 0.25) !important; }
+.spn [class~="text-[#EEF08F]"] { color: var(--spn-accent) !important; }
+.spn [class~="ring-[#EEF08F]/15"] { --tw-ring-color: rgba(232, 184, 75, 0.2) !important; }
+.spn [class~="border-primary-800/15"] { border-color: var(--spn-line) !important; }
+
+/* inside product mockups, keep the product's own ink */
+.spn [class~="bg-white"] [class~="text-primary-800"],
+.spn [class~="bg-[#FFFFFF]"] [class~="text-primary-800"],
+.spn [class~="bg-[#EEEDED]"] [class~="text-primary-800"],
+.spn .browser-shell__page [class~="text-primary-800"],
+.spn [data-featured] [class~="text-primary-800"] { color: #1F1F1F !important; }
+
+/* component styles: the Arro green band, lime accents and dark-green ink, in this site's palette */
+.spn .priorities-tile--dark { background: #141414 !important; box-shadow: 0 0 0 100vmax #141414 !important; }
+.spn .chosen__badge,
+.spn .priorities-tile--dark .compare-badge { background: var(--spn-accent) !important; color: #141414 !important; }
+.spn .compare-badge { background: #141414 !important; color: var(--spn-accent) !important; border: 1px solid var(--spn-accent); }
+.spn .compare-ring { border-color: var(--spn-accent) !important; }
+.spn .priorities-link[aria-current=true] { box-shadow: inset 0 -2px var(--spn-accent) !important; }
+.spn .priorities-nav { background: rgba(14, 14, 14, 0.92) !important; }
+.spn .priorities-nav, .spn .priorities-nav * { color: var(--spn-ink); }
+
+/* product mocks keep the product's own ink and surfaces */
+.spn [data-accel] [class*="text-primary-800"] { color: #1F1F1F !important; }
+.spn [data-accel] figcaption [class*="text-primary-800"],
+.spn [data-accel] figcaption { color: var(--spn-ink-dim) !important; }
+
+/* the frame around the four priority boxes, and the results bar */
+.spn div:has(> [data-priorities-boxes]) { background: #141414 !important; }
+.spn [data-results] div:last-child > [data-results-bar] { background: var(--spn-accent) !important; }
+/* dark logos on dark cards: flip their lightness, keep their hues */
+.spn [data-priorities-boxes] img[src*="sceneplus-dark"],
+.spn [data-priorities-boxes] img[src*="arro-mark"] { filter: invert(1) hue-rotate(180deg); }
+.spn [class*="border-[#EEF08F]"], .spn .chosen__ring, .spn [data-chosen-ring] { border-color: var(--spn-accent) !important; }
+
+/* mobile/desktop segmented control: neutral dark track, Scene+ purple selected state */
+.spn .dh-toggle { background: #1C1C1C !important; border: 1px solid var(--spn-line); }
+.spn .dh-toggle__btn { color: var(--spn-ink-dim) !important; font-family: 'Space Grotesk', sans-serif !important; font-weight: 600; }
+.spn .dh-toggle__btn:hover { color: var(--spn-ink) !important; }
+.spn .dh-toggle__btn[aria-pressed=true] { background: #7B3FE4 !important; color: #FFFFFF !important; }
+.spn .dh-toggle__btn:focus-visible { outline: 2px solid #05D9E8; outline-offset: 2px; }
+
+/* other Arro chrome inside the demos, in neutral tones */
+.spn .modal-layer { background: rgba(14, 14, 14, 0.55) !important; }
+.spn .browser-shell { box-shadow: 0 0 0 1px var(--spn-line), 0 24px 48px rgba(0, 0, 0, 0.4) !important; }
+.spn [class*="text-[#F5F6EA]"] { color: var(--spn-ink-dim) !important; }
+.spn [class*="border-[#F5F6EA]"] { border-color: var(--spn-line) !important; }
+
+/* captions: one readable caption color on the dark page, matching the portfolio's own captions */
+.spn figcaption,
+.spn .tile-muted,
+.spn .card-stage-caption p { color: rgba(245, 239, 224, 0.66) !important; }
+.spn figcaption strong, .spn .card-stage-caption h4, .spn .card-stage-caption [class*="tracking"] { color: var(--spn-ink) !important; }
+.spn [data-gallery] img { cursor: zoom-in; }

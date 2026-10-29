@@ -1,0 +1,473 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%234f8dff'/%3E%3Cstop offset='.55' stop-color='%236fe0c0'/%3E%3Cstop offset='1' stop-color='%23e4ef7a'/%3E%3C/linearGradient%3E%3C/defs%3E%3Ccircle cx='16' cy='16' r='11' fill='url(%23g)'/%3E%3C/svg%3E">
+<style>:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}/* Calls to action: one small system, the same on every page (docs/copy-cta-pass.md).
+   Primary is solid, one per view. Secondary is outlined. Tertiary is a text link with an arrow.
+   On hover a solid one lifts to pure white and an outlined one takes a faint wash; both draw the arc's gradient
+   as a one-pixel hairline round the edge. An arrow nudges; a link's underline draws in from the left. A press
+   sinks a button a touch. Keyboard focus is its own ring, in the arc's tide colour. No glows, no inverting.
+   (.play-btn, .finding-link and the nav pill keep their names: the builder and tests use them.) */
+:root {
+  --cta-t: 190ms;
+  --cta-ease: cubic-bezier(.2, .7, .2, 1);
+  --cta-arc: linear-gradient(100deg, #4f8dff, #6fe0c0 55%, #e4ef7a);
+  --cta-fill: #f4f2ee;
+  --cta-fill-hi: #ffffff;
+  --cta-fill-press: #e6e3dc;
+  --cta-label: #05070c;
+  --cta-edge: rgba(244, 242, 238, 0.36);
+  --cta-wash: rgba(255, 255, 255, 0.06);
+  --cta-wash-press: rgba(255, 255, 255, 0.11);
+  --cta-rule: rgba(244, 242, 238, 0.32);
+  --cta-ring: #6fe0c0;
+}
+.cta-primary, .play-btn, .cta-secondary, nav.top .links a.pill { position: relative; -webkit-tap-highlight-color: transparent;
+  transition: background-color var(--cta-t) var(--cta-ease), border-color var(--cta-t) var(--cta-ease), color var(--cta-t) var(--cta-ease), transform var(--cta-t) var(--cta-ease); }
+:is(.cta-primary, .play-btn, .cta-secondary, nav.top .links a.pill)::before { content: ""; position: absolute; inset: -1px; border-radius: inherit; padding: 1px; pointer-events: none;
+  background: var(--cta-arc); -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor; mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0);
+  opacity: 0; transition: opacity var(--cta-t) var(--cta-ease); }
+:is(.cta-primary, .play-btn, .cta-secondary, nav.top .links a.pill) :is(svg, .pi, .i) { transition: transform var(--cta-t) var(--cta-ease); }
+/* Primary */
+.cta-primary, .play-btn { background-color: var(--cta-fill); border-color: var(--cta-fill); color: var(--cta-label); }
+.cta-primary:hover, .play-btn:hover, .watch:hover .cta-primary { background-color: var(--cta-fill-hi); border-color: transparent; color: var(--cta-label); }
+.cta-primary:active, .play-btn:active, .watch:active .cta-primary { background-color: var(--cta-fill-press); transform: scale(0.98); }
+/* Secondary */
+.cta-secondary, nav.top .links a.pill:not([aria-current]) { background-color: transparent; border-color: var(--cta-edge); color: var(--ink); }
+.cta-secondary:hover, nav.top .links a.pill:not([aria-current]):hover { background-color: var(--cta-wash); border-color: transparent; color: var(--ink); }
+.cta-secondary:active, nav.top .links a.pill:active { background-color: var(--cta-wash-press); transform: scale(0.98); }
+/* Both: the hairline, and the icon's small move. */
+:is(.cta-primary, .play-btn, .cta-secondary, nav.top .links a.pill):hover::before, .watch:hover .cta-primary::before { opacity: 1; }
+:is(.cta-primary, .play-btn, .cta-secondary):hover > svg, .watch:hover .cta-primary > svg { transform: translateX(3px); }
+:is(.cta-primary, .play-btn, .cta-secondary):hover :is(.pi, .i), .watch:hover .cta-primary .pi { transform: scale(1.06); }
+:is(.cta-primary, .play-btn, .cta-secondary):focus-visible, nav.top .links a.pill:focus-visible, .watch:focus-visible .cta-primary { outline: 2px solid var(--cta-ring); outline-offset: 3px; border-radius: 999px; }
+.watch:focus-visible { outline: none; }
+/* Tertiary: a resting hairline under the words; on hover the full line draws in from the left and the arrow moves on. */
+.cta-tertiary, .finding-link { color: var(--ink); text-decoration: none; border-bottom: 0; -webkit-tap-highlight-color: transparent;
+  background: linear-gradient(currentColor, currentColor) 0 100% / 0 1px no-repeat, linear-gradient(var(--cta-rule), var(--cta-rule)) 0 100% / 100% 1px no-repeat;
+  transition: background-size calc(var(--cta-t) * 1.4) var(--cta-ease), color var(--cta-t) var(--cta-ease); }
+:is(.cta-tertiary, .finding-link) svg { transition: transform var(--cta-t) var(--cta-ease); }
+.cta-tertiary:hover, .finding-link:hover, a:hover > * > .cta-tertiary { background-size: 100% 1px, 100% 1px; }
+.cta-tertiary:hover svg, .finding-link:hover svg, a:hover > * > .cta-tertiary svg { transform: translateX(4px); }
+.cta-tertiary:active svg, .finding-link:active svg, a:active > * > .cta-tertiary svg { transform: translateX(7px); }
+.cta-tertiary:active, .finding-link:active { color: var(--cta-fill-press); }
+.cta-tertiary:focus-visible, .finding-link:focus-visible, a.plate:focus-visible { outline: 2px solid var(--cta-ring); outline-offset: 4px; border-radius: 4px; }
+@media (prefers-reduced-motion: reduce) {
+  :is(.cta-primary, .play-btn, .cta-secondary, nav.top .links a.pill, .cta-tertiary, .finding-link), :is(.cta-primary, .play-btn, .cta-secondary, nav.top .links a.pill, .cta-tertiary, .finding-link) *,
+  :is(.cta-primary, .play-btn, .cta-secondary, nav.top .links a.pill)::before { transition: none !important; }
+  :is(.cta-primary, .play-btn, .cta-secondary, nav.top .links a.pill, .cta-tertiary, .finding-link), :is(.cta-primary, .play-btn, .cta-secondary, nav.top .links a.pill, .cta-tertiary, .finding-link) * { transform: none !important; }
+}
+/* The debate pill (written by the builder, with its layout inline) is a secondary in the same system. */
+.watch-debate { position: relative; -webkit-tap-highlight-color: transparent; transition: background-color var(--cta-t) var(--cta-ease), transform var(--cta-t) var(--cta-ease); }
+.watch-debate::before { content: ""; position: absolute; inset: -1px; border-radius: inherit; padding: 1px; pointer-events: none; background: var(--cta-arc); -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor; mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0); opacity: 0; transition: opacity var(--cta-t) var(--cta-ease); }
+.watch-debate:hover { background-color: var(--cta-wash); }
+.watch-debate:hover::before { opacity: 1; }
+.watch-debate:active { background-color: var(--cta-wash-press); transform: scale(0.98); }
+.watch-debate:focus-visible { outline: 2px solid var(--cta-ring); outline-offset: 3px; }
+@media (prefers-reduced-motion: reduce) { .watch-debate, .watch-debate::before { transition: none !important; transform: none !important; } }
+</style>
+<title>is buying a highly anticipated IPO on its first trading day a good long-term investment? · The Observatori</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="Taken together, these separate observational findings suggest that first-day buying risk looks greatest for heavily hyped US IPOs; they show association, not that hype causes later weakness.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="is buying a highly anticipated IPO on its first trading day a good long-term investment?">
+<meta property="og:description" content="Taken together, these separate observational findings suggest that first-day buying risk looks greatest for heavily hyped US IPOs; they show association, not that hype causes later weakness.">
+<meta property="article:published_time" content="2026-10-27">
+<meta property="og:site_name" content="The Observatori">
+<meta property="og:url" content="https://theobservatori.com/investigations/05/">
+<link rel="canonical" href="https://theobservatori.com/investigations/05/">
+<meta name="twitter:card" content="summary">
+</head>
+<body>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Is buying a highly anticipated IPO on its first trading day a good long-term investment?",
+  "description": "Taken together, these separate observational findings suggest that first-day buying risk looks greatest for heavily hyped US IPOs; they show association, not that hype causes later weakness.",
+  "datePublished": "2026-10-27",
+  "author": {
+    "@type": "Organization",
+    "name": "The Observatori"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "The Observatori"
+  },
+  "url": "https://theobservatori.com/investigations/05/",
+  "citation": [
+    {
+      "@type": "ScholarlyArticle",
+      "name": "Myth or Reality? The Long-Run Underperformance of Initial Public Offerings: Evidence from Venture and Nonventure Capital-Backed Companies",
+      "isPartOf": "The Journal of Finance",
+      "datePublished": "1997"
+    },
+    {
+      "@type": "ScholarlyArticle",
+      "name": "The Long‐Run Performance of initial Public Offerings",
+      "isPartOf": "The Journal of Finance",
+      "datePublished": "1991"
+    },
+    {
+      "@type": "ScholarlyArticle",
+      "name": "The Really Long‐Run Performance of Initial Public Offerings: The Pre‐Nasdaq Evidence",
+      "isPartOf": "The Journal of Finance",
+      "datePublished": "2003"
+    },
+    {
+      "@type": "ScholarlyArticle",
+      "name": "Chapter 30 Initial public offerings",
+      "isPartOf": "Handbooks in operations research and management science",
+      "datePublished": "1995"
+    },
+    {
+      "@type": "ScholarlyArticle",
+      "name": "Multi-Horizon IPO Aftermarket Performance: Evidence from India",
+      "isPartOf": "Journal of risk and financial management",
+      "datePublished": "2026"
+    },
+    {
+      "@type": "ScholarlyArticle",
+      "name": "Social Media Emotions and IPO Returns",
+      "isPartOf": "Journal of money credit and banking",
+      "datePublished": "2024"
+    },
+    {
+      "@type": "ScholarlyArticle",
+      "name": "The Persistence of IPO Mispricing and the Predictive Power of Flipping",
+      "isPartOf": "The Journal of Finance",
+      "datePublished": "1999"
+    },
+    {
+      "@type": "ScholarlyArticle",
+      "name": "The cross-section of European IPO returns",
+      "isPartOf": "RePEc: Research Papers in Economics",
+      "datePublished": "2003"
+    }
+  ]
+}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&family=Source+Sans+3:wght@300;400;600&family=Montserrat:wght@600;700&display=swap">
+<style>
+/* Layout: the readable brief. Full-bleed with one gutter; the finding first, as text, so it reads and
+   indexes without the replay; a play button opens the investigation. Below: the brief in a comfortable
+   column beside a section index, then how it was checked and the studies. One dark look, as the site. */
+:root {
+  color-scheme: dark;
+  --night: #05070c;
+  --panel: rgba(255, 255, 255, 0.035);
+  --line: rgba(255, 255, 255, 0.14);
+  --ink: #f4f2ee;
+  --ink-2: rgba(244, 242, 238, 0.68);
+  --ink-3: rgba(244, 242, 238, 0.4);
+  --arc-a: #4f8dff; --arc-b: #6fe0c0; --arc-c: #e4ef7a;
+  --warm: #ffb28f; --cool: #9fd0ff; --contra: #ff7466;
+  --g: clamp(16px, 5vw, 96px);
+  --serif: "Playfair Display", "Iowan Old Style", Georgia, serif;
+  --body: "Source Sans 3", "Segoe UI", system-ui, sans-serif;
+  --caps: "Montserrat", "Segoe UI", system-ui, sans-serif;
+}
+* { box-sizing: border-box; }
+html { background: var(--night); scroll-padding-top: 110px; }
+@media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
+body { margin: 0; background: var(--night); color: var(--ink); font: 400 17px/1.7 var(--body); -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+a { color: inherit; }
+:focus-visible { outline: 2px solid var(--ink); outline-offset: 4px; border-radius: 4px; }
+/* Film grain over the night: fine noise, barely there, drifting a little. Fixed to the screen. */
+.grain { position: fixed; inset: -50%; z-index: 1; pointer-events: none; opacity: 0.075; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0.55 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); }
+@media (prefers-reduced-motion: no-preference) { .grain { animation: grain 1.2s steps(6) infinite; } }
+@keyframes grain { 0% { transform: translate(0, 0); } 20% { transform: translate(-3%, 2%); } 40% { transform: translate(2%, -3%); } 60% { transform: translate(-2%, -1%); } 80% { transform: translate(3%, 3%); } 100% { transform: translate(0, 0); } }
+.gut { padding-left: max(var(--g), env(safe-area-inset-left, 0px)); padding-right: max(var(--g), env(safe-area-inset-right, 0px)); }
+.caps { font: 700 11px/1.7 var(--caps); letter-spacing: 0.24em; text-transform: uppercase; }
+.dim { color: var(--ink-2); }
+h1, h2, h3 { font-family: var(--serif); font-weight: 700; letter-spacing: -0.01em; text-wrap: balance; margin: 0; }
+.wm { font: 700 clamp(22px, 2vw, 28px)/1 var(--serif); text-decoration: none; color: #fff; white-space: nowrap; }
+.wm .dot { display: inline-block; width: 0.2em; height: 0.2em; margin-left: 0.06em; border-radius: 50%; background: linear-gradient(135deg, var(--arc-a), var(--arc-b) 55%, var(--arc-c)); box-shadow: 0 0 0.35em rgba(111, 224, 192, 0.75); }
+/* The header stays at the top: wordmark left, the menu right.
+   Clear over the top of the page; a dark glass once the page scrolls under it (pip.js sets .stuck). The
+   margins keep the page laid out as it was before the bar stuck. */
+nav.top { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 20px; position: sticky; top: 0; z-index: 20; margin: 12px 0 -20px; padding-block: calc(20px + env(safe-area-inset-top, 0px)) 20px; border-bottom: 1px solid transparent; transition: background-color .3s ease, border-color .3s ease; }
+nav.top.stuck { background: color-mix(in srgb, var(--night) 82%, transparent); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); border-bottom-color: var(--line); }
+nav.top .wm { grid-column: 1; justify-self: start; }
+nav.top .links { grid-column: 3; justify-self: end; }
+nav.top a { white-space: nowrap; }
+@media (max-width: 620px) { nav.top { grid-template-columns: auto 1fr auto; gap: 12px; } body nav.top .links a.pill { padding: 8px 12px; } }
+@media (prefers-reduced-motion: reduce) { nav.top { transition: none; } }
+nav.top .links { display: flex; gap: clamp(16px, 2.4vw, 40px); }
+nav.top .links a { text-decoration: none; color: var(--ink-2); }
+nav.top .links a:hover { color: var(--ink); }
+nav.top .links { align-items: center; }
+nav.top .links a.pill { color: var(--ink); border: 1px solid var(--line); border-radius: 999px; padding: 9px 16px; }
+nav.top .links a.pill:hover { border-color: var(--ink); }
+.foot { display: grid; gap: 16px; justify-items: end; }
+.foot-links { display: flex; flex-wrap: wrap; gap: 10px 28px; }
+.foot-links a { text-decoration: none; color: var(--ink-2); }
+.foot-links a:hover, .foot-links a[aria-current] { color: var(--ink); }
+@media (max-width: 720px) { .foot { justify-items: start; } }
+
+/* The finding, first */
+.lead { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); gap: clamp(28px, 5vw, 96px); align-items: center; padding-block: clamp(60px, 8vw, 130px) clamp(50px, 6vw, 100px); }
+.lead .kicker { display: flex; flex-wrap: wrap; gap: 8px 18px; margin-bottom: 22px; }
+.lead h1 { font-size: clamp(38px, 4.6vw, 78px); line-height: 1.04; text-transform: lowercase; }
+.answer { margin: 26px 0 0; font: normal 500 clamp(22px, 2vw, 32px)/1.3 var(--serif); color: var(--ink); max-width: 28ch; }
+.answer::before { content: "The answer"; display: block; font: normal 700 11px/1.7 var(--caps); letter-spacing: 0.24em; text-transform: uppercase; color: var(--arc-b); margin-bottom: 10px; }
+.split { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 34px; max-width: 640px; }
+.split div { border-top: 1px solid var(--line); padding-top: 16px; display: grid; gap: 8px; align-content: start; }
+.split b { font: 300 clamp(36px, 3.4vw, 58px)/0.95 var(--body); letter-spacing: -0.03em; }
+.split .cool b { color: var(--cool); } .split .warm b { color: var(--warm); }
+.split p { margin: 0; font-size: 15px; line-height: 1.5; color: var(--ink-2); }
+.watch { position: relative; display: grid; place-items: center; aspect-ratio: 1; max-width: 100%; width: min(100%, 560px); justify-self: center; text-decoration: none; }
+.watch canvas { position: absolute; inset: 0; width: 100%; height: 100%; }
+/* The page's primary: hovering anywhere on the plate lights the button (the CTA system, at the end of this sheet). */
+.watch .btn { display: inline-flex; align-items: center; gap: 14px; padding: 8px 26px 8px 8px; border-radius: 999px; border: 1px solid; font: 600 17px/1 var(--body); }
+.watch .btn .pi { width: 46px; height: 46px; border-radius: 50%; display: grid; place-items: center; background: var(--night); }
+.watch .btn .pi svg { width: 18px; height: 18px; fill: var(--ink); margin-left: 2px; }
+.watch .under { position: absolute; bottom: 12%; left: 0; right: 0; text-align: center; color: var(--ink-2); }
+.facts { display: flex; flex-wrap: wrap; gap: 10px 26px; margin-top: 30px; }
+.facts span { color: var(--ink-2); font-size: 15px; } .facts b { color: var(--ink); font-weight: 600; }
+
+/* The brief */
+.read { display: grid; grid-template-columns: minmax(180px, 0.32fr) minmax(0, 1fr); gap: clamp(28px, 5vw, 96px); padding-block: clamp(50px, 6vw, 100px); border-top: 1px solid var(--line); }
+.toc { position: sticky; top: 110px; align-self: start;   /* below the sticky header */ display: grid; gap: 12px; }
+.toc a { text-decoration: none; color: var(--ink-2); font-size: 15px; }
+.toc a:hover { color: var(--ink); }
+article { max-width: 68ch; }
+article h2 { font-size: clamp(30px, 2.8vw, 46px); line-height: 1.08; margin: 0 0 18px; }
+article h3 { font-size: clamp(21px, 1.6vw, 26px); margin: 38px 0 12px; }
+article p { margin: 0 0 16px; color: var(--ink-2); }
+article p strong { color: var(--ink); font-weight: 600; }
+.key { display: inline-block; font: 700 10px/1 var(--caps); letter-spacing: 0.12em; padding: 5px 7px; border-radius: 5px; border: 1px solid var(--line); color: var(--cool); margin-right: 10px; vertical-align: 3px; }
+.contested { color: var(--contra); border-color: color-mix(in srgb, var(--contra) 50%, transparent); }
+.claims { margin: 8px 0 0; padding: 0; list-style: none; display: grid; gap: 14px; }
+.claims li { padding: 18px 20px; border-radius: 16px; background: var(--panel); border: 1px solid var(--line); }
+.claims blockquote { margin: 10px 0 0; padding-left: 14px; border-left: 2px solid var(--line); font: normal 500 16px/1.55 var(--serif); color: var(--ink); }
+.claims .src { display: block; margin-top: 8px; font-size: 14px; color: var(--ink-3); }
+.trail { list-style: none; margin: 8px 0 0; padding: 0; }
+.trail li { display: grid; grid-template-columns: 90px 150px minmax(0, 1fr); gap: 16px; padding: 14px 0; border-bottom: 1px solid var(--line); font-size: 16px; color: var(--ink-2); }
+.trail .t { font-variant-numeric: tabular-nums; color: var(--ink-3); }
+.studies { list-style: none; margin: 8px 0 0; padding: 0; counter-reset: s; }
+.studies li { padding: 16px 0; border-bottom: 1px solid var(--line); display: grid; gap: 4px; counter-increment: s; }
+.studies li::before { content: "." counter(s, decimal-leading-zero); font: 300 22px/1 var(--body); color: var(--arc-b); }
+.studies cite { font: 600 18px/1.35 var(--serif); font-style: normal; color: var(--ink); }
+.studies span { font-size: 15px; color: var(--ink-3); }
+.out { display: grid; gap: 10px; margin-top: 8px; }
+.out p { margin: 0; }
+.cta-end { display: flex; flex-wrap: wrap; gap: 16px 24px; align-items: center; margin-top: 44px; padding-top: 28px; border-top: 1px solid var(--line); }
+.cta-end a.play { display: inline-flex; align-items: center; gap: 14px; padding: 8px 24px 8px 8px; border-radius: 999px; border: 1px solid; font: 600 16px/1 var(--body); text-decoration: none; }
+.cta-end a.play .pi { width: 40px; height: 40px; border-radius: 50%; display: grid; place-items: center; background: var(--night); }
+.cta-end a.play svg { width: 16px; height: 16px; fill: var(--ink); margin-left: 2px; }
+footer { padding-block: 40px calc(36px + env(safe-area-inset-bottom, 0px)); border-top: 1px solid var(--line); display: flex; flex-wrap: wrap; justify-content: space-between; gap: 16px; }
+.anim .rv { opacity: 0; transform: translateY(26px); filter: blur(6px); transition: opacity .9s ease, transform 1.1s cubic-bezier(.2, .8, .2, 1), filter .9s ease; }
+.anim .rv.in { opacity: 1; transform: none; filter: none; }
+@media (max-width: 960px) {
+  .lead { grid-template-columns: minmax(0, 1fr); }
+  .watch { width: min(100%, 420px); justify-self: center; margin-top: 12px; }   /* the answer leads; the replay follows it */
+  .read { grid-template-columns: minmax(0, 1fr); }
+  .toc { position: static; display: flex; flex-wrap: wrap; gap: 10px 18px; }
+  .trail li { grid-template-columns: 70px minmax(0, 1fr); }
+  .trail li > :last-child { grid-column: 2; }
+}
+@media (max-width: 560px) { .split { grid-template-columns: minmax(0, 1fr); } nav.top .links a:not(:last-child) { display: none; } }
+@media (prefers-reduced-motion: reduce) { .watch .btn { transition: none; } .anim .rv { opacity: 1; transform: none; filter: none; transition: none; } }
+/* Between pages: fade up on arrival, dip into the night on leaving. */
+@view-transition { navigation: auto; }
+@media (prefers-reduced-motion: no-preference) {
+  body { animation: page-in .7s cubic-bezier(.2, .8, .2, 1) backwards; }
+  @keyframes page-in { from { opacity: 0; } to { opacity: 1; } }
+  body.leaving { opacity: 0; transition: opacity .38s ease; }
+}
+/* Tap targets of at least 40px on a phone (scenario 238), with the desktop look unchanged. */
+@media (max-width: 620px) {
+  nav.top .wm, footer .wm { display: inline-block; padding-block: 9px; }
+  body nav.top .links a.pill { display: inline-flex; align-items: center; min-height: 40px; }
+  .foot-links a { display: inline-block; padding-block: 11px; }
+  .toc a { display: inline-flex; align-items: center; min-height: 40px; }
+  .toc { gap: 0 18px; }
+}
+</style>
+
+<div class="grain" aria-hidden="true"></div>
+<nav class="top gut" aria-label="Site">
+  <a class="wm" href="https://www.theobservatori.com/">observatori<span class="dot" aria-hidden="true"></span></a>
+  <div class="links caps"><a href="https://www.theobservatori.com/investigations/">Investigations</a><a href="https://www.theobservatori.com/about/">About</a><a class="pill" href="https://www.theobservatori.com/get-involved/">Get involved</a></div>
+</nav>
+<header class="gut">
+</header>
+
+<main>
+  <section class="lead gut" aria-labelledby="q">
+    <div>
+      <div class="kicker"><span class="caps">.05 · The brief</span><span class="caps dim">Published Oct 27, 2026</span></div>
+      <h1 id="q">is buying a highly anticipated IPO on its first trading day a good long-term investment?</h1>
+      <p class="answer">Taken together, these separate observational findings suggest that first-day buying risk looks greatest for heavily hyped US IPOs; they show association, not that hype causes later weakness.</p>
+      <div class="facts"><span><b>8</b> studies kept</span><span><b>14</b> claims, every one challenged</span><span><b>11</b> left out</span></div>
+    </div>
+    <a class="watch" href="../replay/?edited" aria-label="Watch the investigation replay">
+      <canvas id="plate" aria-hidden="true"></canvas>
+      <span class="btn cta-primary"><span class="pi"><svg viewBox="0 0 24 24"><path d="M8 5.5v13l11-6.5z"/></svg></span>Watch the investigation</span>
+      <span class="under caps">Replay</span>
+    </a>
+  </section>
+
+  <section class="read gut" aria-label="The brief">
+    <nav class="toc" aria-label="On this page">
+      <span class="caps dim">On this page</span>
+      <a href="#short">In short</a><a href="#part-1">Age and market activity</a><a href="#part-2">Early enthusiasm and later returns</a><a href="#part-3">Reading the pattern</a><a href="#left-out">What was left out</a><a href="#checked">How it was checked</a><a href="#studies">The studies</a>
+    </nav>
+    <article>
+      <section id="short" class="rv">
+        <h2>in short</h2>
+        <ul class="claims">
+          <li><span class="key">C13</span>Interpretation: The first-day-buyer risk looks greatest for heavily hyped IPOs. Young firms, busy-market issues, high pre-IPO social-media enthusiasm and extra-hot first-day jumps are each linked to weaker later returns. These are separate, observational findings from different periods and horizons, and they show association, not that hype causes the later weakness.
+            <blockquote>“IPOs with strong early
+excitement average a 29.73% initial return, but suffer a − 8.22% long-term
+industry-adjusted return”</blockquote><span class="src">Social Media Emotions and IPO Returns · Journal of money credit and banking · 2024</span></li>
+        </ul>
+      </section>
+
+      <section id="part-1" class="rv">
+        <h3>age and market activity</h3>
+        <ul class="claims">
+          <li><span class="key">C2</span>Ritter found the underperformance was not uniform: it was worst for young firms and for IPOs in high-volume years, and absent for older firms and in light-volume years. This is relevant because heavily hyped IPOs are likely to be young and issued in busy markets.
+            <blockquote>“Younger companies and companies going public in heavy volume
+years did even worse than average.”</blockquote><span class="src">The Long‐Run Performance of initial Public Offerings · The Journal of Finance · 1991</span></li>
+        </ul>
+      </section>
+
+      <section id="part-2" class="rv">
+        <h3>early enthusiasm and later returns</h3>
+        <ul class="claims">
+          <li><span class="key">C7</span>Pre-IPO social-media enthusiasm is associated with higher first-day returns but lower later industry-adjusted returns: IPOs with high enthusiasm averaged a 29.73% first-day return and a -8.22% long-run industry-adjusted return.
+            <blockquote>“IPOs with strong early
+excitement average a 29.73% initial return, but suffer a − 8.22% long-term
+industry-adjusted return”</blockquote><span class="src">Social Media Emotions and IPO Returns · Journal of money credit and banking · 2024</span></li>
+        </ul>
+      </section>
+
+      <section id="part-3" class="rv">
+        <h3>reading the pattern</h3>
+        <ul class="claims">
+          <li><span class="key">C13</span>Interpretation: The first-day-buyer risk looks greatest for heavily hyped IPOs. Young firms, busy-market issues, high pre-IPO social-media enthusiasm and extra-hot first-day jumps are each linked to weaker later returns. These are separate, observational findings from different periods and horizons, and they show association, not that hype causes the later weakness.
+            <blockquote>“IPOs with strong early
+excitement average a 29.73% initial return, but suffer a − 8.22% long-term
+industry-adjusted return”</blockquote><span class="src">Social Media Emotions and IPO Returns · Journal of money credit and banking · 2024</span></li>
+        </ul>
+      </section>
+
+      <section id="left-out" class="rv">
+        <h3>what was left out</h3>
+        <div class="out">
+          <p><span class="key">C1</span>Left out after the challenge.</p>
+          <p><span class="key">C3</span>Its passages don’t support it as worded.</p>
+          <p><span class="key">C4</span>Left out after the challenge.</p>
+          <p><span class="key">C5</span>Left out after the challenge.</p>
+          <p><span class="key">C6</span>Left out after the challenge.</p>
+          <p><span class="key">C8</span>Left out after the challenge.</p>
+          <p><span class="key">C9</span>Its passages don’t support it as worded.</p>
+          <p><span class="key">C10</span>Its passages don’t support it as worded.</p>
+          <p><span class="key">C11</span>Left out after the challenge.</p>
+          <p><span class="key">C12</span>Left out after the challenge.</p>
+          <p><span class="key">C14</span>Its passages don’t support it as worded.</p>
+        </div>
+      </section>
+
+      <section id="checked" class="rv">
+        <h3>how it was checked</h3>
+        <ol class="trail">
+          <li><span class="t">3:28 PM</span><span class="caps dim">Search</span><span>The Researcher ran 9 searches.</span></li>
+          <li><span class="t">3:28 PM</span><span class="caps dim">Screening</span><span>8 studies kept.</span></li>
+          <li><span class="t">4:46 PM</span><span class="caps dim">Claims</span><span>14 claims drafted, each tied to an exact quoted passage.</span></li>
+          <li><span class="t">4:50 PM</span><span class="caps dim">Challenge</span><span>A second model, from a different AI company, reviewed every claim: 3 of 14 held.</span></li>
+          <li><span class="t">5:02 PM</span><span class="caps dim">Wording</span><span>3 versions of the brief. Code checked every sentence against its claim.</span></li>
+          <li><span class="t">5:02 PM</span><span class="caps dim">Approval</span><span>Every rule held. Approved by code.</span></li>
+        </ol>
+        <p style="margin-top:18px;font-size:15px">Times are US Central, Oct 27, 2026.</p>
+      </section>
+
+      <section id="studies" class="rv">
+        <h3>the studies</h3>
+        <ol class="studies">
+          <li><cite><a href="https://doi.org/10.1111/j.1540-6261.1997.tb02742.x">Myth or Reality? The Long-Run Underperformance of Initial Public Offerings: Evidence from Venture and Nonventure Capital-Backed Companies</a></cite><span>Cohort, 4,341 · The Journal of Finance, 1997</span></li>
+          <li><cite><a href="https://doi.org/10.1111/j.1540-6261.1991.tb03743.x">The Long‐Run Performance of initial Public Offerings</a></cite><span>Cohort, 1,526 · The Journal of Finance, 1991</span></li>
+          <li><cite><a href="https://doi.org/10.1111/1540-6261.00570">The Really Long‐Run Performance of Initial Public Offerings: The Pre‐Nasdaq Evidence</a></cite><span>Cohort, 3,661 · The Journal of Finance, 2003</span></li>
+          <li><cite><a href="https://doi.org/10.1016/s0927-0507(05)80074-x">Chapter 30 Initial public offerings</a></cite><span>Other · Handbooks in operations research and management science, 1995</span></li>
+          <li><cite><a href="https://doi.org/10.3390/jrfm19090729">Multi-Horizon IPO Aftermarket Performance: Evidence from India</a></cite><span>Cohort, 197 · Journal of risk and financial management, 2026</span></li>
+          <li><cite><a href="https://doi.org/10.1111/jmcb.13152">Social Media Emotions and IPO Returns</a></cite><span>Cohort, 745 · Journal of money credit and banking, 2024</span></li>
+          <li><cite><a href="https://doi.org/10.1111/0022-1082.00135">The Persistence of IPO Mispricing and the Predictive Power of Flipping</a></cite><span>Cohort, 611 · The Journal of Finance, 1999</span></li>
+          <li><cite>The cross-section of European IPO returns</cite><span>Cohort, 973 · RePEc: Research Papers in Economics, 2003</span></li>
+        </ol>
+        <div class="cta-end">
+          <a class="play cta-primary" href="../replay/?edited"><span class="pi"><svg viewBox="0 0 24 24"><path d="M8 5.5v13l11-6.5z"/></svg></span>Watch how they got there</a>
+        </div>
+      </section>
+    </article>
+  </section>
+</main>
+
+<footer class="gut"><a class="wm" href="https://www.theobservatori.com/">observatori<span class="dot" aria-hidden="true"></span></a><div class="foot"><nav class="foot-links caps" aria-label="More"><a href="https://www.theobservatori.com/investigations/">Investigations</a><a href="https://www.theobservatori.com/about/">About</a><a href="https://www.theobservatori.com/get-involved/">Get involved</a></nav><span class="caps dim">An autonomous AI lab</span></div></footer>
+
+<script>
+'use strict';
+const RM = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+// The plate: this study's evidence as a particle figure, assembling on load. The bright points are the
+// studies, sized by their design; each quoted passage is a fine line out to its claim; the shell is dust.
+const SRC = [[-74,171,92,0.8],[-12,122,-190,0.8],[163,73,157,0.8],[-244,25,-6,0.6],[184,-25,-161,0.8],[-25,-74,226,0.8],[-113,-123,-155,0.8],[114,-169,23,0.8]];
+const plate = document.getElementById('plate'), g = plate.getContext('2d');
+let W = 0, H = 0;
+function size() { const r = plate.getBoundingClientRect(), d = Math.min(2, devicePixelRatio || 1); W = r.width; H = r.height; plate.width = W * d; plate.height = H * d; g.setTransform(d, 0, 0, d, 0, 0); }
+size(); addEventListener('resize', size);
+let q = 3; const rnd = () => (q = (q * 48271) % 2147483647) / 2147483647;
+const DUST = Array.from({ length: 1600 }, () => { const u = rnd() * 2 - 1, th = rnd() * 6.283, r = 380 + rnd() * 30, k = Math.sqrt(1 - u * u); return [r * k * Math.cos(th), r * u, r * k * Math.sin(th), rnd(), 1.5 + rnd() * 2.5, rnd() * 0.6]; });
+const FIL = Array.from({ length: 140 }, (_, i) => { const s = SRC[i % SRC.length], j = [rnd() - 0.5, rnd() - 0.5, rnd() - 0.5].map((v) => v * 120); return [s, [s[0] * 0.45 + j[0], s[1] * 0.45 + j[1], s[2] * 0.45 + j[2]], rnd()]; });
+const born = performance.now(), ease = (x) => 1 - Math.pow(1 - Math.min(1, Math.max(0, x)), 3);
+function proj(p, yaw) { const cy = Math.cos(yaw), sy = Math.sin(yaw), cp = Math.cos(0.3), sp = Math.sin(0.3); let x = p[0] * cy - p[2] * sy, z = p[0] * sy + p[2] * cy, y = p[1]; const y2 = y * cp - z * sp; z = y * sp + z * cp; const f = W * 0.92 / (900 + z); return [W / 2 + x * f, H / 2 + y2 * f, f, z]; }
+function draw(now) {
+  const t = RM ? 0 : now / 1000, age = RM ? 99 : (now - born) / 1000, yaw = -0.5 + t * 0.05;
+  g.clearRect(0, 0, W, H);
+  g.strokeStyle = 'rgba(255,255,255,0.55)'; g.lineWidth = 0.8; g.beginPath(); g.arc(W / 2, H / 2, W * 0.46, 0, 6.283); g.stroke();
+  const grad = g.createLinearGradient(0, 0, W, H); grad.addColorStop(0, '#4f8dff'); grad.addColorStop(0.55, '#6fe0c0'); grad.addColorStop(1, '#e4ef7a');
+  g.strokeStyle = grad; g.lineWidth = 1.6; g.lineCap = 'round'; const a0 = -1.1 + t * 0.07; g.beginPath(); g.arc(W / 2, H / 2, W * 0.42, a0, a0 + 2.4); g.stroke();
+  for (const p of DUST) { const k = ease((age - p[5]) / 2), o = 1 + (1 - k) * p[4]; const [x, y, , z] = proj([p[0] * o, p[1] * o, p[2] * o], yaw * 0.7); g.fillStyle = `rgba(170,235,220,${(0.1 + (z < 0 ? 0.45 : 0.18) * p[3]) * k})`; g.fillRect(x, y, 1.1, 1.1); }
+  const show = ease((age - 0.8) / 1.6);
+  g.globalAlpha = show;
+  for (const [s, c, w] of FIL) { const A = proj(s, yaw), B = proj(c, yaw); g.strokeStyle = `rgba(200,225,255,${0.12 + w * 0.2})`; g.lineWidth = 0.6; g.beginPath(); g.moveTo(A[0], A[1]); g.lineTo(B[0], B[1]); g.stroke(); g.fillStyle = 'rgba(214,232,255,0.8)'; g.fillRect(B[0] - 0.8, B[1] - 0.8, 1.6, 1.6); }
+  for (const s of SRC) { const [x, y, f] = proj(s, yaw), r = (3 + s[3] * 6) * f * 1.3; const h = g.createRadialGradient(x, y, 0, x, y, r * 4); h.addColorStop(0, 'rgba(244,247,255,0.4)'); h.addColorStop(1, 'rgba(244,247,255,0)'); g.fillStyle = h; g.beginPath(); g.arc(x, y, r * 4, 0, 6.283); g.fill(); g.fillStyle = '#f6f8ff'; g.beginPath(); g.arc(x, y, r, 0, 6.283); g.fill(); }
+  g.globalAlpha = 1;
+  if (!RM) requestAnimationFrame(draw);
+}
+draw(performance.now()); requestAnimationFrame(draw);
+
+// Sections assemble as they come into view (the text is all in the page from the start).
+if (!RM && 'IntersectionObserver' in window) {
+  document.documentElement.classList.add('anim');
+  const io = new IntersectionObserver((es) => { for (const e of es) if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }, { threshold: 0.08 });
+  for (const el of document.querySelectorAll('.rv')) io.observe(el);
+}
+// Between pages: links to the site's other pages dip the page into the night first, then follow.
+(() => {
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  let leaving = false;
+  document.addEventListener('click', (e) => {
+    const a = e.target.closest('a[href]');
+    if (!a || leaving || e.defaultPrevented || e.button || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+    const to = new URL(a.href, location.href);
+    if (a.target === '_blank' || to.origin !== location.origin || a.dataset.fadeGo) return;
+    // A place on this same page ("On this page", #top): nothing new loads, so there is nothing to fade out for.
+    if (to.hash && to.pathname === location.pathname && to.search === location.search) return;
+    e.preventDefault();
+    leaving = true;
+    document.body.classList.add('leaving');
+    setTimeout(() => { a.dataset.fadeGo = '1'; a.click(); delete a.dataset.fadeGo; }, 380);
+  });
+  // Coming back with the Back button shows the page as it was left: undo the dip.
+  addEventListener('pageshow', () => { leaving = false; document.body.classList.remove('leaving'); });
+})();
+</script>
+<script>/* portfolio embed: links to the live site open in a new tab */document.addEventListener("click",function(e){var a=e.target.closest&&e.target.closest("a[href^='https://']");if(a){a.target="_blank";a.rel="noopener";}},true);</script></body>
+</html>
