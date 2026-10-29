@@ -62,6 +62,8 @@ h1, h2, h3 { font-family: var(--serif); font-weight: 700; letter-spacing: -0.01e
 /* Header, shared by every page: the wordmark goes home. (While a study runs, or one is scheduled, pip.js shows a fob at the bottom right.) */
 .wm { font: 700 clamp(24px, 2.2vw, 30px)/1 var(--serif); letter-spacing: -0.01em; text-decoration: none; color: #fff; white-space: nowrap; }
 .wm .dot { display: inline-block; width: 0.2em; height: 0.2em; margin-left: 0.06em; border-radius: 50%; vertical-align: 0.02em; background: linear-gradient(135deg, var(--arc-a), var(--arc-b) 55%, var(--arc-c)); box-shadow: 0 0 0.35em rgba(111, 224, 192, 0.75); }
+/* Beta while the lab is new and public (John, October 29, 2026): beside the header's wordmark only. */
+.wm .beta { display: inline-block; vertical-align: 0.5em; font: 600 9px/1 system-ui, -apple-system, 'Segoe UI', sans-serif; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(255, 255, 255, 0.78); border: 1px solid rgba(255, 255, 255, 0.32); border-radius: 999px; padding: 3px 6px 2px; margin-left: 0.6em; }
 /* The header stays at the top: wordmark left, the menu right.
    Clear over the top of the page; a dark glass once the page scrolls under it (pip.js sets .stuck). The
    margins keep the page laid out as it was before the bar stuck. */
@@ -242,7 +244,7 @@ footer .wm { font-size: clamp(48px, 8vw, 140px); }
 <div class="grain" aria-hidden="true"></div>
 
 <nav class="top gut" id="nav" aria-label="Site">
-  <a class="wm" data-home href="#" aria-label="The Observatori, home">observatori<span class="dot" aria-hidden="true"></span></a>
+  <a class="wm" data-home href="#" aria-label="The Observatori, home">observatori<span class="dot" aria-hidden="true"></span><span class="beta">Beta</span></a>
   <div class="links caps" id="links">
     <a data-archive href="#">Investigations</a>
     <a data-about href="#">About</a>

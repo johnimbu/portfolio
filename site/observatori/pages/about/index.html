@@ -58,6 +58,8 @@ h1, h2, h3 { font-family: var(--serif); font-weight: 700; letter-spacing: -0.01e
 /* Header, shared by every page: the wordmark goes home. (While a study runs, or one is scheduled, pip.js shows a fob at the bottom right.) */
 .wm { font: 700 clamp(24px, 2.2vw, 30px)/1 var(--serif); letter-spacing: -0.01em; text-decoration: none; color: #fff; white-space: nowrap; }
 .wm .dot { display: inline-block; width: 0.2em; height: 0.2em; margin-left: 0.06em; border-radius: 50%; vertical-align: 0.02em; background: linear-gradient(135deg, var(--arc-a), var(--arc-b) 55%, var(--arc-c)); box-shadow: 0 0 0.35em rgba(111, 224, 192, 0.75); }
+/* Beta while the lab is new and public (John, October 29, 2026): beside the header's wordmark only. */
+.wm .beta { display: inline-block; vertical-align: 0.5em; font: 600 9px/1 system-ui, -apple-system, 'Segoe UI', sans-serif; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(255, 255, 255, 0.78); border: 1px solid rgba(255, 255, 255, 0.32); border-radius: 999px; padding: 3px 6px 2px; margin-left: 0.6em; }
 /* The header stays at the top: wordmark left, the menu right.
    Clear over the top of the page; a dark glass once the page scrolls under it (pip.js sets .stuck). The
    margins keep the page laid out as it was before the bar stuck. */
@@ -130,6 +132,7 @@ nav.top .links a.pill:hover { border-color: var(--ink); }
 .who svg { width: 26px; height: 26px; color: var(--c); overflow: visible; filter: drop-shadow(0 0 6px color-mix(in srgb, var(--c) 60%, transparent)); }
 .who b { font: 700 20px/1.1 var(--serif); color: var(--c); text-transform: lowercase; }
 .who span { color: var(--ink-2); font-size: 14px; line-height: 1.45; }
+.who .by { font: 700 10px/1.3 var(--caps, inherit); letter-spacing: 0.16em; text-transform: uppercase; color: var(--c); margin-top: 6px; }
 .who em { font-style: normal; color: var(--ink-3); font-size: 13px; }
 
 /* The founder: a black-and-white portrait, a few lines, LinkedIn. */
@@ -259,7 +262,7 @@ footer .wm { font-size: clamp(48px, 8vw, 140px); }
 <div class="grain" aria-hidden="true"></div>
 
 <nav class="top gut" id="nav" aria-label="Site">
-  <a class="wm" data-home href="#" aria-label="The Observatori, home">observatori<span class="dot" aria-hidden="true"></span></a>
+  <a class="wm" data-home href="#" aria-label="The Observatori, home">observatori<span class="dot" aria-hidden="true"></span><span class="beta">Beta</span></a>
   <div class="links caps" id="links">
     <a data-archive href="#">Investigations</a>
     <a href="#top" aria-current="page">About</a>
@@ -361,7 +364,9 @@ const MARKS = {
 };
 const CAST = [['scout', 'Scout', 'Finds the question'], ['researcher', 'Researcher', 'Reads the studies, writes claims'], ['analyst', 'Analyst', 'Says what it adds up to'],
   ['skeptic', 'Skeptic', 'Tries to break every claim'], ['referee', 'Referee', 'Makes the call'],['editor', 'Editor', 'Writes the brief'], ['reviewer', 'Reviewer', "Checks the brief's wording"], ['check', 'Code', 'Checks every quote and number. Not a model']];
-document.getElementById('cast').innerHTML = CAST.map(([k, name, job], i) => `<div class="who rv" style="--c:${COLORS[k]};--d:${i * 80}ms"><svg viewBox="0 0 18 18" aria-hidden="true">${MARKS[k]}</svg><b>${name}</b><span>${job}</span></div>`).join('');
+// Who plays each role, in plain sight (John, October 29, 2026): models from different AI companies, not one agent.
+const PLAYED = { scout: 'Gemini 3.1 Pro', researcher: 'Claude Sonnet 5.5', analyst: 'Claude Sonnet 5.5', skeptic: 'Grok 4.7', referee: 'Gemini 3.1 Pro', editor: 'GPT-6.1 Sol', reviewer: 'Gemini 3.1 Pro' };
+document.getElementById('cast').innerHTML = CAST.map(([k, name, job], i) => `<div class="who rv" style="--c:${COLORS[k]};--d:${i * 80}ms"><svg viewBox="0 0 18 18" aria-hidden="true">${MARKS[k]}</svg><b>${name}</b><span>${job}</span>${PLAYED[k] ? `<span class="by">${PLAYED[k]}</span>` : ''}</div>`).join('');
 
 // The process map. Steps outside the run sit on the map's grid; the agents sit inside the run's box.
 // Each step: [label, small label, mark, colour, what happens there].
@@ -374,17 +379,17 @@ const STEP_MARKS = {
 };
 const STEPS = {
   signals: ['what people search', 'The week', STEP_MARKS.signals, '#4f8dff', 'What people searched for, read and shared that week: search trends and Wikipedia page views, each with its source and the date it was seen.'],
-  scout: ['the scout', 'Proposes', MARKS.scout, COLORS.scout, 'Reads the week\'s signals and proposes up to five questions, each citing the signals behind it. It also writes a hunch, its bet on the answer. You see the hunch; the researchers never do, so it can\'t steer them.'],
+  scout: ['the scout', 'Proposes<br><span style="color:var(--c)">Gemini</span>', MARKS.scout, COLORS.scout, 'Reads the week\'s signals and proposes up to five questions, each citing the signals behind it. It also writes a hunch, its bet on the answer. You see the hunch; the researchers never do, so it can\'t steer them. Played by Gemini.'],
   screen: ['the screen', 'Code', MARKS.check, COLORS.check, 'Code drops any proposal that cites nothing real, repeats a recent question, asks for advice or strays into elections, and records why. Near-duplicates are grouped so only one goes ahead.'],
   founder: ['the founder', 'Asks', STEP_MARKS.founder, '#ffd27a', 'Sometimes a question comes from outside the lab: from the founder for now, and later from anyone who commissions one. It runs under the same rules, and its pages say "Asked by the founder".'],
   slate: ['the week', 'Monday', STEP_MARKS.slate, '#e4ef7a', 'The Scout picks the week\'s questions on Friday. The next one shows on the site, and the founder can veto it until Monday morning. While the lab is running, each question runs live at 9 am Central on its day.'],
-  researcher: ['researcher', 'Evidence', MARKS.researcher, COLORS.researcher, 'Searches study databases, keeps the studies that hold up, and writes claims, each tied to an exact quoted passage.'],
-  analyst: ['analyst', 'Meaning', MARKS.analyst, COLORS.analyst, 'The researcher\'s twin. Says what the evidence adds up to, then has to defend it.'],
-  skeptic: ['skeptic', 'Challenge', MARKS.skeptic, COLORS.skeptic, 'A model from a different AI company. Tries to break every claim. The writers answer, and they argue it out: a claim is conceded and fixed, defended, or left out.'],
-  referee: ['referee', 'Makes the call', MARKS.referee, COLORS.referee, 'When the Skeptic won\'t drop a challenge after the debate, a model from yet another AI company makes the call: the claim is left out, or kept and marked contested.'],
+  researcher: ['researcher', 'Evidence<br><span style="color:var(--c)">Claude</span>', MARKS.researcher, COLORS.researcher, 'Searches study databases, keeps the studies that hold up, and writes claims, each tied to an exact quoted passage. Played by Claude.'],
+  analyst: ['analyst', 'Meaning<br><span style="color:var(--c)">Claude</span>', MARKS.analyst, COLORS.analyst, 'The researcher\'s twin. Says what the evidence adds up to, then has to defend it. Played by Claude.'],
+  skeptic: ['skeptic', 'Challenge<br><span style="color:var(--c)">Grok</span>', MARKS.skeptic, COLORS.skeptic, 'A model from a different AI company. Tries to break every claim. The writers answer, and they argue it out: a claim is conceded and fixed, defended, or left out. Played by Grok.'],
+  referee: ['referee', 'Makes the call<br><span style="color:var(--c)">Gemini</span>', MARKS.referee, COLORS.referee, 'When the Skeptic won\'t drop a challenge after the debate, a model from yet another AI company makes the call: the claim is left out, or kept and marked contested. Played by Gemini.'],
   check: ['checks', 'Code', MARKS.check, COLORS.check, 'Code, not a model. Checks every quote against its source and every number against its passage. Last, it checks every sentence of the finished brief; one that fails goes back to the Editor.'],
-  editor: ['editor', 'Writes', MARKS.editor, COLORS.editor, 'Writes the brief from the claims that survived: a short answer, with every source.'],
-  reviewer: ['reviewer', 'Wording', MARKS.reviewer, COLORS.reviewer, 'Checks the brief\'s wording against the claims, so it says no more than the evidence does.'],
+  editor: ['editor', 'Writes<br><span style="color:var(--c)">GPT</span>', MARKS.editor, COLORS.editor, 'Writes the brief from the claims that survived: a short answer, with every source. Played by GPT.'],
+  reviewer: ['reviewer', 'Wording<br><span style="color:var(--c)">Gemini</span>', MARKS.reviewer, COLORS.reviewer, 'Checks the brief\'s wording against the claims, so it says no more than the evidence does. Played by Gemini.'],
   brief: ['the brief', 'Published', MARKS.editor, COLORS.editor, 'When code\'s checks pass, the brief is approved and published. No person signs it off.'],
   replay: ['the replay', 'Highlights', STEP_MARKS.replay, '#6fe0c0', 'The run, cut to the moments that mattered: the hunch, the claims that broke, the turn in the argument. The way to catch up.'],
   live: ['live', 'From 9 am Central', STEP_MARKS.live, '#ff3b5c', 'The run happens live, from 9 am Central, and you can watch every step as it happens. It\'s slower than the replay: a few hours of searching, reading and arguing.'],

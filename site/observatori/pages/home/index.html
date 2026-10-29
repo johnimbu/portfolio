@@ -70,6 +70,8 @@ h1, h2, h3 { font-family: var(--serif); font-weight: 700; letter-spacing: -0.01e
 .wm { font: 700 clamp(24px, 2.2vw, 30px)/1 var(--serif); letter-spacing: -0.01em; text-decoration: none; color: #fff; white-space: nowrap; }
 /* The full stop is the one lit point: a small star in the hero ring's gradient. */
 .wm .dot { display: inline-block; width: 0.2em; height: 0.2em; margin-left: 0.06em; border-radius: 50%; vertical-align: 0.02em; background: linear-gradient(135deg, var(--arc-a), var(--arc-b) 55%, var(--arc-c)); box-shadow: 0 0 0.35em rgba(111, 224, 192, 0.75); }
+/* Beta while the lab is new and public (John, October 29, 2026): beside the header's wordmark only. */
+.wm .beta { display: inline-block; vertical-align: 0.5em; font: 600 9px/1 system-ui, -apple-system, 'Segoe UI', sans-serif; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(255, 255, 255, 0.78); border: 1px solid rgba(255, 255, 255, 0.32); border-radius: 999px; padding: 3px 6px 2px; margin-left: 0.6em; }
 
 /* Hero (scenario 213, John, October 28, 2026; docs/mockups/hero-v2.html): one 1:1 split. The lab introduces itself
    on the left; on the right its newest investigation plays as a small replay, with its number, date, question,
@@ -204,6 +206,8 @@ a.tile:hover .arrow { transform: rotate(-45deg); }
 .how h3 { font-size: clamp(22px, 1.9vw, 30px); display: flex; align-items: center; gap: 12px; }
 .how h3 svg { width: 20px; height: 20px; flex: none; overflow: visible; color: var(--c); filter: drop-shadow(0 0 5px color-mix(in srgb, var(--c) 65%, transparent)); }
 .how p { margin: 0; color: var(--ink-2); max-width: 36ch; }
+/* Who plays each role, in plain sight (John, October 29, 2026): models from different AI companies, not one agent. */
+.how .by { font: 700 10px/1.3 var(--caps); letter-spacing: 0.16em; text-transform: uppercase; color: var(--c); opacity: 0.85; }
 footer { padding-block: clamp(60px, 8vw, 120px) calc(36px + env(safe-area-inset-bottom, 0px)); border-top: 1px solid var(--line); display: flex; flex-wrap: wrap; justify-content: space-between; align-items: end; gap: 20px; }
 footer .wm { font-size: clamp(48px, 8vw, 140px); }
 .foot { display: grid; gap: 16px; justify-items: end; }
@@ -315,7 +319,7 @@ footer .wm { font-size: clamp(48px, 8vw, 140px); }
 <div class="grain" aria-hidden="true"></div>
 
 <nav class="top gut" aria-label="Site">
-  <a class="wm" href="#top" aria-label="The Observatori, home">observatori<span class="dot" aria-hidden="true"></span></a>
+  <a class="wm" href="#top" aria-label="The Observatori, home">observatori<span class="dot" aria-hidden="true"></span><span class="beta">Beta</span></a>
   <div class="links caps" id="links"><a href="#" data-archive>Investigations</a><a href="#" data-about>About</a><a class="pill" href="#" data-involved>Get involved</a></div>
 </nav>
 
@@ -383,14 +387,14 @@ footer .wm { font-size: clamp(48px, 8vw, 140px); }
   <section class="band gut" id="how" aria-label="How a study works" style="padding-top:0">
     <div class="head rv"><div><div class="caps">03. How a study works</div><h2>a lab that shows its work</h2></div><a class="btn cta-secondary" href="https://www.theobservatori.com/about/#process"><span class="caps" style="letter-spacing:.2em">See how it works</span><svg viewBox="0 0 24 24"><path d="M9 5l7 7-7 7-1.4-1.4L13.2 12 7.6 6.4z"/></svg></a></div>
     <div class="how">
-      <div class="rv" style="--c:var(--scout);--d:0ms"><span class="caps dim">The question</span><h3><svg viewBox="0 0 18 18" aria-hidden="true" data-mark="scout"></svg>the scout</h3><p>Reads what people searched for this week and proposes what to study. Code screens every proposal.</p></div>
-      <div class="rv" style="--c:var(--researcher);--d:120ms"><span class="caps dim">The evidence</span><h3><svg viewBox="0 0 18 18" aria-hidden="true" data-mark="researcher"></svg>the researcher</h3><p>Finds and reads the studies, then writes claims tied to exact quotes.</p></div>
-      <div class="rv" style="--c:var(--analyst);--d:240ms"><span class="caps dim">The meaning</span><h3><svg viewBox="0 0 18 18" aria-hidden="true" data-mark="analyst"></svg>the analyst</h3><p>The researcher’s twin. Says what the evidence adds up to, then has to defend it.</p></div>
-      <div class="rv" style="--c:var(--skeptic);--d:360ms"><span class="caps dim">The challenge</span><h3><svg viewBox="0 0 18 18" aria-hidden="true" data-mark="skeptic"></svg>the skeptic</h3><p>A model from a different AI company tries to break every claim.</p></div>
-      <div class="rv" style="--c:var(--referee);--d:0ms"><span class="caps dim">The call</span><h3><svg viewBox="0 0 18 18" aria-hidden="true" data-mark="referee"></svg>the referee</h3><p>When the Skeptic won’t let go, a model from yet another AI company makes the call.</p></div>
-      <div class="rv" style="--c:var(--editor);--d:120ms"><span class="caps dim">The brief</span><h3><svg viewBox="0 0 18 18" aria-hidden="true" data-mark="editor"></svg>the editor</h3><p>Writes the brief from the claims that held.</p></div>
-      <div class="rv" style="--c:var(--reviewer);--d:240ms"><span class="caps dim">The wording</span><h3><svg viewBox="0 0 18 18" aria-hidden="true" data-mark="reviewer"></svg>the reviewer</h3><p>Checks the brief’s wording against the claims, so it says no more than the evidence does.</p></div>
-      <div class="rv" style="--c:var(--check);--d:360ms"><span class="caps dim">The checks</span><h3><svg viewBox="0 0 18 18" aria-hidden="true" data-mark="check"></svg>the code</h3><p>Checks every passage, number and sentence before a brief is approved.</p></div>
+      <div class="rv" style="--c:var(--scout);--d:0ms"><span class="caps dim">The question</span><h3><svg viewBox="0 0 18 18" aria-hidden="true" data-mark="scout"></svg>the scout</h3><p>Reads what people searched for this week and proposes what to study. Code screens every proposal.</p><span class="by">Played by Gemini 3.1 Pro</span></div>
+      <div class="rv" style="--c:var(--researcher);--d:120ms"><span class="caps dim">The evidence</span><h3><svg viewBox="0 0 18 18" aria-hidden="true" data-mark="researcher"></svg>the researcher</h3><p>Finds and reads the studies, then writes claims tied to exact quotes.</p><span class="by">Played by Claude Sonnet 5.5</span></div>
+      <div class="rv" style="--c:var(--analyst);--d:240ms"><span class="caps dim">The meaning</span><h3><svg viewBox="0 0 18 18" aria-hidden="true" data-mark="analyst"></svg>the analyst</h3><p>The researcher’s twin. Says what the evidence adds up to, then has to defend it.</p><span class="by">Played by Claude Sonnet 5.5</span></div>
+      <div class="rv" style="--c:var(--skeptic);--d:360ms"><span class="caps dim">The challenge</span><h3><svg viewBox="0 0 18 18" aria-hidden="true" data-mark="skeptic"></svg>the skeptic</h3><p>A model from a different AI company tries to break every claim.</p><span class="by">Played by Grok 4.7</span></div>
+      <div class="rv" style="--c:var(--referee);--d:0ms"><span class="caps dim">The call</span><h3><svg viewBox="0 0 18 18" aria-hidden="true" data-mark="referee"></svg>the referee</h3><p>When the Skeptic won’t let go, a model from yet another AI company makes the call.</p><span class="by">Played by Gemini 3.1 Pro</span></div>
+      <div class="rv" style="--c:var(--editor);--d:120ms"><span class="caps dim">The brief</span><h3><svg viewBox="0 0 18 18" aria-hidden="true" data-mark="editor"></svg>the editor</h3><p>Writes the brief from the claims that held.</p><span class="by">Played by GPT-6.1 Sol</span></div>
+      <div class="rv" style="--c:var(--reviewer);--d:240ms"><span class="caps dim">The wording</span><h3><svg viewBox="0 0 18 18" aria-hidden="true" data-mark="reviewer"></svg>the reviewer</h3><p>Checks the brief’s wording against the claims, so it says no more than the evidence does.</p><span class="by">Played by Gemini 3.1 Pro</span></div>
+      <div class="rv" style="--c:var(--check);--d:360ms"><span class="caps dim">The checks</span><h3><svg viewBox="0 0 18 18" aria-hidden="true" data-mark="check"></svg>the code</h3><p>Checks every passage, number and sentence before a brief is approved.</p><span class="by">Code, not a model</span></div>
     </div>
   </section>
 </main>
