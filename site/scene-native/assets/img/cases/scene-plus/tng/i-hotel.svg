@@ -1,0 +1,9 @@
+<svg preserveAspectRatio="none" overflow="visible" style="display: block;" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="Hotel">
+<path id="Vector" d="M3.13542 11.2812H20.8646C21.3729 11.2813 21.8604 11.4832 22.2199 11.8426C22.5793 12.2021 22.7812 12.6896 22.7812 13.1979V17.75H1.21875V13.1979C1.21875 12.6896 1.42068 12.2021 1.78013 11.8426C2.13957 11.4832 2.62709 11.2812 3.13542 11.2812Z" stroke="black" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+<path id="Vector_2" d="M1.21875 17.75V20.625" stroke="black" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+<path id="Vector_3" d="M22.7812 17.75V20.625" stroke="black" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+<path id="Vector_4" d="M20.625 11.2812V4.8125C20.625 4.43125 20.4735 4.06562 20.204 3.79603C19.9344 3.52645 19.5687 3.375 19.1875 3.375H4.8125C4.43125 3.375 4.06562 3.52645 3.79603 3.79603C3.52645 4.06562 3.375 4.43125 3.375 4.8125V11.2812" stroke="black" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+<path id="Vector_5" d="M8.64583 7.6875H15.3542C15.6083 7.6875 15.8521 7.78847 16.0318 7.96819C16.2115 8.14791 16.3125 8.39167 16.3125 8.64583V11.2812H7.6875V8.64583C7.6875 8.39167 7.78847 8.14791 7.96819 7.96819C8.14791 7.78847 8.39167 7.6875 8.64583 7.6875Z" stroke="black" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+</g>
+</svg>
