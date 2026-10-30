@@ -1,0 +1,21 @@
+/* The threads (step 12): how the live page and every finished replay draw the lines, inside a .threads box.
+   The page around them supplies the colours: --ink, --ink-2, --ink-3, --line, --panel and the --caps font. */
+.threads { display: grid; gap: 14px; }
+.threads .line { display: grid; gap: 4px; padding: 10px 0 10px 14px; border-left: 1px solid var(--line); }
+.threads .line .head { display: flex; align-items: center; gap: 8px; }
+.threads .line .head:empty { display: none; }
+.threads .line .who { font: 700 11px/1.2 var(--caps); letter-spacing: 0.16em; text-transform: uppercase; color: var(--c); margin-right: 8px; }
+.threads .line .lab-log { margin: 0; color: var(--ink-3); font-size: 13px; }
+.threads .line.log-only { display: flex; align-items: baseline; gap: 8px; padding: 4px 0 4px 14px; }
+.threads .line .lab { font: 600 10px/1 var(--caps); letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-3); border: 1px dashed var(--line); border-radius: 3px; padding: 2px 4px; margin-right: 4px; }
+.threads .line .said { margin: 2px 0 0; color: var(--ink); }
+.threads .line details.said summary { cursor: pointer; list-style: none; }
+.threads .line details.said summary::after { content: " · more"; color: var(--ink-3); font-size: 13px; }
+.threads .line details[open].said summary { display: none; }
+.threads .thread { border: 1px solid var(--line); padding: 10px 14px 4px; background: var(--panel); }
+.threads .thread-h { color: var(--ink-3); font-size: 13px; margin-bottom: 4px; }
+.ctag { font: 600 11px/1 var(--caps); letter-spacing: 0.08em; color: var(--ink-3); border: 1px solid var(--line); border-radius: 3px; padding: 2px 5px; margin-right: 8px; vertical-align: 1px; }
+.ctag:hover, .ctag:focus-visible { color: var(--ink); border-color: var(--ink-2); }
+.claim-card { position: fixed; z-index: 30; left: 50%; bottom: 24px; transform: translateX(-50%); width: min(560px, calc(100vw - 32px)); background: #0c1018; border: 1px solid var(--line); padding: 14px 16px; box-shadow: 0 10px 40px rgba(0,0,0,0.6); }
+.claim-card p { margin: 8px 0 0; }
+.claim-card .st, .claim-card .dim { color: var(--ink-2); }
