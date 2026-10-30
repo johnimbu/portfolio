@@ -3915,13 +3915,13 @@ class Component extends DCLogic {
       },
       heroGridStyle: {
         maxWidth: '1280px', margin: '0 auto', display: 'grid',
-        gridTemplateColumns: mobile ? '1fr' : 'minmax(0,1.5fr) minmax(0,1fr)', gap: mobile ? '36px' : '44px', alignItems: 'start'
+        gridTemplateColumns: mobile ? '1fr' : 'minmax(0,1.5fr) minmax(0,1fr)', gap: mobile ? '36px' : '44px', alignItems: mobile ? 'start' : 'stretch'
       },
       heroLedeStyle: { fontSize: narrow ? '20px' : 'clamp(1.25rem,1.9vw,1.6rem)', lineHeight: 1.36, color: '#F3F2EE', maxWidth: '34ch', margin: '0 0 18px', textWrap: 'pretty', fontWeight: 500 },
-      heroPhotoWrapStyle: { position: 'relative', marginRight: mobile ? '14px' : '28px', marginBottom: mobile ? '14px' : '28px' },
+      heroPhotoWrapStyle: { position: 'relative', marginRight: mobile ? '14px' : '28px', marginBottom: mobile ? '14px' : 0 },
       heroPhotoStyle: {
-        width: '100%', aspectRatio: mobile ? '16 / 9' : '4 / 5', maxHeight: mobile ? '220px' : '400px', borderRadius: '14px',
-        backgroundImage: "url('assets/john-portrait.webp')", backgroundSize: '135% auto', backgroundPosition: '40% 30%', backgroundRepeat: 'no-repeat',
+        width: '100%', aspectRatio: mobile ? '16 / 9' : 'auto', height: mobile ? 'auto' : '100%', minHeight: mobile ? 0 : '360px', maxHeight: mobile ? '220px' : 'none', boxSizing: 'border-box', borderRadius: '14px',
+        backgroundImage: "url('assets/john-portrait.webp')", backgroundSize: '135% auto', backgroundPosition: '40% 38%', backgroundRepeat: 'no-repeat',
         filter: 'grayscale(100%) contrast(108%) brightness(92%)', border: '1px solid rgba(243,242,238,0.12)'
       },
       contactGridStyle: {
