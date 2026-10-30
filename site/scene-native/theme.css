@@ -90,3 +90,6 @@
 .spn .card-stage-caption p { color: rgba(243, 242, 238, 0.66) !important; }
 .spn figcaption strong, .spn .card-stage-caption h4, .spn .card-stage-caption [class*="tracking"] { color: var(--spn-ink) !important; }
 .spn [data-gallery] img { cursor: zoom-in; }
+
+/* card stages sit on white, as in the original artwork */
+.spn .card-stage { background-color: #FFFFFF !important; outline: none !important; }
