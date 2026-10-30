@@ -55,6 +55,13 @@
   <sc-if value="{{ isCase }}" hint-placeholder-val="{{ false }}">
     <header style="{{ headerStyle }}">
       <button onClick="{{ goHome }}" style="background:none;border:none;cursor:pointer;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:16px;color:#F3F2EE;letter-spacing:-0.02em;text-transform:uppercase;padding:0;"><span style="{{ navFlash0 }}">John Imburgia<span style="color:#05D9E8;text-transform:none;">.</span></span></button>
+      <sc-if value="{{ subnavInHeader }}" hint-placeholder-val="{{ false }}">
+        <nav aria-label="Decisions in this case study" style="{{ subnavHeaderStyle }}">
+          <sc-for list="{{ subnavItems }}" as="sn" hint-placeholder-count="3">
+            <button onClick="{{ sn.go }}" aria-current="{{ sn.current }}" style="{{ sn.style }}" style-hover="color:#F3F2EE;">{{ sn.label }}</button>
+          </sc-for>
+        </nav>
+      </sc-if>
       <div style="display:flex;align-items:center;border:1px solid rgba(243,242,238,0.2);border-radius:999px;overflow:hidden;">
         <button onClick="{{ goPrev }}" aria-label="Previous case study" style="background:none;border:none;padding:9px 16px;color:rgba(243,242,238,0.65);cursor:pointer;font-size:14px;"><span style="{{ navFlash1 }}">←</span></button>
         <span style="padding:9px 14px;color:rgba(243,242,238,0.45);font-size:12px;font-family:monospace;border-left:1px solid rgba(243,242,238,0.15);border-right:1px solid rgba(243,242,238,0.15);"><span style="{{ navFlash2 }}">{{ indexLabel }}</span></span>
@@ -3771,7 +3778,12 @@ class Component extends DCLogic {
       zoomAlt: (this.state.zoom || {}).alt || '',
       zoomCaption: (this.state.zoom || {}).caption || '',
       zoomClose: (e) => { if (e) e.stopPropagation(); this.closeZoom(); },
-      subnavShow: !!(isStory && current.subnav && this.state.subnavShow),
+      subnavShow: !!(isStory && current.subnav && this.state.subnavShow) && (this.state.vw || 1440) < 1280,
+      subnavInHeader: !!(isStory && current.subnav && this.state.subnavShow) && (this.state.vw || 1440) >= 1280,
+      subnavHeaderStyle: {
+        position: 'absolute', left: '50%', top: '50%', transform: 'translate(-50%, -50%)', display: 'flex', gap: '4px',
+        padding: '4px', borderRadius: '999px', border: '1px solid rgba(243,242,238,0.14)', background: 'rgba(243,242,238,0.03)', whiteSpace: 'nowrap'
+      },
       subnavStyle: {
         position: 'fixed', top: narrow ? '51px' : '62px', left: 0, right: 0, zIndex: 45, display: 'flex', justifyContent: mobile ? 'flex-start' : 'center', gap: '6px',
         padding: mobile ? '8px 12px' : '8px 24px', overflowX: 'auto', scrollbarWidth: 'none', whiteSpace: 'nowrap',
@@ -3781,7 +3793,7 @@ class Component extends DCLogic {
         const on = this.state.subnavCurrent === it.target;
         return {
           label: it.label, current: on ? 'true' : 'false', go: () => this.jumpTo(it.target),
-          style: { flexShrink: 0, padding: '7px 14px', borderRadius: '999px', cursor: 'pointer', fontFamily: "'Space Grotesk',sans-serif", fontWeight: 600, fontSize: '13px', border: '1px solid ' + (on ? 'rgba(5,217,232,0.6)' : 'rgba(243,242,238,0.16)'), background: on ? 'rgba(5,217,232,0.12)' : 'transparent', color: on ? '#F3F2EE' : 'rgba(243,242,238,0.7)' }
+          style: { flexShrink: 0, padding: (this.state.vw || 1440) >= 1280 ? '6px 12px' : '7px 14px', borderRadius: '999px', cursor: 'pointer', fontFamily: "'Space Grotesk',sans-serif", fontWeight: 600, fontSize: '13px', border: '1px solid ' + (on ? 'rgba(5,217,232,0.6)' : 'rgba(243,242,238,0.16)'), background: on ? 'rgba(5,217,232,0.12)' : 'transparent', color: on ? '#F3F2EE' : 'rgba(243,242,238,0.7)' }
         };
       }) : [],
       storyBlocks,
@@ -3859,7 +3871,7 @@ class Component extends DCLogic {
       },
       headerStyle: {
         position: 'fixed', top: 0, left: 0, right: 0, zIndex: 50,
-        background: (this.state.subnavShow && isStory) ? '#0E0E0E' : 'rgba(14,14,14,0.85)', backdropFilter: 'blur(8px)',
+        background: (this.state.subnavShow && isStory && (this.state.vw || 1440) < 1280) ? '#0E0E0E' : 'rgba(14,14,14,0.85)', backdropFilter: 'blur(8px)',
         padding: narrow ? '10px 16px' : '14px 32px',
         display: 'flex', alignItems: 'center', justifyContent: 'space-between',
         gap: '12px', borderBottom: '1px solid rgba(243,242,238,0.1)'
