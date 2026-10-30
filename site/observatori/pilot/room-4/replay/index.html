@@ -1622,7 +1622,7 @@ requestAnimationFrame(frame);
       document.body.style.opacity = '0';
       setTimeout(() => { goTo(0); document.body.style.opacity = '1'; }, 190);
     };
-    const io = new IntersectionObserver((es) => { if (es[0].isIntersecting) { io.disconnect(); setTimeout(start, 1100); } }, { threshold: 0.35 });
+    const io = new IntersectionObserver((es) => { if (es[0].isIntersecting) { io.disconnect(); setTimeout(start, 2200); } }, { threshold: 0.35 });
     io.observe(document.body);
   }
   else if (location.hash === '#finding') { endIntro(true); finish(); } else requestAnimationFrame(() => startIntro(true));

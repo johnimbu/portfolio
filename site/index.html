@@ -1347,6 +1347,7 @@ class Component extends DCLogic {
       cover: 'assets/scene-2banks-still.webp',
       tags: ['Loyalty & rewards', 'Banking', 'Arro Labs'],
       roles: ['Principal Product Designer'],
+      subnav: { after: 'scene-glance', items: [{ target: 'scene-1', label: '1 · Aligning three brands' }, { target: 'scene-2', label: '2 · Card discovery' }, { target: 'scene-3', label: '3 · One system, three brands' }] },
       blocks: [
         {
           t: 'hero', compact: true, title: 'Scene+ Rewards', tags: ['Scene+', 'Loyalty & banking', 'Arro Labs', '16 weeks'],
@@ -1358,6 +1359,14 @@ class Component extends DCLogic {
             { k: 'My role', v: 'Principal Product Designer at Arro Labs. I lead design for Scene+ (15M+ members) and led this project end to end.' },
             { k: 'Worked with', v: 'Arro\'s head of design, research lead and UX/UI designers; Scene+, Scotiabank and Tangerine stakeholders; Havas, who built it.' },
             { k: 'Timeline', v: '16 weeks from discovery through build, across responsive web, iOS and Android.' }
+          ]
+        },
+        {
+          t: 'cols', glance: true, id: 'scene-glance',
+          items: [
+            { target: 'scene-1', title: '1 · Aligning three brands', desc: 'Workshops, one shared journey, and concept reviews in the open.' },
+            { target: 'scene-2', title: '2 · Card discovery', desc: 'Filtering and layout as two decisions, with research settling the layout.' },
+            { target: 'scene-3', title: '3 · One system, three brands', desc: 'Card motion, the bank switcher, and the hero direction.' }
           ]
         },
         { t: 'native', src: 'scene-native/fragments/devices.html' },
@@ -1372,7 +1381,7 @@ class Component extends DCLogic {
           m: { src: 'assets/scene-current.png', maxH: '520px', badge: 'Before', caption: 'The inherited, iframe-based card finder (top of the page).' }
         },
 
-        { t: 'chapter', kicker: 'Aligning the teams', title: 'Three brands, deciding together', lede: 'Scene+ wanted members\' trust to carry over to its partners. Scotiabank wanted its full lineup seen. Tangerine wanted its one card to feel like plenty. All three had to sign off on one page.' },
+        { t: 'chapter', id: 'scene-1', kicker: 'Aligning the teams', title: 'Three brands, deciding together', lede: 'Scene+ wanted members\' trust to carry over to its partners. Scotiabank wanted its full lineup seen. Tangerine wanted its one card to feel like plenty. All three had to sign off on one page.' },
         {
           t: 'text',
           paras: [
@@ -1389,7 +1398,7 @@ class Component extends DCLogic {
           m: { src: 'assets/scene-research-hub.gif', still: 'assets/scene-research-hub-still.webp', bg: '#FFFFFF', badge: 'Built with AI', caption: 'The research hub stakeholders used to explore usability findings.' }
         },
 
-        { t: 'chapter', kicker: 'Card discovery', title: 'Making cards easier to compare', lede: 'Two separate decisions: how filtering works, and how much detail each card shows. They were settled in different ways.' },
+        { t: 'chapter', id: 'scene-2', kicker: 'Card discovery', title: 'Making cards easier to compare', lede: 'Two separate decisions: how filtering works, and how much detail each card shows. They were settled in different ways.' },
         {
           t: 'decision',
           rows: [
@@ -1415,7 +1424,7 @@ class Component extends DCLogic {
         },
         { t: 'native', src: 'scene-native/fragments/compare.html' },
 
-        { t: 'chapter', kicker: 'One experience, three brands', title: 'A shared system with room for each bank', lede: 'The heroes share one template while each brand gets its own color, artwork and card presentation. Scene+ stays constant across all three.' },
+        { t: 'chapter', id: 'scene-3', kicker: 'One experience, three brands', title: 'A shared system with room for each bank', lede: 'The heroes share one template while each brand gets its own color, artwork and card presentation. Scene+ stays constant across all three.' },
         { t: 'native', src: 'scene-native/fragments/stages.html' },
         {
           t: 'split',
@@ -1650,6 +1659,7 @@ class Component extends DCLogic {
       cover: 'assets/observatori-replay-poster.webp',
       tags: ['Founder', 'AI product', 'Live'],
       roles: ['Founder', 'Product designer', 'Builder'],
+      subnav: { after: 'obs-glance', items: [{ target: 'obs-1', label: '1 · Evidence visible' }, { target: 'obs-2', label: '2 · Easier to follow' }, { target: 'obs-3', label: '3 · Disagreement shown' }] },
       blocks: [
         {
           t: 'hero', compact: true, title: 'Observatori', tags: ['Founder', 'AI product', 'Live soft launch', '2026'],
@@ -1657,7 +1667,7 @@ class Component extends DCLogic {
         },
         {
           t: 'media', width: 'full',
-          m: { embed: 'observatori/pilot/room-4/replay/#peek', ratio: 1.6, mRatio: 0.5, badge: 'Preview · current build', caption: 'The current build, in private preview: Claude hosts GPT, Gemini and Grok in a conversation about whether social media use is harming teenagers\' mental health. 22 turns and one research trip, every line in the model\'s own words.', alt: 'A replay of an Observatori room: four AI models in a hosted conversation, with the evidence they found charted as a constellation' }
+          m: { embed: 'observatori/pilot/room-4/replay/', ratio: 1.6, mRatio: 0.5, badge: 'Preview · current build', caption: 'The current build, in private preview: Claude hosts GPT, Gemini and Grok in a conversation about whether social media use is harming teenagers\' mental health. 22 turns and one research trip, every line in the model\'s own words.', alt: 'A replay of an Observatori room: four AI models in a hosted conversation, with the evidence they found charted as a constellation' }
         },
         {
           t: 'text',
@@ -1673,6 +1683,14 @@ class Component extends DCLogic {
             { k: 'Built', v: 'October 2026.' }
           ]
         },
+        {
+          t: 'cols', glance: true, id: 'obs-glance',
+          items: [
+            { target: 'obs-1', title: '1 · Make the evidence visible', desc: 'From a pixel-art lab to a star chart of studies and claims.' },
+            { target: 'obs-2', title: '2 · Make it easier to follow', desc: 'An edited replay from recorded events, with the full record one click away.' },
+            { target: 'obs-3', title: '3 · Show the disagreement', desc: 'Every claim challenged, and every left-out claim listed with its reason.' }
+          ]
+        },
 
         { t: 'chapter', kicker: 'The system', title: 'A team of models, with code checking the work', lede: 'A Researcher finds studies and writes claims tied to exact quotes. A Skeptic from a different AI company tries to break them, and a Referee rules on disputes. Code, not a model, checks every quote and number before a brief is approved.' },
         {
@@ -1686,7 +1704,7 @@ class Component extends DCLogic {
           ]
         },
 
-        { t: 'chapter', kicker: 'Decision 1', title: 'Make the evidence visible', lede: 'A run is about 90 minutes of searching, reading and arguing. The visual had to show whether the answer holds up, not just that agents were busy.' },
+        { t: 'chapter', id: 'obs-1', kicker: 'Decision 1', title: 'Make the evidence visible', lede: 'A run is about 90 minutes of searching, reading and arguing. The visual had to show whether the answer holds up, not just that agents were busy.' },
         {
           t: 'decision',
           rows: [
@@ -1706,7 +1724,7 @@ class Component extends DCLogic {
           ]
         },
 
-        { t: 'chapter', kicker: 'Decision 2', title: 'Make a long investigation easier to follow', lede: '.05 ran 94 minutes, and even the full replay plays for about 17. Most people won\'t watch that.' },
+        { t: 'chapter', id: 'obs-2', kicker: 'Decision 2', title: 'Make a long investigation easier to follow', lede: '.05 ran 94 minutes, and even the full replay plays for about 17. Most people won\'t watch that.' },
         {
           t: 'text',
           paras: [
@@ -1725,7 +1743,7 @@ class Component extends DCLogic {
           ]
         },
 
-        { t: 'chapter', kicker: 'Decision 3', title: 'Show the disagreement, and what was left out', lede: 'In .05, most claims didn\'t make the brief. Readers should be able to see that, and why.' },
+        { t: 'chapter', id: 'obs-3', kicker: 'Decision 3', title: 'Show the disagreement, and what was left out', lede: 'In .05, most claims didn\'t make the brief. Readers should be able to see that, and why.' },
         {
           t: 'stats',
           items: [
