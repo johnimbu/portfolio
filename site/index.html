@@ -110,7 +110,6 @@
                   <sc-if value="{{ f.isEmbed }}" hint-placeholder-val="{{ false }}">
                     <iframe src="{{ f.embed }}" title="{{ f.alt }}" tabIndex="-1" aria-hidden="true" loading="lazy" style="{{ f.embedStyle }}"></iframe>
                   </sc-if>
-                  <span style="{{ f.badgeStyle }}">{{ f.badge }}</span>
                 </div>
                 <div style="padding:26px 28px 28px;display:flex;flex-direction:column;gap:14px;flex:1;">
                   <div style="display:flex;align-items:center;gap:10px;">
@@ -119,11 +118,16 @@
                   </div>
                   <h3 style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:clamp(1.5rem,2.2vw,1.9rem);line-height:1.05;letter-spacing:-0.01em;margin:0;">{{ f.title }}</h3>
                   <p style="font-size:15px;line-height:1.6;color:rgba(243,242,238,0.74);margin:0;text-wrap:pretty;">{{ f.desc }}</p>
-                  <div style="display:flex;align-items:baseline;gap:12px;border-top:1px solid rgba(243,242,238,0.14);padding-top:16px;margin-top:auto;">
-                    <span style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:26px;line-height:1;color:#E8B84B;white-space:nowrap;">{{ f.metric }}</span>
-                    <span style="font-size:13px;line-height:1.4;color:rgba(243,242,238,0.62);">{{ f.metricLabel }}</span>
+                  <div style="display:flex;align-items:center;gap:12px;border-top:1px solid rgba(243,242,238,0.14);padding-top:16px;margin-top:auto;">
+                    <sc-if value="{{ f.metric }}" hint-placeholder-val="{{ true }}">
+                      <span style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:26px;line-height:1;color:#E8B84B;white-space:nowrap;">{{ f.metric }}</span>
+                    </sc-if>
+                    <sc-if value="{{ f.live }}" hint-placeholder-val="{{ false }}">
+                      <span style="width:8px;height:8px;border-radius:50%;background:#3FD68A;box-shadow:0 0 0 4px rgba(63,214,138,0.18);flex-shrink:0;"></span>
+                    </sc-if>
+                    <span style="flex:1;font-size:13px;line-height:1.4;color:rgba(243,242,238,0.66);">{{ f.metricLabel }}</span>
+                    <span aria-hidden="true" style="{{ f.arrowStyle }}">→</span>
                   </div>
-                  <span style="display:flex;align-items:center;gap:10px;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:15px;color:#F3F2EE;">Read the case study<span style="{{ f.arrowStyle }}">→</span></span>
                 </div>
               </a>
             </sc-for>
@@ -1177,21 +1181,21 @@ class Component extends DCLogic {
 
   featuredCopy = {
     'shopify-tax-international': {
-      kicker: 'Case study · Shopify',
-      desc: 'UX mission lead for international tax: turning EU and UK VAT rules into a product that shows merchants where they owe and what to do next.',
+      kicker: 'Shopify',
+      desc: 'Making international tax obligations clear and actionable for EU and UK merchants.',
       metric: 'EU + UK', metricLabel: '0 → 1 launch across five features',
       media: { src: 'assets/shopify-eu-settings.webp', bg: '#F1F1F1', badge: 'Final design', alt: 'Shopify Taxes and duties settings for the European Union: Shopify Tax active, VAT collected in France and Germany, automated rate management and VAT invoices' }
     },
     'scene-plus-banking': {
-      kicker: 'Case study · Arro Labs for Scene+',
-      desc: "Led design for a native card-discovery experience inside Scene+, one of Canada's largest loyalty programs (15M+ members), replacing an inherited bank iframe.",
+      kicker: 'Arro Labs · Scene+',
+      desc: 'Helping members find the right banking card across three connected brands.',
       metric: '+221%', metricLabel: 'Referrals from Scene+ to bank partners',
-      media: { src: 'assets/scene-filter-table.gif', still: 'assets/scene-filter-table-still.webp', bg: '#FFFFFF', badge: 'Concept', alt: 'Scene+ card comparison with additive filters highlighting matching cards' }
+      media: { src: 'assets/scene-2banks.gif', still: 'assets/scene-2banks-still.webp', bg: '#000000', alt: 'The Scene+ payment cards page introducing Scotiabank and Tangerine' }
     },
     'observatori': {
-      kicker: 'Founder · Live product',
-      desc: 'I founded and built an AI research lab where models from different companies investigate a question in public, challenge each other\'s claims, and show what survived.',
-      metric: 'Live', metricLabel: 'Trace each conclusion back to its evidence and the disagreement behind it',
+      kicker: 'Independent · Founder',
+      desc: 'A research lab where AI models investigate, challenge, and support their conclusions with evidence.',
+      metric: '', live: true, metricLabel: 'Live at theobservatori.com',
       media: { embed: 'observatori/05/replay/?edited#at=0.35', poster: 'assets/observatori-replay-poster.webp', badge: 'Live replay', alt: 'The Observatori replay: a star chart of studies and claims building itself' }
     }
   };
@@ -3449,7 +3453,7 @@ class Component extends DCLogic {
       return {
         title: c.title, href: '#work/' + slug, ...copy,
         alt: md.alt || c.title,
-        aria: c.title + ': read the case study',
+        aria: c.title + ', case study',
         isEmbed: embed,
         isImg: !embed,
         embed: md.embed || '',
