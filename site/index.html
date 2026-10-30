@@ -433,10 +433,9 @@
                 <sc-if value="{{ b.sh.doneShow }}" hint-placeholder-val="{{ false }}">
                   <button onClick="{{ b.sh.deactivate }}" style="{{ b.sh.doneStyle }}">Done</button>
                 </sc-if>
-                <span style="{{ b.badgeStyle }}">{{ b.cur.badge }}</span>
               </div>
               <div style="{{ b.capRow }}">
-                <p style="margin:0;font-size:15px;line-height:1.6;color:rgba(245,239,224,0.78);max-width:72ch;text-wrap:pretty;"><strong style="color:#F5EFE0;">{{ b.cur.date }}</strong> {{ b.cur.note }}</p>
+                <p style="margin:0;font-size:15px;line-height:1.6;color:rgba(245,239,224,0.78);max-width:72ch;text-wrap:pretty;"><span style="{{ b.badgeStyle }}">{{ b.cur.badge }}</span> <strong style="color:#F5EFE0;">{{ b.cur.date }}</strong> {{ b.cur.note }}</p>
                 <a href="{{ b.cur.embed }}" target="_blank" rel="noopener noreferrer" style="flex-shrink:0;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:13px;color:#05D9E8;white-space:nowrap;" style-hover="color:#F5EFE0;">Open full screen ↗</a>
               </div>
             </div>
@@ -3225,9 +3224,9 @@ class Component extends DCLogic {
           go: () => this.setState(s => ({ storyVer: { ...(s.storyVer || {}), [cs.slug + ':' + i]: n } })),
           style: { padding: '9px 16px', borderRadius: '999px', cursor: 'pointer', fontFamily: "'Space Grotesk',sans-serif", fontWeight: 700, fontSize: '13px', border: '1px solid ' + (n === k ? accent : 'rgba(245,239,224,0.22)'), background: n === k ? accent : 'transparent', color: n === k ? '#0E0E0E' : 'rgba(245,239,224,0.8)' }
         }));
-        o.frame = { position: 'relative', width: '100%', aspectRatio: mobile ? '3 / 4' : '16 / 10', borderRadius: '14px', overflow: 'hidden', border: '1px solid rgba(245,239,224,0.14)', background: '#05070c' };
+        o.frame = { position: 'relative', width: '100%', aspectRatio: mobile ? '3 / 4.4' : '4 / 3.15', borderRadius: '14px', overflow: 'hidden', border: '1px solid rgba(245,239,224,0.14)', background: '#05070c' };
         const bc = this.storyBadge(o.cur.badge);
-        o.badgeStyle = { position: 'absolute', top: '14px', right: '14px', zIndex: 2, padding: '6px 12px', borderRadius: '999px', background: 'rgba(14,14,14,0.86)', border: '1px solid ' + bc, color: bc, fontFamily: "'Space Grotesk',sans-serif", fontWeight: 700, fontSize: '11px', letterSpacing: '0.14em', textTransform: 'uppercase', pointerEvents: 'none' };
+        o.badgeStyle = { display: 'inline-block', verticalAlign: '2px', marginRight: '6px', padding: '4px 10px', borderRadius: '999px', background: 'rgba(14,14,14,0.86)', border: '1px solid ' + bc, color: bc, fontFamily: "'Space Grotesk',sans-serif", fontWeight: 700, fontSize: '11px', letterSpacing: '0.14em', textTransform: 'uppercase', pointerEvents: 'none' };
         o.capRow = { display: 'flex', flexDirection: mobile ? 'column' : 'row', alignItems: mobile ? 'flex-start' : 'baseline', justifyContent: 'space-between', gap: '8px 24px', marginTop: '14px' };
       }
       if (b.t === 'stats') {
