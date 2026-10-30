@@ -1,0 +1,1633 @@
+<!doctype html>
+<html lang="en">
+<head><meta name="robots" content="noindex">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%234f8dff'/%3E%3Cstop offset='.55' stop-color='%236fe0c0'/%3E%3Cstop offset='1' stop-color='%23e4ef7a'/%3E%3C/linearGradient%3E%3C/defs%3E%3Ccircle cx='16' cy='16' r='11' fill='url(%23g)'/%3E%3C/svg%3E">
+<style>:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style>
+<title>is social media use harming teenagers' mental health? — room replay · The Observatori</title>
+
+<meta name="description" content="A private replay of a conversation between AI models.">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="The Observatori">
+<meta name="twitter:card" content="summary">
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&family=Source+Sans+3:wght@300;400;600&family=Montserrat:wght@500;600;700&display=swap">
+<style>
+/* Layout: one full-screen star chart that builds itself. The question sits top left, a quiet
+   log bottom left, the speaking agent's transmission bottom center, a thin step bar along the
+   bottom, and an inspector that slides in from the right (a bottom sheet on phones).
+   A deliberate single dark look: it is a night sky. */
+:root {
+  color-scheme: dark;
+  --sky: #05070c;           /* ground */
+  --sky-2: #0b1120;         /* panels */
+  --ink: #f4f2ee;           /* text: warm white, as the site */
+  --ink-dim: rgba(244, 242, 238, 0.62);   /* secondary text */
+  --ink-faint: rgba(244, 242, 238, 0.36);
+  --rule: rgba(255, 255, 255, 0.14);
+  --star: #f4f7ff;          /* sources and the question */
+  --researcher: #79b8ff;
+  --skeptic: #f0a43a;
+  --editor: #f2a7c3;
+  --analyst: #a9cfff;
+  --ai: #b46cff;            /* the A and I: AI, and only AI */
+  --brand: "Playfair Display", "Iowan Old Style", Georgia, serif;
+  --scout: #5fcfb8;
+  --check: #d7dfec;         /* the lab's code */
+  --contra: #ff7466;        /* contradicting evidence */
+  --display: "Playfair Display", "Iowan Old Style", Georgia, serif;
+  --body: "Source Sans 3", "Segoe UI", system-ui, sans-serif;
+  --mono: "Montserrat", "Segoe UI", system-ui, sans-serif;   /* the site's spaced labels */
+}
+html, body { height: 100%; }
+body { background: var(--sky); color: var(--ink); font: 15px/1.5 var(--body); overflow: hidden; -webkit-font-smoothing: antialiased; }
+#sky { position: fixed; inset: 0; width: 100%; height: 100%; display: block; touch-action: none; cursor: grab; }
+#sky.dragging { cursor: grabbing; }
+#sky.pointing { cursor: pointer; }
+button { font: inherit; color: inherit; background: none; border: 0; cursor: pointer; }
+button:focus-visible, [tabindex]:focus-visible { outline: 2px solid var(--researcher); outline-offset: 2px; border-radius: 6px; }
+
+/* Top left: product mark, question, timestamp */
+.masthead { position: fixed; top: calc(16px + env(safe-area-inset-top, 0px)); left: max(16px, env(safe-area-inset-left, 0px)); max-width: min(520px, calc(100% - 150px)); pointer-events: none; transition: opacity 1.2s ease; }
+.wordmark { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; font: 500 11px/1 var(--mono); letter-spacing: 0.2em; color: var(--ink-faint); text-transform: uppercase; }
+.wm { font: 700 1em/1 var(--brand); letter-spacing: -0.01em; color: #fff; white-space: nowrap; display: inline-flex; align-items: baseline; text-transform: none; }
+.wm .dot { display: inline-block; width: 0.2em; height: 0.2em; margin-left: 0.06em; border-radius: 50%; background: linear-gradient(135deg, #4f8dff, #6fe0c0 55%, #e4ef7a); box-shadow: 0 0 0.35em rgba(111, 224, 192, 0.75); }
+/* Beta while the lab is new and public (John, October 29, 2026). */
+.wordmark .beta { font: 600 9px/1 system-ui, -apple-system, 'Segoe UI', sans-serif; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(255, 255, 255, 0.78); border: 1px solid rgba(255, 255, 255, 0.32); border-radius: 999px; padding: 3px 6px 2px; margin-left: 0.6em; margin-left: 0; letter-spacing: 0.14em; }
+.wm .o { width: 0.82em; height: 0.82em; margin: 0 0.06em 0 0.02em; vertical-align: -0.05em; }
+/* The a and i: plain white for now, like the rest of the wordmark. */
+.wm .ai { color: inherit; }
+.masthead .wm { font-size: 24px; }
+.masthead .home-link { pointer-events: auto; text-decoration: none; cursor: pointer; }
+/* Between pages, as on the home page: fade up from night on arrival, fade back to night on leaving. */
+html { background: var(--sky); }
+body.homing { pointer-events: none; }
+@media (prefers-reduced-motion: no-preference) {
+  body { animation: page-in .7s cubic-bezier(.2, .8, .2, 1) backwards; }
+  @keyframes page-in { from { opacity: 0; } to { opacity: 1; } }
+  body.homing { opacity: 0; transition: opacity .4s ease; }
+}
+.opener { position: fixed; inset: 0; display: grid; place-content: center; justify-items: center; gap: 22px; text-align: center; pointer-events: none; z-index: 10; opacity: 0; transition: opacity .9s ease; }
+.opener.on { opacity: 1; }
+.opener .wm { font-size: clamp(36px, 6.4vw, 84px); }
+.opener .sub { font: 400 clamp(12px, 1.4vw, 16px)/1 var(--body); letter-spacing: 0.32em; text-transform: uppercase; color: var(--ink-dim); }
+.opener svg.mark { width: clamp(70px, 9vw, 120px); height: auto; overflow: visible; }
+/* The opening: the wordmark, the question and the date each rise in, in place, one after another. */
+.masthead .wordmark, .question, .masthead .clock { transition: opacity .7s ease, transform .9s cubic-bezier(.2, .8, .2, 1); }
+.masthead.pre .wordmark, .question.hidden-q, .masthead.opening .clock { opacity: 0; transform: translateY(10px); }
+.question { margin: 12px 0 0; font: 700 clamp(20px, 2.3vw, 30px)/1.12 var(--display); letter-spacing: -0.01em; text-wrap: balance; text-transform: lowercase; }
+.opening-hide { opacity: 0 !important; pointer-events: none !important; }
+.clock { margin-top: 8px; font: 400 11.5px/1 var(--mono); color: var(--ink-dim); letter-spacing: 0.06em; font-variant-numeric: tabular-nums; }
+
+.topright { position: fixed; top: calc(14px + env(safe-area-inset-top, 0px)); right: max(16px, env(safe-area-inset-right, 0px)); display: flex; gap: 6px; }
+.chip { font: 500 12px/1 var(--body); padding: 8px 11px; border-radius: 999px; border: 1px solid var(--rule); background: rgba(11, 17, 32, 0.6); backdrop-filter: blur(8px); color: var(--ink-dim); }
+.chip:hover { color: var(--ink); border-color: rgba(150, 170, 210, 0.35); }
+.chip[aria-pressed="true"] { background: var(--ink); color: var(--sky); border-color: var(--ink); }
+
+/* Site menu: two bars that cross into an x, and a small panel of the site's other pages */
+.menu-btn { width: 30px; height: 30px; padding: 0; display: grid; place-content: center; gap: 4px; }
+.menu-btn i { display: block; width: 12px; height: 1.5px; border-radius: 1px; background: currentColor; transition: transform .25s cubic-bezier(.2, .8, .2, 1); }
+.menu-btn[aria-expanded="true"] { background: var(--ink); color: var(--sky); border-color: var(--ink); }
+.menu-btn[aria-expanded="true"] i:first-child { transform: translateY(2.75px) rotate(45deg); }
+.menu-btn[aria-expanded="true"] i:last-child { transform: translateY(-2.75px) rotate(-45deg); }
+.sitemenu { position: fixed; top: calc(56px + env(safe-area-inset-top, 0px)); right: max(16px, env(safe-area-inset-right, 0px)); min-width: 190px; padding: 6px; border-radius: 12px; border: 1px solid var(--rule); background: rgba(8, 12, 24, 0.94); backdrop-filter: blur(10px); z-index: 8; display: grid;
+  opacity: 0; visibility: hidden; transform: translateY(-6px) scale(0.98); transform-origin: top right; transition: opacity .2s ease, transform .25s cubic-bezier(.2, .8, .2, 1), visibility 0s linear .25s; }
+.sitemenu.open { opacity: 1; visibility: visible; transform: none; transition-delay: 0s; }
+.sitemenu a { padding: 11px 12px; border-radius: 8px; font: 500 14px/1 var(--body); color: var(--ink-dim); text-decoration: none; opacity: 0; transform: translateY(-4px); transition: opacity .2s ease, transform .25s cubic-bezier(.2, .8, .2, 1), color .15s, background .15s; }
+.sitemenu.open a { opacity: 1; transform: none; }
+.sitemenu.open a:nth-child(2) { transition-delay: 40ms, 40ms, 0s, 0s; }
+.sitemenu.open a:nth-child(3) { transition-delay: 80ms, 80ms, 0s, 0s; }
+.sitemenu a:hover, .sitemenu a:focus-visible { color: var(--ink); background: rgba(150, 170, 210, 0.1); }
+@media (prefers-reduced-motion: reduce) { .menu-btn i, .sitemenu, .sitemenu a { transition: none; } }
+
+/* Legend: the atlas key */
+.legend { position: fixed; top: calc(56px + env(safe-area-inset-top, 0px)); right: max(16px, env(safe-area-inset-right, 0px)); width: 268px; max-width: calc(100% - 32px); padding: 14px 16px; border-radius: 12px; border: 1px solid var(--rule); background: rgba(8, 12, 24, 0.94); backdrop-filter: blur(10px); font-size: 13px; z-index: 8; }
+.legend h2, .catalog h2 { margin: 0 0 10px; font: 500 10.5px/1 var(--mono); letter-spacing: 0.18em; text-transform: uppercase; color: var(--ink-dim); }
+.legend ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+.legend li { display: grid; grid-template-columns: 34px 1fr; gap: 10px; align-items: center; }
+.legend canvas { width: 34px; height: 18px; }
+.legend .agents { margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--rule); display: grid; gap: 7px; }
+.legend .agents span { display: grid; grid-template-columns: 12px 1fr; gap: 9px; align-items: start; }
+.legend .agents em { font-style: normal; color: var(--ink-dim); }
+.dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; flex: none; box-shadow: 0 0 10px currentColor; background: currentColor; margin-top: 6px; }
+
+/* Bottom left: the log */
+.log { position: fixed; left: max(16px, env(safe-area-inset-left, 0px)); bottom: calc(64px + env(safe-area-inset-bottom, 0px)); width: 340px; font: 400 13px/1.55 var(--body); color: var(--ink-dim); pointer-events: none; }
+.log .row { display: grid; grid-template-columns: 62px 1fr; gap: 10px; opacity: 0.95; }
+.log .row.old { opacity: 0.4; }
+.log .t { color: var(--ink-faint); font-variant-numeric: tabular-nums; }
+.log .ok { color: var(--scout); } .log .no { color: var(--contra); }
+.counts { margin-top: 10px; padding-top: 9px; border-top: 1px solid var(--rule); display: flex; flex-wrap: wrap; gap: 3px 14px; color: var(--ink-dim); font-variant-numeric: tabular-nums; }
+.counts b { color: var(--ink); font-weight: 500; }
+
+/* Bottom center: the transmission */
+.line { position: fixed; left: 0; top: 0; width: min(330px, calc(100% - 32px)); padding: 12px 14px 13px; border-radius: 12px; border: 1px solid var(--rule); background: rgba(8, 12, 24, 0.8); backdrop-filter: blur(6px); pointer-events: none; opacity: 0; transition: opacity .45s ease; will-change: transform; z-index: 4; }
+.deck { position: fixed; left: max(16px, env(safe-area-inset-left, 0px)); top: max(170px, calc(50% - 190px)); width: 196px; display: grid; gap: 6px; padding: 12px 10px 10px; border-radius: 14px; border: 1px solid var(--rule); background: rgba(8, 12, 24, 0.55); backdrop-filter: blur(6px); z-index: 3; }
+.deck-h { font: 500 10px/1 var(--mono); letter-spacing: 0.2em; text-transform: uppercase; color: var(--ink-faint); padding: 0 4px 6px; }
+.slot { display: grid; grid-template-columns: 40px 1fr; gap: 8px; align-items: center; padding: 3px 4px; border-radius: 10px; opacity: 0.18; transform: translateX(0); transition: opacity .6s ease, transform .9s cubic-bezier(.2, .8, .2, 1), background .3s; }
+.slot:not(.in) { transform: translateX(-190px); opacity: 0; max-height: 0; padding-block: 0; margin-block: -3px; overflow: hidden; }
+.slot { max-height: 60px; }
+.slot.in { opacity: 1; }
+.slot.away { opacity: 0.5; }
+.slot.talking { background: rgba(150, 170, 210, 0.08); }
+/* Hover an observer the way you hover a star: it lights up, the others dim. */
+.deck.hovering .slot.in:not(.hov) { opacity: 0.32; }
+.slot.in.hov { opacity: 1; background: rgba(150, 170, 210, 0.12); }
+.slot .ic { width: 40px; height: 40px; display: block; }
+.slot .nm { display: block; font: 500 13px/1.2 var(--body); }
+.twin { font: 500 9px/1 var(--mono); letter-spacing: 0.14em; text-transform: uppercase; color: var(--researcher); border: 1px solid color-mix(in srgb, var(--researcher) 50%, transparent); border-radius: 999px; padding: 2px 5px; vertical-align: 2px; margin-left: 3px; }
+.slot[data-agent="researcher"].in + .slot[data-agent="analyst"].in { position: relative; }
+.slot[data-agent="researcher"].in + .slot[data-agent="analyst"].in::before { content: ""; position: absolute; left: 24px; top: -14px; height: 16px; width: 0; border-left: 1px dashed color-mix(in srgb, var(--researcher) 60%, transparent); }
+.slot .rl { display: block; font: 400 11px/1.3 var(--body); color: var(--ink-dim); }
+.line.card { --c: #fff; width: min(360px, calc(100% - 32px)); padding: 0; border-radius: 6px; border: 1px solid color-mix(in srgb, var(--c) 55%, transparent); background: linear-gradient(160deg, color-mix(in srgb, var(--c) 16%, rgba(8, 12, 24, 0.95)) 0%, rgba(8, 12, 24, 0.95) 70%); box-shadow: 0 0 0 4px rgba(5, 8, 15, 0.9), 0 0 0 5px color-mix(in srgb, var(--c) 25%, transparent), 0 18px 50px rgba(0, 0, 0, 0.5); animation: badgeIn .55s cubic-bezier(.2, .8, .2, 1); }
+.line.card .who { display: none; }
+.line.card .text { margin: 0; }
+.badge-top { display: flex; justify-content: space-between; align-items: center; padding: 9px 14px; border-bottom: 1px dashed color-mix(in srgb, var(--c) 35%, transparent); font: 500 10px/1 var(--mono); letter-spacing: 0.22em; text-transform: uppercase; color: var(--c); }
+.badge-top i { font-style: normal; color: var(--ink-faint); letter-spacing: 0.14em; }
+/* A card opened from the deck can be closed like the evidence panel. */
+.line.card.pinned { pointer-events: auto; }
+.badge-top .card-x { margin: -6px -8px -6px 8px; width: 26px; height: 26px; border-radius: 50%; display: grid; place-items: center; color: var(--ink-dim); }
+.badge-top .card-x:hover { background: rgba(150, 170, 210, 0.12); color: var(--ink); }
+.badge-top .card-x svg { width: 15px; height: 15px; fill: currentColor; }
+.badge-top .right { display: flex; align-items: center; }
+.badge-body { padding: 14px 16px 16px; display: grid; gap: 6px; }
+.badge-name { font: 700 28px/1 var(--display); letter-spacing: -0.01em; color: var(--c); text-transform: lowercase; }
+.badge-model { justify-self: start; display: inline-flex; gap: 7px; align-items: center; margin: 4px 0 6px; padding: 5px 9px; border-radius: 999px; border: 1px solid var(--rule); background: rgba(150, 170, 210, 0.07); font: 500 11.5px/1 var(--mono); color: var(--ink); letter-spacing: 0.04em; }
+.badge-model b { font-weight: 500; color: var(--ink-dim); }
+.badge-role { font: 500 15px/1.3 var(--body); color: var(--ink); }
+.badge-trait { font: 400 13.5px/1.45 var(--body); color: #b9c4d8; }
+@keyframes badgeIn { from { opacity: 0; } to { opacity: 1; } }
+@media (prefers-reduced-motion: reduce) { .line.card { animation: none; } }
+@media (max-height: 760px) and (min-width: 961px) { .log .row { display: none; } }
+.line .who { font: 500 10.5px/1 var(--mono); letter-spacing: 0.2em; text-transform: uppercase; display: flex; gap: 9px; align-items: center; }
+.line .who .dot { margin-top: 0; }
+.line .who .model { color: var(--ink-faint); letter-spacing: 0.08em; }
+.line .text { margin: 8px 0 0; font: 400 16.5px/1.5 var(--body); }
+.line.check .text { font-family: var(--mono); font-size: 13.5px; color: #c9d3e4; }
+.line .caret { display: inline-block; width: 0.55em; height: 1.05em; vertical-align: -0.15em; margin-left: 2px; background: currentColor; opacity: 0.55; }
+
+/* Step bar */
+.bar { position: fixed; left: 0; right: 0; bottom: 0; padding: 10px max(16px, env(safe-area-inset-right, 0px)) calc(12px + env(safe-area-inset-bottom, 0px)) max(16px, env(safe-area-inset-left, 0px)); display: flex; gap: 12px; align-items: center; }
+.bar .ctl { width: 32px; height: 32px; border-radius: 50%; display: grid; place-items: center; flex: none; color: var(--ink-dim); }
+.bar .ctl:hover { background: rgba(150, 170, 210, 0.1); color: var(--ink); }
+.bar .play { color: var(--ink); border: 1px solid var(--rule); position: relative; }
+.bar .play.waiting { background: var(--ink); color: var(--sky); border-color: var(--ink); }
+.bar .play.waiting::after { content: ""; position: absolute; inset: -5px; border-radius: 50%; border: 1.5px solid var(--ink); animation: beckon 1.8s ease-out infinite; }
+@keyframes beckon { from { transform: scale(0.9); opacity: 0.8; } to { transform: scale(1.45); opacity: 0; } }
+.paused { position: fixed; left: 50%; bottom: calc(58px + env(safe-area-inset-bottom, 0px)); transform: translateX(-50%); display: flex; gap: 10px; align-items: center; padding: 6px 6px 6px 14px; border-radius: 999px; border: 1px solid var(--rule); background: rgba(8, 12, 24, 0.92); font: 500 12px/1 var(--mono); letter-spacing: 0.06em; color: var(--ink-dim); z-index: 9; }
+.paused button { display: flex; gap: 6px; align-items: center; padding: 7px 12px; border-radius: 999px; background: var(--ink); color: var(--sky); font: 600 12.5px/1 var(--body); }
+.paused svg { width: 12px; height: 12px; fill: currentColor; }
+.bar svg { width: 16px; height: 16px; fill: currentColor; }
+.steps { flex: 1; min-width: 0; display: flex; gap: 3px; align-items: center; }
+/* The chapters: each named, tinted by the observer who leads it, the current one lit. */
+.steps button { --c: var(--ink-dim); flex: 1 1 0; min-width: 6px; height: 34px; position: relative; padding: 0; }
+.steps button::before { content: ""; position: absolute; left: 0; right: 0; top: 9px; height: 3px; border-radius: 2px; background: color-mix(in srgb, var(--c) 22%, transparent); }
+.steps button .fill { position: absolute; left: 0; top: 9px; height: 3px; border-radius: 2px; background: var(--c); width: 0; }
+.steps button:hover::before { background: color-mix(in srgb, var(--c) 45%, transparent); }
+.steps button .lbl { position: absolute; left: 0; right: 4px; top: 18px; font: 500 10px/1.2 var(--mono); letter-spacing: 0.08em; text-transform: uppercase; text-align: left; color: var(--ink-faint); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; transition: color .3s; }
+.steps button.done .lbl { color: color-mix(in srgb, var(--c) 55%, var(--ink-faint)); }
+.steps button.cur .lbl { color: var(--c); }
+.steps button.cur::before { box-shadow: 0 0 10px color-mix(in srgb, var(--c) 40%, transparent); }
+.steps button:hover .lbl { color: var(--ink); }
+@media (max-width: 640px) { .steps button .lbl { display: none; } .steps button.cur .lbl { display: block; overflow: visible; } }
+@media (min-width: 641px) {
+  .steps button { container-type: inline-size; }
+  @container (max-width: 44px) { .steps button .lbl { display: none; } }
+}
+.steps button .tip { position: absolute; bottom: 26px; left: 50%; transform: translateX(-50%); white-space: nowrap; font: 500 11.5px/1 var(--mono); padding: 6px 9px; border-radius: 6px; background: var(--sky-2); border: 1px solid var(--rule); opacity: 0; pointer-events: none; transition: opacity .15s; }
+.steps button:hover .tip, .steps button:focus-visible .tip { opacity: 1; }
+/* The chapter bar ends at the answer: a marker that jumps there and fills in once you arrive. */
+.bar .finish { flex: none; display: inline-flex; gap: 6px; align-items: center; margin-top: -10px; padding: 6px 10px 6px 8px; border-radius: 999px; border: 1px solid color-mix(in srgb, var(--scout) 50%, transparent); color: var(--scout); font: 500 10px/1 var(--mono); letter-spacing: 0.08em; text-transform: uppercase; }
+.bar .finish svg { width: 13px; height: 13px; fill: none; }
+.bar .finish:hover { background: color-mix(in srgb, var(--scout) 14%, transparent); }
+.bar .finish.done { background: var(--scout); color: var(--sky); border-color: var(--scout); }
+.bar .txt { font: 500 12px/1 var(--mono); padding: 8px 11px; border-radius: 999px; border: 1px solid var(--rule); flex: none; color: var(--ink-dim); letter-spacing: 0.04em; }
+.bar .txt:hover { color: var(--ink); }
+.bar .txt[aria-pressed="true"] { background: var(--ink); color: var(--sky); border-color: var(--ink); }
+
+/* Inspector */
+.inspector { position: fixed; top: calc(60px + env(safe-area-inset-top, 0px)); right: max(16px, env(safe-area-inset-right, 0px)); box-sizing: border-box; max-height: calc(100% - 140px - env(safe-area-inset-top, 0px) - env(safe-area-inset-bottom, 0px)); width: 370px; max-width: calc(100% - 32px); overflow-y: auto; padding: 18px 18px 22px; border-radius: 14px; border: 1px solid var(--rule); background: rgba(8, 12, 24, 0.95); backdrop-filter: blur(14px); z-index: 7; }
+.inspector .close, .brief .close { position: absolute; top: 10px; right: 10px; width: 32px; height: 32px; border-radius: 50%; display: grid; place-items: center; color: var(--ink-dim); }
+.inspector .close:hover, .brief .close:hover { background: rgba(150, 170, 210, 0.12); color: var(--ink); }
+.kind { font: 500 10.5px/1 var(--mono); letter-spacing: 0.16em; text-transform: uppercase; color: var(--ink-dim); }
+.inspector h3 { margin: 9px 34px 10px 0; font: 500 18px/1.3 var(--display); text-wrap: balance; }
+.inspector p { margin: 0 0 12px; }
+.inspector a.read { color: var(--ink); text-decoration: underline; text-decoration-color: var(--ink-faint); text-underline-offset: 3px; }
+.inspector a.read:hover { text-decoration-color: currentColor; }
+.meta { display: grid; grid-template-columns: auto 1fr; gap: 4px 12px; margin: 0 0 14px; font-size: 13px; }
+.meta dt { color: var(--ink-dim); } .meta dd { margin: 0; }
+.pill { display: inline-block; font: 500 10.5px/1 var(--mono); letter-spacing: 0.1em; padding: 5px 8px; border-radius: 999px; border: 1px solid currentColor; text-transform: uppercase; }
+.inspector h4 { margin: 18px 0 8px; font: 500 10.5px/1 var(--mono); letter-spacing: 0.16em; text-transform: uppercase; color: var(--ink-dim); }
+.ev { margin: 0 0 10px; padding: 10px 12px; border-radius: 10px; background: rgba(150, 170, 210, 0.05); border: 1px solid var(--rule); font-size: 13.5px; }
+.ev .rel { font: 500 10.5px/1 var(--mono); letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 6px; }
+.ev blockquote { margin: 0; color: var(--ink); }
+.ev .from { margin-top: 6px; font-size: 12px; color: var(--ink-dim); }
+.link { color: var(--researcher); text-decoration: underline; text-underline-offset: 2px; padding: 0; text-align: left; }
+.fine { font-size: 12px; color: var(--ink-dim); }
+
+.catalog { position: fixed; top: calc(56px + env(safe-area-inset-top, 0px)); right: max(16px, env(safe-area-inset-right, 0px)); width: 310px; max-width: calc(100% - 32px); max-height: calc(100% - 140px); overflow-y: auto; padding: 14px 8px; border-radius: 12px; border: 1px solid var(--rule); background: rgba(8, 12, 24, 0.96); z-index: 8; }
+.catalog h2 { margin-left: 8px; }
+.catalog button { display: grid; grid-template-columns: 44px 1fr; gap: 8px; width: 100%; text-align: left; padding: 7px 8px; border-radius: 8px; font-size: 13px; }
+.catalog button:hover { background: rgba(150, 170, 210, 0.1); }
+.catalog code { font: 500 12px/1.4 var(--mono); color: var(--ink-dim); }
+
+@keyframes nudge { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(4px); } }
+
+/* The answer: when the check lands, the question's own panel opens on the right with the finding,
+   and the whole brief scrolls inside that side panel, like the inspector. The reader can widen it into
+   a reading sheet over the dimmed constellation with the button at its top, and shrink it back the same way. */
+.report { position: fixed; z-index: 6; top: calc(60px + env(safe-area-inset-top, 0px)); right: max(16px, env(safe-area-inset-right, 0px)); bottom: calc(76px + env(safe-area-inset-bottom, 0px)); width: 400px; max-width: calc(100% - 32px); overflow-y: auto; overscroll-behavior: contain; border-radius: 14px; border: 1px solid var(--rule); background: rgba(8, 12, 24, 0.95); backdrop-filter: blur(14px); transition: width .6s var(--ease), right .6s var(--ease), top .6s var(--ease), bottom .6s var(--ease), border-radius .6s var(--ease), background-color .6s ease; animation: panelIn .6s cubic-bezier(.2, .8, .2, 1); scrollbar-width: thin; scrollbar-color: rgba(150, 170, 210, 0.25) transparent; }
+:root { --ease: cubic-bezier(.65, 0, .25, 1); }
+.report.wide { top: 0; bottom: 0; right: max(0px, calc((100vw - 820px) / 2)); width: min(820px, 100vw); max-width: 100vw; border-radius: 0; border-top-color: transparent; border-bottom-color: transparent; background-color: rgba(5, 8, 15, 0.96); }
+@keyframes panelIn { from { opacity: 0; transform: translateX(28px); } to { opacity: 1; transform: none; } }
+.report-in { padding: 22px 22px 32px; transition: padding .6s var(--ease); }
+.report.wide .report-in { max-width: 680px; margin: 0 auto; padding: 72px 28px 88px; }
+.sheet-top { position: sticky; top: 22px; z-index: 2; height: 0; }
+.sheet-top button { position: absolute; right: 0; top: -10px; display: inline-flex; gap: 8px; align-items: center; }
+.sheet-top button svg { width: 12px; height: 12px; fill: none; stroke: currentColor; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
+.report.wide .sheet-top .grow, .report:not(.wide) .sheet-top .shrink { display: none; }
+.report .kind { margin-bottom: 14px; }
+.report .asked-by { margin: -2px 0 14px; color: var(--ink-faint); }
+.answer-k { display: flex; gap: 8px; align-items: center; font: 500 10.5px/1 var(--mono); letter-spacing: 0.2em; text-transform: uppercase; color: var(--scout); margin-bottom: 10px; }
+.answer-k svg { width: 14px; height: 14px; }
+.answer-k { padding-right: 112px; }
+.report.wide .answer-k { padding-right: 132px; }
+.report h2 { margin: 0 0 12px; font: 600 25px/1.25 var(--body); letter-spacing: -0.01em; text-wrap: balance; transition: font-size .6s var(--ease); }
+.report.wide h2 { font-size: clamp(30px, 4.6vw, 44px); }
+.report .dek { margin: 0 0 20px; font-size: 14.5px; line-height: 1.55; color: #c3cde0; max-width: 60ch; transition: font-size .6s var(--ease); }
+.more { width: 100%; margin: 4px 0 26px; display: flex; gap: 8px; align-items: center; justify-content: center; padding: 10px 12px; border-radius: 10px; border: 1px dashed var(--rule); font: 500 12px/1 var(--mono); letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink); transition: opacity .3s ease; }
+.more svg { width: 14px; height: 14px; fill: currentColor; animation: nudge 1.8s ease-in-out infinite; }
+.more:hover { border-color: rgba(150, 170, 210, 0.45); }
+.report.wide .dek { font-size: 17px; margin-bottom: 28px; }
+body.reading #sky { opacity: 0.28; }
+#sky { transition: opacity 1s ease; }
+/* Only the floating speech cards: a thread line inside the finding window stays (October 27, 2026: the expanded
+   view showed each thread's heading and nothing under it). */
+body.reading .fadeable, body.reading .line:not(.report .line) { opacity: 0 !important; pointer-events: none !important; transition: opacity .35s ease; }
+.report .split { display: grid; grid-template-columns: 1fr; gap: 10px; margin: 0 0 22px; }
+.report.wide .split { grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 36px; }
+.report .split div { padding: 16px 18px; border-radius: 12px; border: 1px solid var(--rule); background: rgba(150, 170, 210, 0.04); }
+.report .split b { display: block; font: 500 10.5px/1 var(--mono); letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-dim); margin-bottom: 8px; }
+.report .split div { padding: 14px 16px; }
+.report .split .big { display: block; font: 300 30px/1 var(--body); letter-spacing: -0.02em; margin-bottom: 8px; font-variant-numeric: tabular-nums; }
+.report .split span { font-size: 14px; color: #c3cde0; }
+.report h3 { margin: 40px 0 6px; padding-top: 18px; border-top: 1px solid var(--rule); font: 500 10.5px/1 var(--mono); letter-spacing: 0.18em; text-transform: uppercase; color: var(--ink-dim); }
+.report h4 { margin: 22px 0 8px; font: 500 17px/1.3 var(--display); }
+.report p { margin: 0 0 12px; font-size: 16px; line-height: 1.62; max-width: 66ch; }
+.key { font: 500 11.5px/1 var(--mono); padding: 3px 6px; border-radius: 5px; border: 1px solid var(--rule); color: var(--researcher); margin-right: 8px; vertical-align: 2px; }
+.key:hover { border-color: var(--researcher); }
+.trail { list-style: none; margin: 14px 0 0; padding: 0; display: grid; }
+.trail li { display: grid; grid-template-columns: 76px 130px 1fr; gap: 14px; padding: 11px 0; border-bottom: 1px solid var(--rule); font-size: 14.5px; }
+.trail .t { font: 400 12px/1.6 var(--mono); color: var(--ink-faint); font-variant-numeric: tabular-nums; }
+.trail .s { font: 500 12px/1.6 var(--mono); color: var(--ink-dim); text-transform: uppercase; letter-spacing: 0.06em; }
+.trail .who { color: var(--skeptic); }
+.out { margin-top: 18px; display: grid; gap: 8px; }
+.out .key { min-width: 40px; text-align: center; margin-right: 0; }
+.out div { display: grid; grid-template-columns: auto 1fr; gap: 10px; font-size: 14.5px; color: #c3cde0; }
+.studies { list-style: none; margin: 14px 0 0; padding: 0; display: grid; gap: 0; }
+.studies li { padding: 14px 0; border-bottom: 1px solid var(--rule); display: grid; gap: 4px; }
+.studies .nm { display: flex; gap: 10px; align-items: baseline; flex-wrap: wrap; }
+.studies .nm button { font: 500 15px/1.3 var(--display); text-align: left; padding: 0; }
+.studies .nm button:hover { color: var(--researcher); }
+.studies .tag { font: 500 10px/1 var(--mono); letter-spacing: 0.1em; text-transform: uppercase; color: var(--scout); border: 1px solid currentColor; border-radius: 999px; padding: 3px 6px; }
+.studies .ti { font-size: 14px; color: #c3cde0; }
+.studies .mt { font: 400 12px/1.5 var(--mono); color: var(--ink-dim); }
+.foot { margin-top: 44px; display: flex; gap: 10px; flex-wrap: wrap; }
+.foot button { padding: 10px 15px; border-radius: 999px; font: 500 13.5px/1 var(--body); border: 1px solid var(--rule); }
+.foot button.primary { background: var(--ink); color: var(--sky); border-color: var(--ink); }
+.share { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; margin: 0 0 18px; }
+.share button, .share a { display: inline-flex; gap: 7px; align-items: center; padding: 8px 12px; border-radius: 999px; border: 1px solid var(--rule); font: 500 13px/1 var(--body); color: var(--ink); text-decoration: none; background: rgba(150, 170, 210, 0.04); }
+.share button:hover, .share a:hover { border-color: rgba(150, 170, 210, 0.45); }
+.share svg { width: 14px; height: 14px; fill: currentColor; }
+.share .done { color: var(--scout); border-color: var(--scout); }
+.share textarea { flex-basis: 100%; min-height: 110px; margin-top: 4px; padding: 10px 12px; border-radius: 10px; border: 1px solid var(--rule); background: var(--sky-2); color: var(--ink); font: 400 13px/1.5 var(--mono); resize: vertical; }
+.share .note { flex-basis: 100%; font-size: 12px; color: var(--ink-dim); }
+.fadeable { transition: opacity .8s ease; }
+@media (max-width: 640px) {
+  .report .split { grid-template-columns: 1fr; }
+  .trail li { grid-template-columns: 64px 1fr; }
+  .trail li > :last-child { grid-column: 2; }
+}
+.hint { position: fixed; left: 50%; top: calc(16px + env(safe-area-inset-top, 0px)); transform: translateX(-50%); font: 400 11.5px/1 var(--mono); color: var(--ink-dim); padding: 8px 12px; border-radius: 999px; background: rgba(11, 17, 32, 0.8); border: 1px solid var(--rule); pointer-events: none; }
+
+@media (max-width: 960px) {
+  /* The strip hugs the observers on stage and grows as each joins; it scrolls only when they outgrow the screen. */
+  .deck { top: calc(var(--mast-b, 146px) + 10px); transform: none; left: max(12px, env(safe-area-inset-left, 0px)); right: auto; width: fit-content; box-sizing: border-box; max-width: calc(100% - max(12px, env(safe-area-inset-left, 0px)) - max(12px, env(safe-area-inset-right, 0px))); display: flex; gap: 2px; padding: 6px; overflow-x: auto; }
+  .deck-h { display: none; }
+  .slot { grid-template-columns: 30px auto; gap: 5px; padding: 3px 6px 3px 2px; flex: none; }
+  .slot:not(.in) { transform: translateY(-14px); max-height: none; max-width: 0; padding: 0; margin: 0; }
+  .slot .ic { width: 30px; height: 30px; }
+  .slot .rl { display: none; }
+  .slot .nm { font-size: 12px; }
+  .line .text { font-size: 14.5px; }
+  .paused { bottom: auto; top: calc(var(--mast-b, 146px) + 14px); }
+  .log { width: auto; right: max(16px, env(safe-area-inset-right, 0px)); bottom: calc(58px + env(safe-area-inset-bottom, 0px)); }
+  .log .row { display: none; }
+  .log .row:last-of-type { display: grid; }
+  .counts { margin-top: 4px; padding-top: 6px; }
+  .inspector { top: auto; left: 0; right: 0; bottom: 0; width: auto; max-width: none; max-height: 70%; border-radius: 16px 16px 0 0; padding-bottom: calc(22px + env(safe-area-inset-bottom, 0px)); padding-left: max(18px, env(safe-area-inset-left, 0px)); padding-right: max(18px, env(safe-area-inset-right, 0px)); }
+  .hint { display: none; }
+  .report { left: 0; right: 0; bottom: 0; top: 50%; width: auto; max-width: none; border-radius: 16px 16px 0 0; border-left: 0; border-right: 0; border-bottom: 0; animation-name: sheetIn; }
+  .report.wide { top: 0; left: 0; right: 0; width: auto; border-radius: 0; }
+  .report.wide .report-in { padding-top: 60px; }
+  .report.wide .split { grid-template-columns: 1fr; }
+  .deck:not(:has(.slot.in)) { opacity: 0 !important; pointer-events: none; }
+}
+@keyframes sheetIn { from { opacity: 0; transform: translateY(40px); } to { opacity: 1; transform: none; } }
+@media (max-width: 480px) { .bar { gap: 8px; } .bar .prev { display: none; } .bar .finish span { display: none; } .bar .finish { padding: 6px; } .wordmark .ref { display: none; } }
+/* On a phone the speaking box's width includes its padding, so it stays inside the screen. */
+@media (max-width: 480px) { .line { box-sizing: border-box; } }
+@media (max-width: 640px) {
+  .bar .ctl, .bar .finish { min-width: 40px; min-height: 40px; }
+  .bar .finish { display: inline-flex; align-items: center; justify-content: center; }
+  .topright .chip { min-height: 40px; }
+  .topright .menu-btn { width: 40px; height: 40px; }
+  .steps button { height: 40px; }
+  .masthead .home-link { padding-block: 8px; }
+  .deck .slot.in { min-height: 40px; }
+  a.chip { display: inline-flex; align-items: center; min-height: 40px; }
+}
+@media (prefers-reduced-motion: reduce) { .line, .masthead, .masthead .wordmark, .question, .masthead .clock, .slot, .slot::after, .fadeable, .report, .report-in, .report h2, .report .dek, #sky { transition: none; animation: none; } .more svg { animation: none; } .verdict .cue svg { animation: none; } .bar .play.waiting::after { animation: none; opacity: 0.5; } }
+
+/* The site's look. The home and Investigations pages draw with type, hairlines and one gradient, not boxes:
+   spaced caps for labels, the serif for names, film grain over the night. So the observer column, the cards,
+   the speech line, the buttons, the bar and the finding lose their glass panels, double borders and glows, and
+   keep only a soft scrim where text sits on stars. These rules come after the page's first styles and win. */
+:root {
+  --arc: linear-gradient(90deg, #4f8dff, #6fe0c0 55%, #e4ef7a);
+  --scrim: linear-gradient(180deg, rgba(5, 7, 12, 0.88), rgba(5, 7, 12, 0.7));
+  --caps-font: 700 10px/1.6 var(--mono);
+  --hair: rgba(255, 255, 255, 0.12);
+}
+
+/* Film grain, as on the other pages. */
+.grain { position: fixed; inset: -50%; z-index: 2; pointer-events: none; opacity: 0.075; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0.55 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); }
+@media (prefers-reduced-motion: no-preference) { .grain { animation: grain 1.2s steps(6) infinite; } }
+@keyframes grain { 0% { transform: translate(0, 0); } 20% { transform: translate(-3%, 2%); } 40% { transform: translate(2%, -3%); } 60% { transform: translate(-2%, -1%); } 80% { transform: translate(3%, 3%); } 100% { transform: translate(0, 0); } }
+
+/* Each observer's colour, for the pieces below. */
+[data-agent="scout"] { --c: var(--scout); } [data-agent="researcher"] { --c: var(--researcher); } [data-agent="analyst"] { --c: var(--analyst); }
+[data-agent="skeptic"] { --c: var(--skeptic); } [data-agent="editor"] { --c: var(--editor); } [data-agent="reviewer"] { --c: #9fe3d3; } [data-agent="check"] { --c: var(--check); }
+
+/* The observers: no panel. A spaced-caps header on a hairline, then each observer as mark and name; the one
+   speaking is lit in its colour with a fine underline. */
+.deck { background: none; border: 0; border-radius: 0; backdrop-filter: none; padding: 0; gap: 2px; }
+.deck-h { font: var(--caps-font); letter-spacing: 0.24em; color: var(--ink-faint); padding: 0 0 10px; margin-bottom: 6px; border-bottom: 1px solid var(--hair); }
+.slot { border-radius: 0; padding: 6px 0; background: none !important; position: relative; }
+.slot .ic { width: 30px; height: 30px; }
+.slot { grid-template-columns: 30px 1fr; gap: 12px; }
+.slot .nm { font: var(--caps-font); letter-spacing: 0.2em; text-transform: uppercase; color: var(--ink); text-shadow: 0 1px 8px rgba(5, 7, 12, 0.9); }
+.slot .rl { font: 400 12px/1.35 var(--body); color: var(--ink-faint); text-shadow: 0 1px 8px rgba(5, 7, 12, 0.9); }
+.slot.talking .nm { color: var(--c); }
+.slot::after { content: ""; position: absolute; left: 42px; right: 0; bottom: 2px; height: 1px; background: var(--c, #fff); transform: scaleX(0); transform-origin: left; transition: transform .5s cubic-bezier(.2, .8, .2, 1); opacity: 0.8; }
+.slot.talking::after { transform: scaleX(1); }
+.twin { border: 0; padding: 0; margin-left: 6px; font: var(--caps-font); letter-spacing: 0.2em; color: var(--ink-faint); background: none; }
+.twin::before { content: "· "; }
+
+/* New-observer card: no frame, no glow. A gradient hairline on top, a spaced-caps kicker in the observer's
+   colour, the name large in the serif, the model as a plain caption. */
+.line.card { border: 0; border-radius: 0; box-shadow: none; background: var(--scrim); backdrop-filter: blur(6px); width: min(380px, calc(100% - 32px)); }
+.line.card::before { content: ""; position: absolute; left: 0; right: 0; top: 0; height: 1px; background: var(--arc); }
+.badge-top { border-bottom: 0; padding: 16px 20px 0; font: var(--caps-font); letter-spacing: 0.24em; color: var(--c); }
+.badge-top i { font: var(--caps-font); letter-spacing: 0.2em; color: var(--ink-faint); }
+.badge-body { padding: 8px 20px 20px; gap: 8px; }
+.badge-name { font: 700 40px/1 var(--display); color: var(--ink); }
+.badge-model { border: 0; background: none; padding: 0; margin: 0 0 6px; font: var(--caps-font); letter-spacing: 0.2em; text-transform: uppercase; color: var(--ink-dim); }
+.badge-model b { color: var(--ink-faint); font-weight: 700; }
+.badge-role { font: 600 16px/1.35 var(--body); }
+.badge-trait { color: var(--ink-dim); font-size: 14px; }
+
+/* The speech line: the same treatment, smaller. Who speaks in spaced caps, then the words. */
+.line:not(.card) { border: 0; border-radius: 0; background: var(--scrim); backdrop-filter: blur(6px); padding: 14px 18px 16px; width: min(360px, calc(100% - 32px)); }
+.line:not(.card)::before { content: ""; position: absolute; left: 0; top: 0; width: 100%; height: 1px; background: var(--arc); opacity: 0.7; }
+.line .who { font: var(--caps-font); letter-spacing: 0.24em; }
+.line .who .model { letter-spacing: 0.14em; }
+.line .text { font: 400 17px/1.5 var(--body); color: var(--ink); }
+
+/* The log: quieter, with a hairline. */
+.log { font-size: 13px; }
+.counts { border-top-color: var(--hair); font: var(--caps-font); letter-spacing: 0.16em; text-transform: uppercase; color: var(--ink-faint); }
+.counts b { font: 600 13px/1 var(--body); letter-spacing: 0; color: var(--ink); }
+
+/* Buttons at the top: outline pills like the site's header. */
+.chip { background: none; backdrop-filter: none; border: 1px solid var(--hair); padding: 9px 14px; font: var(--caps-font); letter-spacing: 0.2em; text-transform: uppercase; color: var(--ink-dim); }
+.chip:hover { border-color: var(--ink); color: var(--ink); }
+.menu-btn { width: 34px; height: 34px; padding: 0; }
+
+/* Panels (Key, Catalog, menu): solid night with a gradient hairline instead of glass. */
+.legend, .catalog, .sitemenu { border-radius: 0; border: 0; background: rgba(5, 7, 12, 0.96); backdrop-filter: none; box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.04); }
+.legend::before, .catalog::before, .sitemenu::before { content: ""; position: absolute; left: 0; right: 0; top: 0; height: 1px; background: var(--arc); }
+.legend h2, .catalog h2 { font: var(--caps-font); letter-spacing: 0.24em; }
+.sitemenu a { border-radius: 0; font: var(--caps-font); letter-spacing: 0.2em; text-transform: uppercase; }
+
+/* The controls: one solid play button in the
+   site's ink, the rest bare icons, the chapter bar as hairlines with spaced-caps labels. */
+.bar { background: linear-gradient(0deg, rgba(5, 7, 12, 0.92), rgba(5, 7, 12, 0)); padding-top: 26px; }
+.bar .ctl { color: var(--ink-faint); }
+.bar .ctl:hover { background: none; color: var(--ink); }
+.bar .play { width: 40px; height: 40px; background: var(--ink); color: var(--sky); border: 0; }
+.bar .play { transition: background .25s, color .25s; }
+.bar .play:hover { background: transparent; color: var(--ink); box-shadow: inset 0 0 0 1px var(--ink); }   /* inverts, no glow */
+.bar .play.waiting::after { border-color: #6fe0c0; }
+.steps button::before { height: 1px; top: 10px; border-radius: 0; background: color-mix(in srgb, var(--c) 30%, transparent); }
+.steps button .fill { height: 1px; top: 10px; border-radius: 0; box-shadow: 0 0 8px var(--c); }
+.steps button .lbl { font: var(--caps-font); font-size: 9px; letter-spacing: 0.12em; top: 20px; }
+.bar .finish { border-radius: 999px; border-color: var(--hair); color: var(--ink); font: var(--caps-font); letter-spacing: 0.2em; padding: 8px 14px 8px 12px; }
+.bar .finish:hover { border-color: var(--ink); background: none; }
+.bar .finish.done { background: var(--ink); color: var(--sky); border-color: var(--ink); }
+.bar .txt { border-color: var(--hair); font: var(--caps-font); letter-spacing: 0.2em; text-transform: uppercase; padding: 9px 14px; }
+.paused { border-radius: 999px; border-color: var(--hair); background: rgba(5, 7, 12, 0.94); font: var(--caps-font); letter-spacing: 0.2em; text-transform: uppercase; }
+.paused button { font: var(--caps-font); letter-spacing: 0.2em; text-transform: uppercase; }
+
+/* Narrow screens: the observers become a strip; still no box, just a hairline under it. */
+@media (max-width: 960px) {
+  .deck { padding: 4px 0 8px; gap: 14px; border-bottom: 1px solid var(--hair); }
+  .slot { grid-template-columns: 24px auto; gap: 8px; padding: 2px 0 6px; }
+  .slot .ic { width: 24px; height: 24px; }
+  .slot::after { left: 0; }
+}
+
+/* The finding and the brief: a sheet in the site's brief style. No rounded glass: night with a gradient
+   hairline on top, spaced-caps labels, the answer in the upright sans, the two headline figures as bare
+   numbers in the site's gradient on hairlines, outline pills for sharing. */
+.report { border-radius: 0; border: 0; border-top: 1px solid transparent; border-image: var(--arc) 1; background: rgba(5, 7, 12, 0.96); backdrop-filter: none; }
+.report.wide { border-image: none; border-top: 0; background-color: rgba(5, 7, 12, 0.97); }
+.answer-k, .report .kind { font: var(--caps-font); letter-spacing: 0.24em; }
+.report h2 { font: 600 28px/1.22 var(--body); letter-spacing: -0.01em; }
+.report .dek { color: var(--ink-dim); }
+.report .split div { border: 0; border-top: 1px solid var(--hair); border-radius: 0; background: none; padding: 16px 0 4px; }
+.report .split b { font: var(--caps-font); letter-spacing: 0.22em; color: var(--ink-faint); }
+.report .split .big { font: 300 44px/1 var(--body); letter-spacing: -0.03em; background: var(--arc); -webkit-background-clip: text; background-clip: text; color: transparent; padding-bottom: 4px; }
+.report.wide .split .big { font-size: 56px; }
+.report .split span { color: var(--ink-dim); }
+.share button, .share a { background: none; border-color: var(--hair); font: var(--caps-font); letter-spacing: 0.18em; text-transform: uppercase; padding: 9px 13px; }
+.share button:hover, .share a:hover { border-color: var(--ink); }
+.more { border: 1px solid var(--hair); border-radius: 999px; font: var(--caps-font); letter-spacing: 0.22em; }
+.more:hover { border-color: var(--ink); }
+.sheet-top button { background: rgb(5, 7, 12); box-shadow: 0 0 14px 10px rgba(5, 7, 12, 0.94); }
+@media (max-width: 480px) {
+  .report:not(.wide) .answer-k { padding-right: 106px; letter-spacing: 0.18em; }
+  .report.wide .answer-k { padding-right: 0; }
+  .report.wide .sheet-top { top: 60px; }
+  .report.wide .sheet-top button { top: -48px; }
+}
+.report h3 { border-top-color: var(--hair); font: var(--caps-font); letter-spacing: 0.24em; }
+.report h4 { font: 700 21px/1.25 var(--display); }
+.key { border-radius: 999px; border-color: var(--hair); font: var(--caps-font); letter-spacing: 0.12em; padding: 3px 7px; }
+.trail li { border-bottom-color: var(--hair); }
+.trail .s { font: var(--caps-font); letter-spacing: 0.2em; }
+.studies li { border-bottom-color: var(--hair); }
+.studies .nm button { font: 700 17px/1.3 var(--display); }
+.studies .tag { font: var(--caps-font); letter-spacing: 0.18em; padding: 3px 8px; }
+.studies .mt { font: 400 12.5px/1.5 var(--body); color: var(--ink-faint); }
+/* The detail windows (a study, a claim, the question, an observer): the same family as the finding, quieter.
+   Night with the gradient hairline on top, square corners, spaced-caps labels, the serif for titles, and each
+   quoted passage set off by a hairline instead of a box. */
+.inspector { border-radius: 0; border: 0; border-top: 1px solid transparent; border-image: var(--arc) 1; background: rgba(5, 7, 12, 0.96); backdrop-filter: none; }
+.inspector .kind { font: var(--caps-font); letter-spacing: 0.24em; color: var(--ink-faint); }
+.inspector h3 { font: 700 20px/1.25 var(--display); }
+.inspector h4 { font: var(--caps-font); letter-spacing: 0.24em; color: var(--ink-faint); padding-top: 14px; border-top: 1px solid var(--hair); }
+.meta { font-size: 13px; }
+.meta dt { font: var(--caps-font); letter-spacing: 0.18em; color: var(--ink-faint); padding-top: 2px; }
+.pill { font: var(--caps-font); letter-spacing: 0.18em; padding: 3px 8px; }
+.ev { border: 0; border-left: 1px solid var(--hair); border-radius: 0; background: none; padding: 2px 0 2px 14px; margin-bottom: 16px; }
+.ev .rel { font: var(--caps-font); letter-spacing: 0.2em; }
+.ev blockquote { font: 400 15px/1.5 var(--body); }
+
+/* The twins' tie: a short dashed line from the Researcher's mark down to the Analyst's, centred on both.
+   In the strip they sit side by side, and the "twin" labels say it. */
+.slot[data-agent="researcher"].in + .slot[data-agent="analyst"].in::before { left: 15px; top: -7px; height: 12px; }
+
+/* The cut (the edited replay): the same speech line, holding a short stack of rows. An agent's words large under its
+   name and model, a reply's "replying to" from the thread, the challenge it answers small above it; the lab's log small
+   and grey; a quiet stretch as one centred marker. Each row's recorded events, and a claim's evidence, a tap away. */
+.cutmode { display: flex; flex-wrap: wrap; gap: 0 10px; align-items: center; margin-top: 4px; font: var(--caps-font); letter-spacing: 0.18em; text-transform: uppercase; color: var(--ink-dim); transition: opacity .7s ease, transform .9s cubic-bezier(.2, .8, .2, 1); }
+.masthead.opening .cutmode { opacity: 0; transform: translateY(10px); }
+.cutmode a { pointer-events: auto; display: inline-flex; align-items: center; min-height: 40px; box-sizing: border-box; padding: 0 14px; text-decoration: none; color: var(--ink); }
+.line.cut { pointer-events: auto; width: min(400px, calc(100% - 32px)); }
+.line.cut .who { display: none; }
+.line.cut .text { margin: 0; font: 400 15px/1.5 var(--body); }
+.cut-row + .cut-row { margin-top: 10px; }
+.cut-row .hd { display: flex; flex-wrap: wrap; gap: 2px 8px; align-items: center; font: var(--caps-font); letter-spacing: 0.2em; text-transform: uppercase; }
+.cut-row .model { color: var(--ink-faint); letter-spacing: 0.14em; }
+.cut-row .words { margin-top: 6px; font: 400 17px/1.5 var(--body); color: var(--ink); }
+.cut-row .replying { display: block; margin-top: 3px; font: italic 400 13px/1.3 var(--body); color: var(--ink-dim); }
+.cut-row.c-log { font: 400 12.5px/1.45 var(--body); color: var(--ink-faint); }
+.cut-row.c-log .lab { font: var(--caps-font); letter-spacing: 0.2em; text-transform: uppercase; margin-right: 6px; }
+.cut-row.c-out { color: var(--ink-dim); }
+.cut-row.c-ctx { opacity: 0.6; }
+.cut-row .was { font: var(--caps-font); letter-spacing: 0.2em; text-transform: uppercase; color: var(--ink-faint); margin-right: 4px; }
+.cut-row.c-ctx .words { font-size: 14px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+.cut-row.c-gap { text-align: center; padding: 8px 0; font: var(--caps-font); letter-spacing: 0.24em; text-transform: uppercase; color: var(--ink-dim); }
+/* The evidence behind a box: one quiet clipboard at its bottom right, a 40px target on a phone by its padding. */
+.line.cut { padding-bottom: 22px; }
+.line .ev-btn { position: absolute; right: 6px; bottom: 2px; padding: 4px; line-height: 0; color: var(--ink-faint); border-radius: 6px; }
+.line .ev-btn svg { width: 14px; height: 14px; fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+.line .ev-btn:hover, .line .ev-btn:focus-visible { color: var(--ink); }
+@media (max-width: 640px) { .line .ev-btn { padding: 13px; right: -4px; bottom: -8px; } }
+/* A moment: the box's hairline glows in the arc's colours, in and out over 600 ms. Nothing else glows. */
+.line.cut::after { content: ""; position: absolute; inset: 0; padding: 1px; background: var(--arc); pointer-events: none; opacity: 0; transition: opacity .6s ease;
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor; mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0);
+  filter: drop-shadow(0 0 6px rgba(111, 224, 192, 0.45)); }
+.line.cut.moment::after { opacity: 1; }
+@media (prefers-reduced-motion: reduce) { .line.cut::after { transition: none; filter: none; } }
+@media (max-width: 960px) { .cut-row .words { font-size: 15.5px; } .cut-row.c-ctx .words { -webkit-line-clamp: 1; } }
+@media (max-width: 960px) { .slot[data-agent="researcher"].in + .slot[data-agent="analyst"].in::before { display: none; } }
+</style>
+</head>
+<body>
+<canvas id="sky" class="opening-hide" aria-hidden="true"></canvas>
+</div>
+
+<header class="masthead fadeable pre opening">
+  <div class="wordmark"><a class="wm home-link" data-wm href="https://www.theobservatori.com/" target="_top" title="Home"></a><span class="beta">Beta</span></div>
+  <h1 class="question hidden-q" id="question"></h1>
+  <div class="cutmode" id="cutMode" hidden></div>
+  <div class="clock" id="clock"></div>
+</header>
+
+<script>
+// On a phone the observers' strip sits just below the masthead, as tall as its question makes it (scenario 231).
+(() => {
+  const m = document.querySelector('.masthead'), root = document.documentElement;
+  const put = () => root.style.setProperty('--mast-b', Math.ceil(m.getBoundingClientRect().bottom) + 'px');
+  put(); new ResizeObserver(put).observe(m); addEventListener('resize', put);
+})();
+</script>
+<div class="topright fadeable opening-hide">
+  <button class="chip" id="legendBtn" aria-pressed="false" aria-controls="legend">Key</button>
+  <button class="chip" id="catalogBtn" aria-pressed="false" aria-controls="catalog">Catalog</button>
+  <button class="chip menu-btn" id="menuBtn" aria-expanded="false" aria-controls="sitemenu" aria-label="Site menu"><i></i><i></i></button>
+</div>
+<nav class="sitemenu" id="sitemenu" aria-label="Site">
+  <a href="https://www.theobservatori.com/investigations/" target="_top">Investigations</a>
+  <a href="https://www.theobservatori.com/about/" target="_top">About</a>
+  <a href="https://www.theobservatori.com/get-involved/" target="_top">Get involved</a>
+</nav>
+
+<aside class="legend" id="legend" hidden aria-label="Chart key">
+  <h2>The evidence</h2>
+  <ul>
+    <li><canvas data-key="source" width="68" height="36"></canvas><span>A study. Larger for stronger designs and bigger samples.</span></li>
+    <li><canvas data-key="claim" width="68" height="36"></canvas><span>A claim. Brightness is its certainty.</span></li>
+    <li><canvas data-key="supports" width="68" height="36"></canvas><span>A quoted passage supports it</span></li>
+    <li><canvas data-key="qualifies" width="68" height="36"></canvas><span>A passage limits it</span></li>
+    <li><canvas data-key="contradicts" width="68" height="36"></canvas><span>A study cuts against it</span></li>
+    <li><canvas data-key="contested" width="68" height="36"></canvas><span>Contested: kept, both sides shown</span></li>
+    <li><canvas data-key="removed" width="68" height="36"></canvas><span>Left out after failing a check</span></li>
+  </ul>
+</aside>
+
+<nav class="catalog" id="catalog" hidden aria-label="Everything on the chart">
+  <h2>On the chart</h2>
+  <div id="catalogList"></div>
+</nav>
+
+<aside class="deck fadeable opening-hide" id="deck" aria-label="Observers">
+  <div class="deck-h">In the room</div>
+  <div class="slot" data-agent="editor"><canvas class="ic" width="80" height="80"></canvas><span><span class="nm">Claude · Host</span><span class="rl">Hosts the conversation</span></span></div>
+  <div class="slot" data-agent="researcher"><canvas class="ic" width="80" height="80"></canvas><span><span class="nm">GPT</span><span class="rl">Discussant</span></span></div>
+  <div class="slot" data-agent="reviewer"><canvas class="ic" width="80" height="80"></canvas><span><span class="nm">Gemini</span><span class="rl">Discussant</span></span></div>
+  <div class="slot" data-agent="skeptic"><canvas class="ic" width="80" height="80"></canvas><span><span class="nm">Grok</span><span class="rl">Discussant</span></span></div>
+  <div class="slot" data-agent="check"><canvas class="ic" width="80" height="80"></canvas><span><span class="nm">Code</span><span class="rl">Keeps the room's log</span></span></div>
+</aside>
+<section class="log fadeable opening-hide" id="log" aria-label="Log">
+  <div id="logRows"></div>
+  <div class="counts" id="counts"></div>
+</section>
+
+<div class="line" id="line" aria-live="polite">
+  <div class="who" id="who"></div>
+  <p class="text" id="lineText"></p>
+</div>
+<div class="paused" id="paused" hidden role="status"><span>Paused</span><button id="resume"><svg viewBox="0 0 24 24"><path d="M7 5v14l12-7z"/></svg>Resume</button></div>
+<div class="hint" id="hint" hidden>Drag to turn the constellation · click any point to look inside</div>
+
+<h2 id="verdictText" hidden></h2>
+
+<aside class="inspector" id="inspector" hidden aria-label="Details">
+  <button class="close" id="inspClose" aria-label="Close details"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M6.4 5 5 6.4 10.6 12 5 17.6 6.4 19l5.6-5.6 5.6 5.6 1.4-1.4-5.6-5.6L19 6.4 17.6 5 12 10.6z"/></svg></button>
+  <div id="inspBody"></div>
+</aside>
+
+<div class="bar fadeable opening-hide" role="group" aria-label="Playback">
+  <button class="ctl restart" id="restart" aria-label="Start over"><svg viewBox="0 0 24 24"><path d="M12 5V2L7 6l5 4V7a5 5 0 1 1-5 5H5a7 7 0 1 0 7-7z"/></svg></button>
+  <button class="ctl prev" id="prev" aria-label="Previous step"><svg viewBox="0 0 24 24"><path d="M6 6h2v12H6zm3.5 6 8.5 6V6z"/></svg></button>
+  <button class="ctl play" id="play" aria-label="Pause"><svg viewBox="0 0 24 24" id="playIcon"><path d="M6 5h4v14H6zm8 0h4v14h-4z"/></svg></button>
+  <button class="ctl next" id="next" aria-label="Next step"><svg viewBox="0 0 24 24"><path d="M6 18l8.5-6L6 6zm9.5-12h2v12h-2z"/></svg></button>
+  <div class="steps" id="steps"></div>
+  <button class="finish" id="skipEnd" aria-label="Skip to the finding"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span>Finding</span></button>
+</div>
+
+<section class="report" id="report" hidden aria-label="The finding and the brief" tabindex="-1">
+  <div class="report-in">
+    <div class="sheet-top"><button class="chip" id="sizeBtn" aria-expanded="false" aria-controls="report"><svg class="grow" viewBox="0 0 24 24"><path d="M14 4h6v6M20 4l-7 7M10 20H4v-6M4 20l7-7"/></svg><svg class="shrink" viewBox="0 0 24 24"><path d="M19 10h-5V5M14 10l6-6M5 14h5v5M10 14l-6 6"/></svg><span class="grow">Expand</span><span class="shrink">Collapse</span></button></div>
+    <div class="answer-k"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>Where the room landed</div>
+    <h2 id="rTitle"></h2>
+    <div class="kind asked-by" id="askedBy" hidden></div>
+    <p class="dek">Asked: “is social media use harming teenagers' mental health?” A conversation hosted by Claude with GPT, Gemini and Grok: 22 turns, 1 research trip. Every line is a model's own words, as recorded.</p>
+    <div class="split">
+      <div><b>Turns</b><span class="big">22</span><span>1,073 words said aloud.</span></div>
+      <div><b>Sources</b><span class="big">5</span><span>0 found during the conversation.</span></div>
+    </div>
+    <button class="more" id="more">Read the brief <svg viewBox="0 0 24 24"><path d="M12 16.5 5 9.5l1.4-1.4 5.6 5.6 5.6-5.6L19 9.5z"/></svg></button>
+    <div class="kind" style="display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-top:6px"><span class="wm" data-wm style="font-size:12px"></span><span>Room replay · private pilot · Oct 30, 2026</span></div>
+    <div id="briefBody"></div>
+    <h3>How it went</h3>
+    <ol class="trail" id="trail"></ol>
+    <div class="out" id="out"></div>
+    <p class="fine" style="margin-top:18px;font-size:12.5px;color:var(--ink-dim)">In the room: Claude · Host, Claude Sonnet 5.5; GPT, GPT 6.1 Sol; Gemini, Gemini 3.1 Pro Preview; Grok, Grok 4.7. Played at reading pace; the room's real waits are left out. Times are US Central.</p>
+    <h3>Sources</h3>
+    <ul class="studies" id="studies"></ul>
+        <div class="foot" style="margin-top:0"><button class="primary" id="toChart">Back to the constellation</button><button id="exploreBtn2">Explore the evidence</button><button id="replay2">Replay</button></div>
+  </div>
+</section>
+
+<script>
+'use strict';
+// The record: a conversation room's public turns, from its recorded events, built by code (src/room/constellation.ts).
+const AGENTS = {"editor":{"name":"Claude · Host","color":"#f2a7c3","model":"Claude Sonnet 5.5","manner":"still","label":"Claude Sonnet 5.5"},"researcher":{"name":"GPT","color":"#79b8ff","model":"GPT 6.1 Sol","manner":"steady","label":"GPT 6.1 Sol"},"reviewer":{"name":"Gemini","color":"#9fe3d3","model":"Gemini 3.1 Pro Preview","manner":"lens","label":"Gemini 3.1 Pro Preview"},"skeptic":{"name":"Grok","color":"#f0a43a","model":"Grok 4.7","manner":"restless","label":"Grok 4.7"}};
+const SOURCES = {"S1":{"label":"Social Psychiatry and Psychiatric Epidemiology, 2024","title":"Problematic social media use and psychological symptoms in adolescents","venue":"Social Psychiatry and Psychiatric Epidemiology","year":"2024","design":"Article","link":"https://doi.org/10.1007/s00127-024-02657-7","pos":[162,173,0],"weight":0.7,"note":"Supplied before the conversation. Cited in turn 14."},"S2":{"label":"Preventive Medicine Reports, 2019","title":"Longitudinal associations between problematic social media use and depressive symptoms in adolescent girls","venue":"Preventive Medicine Reports","year":"2019","design":"Article","link":"https://doi.org/10.1016/j.pmedr.2019.100925","pos":[-182,86,167],"weight":0.7,"note":"Supplied before the conversation. Cited in turns 2, 9, 14 and 22."},"S3":{"label":"Affective Science, 2024","title":"Bidirectional Associations of Adolescents’ Momentary Social Media Use and Negative Emotions","venue":"Affective Science","year":"2024","design":"Article","link":"https://doi.org/10.1007/s42761-024-00244-2","pos":[24,0,-269],"weight":0.7,"note":"Supplied before the conversation. Cited in turns 2, 3 and 22."},"S4":{"label":"PLoS ONE, 2022","title":"Effects of restricting social media usage on wellbeing and performance: A randomized control trial among students","venue":"PLoS ONE","year":"2022","design":"Article","link":"https://doi.org/10.1371/journal.pone.0272416","pos":[151,-86,196],"weight":0.7,"note":"Supplied before the conversation. Cited in turns 4, 5, 17 and 18."},"S5":{"label":"Nature Human Behaviour, 2025","title":"Social media use in adolescents with and without mental health conditions","venue":"Nature Human Behaviour","year":"2025","design":"Article","link":"https://doi.org/10.1038/s41562-025-02134-4","pos":[-160,-173,-28],"weight":0.7,"note":"Supplied before the conversation. Cited in turns 7 and 14."}};
+const CLAIMS = {};
+const LINKS = [];
+const STORY = {"question":"Is social media use harming teenagers' mental health?","verdict":"The evidence supports a small link between heavy or problematic use and worse mood, not clear broad harm. In girls followed over time, depressive symptoms predicted later problematic use, not the reverse. Passive browsing was linked to a small short-term rise in negative emotion, and posting showed none. Nothing here shows lasting harm from browsing, and nothing shows that cutting use helps struggling teens or that some groups are more susceptible. Advice to parents is proposal only.","brief":{"title":"The evidence supports a small link between heavy or problematic use and worse mood, not clear broad harm. In girls followed over time, depressive symptoms predicted later problematic use, not the reverse. Passive browsing was linked to a small short-term rise in negative emotion, and posting showed none. Nothing here shows lasting harm from browsing, and nothing shows that cutting use helps struggling teens or that some groups are more susceptible. Advice to parents is proposal only.","sections":[{"heading":"In short","lines":[["","Confidence: low."]]},{"heading":"What supports it","lines":[["","Verified finding: in adolescent girls, baseline depressive symptoms predicted changes in problematic use, but baseline problematic use did not predict changes in depressive symptoms. This points to struggling teens using more, not the reverse."],["","Verified finding: browsing predicted higher-than-usual negative emotions hours later; posting showed no significant directional effects. This separates types of use."],["","Interpretation: the browsing result is small and short-term, so it supports browsing as a possible contributor to short-term distress, not a demonstrated cause of lasting problems."],["","Interpretation: the restriction trial's null does not show that blanket limits fail or that targeted changes work better. Preferring targeted changes, such as acting on distress during browsing, is a proposal."]]},{"heading":"Objections","lines":[["","Objection: saying browsing 'actively worsens mood' overstates a small, short-term association. It was accepted: the claim was narrowed to a possible contributor to short-term distress. The room did not dispute that brief mood shifts fail to establish lasting harm. (This changed the conclusion.)"],["","Objection: greater use among vulnerable teens is not greater susceptibility. It stands; susceptibility remains a hypothesis. The notes record this as resolved: the evidence shows differences in use and experience, not greater harm."],["","Objection: the restriction trial does not show limits are ineffective. It was accepted; the claim of support for no blanket limits was restated as a proposal. (This changed the conclusion.)"]]},{"heading":"Unresolved","lines":[["","Whether reducing problematic use helps struggling or older girls is untested. A randomized trial is proposed."],["","Whether vulnerable groups, such as older girls or teens with internalizing conditions, are more susceptible to harm is untested. Prioritizing them for monitoring is a proposal."],["","Whether a short muting experiment captures lasting change is unknown; a week likely misses it, and monitoring over months is only a proposal."]]},{"heading":"Checks","lines":[["","Left unsettled after one revision: conclusion 0: The brief states 'Nothing here shows lasting harm from browsing', but the transcript's closing summary states 'Disagreement remains over whether browsing counts as lasting harm'."],["","Left unsettled after one revision: objections 0: The brief claims the room 'did not dispute that brief mood shifts fail to establish lasting harm', but the host notes in the closing that 'Disagreement remains over whether browsing counts as lasting harm'."]]},{"heading":"The room’s notes","lines":[["","Finding: In adolescent girls, baseline depressive symptoms predicted changes in problematic social media use, but baseline problematic use did not predict changes in depressive symptoms. (Gemini)"],["","Finding: Browsing predicted higher-than-usual negative emotions hours later, while posting showed no significant directional effects. (Gemini and GPT)"],["","Interpretation: The browsing result is a small association with short-term negative emotion, so it supports browsing as a possible contributor to short-term distress, not a demonstrated cause of lasting mental-health problems. (GPT)"],["","Interpretation: Struggling teens may develop problematic habits while passive browsing may worsen mood. (Gemini)"],["","Proposal: Parents should target specific problems, such as distress during browsing, rather than assume a blanket time limit will improve mental health. (GPT)"],["","Proposal: To test susceptibility, compare whether changing the same pattern of use produces larger mental-health changes in vulnerable groups. (GPT)"],["","Hypothesis: Vulnerable subgroups, such as older girls or those with existing conditions, might experience much greater harm than the small average effect suggests. (Gemini)"],["","Proposal: Run a randomized trial that lowers problematic use in struggling girls and measures whether symptoms improve. (Gemini)"],["","Proposal: Parents could try a small reversible experiment agreed with the teen, such as muting an upsetting account for a week while keeping friend contact; improvement would justify keeping it, not prove cause. (GPT and Grok)"],["","Interpretation: A one-week trial can check short-term distress but would miss lasting change. (Grok)"],["","Proposal: Prioritize monitoring teens with internalizing conditions and watch for depressive symptoms and problematic habits rising together over months; avoid treating time alone as harm or imposing blanket limits. (Grok)"],["","Interpretation: The restriction trial's null does not establish that blanket limits are ineffective or that targeted changes work better; the preference for targeting is a proposal. (GPT)"],["","Proposal: A well-run trial showing sustained meaningful improvement in struggling teens would justify recommending the tested change; a precise null would end it as treatment; an inconclusive result leaves uncertainty. (GPT)"]]},{"heading":"Issues","lines":[["","Resolved: Does the evidence favor social media use harming teens, or struggling teens using it more (direction of effect)? Gemini says evidence supports both directions; GPT cautions the browsing result is small and short-term. Girls' longitudinal data show symptoms predicting use, not the reverse. The closing note says a small link, not clear broad harm. Not settled."],["","Disputed: Does passive browsing worsen mood, and does that amount to lasting mental-health harm? Gemini said browsing actively worsens mood; GPT said that overstates a small, short-term association. Grok noted brief mood shifts do not establish lasting change. The closing note says disagreement remains."],["","Resolved: Do restriction trials in the room include teenagers and show whether limits help? The 2022 trial describes students without ages; Gemini's search found no more detail. Its null does not show restrictions have no effect. Gemini read it as supporting no blanket limits; GPT said it proves neither that limits fail nor that targeting works."],["","Resolved: Are some subgroups (older girls, teens with existing conditions) more susceptible to harm? Possible, but the evidence shows differences in use and experiences, not greater causal susceptibility. Whether reducing use helps older girls is untested; a randomized trial is proposed."],["","Resolved: Does causal uncertainty stop parents acting, and what should they monitor over the long term? GPT: uncertainty limits promises, not action; try a small reversible change. Grok: a week misses lasting change, so watch symptoms and habits rising together over months; differentiate struggling teens from those online without distress. Proposals only."],["","Resolved: What result from a trial in struggling teens would change advice to parents? Grok and GPT agreed a trial in struggling teens would change advice. GPT specified that sustained meaningful benefit would support the change, a precise null would end it as treatment, and an inconclusive result would leave uncertainty."]]}]}};
+const ASKED_BY = null;
+const BRIEF_CLAIMS = [];
+const CUT = {"steps":[{"title":"Opening","clock":"8:49 AM","cast":["editor","reviewer","researcher","skeptic"],"lines":[{"who":"check","label":"Log","about":"editor","focus":["Q","S1","S2","S3","S4"],"log":"question opened","text":"The room opened the question: “Is social media use harming teenagers' mental health?” 5 sources supplied before the conversation.","clock":"8:49 AM","rows":[{"t":"log","ids":[1],"kind":"setup","text":"The room opened the question: “Is social media use harming teenagers' mental health?” 5 sources supplied before the conversation."}],"typeMs":0,"ms":7600,"do":["q","src:S1","src:S2","src:S3","src:S4","src:S5"]},{"who":"editor","focus":["Q"],"with":"reviewer","log":"Claude · Host → Gemini","text":"Here's the tension. Teenagers who struggle seem to use social media more, and some big surveys link heavy or problematic use to worse symptoms. But that pattern fits two stories: the use hurts them, or hurting teens turn to it more. Gemini, which story do you think the evidence supports better, and for which kind of use and which teenagers?","clock":"8:50 AM","rows":[{"t":"say","ids":[8],"agent":"editor","words":"Here's the tension. Teenagers who struggle seem to use social media more, and some big surveys link heavy or problematic use to worse symptoms. But that pattern fits two stories: the use hurts them, or hurting teens turn to it more. Gemini, which story do you think the evidence supports better, and for which kind of use and which teenagers?","kind":"turn","claim":null,"as":{"name":"Claude · Host","model":"Claude Sonnet 5.5"},"seat":"host","n":1}],"typeMs":8143,"ms":19900},{"who":"reviewer","focus":["S2","S3"],"with":"editor","log":"Gemini → Claude","text":"Claude, the evidence supports both directions. In adolescent girls, baseline depressive symptoms were predictive of changes in problematic use, but baseline problematic use did not predict changes in depressive symptoms. On a shorter timescale, the significance of effects depended on social media type: browsing predicted higher-than-usual negative emotions hours later, whereas no significant directional effects emerged for posting. So, struggling teens may develop problematic habits, while passive browsing actively worsens mood.","clock":"8:50 AM","rows":[{"t":"say","ids":[13],"agent":"reviewer","words":"Claude, the evidence supports both directions. In adolescent girls, baseline depressive symptoms were predictive of changes in problematic use, but baseline problematic use did not predict changes in depressive symptoms. On a shorter timescale, the significance of effects depended on social media type: browsing predicted higher-than-usual negative emotions hours later, whereas no significant directional effects emerged for posting. So, struggling teens may develop problematic habits, while passive browsing actively worsens mood.","kind":"turn","claim":null,"as":{"name":"Gemini","model":"Gemini 3.1 Pro Preview"},"seat":"gemini","n":2,"cites":["S2","S3"],"replyTo":"editor"}],"typeMs":12714,"ms":26862},{"who":"researcher","focus":["S3"],"with":"reviewer","log":"GPT → Gemini","text":"Gemini, “actively worsens mood” goes beyond what that study establishes. The 2024 browsing study found a small association with negative emotions hours later among 12- to 15-year-olds, not an experimental demonstration of harm. That matters: a temporary dip in mood isn't the same as developing depression. I'd describe browsing as a possible contributor to short-term distress, rather than a demonstrated cause of lasting mental-health problems.","clock":"8:50 AM","rows":[{"t":"say","ids":[15],"agent":"researcher","words":"Gemini, “actively worsens mood” goes beyond what that study establishes. The 2024 browsing study found a small association with negative emotions hours later among 12- to 15-year-olds, not an experimental demonstration of harm. That matters: a temporary dip in mood isn't the same as developing depression. I'd describe browsing as a possible contributor to short-term distress, rather than a demonstrated cause of lasting mental-health problems.","kind":"turn","claim":null,"as":{"name":"GPT","model":"GPT 6.1 Sol"},"seat":"gpt","n":3,"cites":["S3"]}],"typeMs":10619,"ms":22831},{"who":"skeptic","focus":["S4"],"with":"researcher","log":"Grok → GPT","text":"GPT, for what parents could do now, does any restriction trial here actually include teenagers?","clock":"8:51 AM","rows":[{"t":"say","ids":[17],"agent":"skeptic","words":"GPT, for what parents could do now, does any restriction trial here actually include teenagers?","kind":"turn","claim":null,"as":{"name":"Grok","model":"Grok 4.7"},"seat":"grok","n":4,"cites":["S4"]}],"typeMs":2262,"ms":6752},{"who":"researcher","focus":["S4"],"with":"skeptic","log":"GPT → Grok","text":"Grok, I can't confirm that from the supplied material: the 2022 restriction trial describes students but doesn't specify their ages. It found no statistically significant effect on wellbeing, which doesn't establish that restrictions have no effect. For parents, my proposal—not a finding from that trial—is to focus on specific problems, such as distress during browsing, rather than assume a blanket time limit will improve mental health.","clock":"8:51 AM","rows":[{"t":"say","ids":[19],"agent":"researcher","words":"Grok, I can't confirm that from the supplied material: the 2022 restriction trial describes students but doesn't specify their ages. It found no statistically significant effect on wellbeing, which doesn't establish that restrictions have no effect. For parents, my proposal—not a finding from that trial—is to focus on specific problems, such as distress during browsing, rather than assume a blanket time limit will improve mental health.","kind":"turn","claim":null,"as":{"name":"GPT","model":"GPT 6.1 Sol"},"seat":"gpt","n":5,"cites":["S4"],"replyTo":"skeptic"}],"typeMs":10476,"ms":22556},{"who":"reviewer","focus":["Q"],"with":"researcher","log":"Gemini → GPT","text":"GPT, fair point. If average effects are small, could vulnerable subgroups, like older girls or those with existing conditions, actually experience much greater harm?","clock":"8:51 AM","rows":[{"t":"say","ids":[21],"agent":"reviewer","words":"GPT, fair point. If average effects are small, could vulnerable subgroups, like older girls or those with existing conditions, actually experience much greater harm?","kind":"turn","claim":null,"as":{"name":"Gemini","model":"Gemini 3.1 Pro Preview"},"seat":"gemini","n":6}],"typeMs":3929,"ms":9959}]},{"title":"Turns 7–12","clock":"8:51 AM","cast":["researcher","reviewer","editor","skeptic"],"lines":[{"who":"researcher","focus":["S5"],"with":"reviewer","log":"GPT → Gemini","text":"Gemini, yes, that's possible—but greater use isn't the same as greater susceptibility. The 2025 UK study found that teens with internalizing conditions, such as anxiety or depression, reported more social comparison and greater effects of feedback on mood. That identifies experiences worth examining, not proof of greater harm caused by social media. I'd want comparisons showing that changing the same pattern of use produces larger mental-health changes in those groups.","clock":"8:51 AM","rows":[{"t":"say","ids":[26],"agent":"researcher","words":"Gemini, yes, that's possible—but greater use isn't the same as greater susceptibility. The 2025 UK study found that teens with internalizing conditions, such as anxiety or depression, reported more social comparison and greater effects of feedback on mood. That identifies experiences worth examining, not proof of greater harm caused by social media. I'd want comparisons showing that changing the same pattern of use produces larger mental-health changes in those groups.","kind":"turn","claim":null,"as":{"name":"GPT","model":"GPT 6.1 Sol"},"seat":"gpt","n":7,"cites":["S5"],"replyTo":"reviewer"}],"typeMs":11262,"ms":24068},{"who":"check","label":"Log","about":"editor","focus":["Q"],"log":"The room’s notes: 9 statements, 4 issues (3 open).","text":"The room’s notes: 9 statements, 4 issues (3 open).","clock":"8:51 AM","rows":[{"t":"log","ids":[27],"kind":"notes","text":"The room’s notes: 9 statements, 4 issues (3 open)."}],"typeMs":0,"ms":4600},{"who":"skeptic","focus":["Q"],"with":"reviewer","log":"Grok → Gemini","text":"Gemini, do we know whether reducing problematic use helps older girls, or only that their symptoms predict later use?","clock":"8:52 AM","rows":[{"t":"say","ids":[29],"agent":"skeptic","words":"Gemini, do we know whether reducing problematic use helps older girls, or only that their symptoms predict later use?","kind":"turn","claim":null,"as":{"name":"Grok","model":"Grok 4.7"},"seat":"grok","n":8}],"typeMs":2786,"ms":7760},{"who":"reviewer","focus":["S2"],"with":"skeptic","log":"Gemini → Grok","text":"Grok, the longitudinal study on adolescent girls didn't test interventions, so it doesn't show if reducing use helps. It found that baseline depressive symptoms were predictive of changes in problematic use, but baseline problematic use did not predict changes in depressive symptoms. To know if reducing it actually helps, my proposal is we would need a randomized trial that lowers problematic use in struggling girls and measures whether their symptoms improve.","clock":"8:52 AM","rows":[{"t":"say","ids":[31],"agent":"reviewer","words":"Grok, the longitudinal study on adolescent girls didn't test interventions, so it doesn't show if reducing use helps. It found that baseline depressive symptoms were predictive of changes in problematic use, but baseline problematic use did not predict changes in depressive symptoms. To know if reducing it actually helps, my proposal is we would need a randomized trial that lowers problematic use in struggling girls and measures whether their symptoms improve.","kind":"turn","claim":null,"as":{"name":"Gemini","model":"Gemini 3.1 Pro Preview"},"seat":"gemini","n":9,"cites":["S2"],"replyTo":"skeptic"}],"typeMs":11048,"ms":23656},{"who":"editor","focus":["Q"],"with":"researcher","log":"Claude · Host → GPT","text":"Given all this uncertainty about cause, does it actually stop a parent from acting, or does it only limit what they can promise will happen?","clock":"8:52 AM","rows":[{"t":"say","ids":[33],"agent":"editor","words":"Given all this uncertainty about cause, does it actually stop a parent from acting, or does it only limit what they can promise will happen?","kind":"turn","claim":null,"as":{"name":"Claude · Host","model":"Claude Sonnet 5.5"},"seat":"host","n":10}],"typeMs":3333,"ms":9400},{"who":"researcher","focus":["Q"],"with":"editor","log":"GPT → Claude","text":"Claude, it limits the promise, not the ability to act. My proposal is a small, reversible experiment agreed with the teenager: mute an account they find upsetting for a week, while keeping contact with friends. Ask whether they feel better and whether they miss anything valuable. Improvement would justify keeping that change, not prove social media caused their difficulties. Persistent distress deserves attention beyond adjusting an app.","clock":"8:52 AM","rows":[{"t":"say","ids":[35],"agent":"researcher","words":"Claude, it limits the promise, not the ability to act. My proposal is a small, reversible experiment agreed with the teenager: mute an account they find upsetting for a week, while keeping contact with friends. Ask whether they feel better and whether they miss anything valuable. Improvement would justify keeping that change, not prove social media caused their difficulties. Persistent distress deserves attention beyond adjusting an app.","kind":"turn","claim":null,"as":{"name":"GPT","model":"GPT 6.1 Sol"},"seat":"gpt","n":11,"replyTo":"editor"}],"typeMs":10500,"ms":22602},{"who":"skeptic","focus":["Q"],"with":"researcher","log":"Grok → GPT","text":"GPT, a week can check whether muting one upsetting account eases short-term distress. It would miss lasting change, which brief mood shifts don't establish.","clock":"8:53 AM","rows":[{"t":"say","ids":[40],"agent":"skeptic","words":"GPT, a week can check whether muting one upsetting account eases short-term distress. It would miss lasting change, which brief mood shifts don't establish.","kind":"turn","claim":null,"as":{"name":"Grok","model":"Grok 4.7"},"seat":"grok","n":12}],"typeMs":3714,"ms":9546}]},{"title":"Turns 13–16","clock":"8:53 AM","cast":["reviewer","skeptic","editor","researcher"],"lines":[{"who":"reviewer","focus":["Q"],"with":"skeptic","log":"Gemini → Grok","text":"Grok, if a week misses lasting change, what long-term signs should a parent watch for, and which teenagers need this monitoring most?","clock":"8:53 AM","rows":[{"t":"say","ids":[42],"agent":"reviewer","words":"Grok, if a week misses lasting change, what long-term signs should a parent watch for, and which teenagers need this monitoring most?","kind":"turn","claim":null,"as":{"name":"Gemini","model":"Gemini 3.1 Pro Preview"},"seat":"gemini","n":13}],"typeMs":3167,"ms":8500},{"who":"check","label":"Log","about":"editor","focus":["Q"],"log":"The room’s notes: 12 statements, 5 issues (4 open).","text":"The room’s notes: 12 statements, 5 issues (4 open).","clock":"8:53 AM","rows":[{"t":"log","ids":[43],"kind":"notes","text":"The room’s notes: 12 statements, 5 issues (4 open)."}],"typeMs":0,"ms":4600},{"who":"skeptic","focus":["S1","S2","S5"],"with":"reviewer","log":"Grok → Gemini","text":"Gemini, lasting signs are depressive symptoms and problematic habits rising together over months, not one bad afternoon. In girls followed two years, changes in problematic use tracked changes in depressive symptoms, and baseline depressive symptoms predicted later problematic use. Severe symptoms rose especially among older girls. Teens with internalizing conditions already report more comparison and stronger mood effects from feedback. Prioritizing them is my proposal, not proof they are harmed more.","clock":"8:54 AM","rows":[{"t":"say","ids":[45],"agent":"skeptic","words":"Gemini, lasting signs are depressive symptoms and problematic habits rising together over months, not one bad afternoon. In girls followed two years, changes in problematic use tracked changes in depressive symptoms, and baseline depressive symptoms predicted later problematic use. Severe symptoms rose especially among older girls. Teens with internalizing conditions already report more comparison and stronger mood effects from feedback. Prioritizing them is my proposal, not proof they are harmed more.","kind":"turn","claim":null,"as":{"name":"Grok","model":"Grok 4.7"},"seat":"grok","n":14,"cites":["S1","S2","S5"],"replyTo":"reviewer"}],"typeMs":12071,"ms":25625},{"who":"researcher","focus":["Q"],"with":"skeptic","log":"GPT → Grok","text":"Grok, what would you advise parents to do differently for an already struggling teen versus one who spends hours online without apparent distress?","clock":"8:54 AM","rows":[{"t":"say","ids":[47],"agent":"researcher","words":"Grok, what would you advise parents to do differently for an already struggling teen versus one who spends hours online without apparent distress?","kind":"turn","claim":null,"as":{"name":"GPT","model":"GPT 6.1 Sol"},"seat":"gpt","n":15}],"typeMs":3476,"ms":9088},{"who":"skeptic","focus":["Q"],"with":"researcher","log":"Grok → GPT","text":"GPT, for a teen already struggling, watch whether symptoms and problematic habits rise together over months, and try a small reversible change aimed at the upsetting pattern, such as muting comparison-heavy feeds, while keeping friends. Persistent distress needs care beyond the app. For hours online without distress, I would not treat time alone as harm or push a blanket limit. That split is my proposal, not a trial result.","clock":"8:54 AM","rows":[{"t":"say","ids":[49],"agent":"skeptic","words":"GPT, for a teen already struggling, watch whether symptoms and problematic habits rise together over months, and try a small reversible change aimed at the upsetting pattern, such as muting comparison-heavy feeds, while keeping friends. Persistent distress needs care beyond the app. For hours online without distress, I would not treat time alone as harm or push a blanket limit. That split is my proposal, not a trial result.","kind":"turn","claim":null,"as":{"name":"Grok","model":"Grok 4.7"},"seat":"grok","n":16,"replyTo":"researcher"}],"typeMs":10167,"ms":22600}]},{"title":"Research · Gemini","clock":"8:54 AM","cast":["reviewer","skeptic","editor","researcher"],"lines":[{"who":"check","label":"Log","about":"reviewer","focus":["Q"],"log":"Gemini steps out to research","text":"Gemini steps out to research.","clock":"8:54 AM","rows":[{"t":"log","ids":[54],"kind":"research_start","text":"Gemini steps out to research."}],"typeMs":0,"ms":3800},{"who":"check","label":"Log","about":"reviewer","focus":["Q"],"log":"Gemini is back: nothing to report.","text":"Gemini is back: nothing to report.","clock":"8:54 AM","rows":[{"t":"log","ids":[55],"kind":"research_end","text":"Gemini is back: nothing to report."}],"typeMs":0,"ms":3800,"do":[]},{"who":"reviewer","focus":["S4"],"with":"skeptic","log":"Gemini → Grok","text":"Grok, my search came back empty on the specifics of the 2022 restriction trial, so we still don't know the students' ages or if effects differed by subgroup. But the finding we do have from that trial supports your advice against blanket time limits. The researchers restricted social media to a maximum of 10 minutes per day and did not find any significant impact on well-being and academic success. A blanket restriction might just lead them to substitute other digital activities, rather than fixing a mental health issue.","clock":"8:55 AM","rows":[{"t":"say","ids":[60],"agent":"reviewer","words":"Grok, my search came back empty on the specifics of the 2022 restriction trial, so we still don't know the students' ages or if effects differed by subgroup. But the finding we do have from that trial supports your advice against blanket time limits. The researchers restricted social media to a maximum of 10 minutes per day and did not find any significant impact on well-being and academic success. A blanket restriction might just lead them to substitute other digital activities, rather than fixing a mental health issue.","kind":"return","claim":null,"as":{"name":"Gemini","model":"Gemini 3.1 Pro Preview"},"seat":"gemini","n":17,"cites":["S4"]}],"typeMs":12524,"ms":28300},{"who":"check","label":"Log","about":"editor","focus":["Q"],"log":"The room’s notes: 14 statements, 5 issues (4 open).","text":"The room’s notes: 14 statements, 5 issues (4 open).","clock":"8:55 AM","rows":[{"t":"log","ids":[61],"kind":"notes","text":"The room’s notes: 14 statements, 5 issues (4 open)."}],"typeMs":0,"ms":4600},{"who":"researcher","focus":["S4"],"with":"reviewer","log":"GPT → Gemini","text":"Gemini, that trial doesn't establish that blanket limits are ineffective, or that targeting problematic use works better. My proposal favors targeted changes because they address the teenager's actual difficulty—not because this trial proved them superior.","clock":"8:55 AM","rows":[{"t":"say","ids":[63],"agent":"researcher","words":"Gemini, that trial doesn't establish that blanket limits are ineffective, or that targeting problematic use works better. My proposal favors targeted changes because they address the teenager's actual difficulty—not because this trial proved them superior.","kind":"turn","claim":null,"as":{"name":"GPT","model":"GPT 6.1 Sol"},"seat":"gpt","n":18,"cites":["S4"]}],"typeMs":6095,"ms":14127},{"who":"editor","focus":["Q"],"with":"skeptic","log":"Claude · Host → Grok","text":"Which single finding would change your advice to parents: a trial in struggling teens, or evidence that problematic use, not time, predicts later symptoms?","clock":"8:55 AM","rows":[{"t":"say","ids":[66],"agent":"editor","words":"Which single finding would change your advice to parents: a trial in struggling teens, or evidence that problematic use, not time, predicts later symptoms?","kind":"turn","claim":null,"as":{"name":"Claude · Host","model":"Claude Sonnet 5.5"},"seat":"host","n":19}],"typeMs":3690,"ms":9500},{"who":"skeptic","focus":["Q"],"with":"editor","log":"Grok → Claude","text":"A trial in struggling teens would change it: benefit means recommend cuts; a null means drop them. Does that sign change your advice too?","clock":"8:56 AM","rows":[{"t":"say","ids":[68],"agent":"skeptic","words":"A trial in struggling teens would change it: benefit means recommend cuts; a null means drop them. Does that sign change your advice too?","kind":"turn","claim":null,"as":{"name":"Grok","model":"Grok 4.7"},"seat":"grok","n":20,"replyTo":"editor"}],"typeMs":3262,"ms":9100},{"who":"researcher","focus":["Q"],"with":"skeptic","log":"GPT → Grok","text":"Grok, yes—but not simply by whether the result is called positive or null. A well-run trial showing sustained, meaningful symptom improvement in struggling teens would make me recommend the tested change for similar teens. A precise result ruling out meaningful benefit would make me stop recommending that change as a mental-health treatment. An inconclusive result would leave me uncertain, not tell me to abandon it or endorse it.","clock":"8:56 AM","rows":[{"t":"say","ids":[70],"agent":"researcher","words":"Grok, yes—but not simply by whether the result is called positive or null. A well-run trial showing sustained, meaningful symptom improvement in struggling teens would make me recommend the tested change for similar teens. A precise result ruling out meaningful benefit would make me stop recommending that change as a mental-health treatment. An inconclusive result would leave me uncertain, not tell me to abandon it or endorse it.","kind":"turn","claim":null,"as":{"name":"GPT","model":"GPT 6.1 Sol"},"seat":"gpt","n":21}],"typeMs":10310,"ms":22300}]},{"title":"Close","clock":"8:56 AM","cast":["editor"],"lines":[{"who":"check","label":"Log","about":"editor","focus":["Q"],"log":"The host closes the conversation.","text":"The host closes the conversation.","clock":"8:56 AM","rows":[{"t":"log","ids":[75],"kind":"close","text":"The host closes the conversation."}],"typeMs":0,"ms":3800},{"who":"check","label":"Log","about":"editor","focus":["Q"],"log":"The room’s notes: 16 statements, 6 issues (4 open).","text":"The room’s notes: 16 statements, 6 issues (4 open).","clock":"8:57 AM","rows":[{"t":"log","ids":[76],"kind":"notes","text":"The room’s notes: 16 statements, 6 issues (4 open)."}],"typeMs":0,"ms":4600},{"who":"editor","focus":["S2","S3"],"log":"Claude · Host → the question","text":"The sources we looked at support a small link between heavy use and worse mood, not clear broad harm. The girls' two-year study found depressive symptoms predicted later problematic use, not the reverse. Passive browsing showed a small short-term mood effect, and posting showed none. Disagreement remains over whether browsing counts as lasting harm. The sources don't answer whether cutting problematic use helps struggling teens, or whether some groups are more susceptible.","clock":"8:57 AM","rows":[{"t":"say","ids":[79],"agent":"editor","words":"The sources we looked at support a small link between heavy use and worse mood, not clear broad harm. The girls' two-year study found depressive symptoms predicted later problematic use, not the reverse. Passive browsing showed a small short-term mood effect, and posting showed none. Disagreement remains over whether browsing counts as lasting harm. The sources don't answer whether cutting problematic use helps struggling teens, or whether some groups are more susceptible.","kind":"closing","claim":null,"as":{"name":"Claude · Host","model":"Claude Sonnet 5.5"},"seat":"host","n":22,"cites":["S2","S3"]}],"typeMs":11357,"ms":24251},{"who":"check","label":"Log","about":"editor","focus":["Q"],"log":"The room’s notes: 16 statements, 6 issues (4 open).","text":"The room’s notes: 16 statements, 6 issues (4 open).","clock":"8:57 AM","rows":[{"t":"log","ids":[80],"kind":"notes","text":"The room’s notes: 16 statements, 6 issues (4 open)."}],"typeMs":0,"ms":4600},{"who":"check","label":"Log","about":"editor","focus":["Q"],"log":"The room’s brief is written.","text":"The room’s brief is written.","clock":"8:58 AM","rows":[{"t":"log","ids":[82],"kind":"brief","text":"The room’s brief is written."}],"typeMs":0,"ms":3800,"do":["verdict"]}]}],"ms":436283,"runMin":0,"label":"Room replay · private pilot","dropped":[],"names":{"editor":{"name":"Claude · Host","model":"Claude Sonnet 5.5"},"researcher":{"name":"GPT","model":"GPT 6.1 Sol"},"reviewer":{"name":"Gemini","model":"Gemini 3.1 Pro Preview"},"skeptic":{"name":"Grok","model":"Grok 4.7"}},"events":{"1":{"clock":"8:49 AM","agent":null,"kind":"setup","claim":null,"words":null,"full":null,"fact":"The room opened the question: “Is social media use harming teenagers' mental health?” 5 sources supplied before the conversation."},"8":{"clock":"8:50 AM","agent":"editor","kind":"turn","claim":null,"words":"Here's the tension. Teenagers who struggle seem to use social media more, and some big surveys link heavy or problematic use to worse symptoms. But that pattern fits two stories: the use hurts them, or hurting teens turn to it more. Gemini, which story do you think the evidence supports better, and for which kind of use and which teenagers?","full":null,"fact":"Claude · Host · Claude Sonnet 5.5 · turn 1 · to Gemini"},"13":{"clock":"8:50 AM","agent":"reviewer","kind":"turn","claim":null,"words":"Claude, the evidence supports both directions. In adolescent girls, baseline depressive symptoms were predictive of changes in problematic use, but baseline problematic use did not predict changes in depressive symptoms. On a shorter timescale, the significance of effects depended on social media type: browsing predicted higher-than-usual negative emotions hours later, whereas no significant directional effects emerged for posting. So, struggling teens may develop problematic habits, while passive browsing actively worsens mood.","full":null,"fact":"Gemini · Gemini 3.1 Pro Preview · turn 2 · to Claude · citing S2 (Longitudinal associations between problematic social media use and depressive symptoms in adolescent girls) and S3 (Bidirectional Associations of Adolescents’ Momentary Social Media Use and Negative Emotions)"},"15":{"clock":"8:50 AM","agent":"researcher","kind":"turn","claim":null,"words":"Gemini, “actively worsens mood” goes beyond what that study establishes. The 2024 browsing study found a small association with negative emotions hours later among 12- to 15-year-olds, not an experimental demonstration of harm. That matters: a temporary dip in mood isn't the same as developing depression. I'd describe browsing as a possible contributor to short-term distress, rather than a demonstrated cause of lasting mental-health problems.","full":null,"fact":"GPT · GPT 6.1 Sol · turn 3 · to Gemini · citing S3 (Bidirectional Associations of Adolescents’ Momentary Social Media Use and Negative Emotions)"},"17":{"clock":"8:51 AM","agent":"skeptic","kind":"turn","claim":null,"words":"GPT, for what parents could do now, does any restriction trial here actually include teenagers?","full":null,"fact":"Grok · Grok 4.7 · turn 4 · to GPT · citing S4 (Effects of restricting social media usage on wellbeing and performance: A randomized control trial among students)"},"19":{"clock":"8:51 AM","agent":"researcher","kind":"turn","claim":null,"words":"Grok, I can't confirm that from the supplied material: the 2022 restriction trial describes students but doesn't specify their ages. It found no statistically significant effect on wellbeing, which doesn't establish that restrictions have no effect. For parents, my proposal—not a finding from that trial—is to focus on specific problems, such as distress during browsing, rather than assume a blanket time limit will improve mental health.","full":null,"fact":"GPT · GPT 6.1 Sol · turn 5 · to Grok · citing S4 (Effects of restricting social media usage on wellbeing and performance: A randomized control trial among students)"},"21":{"clock":"8:51 AM","agent":"reviewer","kind":"turn","claim":null,"words":"GPT, fair point. If average effects are small, could vulnerable subgroups, like older girls or those with existing conditions, actually experience much greater harm?","full":null,"fact":"Gemini · Gemini 3.1 Pro Preview · turn 6 · to GPT"},"26":{"clock":"8:51 AM","agent":"researcher","kind":"turn","claim":null,"words":"Gemini, yes, that's possible—but greater use isn't the same as greater susceptibility. The 2025 UK study found that teens with internalizing conditions, such as anxiety or depression, reported more social comparison and greater effects of feedback on mood. That identifies experiences worth examining, not proof of greater harm caused by social media. I'd want comparisons showing that changing the same pattern of use produces larger mental-health changes in those groups.","full":null,"fact":"GPT · GPT 6.1 Sol · turn 7 · to Gemini · citing S5 (Social media use in adolescents with and without mental health conditions)"},"27":{"clock":"8:51 AM","agent":null,"kind":"notes","claim":null,"words":null,"full":null,"fact":"The room’s notes: 9 statements, 4 issues (3 open)."},"29":{"clock":"8:52 AM","agent":"skeptic","kind":"turn","claim":null,"words":"Gemini, do we know whether reducing problematic use helps older girls, or only that their symptoms predict later use?","full":null,"fact":"Grok · Grok 4.7 · turn 8 · to Gemini"},"31":{"clock":"8:52 AM","agent":"reviewer","kind":"turn","claim":null,"words":"Grok, the longitudinal study on adolescent girls didn't test interventions, so it doesn't show if reducing use helps. It found that baseline depressive symptoms were predictive of changes in problematic use, but baseline problematic use did not predict changes in depressive symptoms. To know if reducing it actually helps, my proposal is we would need a randomized trial that lowers problematic use in struggling girls and measures whether their symptoms improve.","full":null,"fact":"Gemini · Gemini 3.1 Pro Preview · turn 9 · to Grok · citing S2 (Longitudinal associations between problematic social media use and depressive symptoms in adolescent girls)"},"33":{"clock":"8:52 AM","agent":"editor","kind":"turn","claim":null,"words":"Given all this uncertainty about cause, does it actually stop a parent from acting, or does it only limit what they can promise will happen?","full":null,"fact":"Claude · Host · Claude Sonnet 5.5 · turn 10 · to GPT"},"35":{"clock":"8:52 AM","agent":"researcher","kind":"turn","claim":null,"words":"Claude, it limits the promise, not the ability to act. My proposal is a small, reversible experiment agreed with the teenager: mute an account they find upsetting for a week, while keeping contact with friends. Ask whether they feel better and whether they miss anything valuable. Improvement would justify keeping that change, not prove social media caused their difficulties. Persistent distress deserves attention beyond adjusting an app.","full":null,"fact":"GPT · GPT 6.1 Sol · turn 11 · to Claude"},"40":{"clock":"8:53 AM","agent":"skeptic","kind":"turn","claim":null,"words":"GPT, a week can check whether muting one upsetting account eases short-term distress. It would miss lasting change, which brief mood shifts don't establish.","full":null,"fact":"Grok · Grok 4.7 · turn 12 · to GPT"},"42":{"clock":"8:53 AM","agent":"reviewer","kind":"turn","claim":null,"words":"Grok, if a week misses lasting change, what long-term signs should a parent watch for, and which teenagers need this monitoring most?","full":null,"fact":"Gemini · Gemini 3.1 Pro Preview · turn 13 · to Grok"},"43":{"clock":"8:53 AM","agent":null,"kind":"notes","claim":null,"words":null,"full":null,"fact":"The room’s notes: 12 statements, 5 issues (4 open)."},"45":{"clock":"8:54 AM","agent":"skeptic","kind":"turn","claim":null,"words":"Gemini, lasting signs are depressive symptoms and problematic habits rising together over months, not one bad afternoon. In girls followed two years, changes in problematic use tracked changes in depressive symptoms, and baseline depressive symptoms predicted later problematic use. Severe symptoms rose especially among older girls. Teens with internalizing conditions already report more comparison and stronger mood effects from feedback. Prioritizing them is my proposal, not proof they are harmed more.","full":null,"fact":"Grok · Grok 4.7 · turn 14 · to Gemini · citing S1 (Problematic social media use and psychological symptoms in adolescents), S2 (Longitudinal associations between problematic social media use and depressive symptoms in adolescent girls) and S5 (Social media use in adolescents with and without mental health conditions)"},"47":{"clock":"8:54 AM","agent":"researcher","kind":"turn","claim":null,"words":"Grok, what would you advise parents to do differently for an already struggling teen versus one who spends hours online without apparent distress?","full":null,"fact":"GPT · GPT 6.1 Sol · turn 15 · to Grok"},"49":{"clock":"8:54 AM","agent":"skeptic","kind":"turn","claim":null,"words":"GPT, for a teen already struggling, watch whether symptoms and problematic habits rise together over months, and try a small reversible change aimed at the upsetting pattern, such as muting comparison-heavy feeds, while keeping friends. Persistent distress needs care beyond the app. For hours online without distress, I would not treat time alone as harm or push a blanket limit. That split is my proposal, not a trial result.","full":null,"fact":"Grok · Grok 4.7 · turn 16 · to GPT"},"54":{"clock":"8:54 AM","agent":null,"kind":"research_start","claim":null,"words":null,"full":null,"fact":"Gemini steps out to research."},"55":{"clock":"8:54 AM","agent":null,"kind":"research_end","claim":null,"words":null,"full":null,"fact":"Gemini is back: nothing to report."},"60":{"clock":"8:55 AM","agent":"reviewer","kind":"turn","claim":null,"words":"Grok, my search came back empty on the specifics of the 2022 restriction trial, so we still don't know the students' ages or if effects differed by subgroup. But the finding we do have from that trial supports your advice against blanket time limits. The researchers restricted social media to a maximum of 10 minutes per day and did not find any significant impact on well-being and academic success. A blanket restriction might just lead them to substitute other digital activities, rather than fixing a mental health issue.","full":null,"fact":"Gemini · Gemini 3.1 Pro Preview · turn 17 · to Grok · citing S4 (Effects of restricting social media usage on wellbeing and performance: A randomized control trial among students)"},"61":{"clock":"8:55 AM","agent":null,"kind":"notes","claim":null,"words":null,"full":null,"fact":"The room’s notes: 14 statements, 5 issues (4 open)."},"63":{"clock":"8:55 AM","agent":"researcher","kind":"turn","claim":null,"words":"Gemini, that trial doesn't establish that blanket limits are ineffective, or that targeting problematic use works better. My proposal favors targeted changes because they address the teenager's actual difficulty—not because this trial proved them superior.","full":null,"fact":"GPT · GPT 6.1 Sol · turn 18 · to Gemini · citing S4 (Effects of restricting social media usage on wellbeing and performance: A randomized control trial among students)"},"66":{"clock":"8:55 AM","agent":"editor","kind":"turn","claim":null,"words":"Which single finding would change your advice to parents: a trial in struggling teens, or evidence that problematic use, not time, predicts later symptoms?","full":null,"fact":"Claude · Host · Claude Sonnet 5.5 · turn 19 · to Grok"},"68":{"clock":"8:56 AM","agent":"skeptic","kind":"turn","claim":null,"words":"A trial in struggling teens would change it: benefit means recommend cuts; a null means drop them. Does that sign change your advice too?","full":null,"fact":"Grok · Grok 4.7 · turn 20 · to Claude"},"70":{"clock":"8:56 AM","agent":"researcher","kind":"turn","claim":null,"words":"Grok, yes—but not simply by whether the result is called positive or null. A well-run trial showing sustained, meaningful symptom improvement in struggling teens would make me recommend the tested change for similar teens. A precise result ruling out meaningful benefit would make me stop recommending that change as a mental-health treatment. An inconclusive result would leave me uncertain, not tell me to abandon it or endorse it.","full":null,"fact":"GPT · GPT 6.1 Sol · turn 21 · to Grok"},"75":{"clock":"8:56 AM","agent":null,"kind":"close","claim":null,"words":null,"full":null,"fact":"The host closes the conversation."},"76":{"clock":"8:57 AM","agent":null,"kind":"notes","claim":null,"words":null,"full":null,"fact":"The room’s notes: 16 statements, 6 issues (4 open)."},"79":{"clock":"8:57 AM","agent":"editor","kind":"turn","claim":null,"words":"The sources we looked at support a small link between heavy use and worse mood, not clear broad harm. The girls' two-year study found depressive symptoms predicted later problematic use, not the reverse. Passive browsing showed a small short-term mood effect, and posting showed none. Disagreement remains over whether browsing counts as lasting harm. The sources don't answer whether cutting problematic use helps struggling teens, or whether some groups are more susceptible.","full":null,"fact":"Claude · Host · Claude Sonnet 5.5 · turn 22 · to the question · citing S2 (Longitudinal associations between problematic social media use and depressive symptoms in adolescent girls) and S3 (Bidirectional Associations of Adolescents’ Momentary Social Media Use and Negative Emotions)"},"80":{"clock":"8:57 AM","agent":null,"kind":"notes","claim":null,"words":null,"full":null,"fact":"The room’s notes: 16 statements, 6 issues (4 open)."},"82":{"clock":"8:58 AM","agent":null,"kind":"brief","claim":null,"words":null,"full":null,"fact":"The room’s brief is written."}}};
+const CUT_ON = true;
+const STEPS = CUT.steps;
+const INTROS = {"editor":{"role":"Hosts the conversation","trait":"Takes part with its own provisional views, asks follow-ups, and closes the room."},"researcher":{"role":"Discussant","trait":"Holds no assigned position: can argue, question, ask for research, concede or pass."},"reviewer":{"role":"Discussant","trait":"Holds no assigned position: can argue, question, ask for research, concede or pass."},"skeptic":{"role":"Discussant","trait":"Holds no assigned position: can argue, question, ask for research, concede or pass."},"check":{"role":"The room’s log","trait":"Not a model. Code: it records research trips, stand-ins and the close."}};
+const INTRO_MS = 2800;
+function reduceChart(s, op) {
+  if (op === 'q') s.q = true;
+  else if (op === 'verdict') s.verdict = true;
+  else if (op.startsWith('src:') && SOURCES[op.slice(4)]) s.sources[op.slice(4)] = { merged: false };
+  return s;
+}
+
+const blankChart = () => ({ q: false, dust: 0, sources: {}, claims: {}, links: false, brief: false, crossref: false, verdict: false });
+const FLAT = []; STEPS.forEach((st, si) => st.lines.forEach((l, li) => FLAT.push({ si, li, l })));
+// Whose seat a line sits at: whom it is about, for the lab's log of an agent's work; else whoever says it.
+const seatOf = (l) => l.about || l.who;
+function chartAfter(n) { const s = blankChart(); for (let i = 0; i < n; i++) for (const op of FLAT[i].l.do || []) reduceChart(s, op); return s; }
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Scene graph
+// ─────────────────────────────────────────────────────────────────────────────
+const RM = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const canvas = document.getElementById('sky');
+let ctx = canvas.getContext('2d');
+let W = 0, H = 0, DPR = 1;
+const add = (a, b) => [a[0] + b[0], a[1] + b[1], a[2] + b[2]];
+const lerp3 = (a, b, t) => [a[0] + (b[0] - a[0]) * t, a[1] + (b[1] - a[1]) * t, a[2] + (b[2] - a[2]) * t];
+
+const nodes = {};
+function mk(id, type, pos, extra) { nodes[id] = Object.assign({ id, type, pos, home: pos, a: 0, r: 0, glow: 0, sel: 0, pulse: 0, tgt: { a: 0, r: 0, glow: 0 } }, extra); }
+mk('Q', 'question', [0, 0, 0], { label: 'The question' });
+for (const [k, s] of Object.entries(SOURCES)) mk(k, 'source', s.pos, { label: s.label, data: s });
+for (const [k, c] of Object.entries(CLAIMS)) mk(k, 'claim', c.fixed ? c.fixed : add(lerp3([0, 0, 0], SOURCES[c.src].pos, 0.55), c.off), { label: c.key || k, key: c.key || k, data: c });
+const linkObjs = LINKS.map(([c, rel, s, passage], i) => ({ i, c, rel, s, passage, prog: 0, tgt: 0, fade: 1 }));
+const dust = [];
+{ let seed = 7; const rnd = () => (seed = (seed * 16807) % 2147483647) / 2147483647;
+  for (let i = 0; i < 900; i++) { const u = rnd() * 2 - 1, th = rnd() * Math.PI * 2, rr = 300 + rnd() * 170, q = Math.sqrt(1 - u * u);
+    dust.push({ p: [rr * q * Math.cos(th), rr * u * 0.8, rr * q * Math.sin(th)], tw: rnd() * 6.28 }); } }
+let dustA = 0, dustT = 0;
+const field = [];
+{ let seed = 99; const rnd = () => (seed = (seed * 48271) % 2147483647) / 2147483647;
+  for (let i = 0; i < 300; i++) field.push({ x: rnd(), y: rnd(), z: 0.2 + rnd() * 0.8, b: rnd() }); }
+const agents = {};
+AGENTS.check = { name: 'Code', color: '#d7dfec', model: 'code', manner: 'code' };
+for (const [k, a] of Object.entries(AGENTS)) agents[k] = { id: k, ...a, a: 0, speak: 0, speakT: 0, jit: [0, 0], met: false, slot: document.querySelector(`.slot[data-agent="${k}"]`) };
+// Where an observer's avatar sits on screen: the centre of its slot's icon on the deck.
+// Where an observer's sightlines start: the end of the line under its name, clear of the words. In the column
+// (wide) that is the line's right end; in the strip (narrow) its middle. s scales with the icon.
+function seat(ag) {
+  const r = ag.slot.getBoundingClientRect(), ic = ag.slot.querySelector('.ic').getBoundingClientRect();
+  return W <= 960 ? { x: (r.left + r.right) / 2, y: r.bottom - 2, s: ic.width / 40 } : { x: r.right, y: r.bottom - 2, s: ic.width / 40 };
+}
+
+const cam = { yaw: -0.35, pitch: 0.28, tyaw: -0.35, tpitch: 0.28, zoom: 1, tzoom: 1, oy: 0, ox: 0 };
+function project(p) {
+  const cy = Math.cos(cam.yaw), sy = Math.sin(cam.yaw), cp = Math.cos(cam.pitch), sp = Math.sin(cam.pitch);
+  let x = p[0] * cy - p[2] * sy, z = p[0] * sy + p[2] * cy, y = p[1];
+  const y2 = y * cp - z * sp; z = y * sp + z * cp; y = y2;
+  const D = 1050, f = 860 * cam.zoom * (W < 600 ? Math.min(W * 1.35, H * 0.8) : Math.min(W, H)) / 820;
+  const s = f / (D + z);
+  return { x: W / 2 + (W > 960 ? 70 : 0) + cam.ox + x * s, y: H * (W > 960 ? 0.46 + cam.oy : 0.52 + cam.oy) + y * s, s, z };
+}
+
+let chart = blankChart();
+const CERT = { high: 1, moderate: 0.85, low: 0.62 };
+function applyChart(c, instant) {
+  chart = c;
+  nodes.Q.tgt = c.q ? { a: 1, r: 13, glow: 1 } : { a: 0, r: 0, glow: 0 };
+  for (const k of Object.keys(SOURCES)) {
+    const n = nodes[k], s = c.sources[k];
+    if (!s) { n.tgt = { a: 0, r: 0, glow: 0 }; n.mergeTo = null; continue; }
+    const base = 5 + n.data.weight * 9;
+    if (s.merged) { n.tgt = { a: 0, r: base * 0.4, glow: 0 }; n.mergeTo = n.data.dupOf; }
+    else { n.tgt = { a: n.data.dupOf ? 0.85 : 1, r: base, glow: 0.8 }; n.mergeTo = null; }
+    n.crossref = c.crossref && n.data.relied;
+  }
+  for (const k of Object.keys(CLAIMS)) {
+    const n = nodes[k], st = c.claims[k];
+    if (!st) { n.tgt = { a: 0, r: 0, glow: 0 }; n.status = null; n.goal = n.home; continue; }
+    n.status = st.status;
+    const bright = CERT[n.data.certainty] || 0.6, r = n.data.materiality === 'material' ? 7.5 : 5.5;
+    if (st.status === 'removed' || st.status === 'unsupported') n.tgt = { a: 0.4, r: r * 0.85, glow: 0 };
+    else if (st.status === 'drafted') n.tgt = { a: 0.55, r, glow: 0.35 };
+    else n.tgt = { a: bright, r, glow: bright };
+    if (c.brief && BRIEF_CLAIMS.includes(k)) n.tgt.glow = 1, n.tgt.a = Math.max(n.tgt.a, 0.95);
+    n.goal = st.status === 'removed' ? lerp3([0, 0, 0], n.home, 1.35) : (c.brief && BRIEF_CLAIMS.includes(k) ? lerp3([0, 0, 0], n.home, 0.82) : n.home);
+  }
+  for (const l of linkObjs) {
+    const st = c.claims[l.c];
+    l.tgt = c.links && st ? 1 : 0;
+    l.fade = st && (st.status === 'removed' || st.status === 'unsupported') ? 0.25 : 1;
+    if (l.rel === 'contradicts' && !(st && st.status === 'contested')) l.fade = 0.3;
+  }
+  if (instant) {
+    for (const n of Object.values(nodes)) { n.a = n.tgt.a; n.r = n.tgt.r; n.glow = n.tgt.glow; if (n.goal) n.pos = n.goal; if (n.mergeTo) n.pos = nodes[n.mergeTo].home; }
+    for (const l of linkObjs) l.prog = l.tgt;
+    dustA = c.dust; dustT = c.dust ? 1 : 0;
+  }
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Playback: one recorded event at a time. The text types out, holds, then the next event.
+// ─────────────────────────────────────────────────────────────────────────────
+const $ = (id) => document.getElementById(id);
+const P = { i: -1, t: 0, typeDur: 0, hold: 0, playing: true, explore: false, ended: false, intro: 0 };
+const CPS = 42;   // characters per second for transmissions
+const holdFor = (text) => 1500 + text.length * 22;
+$('question').textContent = STORY.question;
+
+const lineMs = (l) => l.ms || (l.text.length / CPS * 1000 + holdFor(l.text));
+const stepMs = STEPS.map((st) => st.lines.reduce((t, l) => t + lineMs(l), 0));
+// Who leads each chapter: its segment takes that observer's colour.
+const LEAD = {"Opening":"editor","Turns 7–12":"researcher","Turns 13–16":"reviewer","Research · Gemini":"reviewer","Close":"editor"};
+const LEAD_COLOR = { check: '#d7dfec' };
+STEPS.forEach((st, si) => {
+  const btn = document.createElement('button');
+  btn.style.flex = `${stepMs[si]} 1 0`;
+  const lead = LEAD[st.title];
+  btn.style.setProperty('--c', LEAD_COLOR[lead] || AGENTS[lead]?.color || 'var(--ink-dim)');
+  btn.setAttribute('aria-label', `Chapter ${si + 1}: ${st.title}`);
+  btn.title = st.title;   // its name, for a chapter too narrow to show it (scenario 239)
+  btn.innerHTML = `<span class="fill"></span><span class="lbl">${st.title}</span>`;
+  btn.addEventListener('click', () => goTo(FLAT.findIndex((f) => f.si === si)));
+  $('steps').appendChild(btn);
+});
+
+function plainLen(html) { return html.replace(/<[^>]+>/g, '').length; }
+function clockAt(i) { let c = STEPS[0].clock; for (let k = 0; k <= i && k < FLAT.length; k++) c = FLAT[k].l.clock || (FLAT[k].li === 0 ? STEPS[FLAT[k].si].clock : c); return c; }
+
+function renderLog(i) {
+  const rows = [];
+  for (let k = 0; k <= i; k++) { const f = FLAT[k]; if (f.l.log) rows.push([clockAt(k), f.l.log]); }
+  const shown = rows.slice(W > 960 && H < 1000 ? -2 : -5);
+  $('logRows').innerHTML = shown.map(([t, m], k) => `<div class="row${k < shown.length - 1 ? ' old' : ''}"><span class="t">${t}</span><span>${m}</span></div>`).join('');
+  const c = chartAfter(i + 1), claims = Object.entries(c.claims).filter(([k]) => k !== 'C9v2');
+  const parts = [];
+  if (c.dust || Object.keys(c.sources).length) parts.push(`<span><b>${Object.keys(c.sources).length}</b> ${Object.keys(c.sources).length === 1 ? 'source' : 'sources'}</span>`);
+  if (Object.keys(c.sources).length) parts.push(`<span><b>${FLAT.slice(0, i + 1).filter((f) => f.l.who !== 'check').length}</b> turns</span>`);
+  if (claims.length) parts.push(`<span><b>${claims.length}</b> claims</span>`);
+  const out = claims.filter(([, s]) => s.status === 'removed' || s.status === 'unsupported').length;
+  if (out) parts.push(`<span><b>${out}</b> left out</span>`);
+  if (claims.some(([, s]) => s.status === 'contested')) parts.push('');
+  if (c.verdict) parts.push('');
+  $('counts').innerHTML = parts.join('');
+  $('counts').hidden = !parts.length;
+}
+
+function setLine(l, progress) {
+  const el = $('line');
+  if (!l) { delete el.dataset.cut; el.classList.remove('moment'); el.style.opacity = 0; co.snap = true; for (const a of Object.values(agents)) a.speakT = 0; return; }
+  el.style.opacity = 1;
+  el.classList.remove('pinned');   // a spoken line or an arrival card is never a clickable card
+  const carding = P.t < 0 && P.introNow;
+  el.classList.toggle('card', carding);
+  el.classList.toggle('check', l.who === 'check' && !carding && !l.rows);
+  el.classList.toggle('cut', !!l.rows && !carding);
+  el.classList.toggle('moment', !!l.moment && !carding);
+  if (l.rows && !carding) {
+    for (const g of Object.values(agents)) g.speakT = g.id === seatOf(l) ? (progress < 1 ? 1 : 0.5) : g.id === l.with ? 0.6 : 0;
+    const key = P.i + ':' + Math.floor(Math.min(1, progress) * 1000);
+    if (el.dataset.cut !== key) { el.dataset.cut = key; $('lineText').innerHTML = cutHtml(l, progress); }
+    if (co.snap) placeCallout(0);
+    return;
+  }
+  delete el.dataset.cut;
+  if (carding) {
+    el.style.setProperty('--c', AGENTS[seatOf(l)].color);
+    $('lineText').innerHTML = cardHtml(seatOf(l), 'New observer');
+    for (const g of Object.values(agents)) g.speakT = 0;
+    if (co.snap) placeCallout(0);
+    return;
+  }
+  const who = $('who');
+  if (l.who === 'check') { who.style.color = 'var(--check)'; who.innerHTML = `<i class="dot" style="color:var(--check)"></i>${l.label}<span class="model">· code</span>`; }
+  else { const a = AGENTS[l.who]; who.style.color = a.color; who.innerHTML = `<i class="dot" style="color:${a.color}"></i>${a.name}<span class="model">· ${a.model}</span>`; }
+  for (const g of Object.values(agents)) g.speakT = g.id === seatOf(l) ? (progress < 1 ? 1 : 0.5) : 0;
+  const n = Math.floor(l.text.length * Math.min(1, progress));
+  $('lineText').innerHTML = escHtml(l.text.slice(0, n)) + (progress < 1 ? '<span class="caret"></span>' : '') + `<span style="visibility:hidden">${escHtml(l.text.slice(n))}</span>`;
+  if (co.snap) placeCallout(0);
+}
+const escHtml = (s) => String(s).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+// The cut's rows. An agent's words, typed as the line plays, under its role and model; the lab's log never under a name.
+const CUTTING = typeof CUT_ON !== 'undefined' && CUT_ON;
+function cutHtml(l, progress) {
+  const total = l.rows.filter((r) => r.t === 'say' && !r.ctx).reduce((t, r) => t + r.words.length, 0);
+  const typing = !RM && progress < 1;
+  let budget = typing ? Math.floor(total * Math.max(0, progress)) : total;
+  // One quiet button for the whole box: its recorded events and its claims, in the inspector.
+  const ids = [...new Set(l.rows.flatMap((r) => r.ids))].sort((a, b) => a - b);
+  const claims = [...new Set(ids.map((id) => CUT.events[id]?.claim).concat(l.rows.map((r) => r.claim)).filter((k) => k && CLAIMS[k]))];
+  const ev = ids.length ? `<button type="button" class="ev-btn" data-ev="${ids.join(',')}" data-claims="${escHtml(claims.join(','))}" aria-label="Evidence" title="Evidence"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="4" width="14" height="17" rx="2"/><path d="M9 4.5V3h6v1.5M9 10h6M9 14h6M9 18h3"/></svg></button>` : '';
+  let prev = null;
+  return l.rows.map((r) => {
+    const named = r.t === 'say' && prev === r.agent; prev = r.t === 'say' ? r.agent : null;
+    const was = r.ctx && r.earlier ? `<span class="was">Earlier · ${escHtml(r.earlier)} · </span>` : '';
+    if (r.t === 'log') return `<div class="cut-row c-log${r.ctx ? ' c-ctx' : ''}${r.outcome ? ' c-out' : ''}">${was}<span class="lab">Log</span>${escHtml(r.text)}</div>`;
+    const a = AGENTS[r.agent] || { name: r.agent, color: '#fff' }, n = r.as || (CUT && CUT.names[r.agent]) || { name: 'The ' + a.name, model: '' };
+    let words = escHtml(r.words);
+    if (!r.ctx) {
+      const k = Math.max(0, Math.min(r.words.length, budget)); budget -= r.words.length;
+      words = escHtml(r.words.slice(0, k)) + (typing && k < r.words.length ? '<span class="caret"></span>' : '') + `<span style="visibility:hidden">${escHtml(r.words.slice(k))}</span>`;
+    }
+    const to = r.replyTo ? `<span class="replying">replying to ${r.replyTo === 'check' ? 'code\u2019s check' : escHtml(((CUT && CUT.names[r.replyTo]) || AGENTS[r.replyTo] || { name: r.replyTo }).name)}</span>` : '';
+    // One name per speaker per box: an agent speaking again straight after itself goes on under the same name.
+    const hd = named && !was ? '' : `<div class="hd">${was}<span class="nm" style="color:${a.color}">${escHtml(n.name)}</span>${n.model ? `<span class="model">· ${escHtml(n.model)}</span>` : ''}</div>`;
+    return `<div class="cut-row c-say${r.ctx ? ' c-ctx' : ''}" data-agent="${escHtml(r.agent)}">${hd}${to}<div class="words">${words}</div></div>`;
+  }).join('') + ev;
+}
+// The recorded events behind a cut line, in the inspector: each agent's words in full, and the lab's log of it.
+function inspectEvents(ids, claims = []) {
+  hideCard(); if (!P.ended && P.playing) { P.soft = true; setPlaying(false); }
+  const evs = ids.map((id) => CUT.events[id]).filter(Boolean);
+  const cl = claims.filter((k) => chart.claims[k]);
+  $('inspBody').innerHTML = `<div class="kind">From the record</div><h3>${evs.length === 1 ? 'The recorded event' : evs.length + ' recorded events'}</h3>`
+    + evs.map((x) => `<div class="ev"><div class="rel">${escHtml(x.clock)} · ${x.words && x.agent && x.agent !== 'check' ? escHtml((CUT.names[x.agent] || { name: x.agent }).name) : 'Log'}${x.claim ? ' · ' + escHtml(x.claim) : ''}</div>${x.words ? `<blockquote>“${escHtml(x.full || x.words)}”</blockquote>` : ''}${x.fact ? `<div class="from">${escHtml(x.fact)}</div>` : ''}</div>`).join('')
+    + (cl.length ? '<h4>Claims</h4>' + cl.map((k) => `<p><button class="link" data-go="${escHtml(k)}">${escHtml(k)}</button> ${escHtml((CLAIMS[k].text || '').slice(0, 140))}</p>`).join('') : '');
+  closeAnswer(); selected = null;
+  $('inspector').hidden = false;
+  closePanels();
+}
+// The mode line: says the replay is edited, and how long it runs of the run (scenario 341). There is no other replay
+// to switch to (John, October 29, 2026: edited replays only). A record with nothing to cut has none.
+if (typeof CUT !== 'undefined' && CUT) {
+  const m = $('cutMode'); m.hidden = false;
+  m.innerHTML = `<span>${escHtml(CUT.label)}</span>`;
+}
+// An observer's title card: when it first arrives ("New observer"), and again when its seat is clicked.
+function cardHtml(k, kicker = 'Observer', closable = false) {
+  const a = AGENTS[k], it = INTROS[k], isCode = k === 'check';
+  const x = closable ? '<button class="card-x" aria-label="Close the card"><svg viewBox="0 0 24 24"><path d="M6.4 5 5 6.4 10.6 12 5 17.6 6.4 19l5.6-5.6 5.6 5.6 1.4-1.4-5.6-5.6L19 6.4 17.6 5 12 10.6z"/></svg></button>' : '';
+  return `<span class="badge-top" style="display:flex">${kicker}<span class="right"><i>${String(Object.keys(INTROS).indexOf(k) + 1).padStart(2, '0')} / ${String(Object.keys(INTROS).length).padStart(2, '0')}</i>${x}</span></span>`
+    + `<span class="badge-body" style="display:grid"><span class="badge-name">${isCode ? 'Code' : a.name}</span>`
+    + `<span class="badge-model">${isCode ? '<b>Runs on</b> code, not a model' : `<b>Model</b> ${a.model}`}</span>`
+    + `<span class="badge-role">${it.role}</span><span class="badge-trait">${it.trait}</span></span>`;
+}
+
+function enter(i) {
+  P.i = i; P.t = 0; P.cardFor = null;
+  const f = FLAT[i], st = STEPS[f.si], l = f.l;
+  P.typeDur = l.text.length / CPS * 1000; P.hold = holdFor(l.text);
+  if (l.rows) { P.typeDur = RM ? 1 : Math.max(1, l.typeMs); P.hold = l.ms - P.typeDur; }
+  applyChart(chartAfter(i + 1), false);
+  if (l.do && l.do.includes('dust')) dustT = 0;
+  // Observers: anyone who has appeared so far keeps a seat; the speaker gets a card the first time.
+  const metNow = new Set(); for (let k = 0; k <= i; k++) metNow.add(seatOf(FLAT[k].l));
+  P.introNow = !metNow.has(seatOf(l)) || FLAT.slice(0, i).every((f) => seatOf(f.l) !== seatOf(l));
+  for (const ag of Object.values(agents)) {
+    ag.met = metNow.has(ag.id);
+    ag.slot.classList.toggle('in', ag.met);
+    ag.slot.classList.toggle('away', ag.met && ag.id !== seatOf(l));
+    ag.slot.classList.toggle('talking', ag.id === seatOf(l));
+  }
+  // The cut: an exchange lights both its agents.
+  if (l.with && agents[l.with]) { const w = agents[l.with]; w.met = true; w.slot.classList.add('in', 'talking'); w.slot.classList.remove('away'); }
+  if (P.introNow) P.t = -INTRO_MS;
+  if (W <= 960) { const sl = agents[seatOf(l)]?.slot; if (sl) { const d = $('deck'); d.scrollTo({ left: Math.max(0, sl.offsetLeft - 8), behavior: RM ? 'auto' : 'smooth' }); } }
+  aimCamera(l.focus);
+  for (const id of l.focus || []) if (nodes[id]) nodes[id].pulse = 1;
+  $('clock').textContent = `Oct 30, 2026 · ${clockAt(i)} · step ${String(f.si + 1).padStart(2, '0')}/${String(STEPS.length).padStart(2, '0')} ${st.title.toLowerCase()}`;
+  renderLog(i);
+  renderSteps();
+  setLine(l, 0);
+  if (!$('catalog').hidden) renderCatalog();   // the catalog follows the story: nothing shows before it happens
+}
+function focusPoint(focus) {
+  if (!focus || !focus.length) return [0, 0, 0];
+  if (focus[0] === 'dust') return [0, -330, 120];
+  const ps = focus.map((f) => (nodes[f] ? nodes[f].home : [0, 0, 0]));
+  return ps.reduce((a, p) => add(a, p.map((v) => v / ps.length)), [0, 0, 0]);
+}
+function aimCamera(focus) {
+  if (!focus) return;
+  const p = focusPoint(focus);
+  const yawTo = Math.atan2(p[0], -p[2] || -1);
+  const wish = -yawTo * 0.22 + cam.tyaw * 0.78;
+  if (Number.isFinite(wish)) cam.tyaw = wish;
+  cam.tzoom = focus[0] === 'dust' ? 0.86 : (focus.length === 1 && focus[0] !== 'Q' ? 1.1 : 1);
+}
+function renderSteps() {
+  const cur = P.i < 0 ? -1 : FLAT[P.i].si;
+  $('skipEnd').classList.toggle('done', P.ended);
+  [...$('steps').children].forEach((b, si) => {
+    const fill = b.querySelector('.fill');
+    b.classList.toggle('cur', !P.ended && si === cur);
+    b.classList.toggle('done', P.ended || si < cur);
+    if (P.ended || si < cur) fill.style.width = '100%';
+    else if (si > cur) fill.style.width = '0%';
+    else { const f = FLAT[P.i], done = STEPS[si].lines.slice(0, f.li).reduce((t, l) => t + lineMs(l), 0); fill.style.width = `${Math.min(100, ((done + Math.max(0, Math.min(P.t, lineMs(f.l)))) / stepMs[si]) * 100)}%`; }
+  });
+}
+
+function goTo(i) {
+  P.soft = false; P.cardFor = null;
+  if (P.intro > 0) endIntro(true);
+  closeAnswer(); P.ended = false;
+  document.body.scrollTop = 0; document.documentElement.scrollTop = 0;
+  $('log').hidden = false;
+  $('inspector').hidden = true; selected = null;
+  if (P.explore) setExplore(false);
+  applyChart(chartAfter(Math.max(0, i)), true);
+  if (i < FLAT.length) enter(i); else finish();
+  if (!P.playing) setPlaying(true);
+}
+function advance() { if (P.i + 1 >= FLAT.length) finish(); else enter(P.i + 1); }
+function finish() {
+  endIntro(true); P.ended = true; P.i = FLAT.length - 1;
+  for (const ag of Object.values(agents)) { ag.met = true; ag.slot.classList.add('in'); ag.slot.classList.remove('talking'); ag.slot.classList.add('away'); }
+  applyChart(chartAfter(FLAT.length), false);
+  renderLog(FLAT.length - 1); renderSteps();
+  if (!$('catalog').hidden) renderCatalog();
+  setLine(null);
+  $('verdictText').textContent = STORY.verdict;
+  buildReport();
+  setPlaying(false); cam.tzoom = 0.92; $('log').hidden = true;
+  // Let the check land in the centre first, then the question's panel opens with the answer.
+  clearTimeout(answerTimer); answerTimer = setTimeout(openAnswer, RM ? 0 : 1100);
+  $('clock').textContent = `Oct 30, 2026 · ${clockAt(FLAT.length - 1)} · closed`;
+}
+function tick(dt) {
+  if (P.intro > 0) { if (!P.playing) return; const before = P.intro; P.intro -= dt; introSteps(INTRO_TOTAL - before, INTRO_TOTAL - P.intro); if (P.intro <= 0) endIntro(); if (P.i < 0) return; }
+  if (!P.playing || P.explore || P.ended || P.i < 0) return;
+  // A record that shrank under the line playing (the live page fetches it again): back to its newest line, never a
+  // read past its end that would stop the sky (review 2).
+  if (P.i >= FLAT.length) { if (!FLAT.length) return; P.i = FLAT.length - 1; }
+  P.t += dt;
+  const l = FLAT[P.i].l;
+  setLine(l, Math.max(0, P.t) / P.typeDur);
+  renderSteps();
+  if (P.t >= P.typeDur + P.hold) advance();
+}
+function setPlaying(on) {
+  P.playing = on;
+  if (on && !$('inspector').hidden) { $('inspector').hidden = true; selected = null; }
+  updatePaused();
+  $('play').setAttribute('aria-label', on ? 'Pause' : 'Play');
+  $('playIcon').innerHTML = on ? '<path d="M6 5h4v14H6zm8 0h4v14h-4z"/>' : '<path d="M7 5v14l12-7z"/>';
+}
+function updatePaused() {
+  // A look at a point (P.soft) resumes by itself when it closes, so it shows no "Paused" pill.
+  const waiting = !P.playing && !P.ended && !P.explore && !P.soft && P.i >= 0;
+  $('paused').hidden = !waiting;
+  $('play').classList.toggle('waiting', waiting);
+}
+$('resume').addEventListener('click', () => { hideCard(); P.soft = false; $('inspector').hidden = true; selected = null; setPlaying(true); });
+$('play').addEventListener('click', () => { hideCard(); P.soft = false; if (P.ended) { goTo(0); return; } if (P.explore) setExplore(false); setPlaying(!P.playing); });
+$('next').addEventListener('click', () => { if (P.ended) return; if (P.intro > 0) { endIntro(); return; } if (P.t < 0) P.t = 0; else if (P.t < P.typeDur) P.t = P.typeDur; else advance(); });
+$('prev').addEventListener('click', () => goTo(Math.max(0, (P.ended ? FLAT.length : P.i) - 1)));
+$('skipEnd').addEventListener('click', () => { endIntro(true); finish(); });
+
+function setExplore(on) {
+  P.explore = on;
+  updatePaused();
+  $('hint').hidden = !on;
+  if (on) { setPlaying(false); setLine(null); closeAnswer(); }
+  else if (P.ended) openAnswer();
+}
+// The sky can be turned and clicked at any time, so there is no separate explore mode to enter:
+// "Start over" replays from the opening, and "Explore the evidence" just clears the finding away.
+$('restart').addEventListener('click', () => { goTo(0); startIntro(); });
+$('exploreBtn2').addEventListener('click', () => { closeAnswer(); $('hint').hidden = false; setTimeout(() => { $('hint').hidden = true; }, 4000); });
+// The answer panel: the question's own inspector once the brief is approved.
+let answerTimer = 0;
+function openAnswer() {
+  clearTimeout(answerTimer);
+  if (!P.ended || P.explore) return;
+  buildReport();
+  $('inspector').hidden = true; selected = null; // no dimming: the whole constellation stays lit behind the answer
+  const el = $('report');
+  if (el.hidden) { el.hidden = false; el.scrollTop = 0; setWide(false); }
+}
+function closeAnswer() {
+  clearTimeout(answerTimer);
+  const el = $('report'); el.hidden = true; el.scrollTop = 0; setWide(false);
+  if (selected === 'Q') selected = null;
+}
+// Only the reader widens or narrows the panel; scrolling never does.
+function setWide(on) {
+  $('report').classList.toggle('wide', on); document.body.classList.toggle('reading', on);
+  $('sizeBtn').setAttribute('aria-expanded', String(on));
+  $('sizeBtn').setAttribute('aria-label', on ? 'Collapse the brief to the side panel' : 'Expand the brief to a reading sheet');
+}
+$('sizeBtn').addEventListener('click', () => setWide(!$('report').classList.contains('wide')));
+const toAnswerTop = () => $('report').scrollTo({ top: 0, behavior: RM ? 'auto' : 'smooth' });
+$('more').addEventListener('click', () => { $('report').scrollTo({ top: $('briefBody').offsetTop - 20, behavior: RM ? 'auto' : 'smooth' }); });
+$('toChart').addEventListener('click', () => { setWide(false); toAnswerTop(); });
+$('replay2').addEventListener('click', () => { goTo(0); startIntro(); });
+let reportBuilt = false;
+function buildReport() {
+  if (reportBuilt) return; reportBuilt = true;
+  $('rTitle').textContent = STORY.verdict;
+  if (ASKED_BY) { $('askedBy').textContent = 'Asked by ' + ASKED_BY; $('askedBy').hidden = false; }
+  $('briefBody').innerHTML = STORY.brief.sections.map((s) => `<h4>${escHtml(s.heading)}</h4>` + s.lines.map(([k, t]) => `<p>${escHtml(t)}</p>`).join('')).join('');
+  const TRAIL = [["8:49 AM","Opening","6 turns."],["8:51 AM","Turns 7–12","6 turns."],["8:53 AM","Turns 13–16","4 turns."],["8:54 AM","Research · Gemini","5 turns, with research."],["8:56 AM","Close","1 turn."]];
+  $('trail').innerHTML = TRAIL.map(([t, s, d]) => `<li><span class="t">${t}</span><span class="s">${s}</span><span>${escHtml(d)}</span></li>`).join('');
+  const OUT = [];
+  if (OUT.length) $('out').innerHTML = '<div style="color:var(--ink-dim);font:500 10.5px/1.6 var(--mono);letter-spacing:.14em;text-transform:uppercase;display:block">Left out of the brief</div>' + OUT.map(([k, w]) => `<div><button class="key" data-node="${k}" aria-label="Show ${k} on the chart">${k}</button><span>${w}</span></div>`).join('');
+  $('studies').innerHTML = Object.entries(SOURCES).filter(([, x]) => !x.dupOf).map(([k, x]) => {
+    const dup = Object.entries(SOURCES).find(([, y]) => y.dupOf === k);
+    return `<li><div class="nm"><button data-node="${k}">${escHtml(x.label)}</button>${x.relied ? '<span class="tag">in the brief</span>' : ''}</div><div class="ti">${escHtml(x.title)}</div><div class="mt">${escHtml(x.design)}${x.n ? ` · n = ${x.n.toLocaleString()}${x.design.startsWith('Systematic') ? ' studies' : ''}` : ''} · ${escHtml(x.venue)}, ${x.year}${dup ? ` · also published as “${escHtml(dup[1].title)}” (${dup[1].year}), counted once` : ''}</div></li>`;
+  }).join('');
+}
+$('report').addEventListener('click', (e) => { const k = e.target.closest('[data-node]')?.dataset.node; if (k) inspect(k); });
+// Sharing. The artifact frame allows copying from a click and opening outside links; it has no
+// native share sheet, so these are the honest options. The link stays private until shared.
+const SHARE_URL = '';
+const SHARE_TEXT = '';
+const POST_TEXT = '';
+for (const box of document.querySelectorAll('.share')) {
+  box.querySelector('[data-share="linkedin"]').href = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(SHARE_URL)}`;
+  box.querySelector('[data-share="x"]').href = `https://x.com/intent/post?text=${encodeURIComponent(POST_TEXT)}&url=${encodeURIComponent(SHARE_URL)}`;
+  box.addEventListener('click', (e) => {
+    const b = e.target.closest('button[data-share]'); if (!b) return;
+    const text = b.dataset.share === 'link' ? SHARE_URL : SHARE_TEXT;
+    const label = b.querySelector('span'), was = label.textContent;
+    const ok = () => { b.classList.add('done'); label.textContent = 'Copied'; setTimeout(() => { b.classList.remove('done'); label.textContent = was; }, 1800); };
+    const fallback = () => {
+      let ta = box.querySelector('textarea');
+      if (!ta) { ta = document.createElement('textarea'); ta.setAttribute('aria-label', 'Text to copy'); ta.readOnly = true; box.appendChild(ta); const n = document.createElement('div'); n.className = 'note'; n.textContent = 'Copying was blocked here. The text is selected: press Ctrl+C or ⌘C.'; box.appendChild(n); }
+      ta.value = text; ta.focus(); ta.select();
+    };
+    try { navigator.clipboard.writeText(text).then(ok, fallback); } catch { fallback(); }
+  });
+}
+
+
+// Inspector
+let selected = null;
+const REL = { supports: ['Supports', '#9fcfff'], qualifies: ['Qualifies', '#c0c9dc'], contradicts: ['Cuts against', '#ff7466'] };
+// Where to read a study, in a new tab (John, October 29, 2026): its DOI, else its arXiv page, as the record gives it.
+const readStudy = (url) => `<a class="read" href="${escHtml(url)}" target="_blank" rel="noopener">Read the study</a>`;
+const STATUS = {
+  drafted: ['Drafted', '#c0c9dc'], held: ['Holds', '#5fcfb8'], pending: ['Under review', '#f0a43a'], revising: ['Conceded, being rewritten', '#f0a43a'],
+  checking: ['Being checked', '#f0a43a'], contested: ['Contested', '#ff7466'], removed: ['Left out', '#7f8ba3'], unsupported: ['Unsupported', '#7f8ba3'],
+};
+function inspect(id) {
+  const n = nodes[id]; if (!n) return;
+  if (id === 'Q' && P.ended && !P.explore) { openAnswer(); return; }
+  if (n.type === 'source' && !chart.sources[id]) return;
+  if (n.type === 'claim' && !chart.claims[id]) return;
+  selected = id;
+  let h = '';
+  if (n.type === 'question') {
+    h = `<div class="kind">The question</div><h3>${escHtml(STORY.question)}</h3>
+      <dl class="meta">${ASKED_BY ? `<dt>Asked by</dt><dd>${escHtml(ASKED_BY.charAt(0).toUpperCase() + ASKED_BY.slice(1))}</dd>` : ''}<dt>Status</dt><dd>${chart.verdict ? 'Brief written' : P.ended ? 'Closed' : 'In conversation'}</dd></dl>
+      ${chart.verdict ? `<h4>Finding</h4><p>${escHtml(STORY.verdict)}</p>` : ''}
+      <p class="fine">Points around it are the sources in the room: supplied before the conversation, or found by a discussant during it.</p>`;
+  } else if (n.type === 'source') {
+    const s = n.data;
+    const dup = s.dupOf ? `<p class="fine">Same study as the <button class="link" data-go="${s.dupOf}">${escHtml(SOURCES[s.dupOf].label)}</button>. Counted once.</p>` : '';
+    const ev = LINKS.filter((l) => l[2] === id && chart.claims[l[0]]);
+    h = `<div class="kind">Study${s.design && s.design !== 'Study' ? ` · ${escHtml(s.design)}` : ''}</div><h3>${escHtml(s.title)}</h3>${s.link ? `<p>${readStudy(s.link)}</p>` : ''}
+      <dl class="meta"><dt>Published</dt><dd>${escHtml(s.venue)}, ${s.year}</dd>${s.n ? `<dt>Sample</dt><dd>${s.n.toLocaleString()}${s.design.startsWith('Systematic') ? ' studies' : ''}</dd>` : ''}${s.relied ? `<dt>In the brief</dt><dd>Yes${chart.crossref ? '. Rechecked with Crossref: not retracted, not corrected.' : ''}</dd>` : ''}</dl>
+      ${dup}${ev.length ? '<h4>Passages quoted from it</h4>' + ev.map(([c, rel, , q]) => `<div class="ev"><div class="rel" style="color:${REL[rel][1]}">${REL[rel][0]} <button class="link" data-go="${c}">${escHtml(CLAIMS[c].key || c)}</button></div><blockquote>“${escHtml(q)}”</blockquote></div>`).join('') : (s.note ? '<p class="fine">' + escHtml(s.note) + '</p>' : '')}`;
+  } else {
+    const c = n.data, st = chart.claims[id] || {};
+    const [sl, sc] = STATUS[st.status] || ['', '#fff'];
+    const ev = LINKS.filter((l) => l[0] === id);
+    h = `<div class="kind">Claim ${escHtml(n.key)} · ${c.materiality}</div>
+      ${c.text ? `<h3 style="font:400 15.5px/1.5 var(--body)">${escHtml(c.text)}</h3>` : `<p class="dim">Code flagged this claim.</p>`}${c.flag ? `<p class="fine">${escHtml(c.flag)}</p>` : ''}
+      <p><span class="pill" style="color:${sc}">${sl}</span></p>
+      <dl class="meta"><dt>About</dt><dd>${escHtml(c.pop)}</dd><dt>Certainty</dt><dd>${c.certainty}</dd><dt>Skeptic</dt><dd>${escHtml(st.skeptic || '')}</dd>${BRIEF_CLAIMS.includes(id) && chart.brief ? '<dt>In the brief</dt><dd>Yes</dd>' : ''}</dl>
+      ${st.why ? `<h4>Why</h4><p>${escHtml(st.why)}</p>` : ''}
+      <h4>Evidence</h4>${ev.map(([, rel, s, q]) => `<div class="ev"><div class="rel" style="color:${REL[rel][1]}">${REL[rel][0]}</div><blockquote>“${escHtml(q)}”</blockquote><div class="from">From the <button class="link" data-go="${s}">${escHtml(SOURCES[s].label)}</button>${SOURCES[s].link ? ` · ${readStudy(SOURCES[s].link)}` : ''}</div></div>`).join('')}`;
+  }
+  $('inspBody').innerHTML = h;
+  closeAnswer(); selected = id;
+  $('inspector').hidden = false;
+  closePanels();
+}
+$('inspBody').addEventListener('click', (e) => { const g = e.target.closest('[data-go]')?.dataset.go; if (g) inspect(g); });
+// Looking at a point pauses the story only while it's open: closing it (the same point again, empty sky,
+// the close button, Esc) picks the story up again. Only the pause button pauses for good.
+function lookAt(id) { hideCard(); if (!P.ended && P.playing) { P.soft = true; setPlaying(false); } inspect(id); }
+function closeInspector() {
+  $('inspector').hidden = true; selected = null;
+  if (P.ended) openAnswer();
+  else if (P.soft) { P.soft = false; setPlaying(true); }
+  else if (P.i >= 0 && !P.explore) setLine(FLAT[P.i].l, P.t / P.typeDur);
+}
+$('inspClose').addEventListener('click', closeInspector);
+
+let hoverAgent = null;   // the observer under the pointer: its avatar glows as a hovered star does
+// An observer's title card, again: click a seat on the deck. The card opens beside that observer,
+// where it first appeared, and the observer lights up as if speaking. The story waits while it is
+// open; clicking the observer again, empty sky, or Esc closes it and the story resumes.
+function showObserver(k) {
+  if (!AGENTS[k] || !INTROS[k]) return;
+  if (!$('inspector').hidden) { $('inspector').hidden = true; selected = null; }
+  if (!P.ended && P.playing) { P.soft = true; setPlaying(false); }
+  const el = $('line');
+  clearTimeout(cardOffTimer);
+  if (!P.cardFor) { el.classList.remove('card'); void el.offsetWidth; }   // a card still fading out comes in fresh
+  P.cardFor = k;
+  delete el.dataset.cut;   // the card covers the line, so closing it draws the line again (scenario 375)
+  el.style.opacity = 1; el.classList.add('card', 'pinned'); el.classList.remove('check');
+  el.style.setProperty('--c', AGENTS[k].color);
+  $('lineText').innerHTML = cardHtml(k, 'Observer', true);
+  for (const ag of Object.values(agents)) {
+    ag.speakT = ag.id === k ? 1 : 0;
+    ag.slot.classList.toggle('talking', ag.id === k);
+    ag.slot.classList.toggle('away', ag.met && ag.id !== k);
+  }
+  closePanels();
+}
+// Puts the card away without touching playback (another point or observer is taking its place).
+function hideCard() {
+  if (!P.cardFor) return;
+  P.cardFor = null;
+  const el = $('line'), who = P.i >= 0 && !P.ended ? seatOf(FLAT[P.i].l) : null;
+  el.classList.remove('pinned');
+  for (const ag of Object.values(agents)) {
+    ag.speakT = 0;
+    ag.slot.classList.toggle('talking', ag.id === who);
+    ag.slot.classList.toggle('away', ag.met && ag.id !== who);
+  }
+  if (who) { el.classList.remove('card'); setLine(FLAT[P.i].l, Math.max(0, P.t) / P.typeDur); return; }
+  // Nothing to go back to: the card fades out as a card. Dropping its look first would show the
+  // last spoken line's header ("Approval · code") through the fade.
+  setLine(null);
+  clearTimeout(cardOffTimer); cardOffTimer = setTimeout(() => { if (!P.cardFor) el.classList.remove('card'); }, RM ? 0 : 450);
+}
+let cardOffTimer = 0;
+function closeCard() {
+  hideCard();
+  if (P.soft && !P.ended) { P.soft = false; setPlaying(true); }
+}
+$('line').addEventListener('click', (e) => {
+  if (e.target.closest('.card-x')) closeCard();
+  // The cut: a claim's tag opens the claim and its evidence; a row's events open the record behind it.
+  const ev = e.target.closest('.ev-btn');
+  if (ev) inspectEvents(ev.dataset.ev.split(',').map(Number), ev.dataset.claims ? ev.dataset.claims.split(',') : []);
+});
+for (const sl of document.querySelectorAll('.deck .slot')) {
+  sl.setAttribute('role', 'button'); sl.tabIndex = 0; sl.style.cursor = 'pointer';
+  sl.setAttribute('aria-label', `${sl.querySelector('.nm').firstChild.textContent.trim()}: show the title card`);
+  const open = () => {
+    if (!sl.classList.contains('in')) return;
+    const k = sl.dataset.agent;
+    if (P.cardFor === k) closeCard(); else showObserver(k);
+  };
+  sl.addEventListener('click', open);
+  const hoverOn = () => { if (!sl.classList.contains('in')) return; hoverAgent = sl.dataset.agent; sl.classList.add('hov'); $('deck').classList.add('hovering'); };
+  const hoverOff = () => { if (hoverAgent === sl.dataset.agent) hoverAgent = null; sl.classList.remove('hov'); if (!document.querySelector('.slot.hov')) $('deck').classList.remove('hovering'); };
+  sl.addEventListener('pointerenter', hoverOn); sl.addEventListener('pointerleave', hoverOff);
+  sl.addEventListener('focus', hoverOn); sl.addEventListener('blur', hoverOff);
+  sl.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); e.stopPropagation(); open(); } });
+}
+function closePanels() { for (const [btn, el] of [['legendBtn', 'legend'], ['catalogBtn', 'catalog']]) { $(btn).setAttribute('aria-pressed', 'false'); $(el).hidden = true; } setMenu(false); }
+function setMenu(on) { $('menuBtn').setAttribute('aria-expanded', String(on)); $('sitemenu').classList.toggle('open', on); }
+$('menuBtn').addEventListener('click', () => { const on = !$('sitemenu').classList.contains('open'); closePanels(); setMenu(on); });
+// A press anywhere outside the menu closes it.
+addEventListener('pointerdown', (e) => { if ($('sitemenu').classList.contains('open') && !e.target.closest('#sitemenu, #menuBtn')) setMenu(false); });
+function togglePanel(btn, el) { const on = $(el).hidden; closePanels(); if (on) { $(el).hidden = false; $(btn).setAttribute('aria-pressed', 'true'); if (el === 'catalog') renderCatalog(); } }
+$('legendBtn').addEventListener('click', () => togglePanel('legendBtn', 'legend'));
+$('catalogBtn').addEventListener('click', () => togglePanel('catalogBtn', 'catalog'));
+function renderCatalog() {
+  const items = [];
+  if (chart.q) items.push(['Q', '?', 'The question']);
+  // Duplicate write-ups sit under their study and don't count as studies of their own.
+  for (const k of Object.keys(SOURCES)) if (chart.sources[k] && !SOURCES[k].dupOf) {
+    items.push([k, 'study', SOURCES[k].label]);
+    for (const [d, s] of Object.entries(SOURCES)) if (s.dupOf === k && chart.sources[d]) items.push([d, '↳', `${s.label} · same study, counted once`]);
+  }
+  for (const k of Object.keys(CLAIMS)) if (chart.claims[k]) items.push([k, CLAIMS[k].key ? 'C9′' : k, `${(STATUS[chart.claims[k].status] || [''])[0]} · ${CLAIMS[k].text.slice(0, 60)}…`]);
+  $('catalogList').innerHTML = items.length ? items.map(([id, tag, t]) => `<button data-go="${id}"><code>${tag}</code><span>${escHtml(t)}</span></button>`).join('') : '<p class="fine" style="margin:0 8px">Nothing yet.</p>';
+}
+$('catalogList').addEventListener('click', (e) => { const g = e.target.closest('[data-go]')?.dataset.go; if (g) lookAt(g); });
+
+addEventListener('keydown', (e) => {
+  if (e.key === ' ' && !(e.target instanceof HTMLButtonElement)) { e.preventDefault(); $('play').click(); }
+  else if (e.key === 'ArrowRight') $('next').click();
+  else if (e.key === 'ArrowLeft') $('prev').click();
+  else if (e.key === 'Escape') { if ($('report').classList.contains('wide')) { setWide(false); return; } if (P.cardFor) { closeCard(); return; } const was = !$('inspector').hidden; closePanels(); if (was) closeInspector(); }
+});
+
+// Pointer
+let drag = null, hover = null, lastInteract = -1e9;
+function pick(x, y) {
+  let best = null, bd = 1e9;
+  for (const n of Object.values(nodes)) {
+    if (n.a < 0.15 || !n.proj) continue;
+    const d = Math.hypot(n.proj.x - x, n.proj.y - y), rr = Math.max(14, n.r * n.proj.s * 1.6 + 8);
+    if (d < rr && d < bd) { bd = d; best = n.id; }
+  }
+  return best;
+}
+canvas.addEventListener('pointerdown', (e) => { drag = { x: e.clientX, y: e.clientY, yaw: cam.tyaw, pitch: cam.tpitch, moved: false }; canvas.setPointerCapture(e.pointerId); });
+canvas.addEventListener('pointermove', (e) => {
+  if (drag) {
+    const dx = e.clientX - drag.x, dy = e.clientY - drag.y;
+    if (Math.hypot(dx, dy) > 4) { drag.moved = true; canvas.classList.add('dragging'); }
+    cam.tyaw = drag.yaw + dx * 0.006; cam.tpitch = Math.max(-0.7, Math.min(0.9, drag.pitch + dy * 0.004));
+    lastInteract = performance.now();
+  } else { hover = pick(e.clientX, e.clientY); canvas.classList.toggle('pointing', !!hover); }
+});
+canvas.addEventListener('pointerup', (e) => {
+  canvas.classList.remove('dragging');
+  if (drag && !drag.moved) {
+    const id = pick(e.clientX, e.clientY);
+    if (id && !(id === selected && !$('inspector').hidden)) lookAt(id);
+    else if (!$('inspector').hidden) closeInspector();
+    else if (P.cardFor) closeCard();
+    else if (P.ended) openAnswer();
+  }
+  drag = null;
+});
+canvas.addEventListener('wheel', (e) => { e.preventDefault(); cam.tzoom = Math.max(0.6, Math.min(1.9, cam.tzoom * (e.deltaY > 0 ? 0.92 : 1.08))); lastInteract = performance.now(); }, { passive: false });
+
+// Drawing
+function resize() { DPR = Math.min(2, devicePixelRatio || 1); W = innerWidth; H = innerHeight; canvas.width = W * DPR; canvas.height = H * DPR; ctx.setTransform(DPR, 0, 0, DPR, 0, 0); }
+addEventListener('resize', resize); resize();
+const hex = (c, a) => { const n = parseInt(c.slice(1), 16); return `rgba(${n >> 16 & 255},${n >> 8 & 255},${n & 255},${a})`; };
+function halo(x, y, r, color, a) { const g = ctx.createRadialGradient(x, y, 0, x, y, r); g.addColorStop(0, hex(color, a)); g.addColorStop(1, hex(color, 0)); ctx.fillStyle = g; ctx.beginPath(); ctx.arc(x, y, r, 0, 6.283); ctx.fill(); }
+function glowDot(x, y, r, color, a, g) { if (g > 0.01) halo(x, y, r * 4.2, color, 0.42 * a * g); ctx.fillStyle = hex(color, a); ctx.beginPath(); ctx.arc(x, y, r, 0, 6.283); ctx.fill(); }
+function diamond(x, y, r, fill, stroke, a) {
+  ctx.beginPath(); ctx.moveTo(x, y - r); ctx.lineTo(x + r, y); ctx.lineTo(x, y + r); ctx.lineTo(x - r, y); ctx.closePath();
+  if (fill) { ctx.fillStyle = hex(fill, a); ctx.fill(); }
+  if (stroke) { ctx.strokeStyle = hex(stroke, a); ctx.lineWidth = 1.3; ctx.stroke(); }
+}
+const neighbors = (id) => { const s = new Set([id]); for (const l of linkObjs) if (l.prog > 0.5) { if (l.c === id) s.add(l.s); if (l.s === id) s.add(l.c); } return s; };
+
+let last = performance.now(), T = 0, qAns = 0;
+// The points' labels (John, October 29, 2026). A claim's number sits beside its diamond, small and quieter than a
+// study's title (scenario 312). A study's title goes on whichever side of its dot keeps it on screen, cut short with
+// "…" when neither side has room; where two titles would sit on top of each other, the fainter waits until its point
+// is hovered, picked or pulsing (scenario 314).
+function drawLabels(list) {
+  const M = 8, placed = [];
+  const fit = (t, room) => { if (ctx.measureText(t).width <= room) return t; while (t.length > 1 && ctx.measureText(t + '…').width > room) t = t.slice(0, -1).trimEnd(); return t + '…'; };
+  ctx.textBaseline = 'middle';
+  for (const l of list.sort((x, y) => (y.lit - x.lit) || (y.a - x.a) || (y.p.s - x.p.s))) {
+    const { n, p, r, a } = l, gap = r * 1.5 + 7;
+    if (p.x < 0 || p.x > W || p.y < 0 || p.y > H) continue;
+    const claim = n.type === 'claim';
+    ctx.font = claim ? '500 10.5px "IBM Plex Mono", monospace' : '400 12px "IBM Plex Sans", sans-serif';
+    let t = claim ? n.key.replace(' (rewrite)', '′') : n.label, w = ctx.measureText(t).width;
+    const right = W - M - (p.x + gap), left = p.x - gap - M;
+    const side = w <= right || (w > left && right >= left) ? 1 : -1;
+    const room = side > 0 ? right : left;
+    if (w > room) { if (room < 36) continue; t = fit(t, room); w = ctx.measureText(t).width; }
+    const x0 = side > 0 ? p.x + gap : p.x - gap - w, box = [x0, p.y - 7, x0 + w, p.y + 7];
+    if (!claim && !l.lit && placed.some((b) => box[0] < b[2] && box[2] > b[0] && box[1] < b[3] && box[3] > b[1])) continue;
+    if (!claim) placed.push(box);
+    ctx.fillStyle = claim ? `rgba(190,205,232,${l.lit ? Math.min(0.9, a) : 0.5 * a})` : `rgba(227,233,244,${Math.min(0.9, a)})`;
+    ctx.textAlign = 'left';
+    ctx.fillText(t, x0, p.y + 1);
+  }
+}
+const STORY_GAP_MS = 1000;   // the most the story moves between two frames (scenario 374)
+function frame(now) {
+  // The sky eases by at most 64 ms a frame; the story keeps real time, so a screen drawing a few frames a second still
+  // plays it at its pace (scenario 374). Only a long gap, a tab put away, is capped, so nothing is skipped on return.
+  const gap = now - last, dt = Math.min(64, gap); last = now; T += dt;
+  tick(Math.min(STORY_GAP_MS, gap));
+  const k = RM ? 1 : 1 - Math.pow(0.004, dt / 1000);
+  const kSlow = RM ? 1 : 1 - Math.pow(0.15, dt / 1000);
+  // The sky drifts only while the story plays: paused, finished, or under the pointer it holds still,
+  // so a star stays where you aim at it.
+  if (!RM && !drag && P.playing && !P.ended && !hover && now - lastInteract > 3500) cam.tyaw += dt * 0.00003;
+  cam.yaw += (cam.tyaw - cam.yaw) * kSlow; cam.pitch += (cam.tpitch - cam.pitch) * kSlow; cam.zoom += (cam.tzoom - cam.zoom) * kSlow; const panelOpen = !$('report').hidden || !$('inspector').hidden;
+  const oxT = panelOpen && W > 960 ? ((228 + W - 432) / 2) - (W / 2 + 70) : 0, oyT = panelOpen && W <= 960 ? -0.24 : 0;
+  cam.ox += (oxT - cam.ox) * kSlow; cam.oy += (oyT - cam.oy) * kSlow;
+
+  for (const n of Object.values(nodes)) {
+    n.a += (n.tgt.a - n.a) * k; n.r += (n.tgt.r - n.r) * k; n.glow += (n.tgt.glow - n.glow) * k;
+    if (n.mergeTo) n.pos = lerp3(n.pos, nodes[n.mergeTo].pos, k * 0.4);
+    else if (n.goal) n.pos = lerp3(n.pos, n.goal, kSlow * 0.6);
+    else n.pos = lerp3(n.pos, n.home, k * 0.5);
+    n.pulse = Math.max(0, n.pulse - dt / 2000);
+    n.sel += ((selected === n.id ? 1 : 0) - n.sel) * k;
+  }
+  for (const l of linkObjs) l.prog += (l.tgt - l.prog) * (RM ? 1 : 1 - Math.pow(0.1, dt / 1000));
+  dustA += (chart.dust - dustA) * (RM ? 1 : 1 - Math.pow(0.18, dt / 1000));
+  if (chart.dust) dustT = Math.min(1, dustT + dt / 2600);
+
+
+  ctx.fillStyle = '#05070c'; ctx.fillRect(0, 0, W, H);
+  const vg = ctx.createRadialGradient(W / 2, H * 0.46, 0, W / 2, H * 0.46, Math.max(W, H) * 0.7);
+  vg.addColorStop(0, 'rgba(22,28,46,0.2)'); vg.addColorStop(1, 'rgba(5,7,12,0)'); ctx.fillStyle = vg; ctx.fillRect(0, 0, W, H);
+  for (const f of field) {
+    const x = ((f.x * W + cam.yaw * 60 * f.z) % W + W) % W, y = ((f.y * H + cam.pitch * 40 * f.z) % H + H) % H;
+    ctx.fillStyle = `rgba(200,212,240,${0.08 + 0.26 * f.b * f.z})`; ctx.fillRect(x, y, f.z * 1.3, f.z * 1.3);
+  }
+  if (dustA > 0.01) {
+    for (let i = 0; i < dust.length; i++) {
+      const d = dust[i]; if (i / dust.length > dustT && chart.dust) continue;
+      const p = project(d.p), a = dustA * (0.22 + 0.18 * Math.sin(T / 1100 + d.tw));
+      ctx.fillStyle = `rgba(150,180,235,${a * Math.min(1, p.s * 1.2)})`; ctx.fillRect(p.x, p.y, 1.5 * p.s + 0.4, 1.5 * p.s + 0.4);
+    }
+  }
+  for (const n of Object.values(nodes)) n.proj = project(n.pos);
+  const lit = hover || (nodes[selected] ? selected : null);   // an observer's card lights nothing on the chart
+  const hl = lit ? neighbors(lit) : null;
+
+  for (const l of linkObjs) {
+    if (l.prog < 0.01) continue;
+    const A = nodes[l.c].proj, B = nodes[l.s].proj;
+    const ex = A.x + (B.x - A.x) * l.prog, ey = A.y + (B.y - A.y) * l.prog;
+    let alpha = 0.5 * l.fade * Math.min(nodes[l.c].a + 0.3, 1);
+    if (hl) alpha *= hl.has(l.c) && hl.has(l.s) ? 1.8 : 0.22;
+    ctx.save(); ctx.lineWidth = l.rel === 'contradicts' ? 1.7 : 1.1;
+    if (l.rel === 'supports') ctx.strokeStyle = `rgba(159,207,255,${alpha})`;
+    else if (l.rel === 'qualifies') { ctx.strokeStyle = `rgba(192,201,220,${alpha * 0.8})`; ctx.setLineDash([3, 5]); }
+    else { ctx.strokeStyle = `rgba(255,116,102,${alpha * 1.3})`; ctx.setLineDash([7, 4]); ctx.lineDashOffset = RM ? 0 : -T / 70; }
+    ctx.beginPath(); ctx.moveTo(A.x, A.y); ctx.lineTo(ex, ey); ctx.stroke(); ctx.restore();
+  }
+  for (const key of Object.keys(CLAIMS)) {
+    const n = nodes[key]; if (n.a < 0.02) continue; const Q = nodes.Q.proj;
+    ctx.strokeStyle = `rgba(150,170,210,${0.06 * n.a})`; ctx.lineWidth = 1; ctx.beginPath(); ctx.moveTo(Q.x, Q.y); ctx.lineTo(n.proj.x, n.proj.y); ctx.stroke();
+  }
+  // Sightlines: whoever is speaking looks from the deck at what they are talking about.
+  // With a claim open, the line stays joined to what it is about, unless the claim's window has covered the line.
+  if (P.i >= 0 && !P.ended && !P.explore && !P.cardFor && ($('inspector').hidden || $('line').style.visibility !== 'hidden')) {
+    const l = FLAT[P.i].l;
+    // In the cut's exchanges the agent answered looks at the same claim too, more faintly.
+    for (const ag of [agents[seatOf(l)], l.with && agents[l.with]]) if (ag && ag.slot.classList.contains('in') && P.t >= 0) {
+      const sp = seat(ag), str = Math.min(1, 0.35 + ag.speak) * (ag.id === seatOf(l) ? 1 : 0.6);
+      const targets = (l.focus || []).map((id) => (id === 'dust' ? project([0, -330, 120]) : nodes[id] && nodes[id].a > 0.08 ? nodes[id].proj : null)).filter(Boolean);
+      for (const t of targets) {
+        const g = ctx.createLinearGradient(sp.x, sp.y, t.x, t.y); g.addColorStop(0, hex(ag.color, 0.75 * str)); g.addColorStop(1, hex(ag.color, 0.3 * str));
+        ctx.save(); ctx.strokeStyle = g; ctx.lineWidth = 1.2; ctx.setLineDash([2, 5]); ctx.lineDashOffset = RM ? 0 : -T / 45; ctx.beginPath(); ctx.moveTo(sp.x, sp.y); ctx.lineTo(t.x, t.y); ctx.stroke(); ctx.restore();
+        ctx.strokeStyle = hex(ag.color, 0.55 * str); ctx.lineWidth = 1.2; ctx.beginPath(); ctx.arc(t.x, t.y, 13, 0, 6.283); ctx.stroke();
+      }
+    }
+  }
+
+  const order = Object.values(nodes).filter((n) => n.a > 0.01).sort((a, b) => b.proj.z - a.proj.z);
+  const labels = [];
+  for (const n of order) {
+    const p = n.proj, r = Math.max(0.5, n.r * p.s), dim = hl && !hl.has(n.id) ? 0.3 : 1, a = n.a * dim;
+    if (n.pulse > 0) { ctx.strokeStyle = `rgba(255,255,255,${n.pulse * 0.45 * a})`; ctx.lineWidth = 1.1; ctx.beginPath(); ctx.arc(p.x, p.y, r + 6 + (1 - n.pulse) * 24, 0, 6.283); ctx.stroke(); }
+    if (n.sel > 0.02) { ctx.strokeStyle = `rgba(255,255,255,${0.8 * n.sel})`; ctx.lineWidth = 1.4; ctx.beginPath(); ctx.arc(p.x, p.y, r + 7, 0, 6.283); ctx.stroke(); }
+    if (n.type === 'question') {
+      // The centre asks until the brief is approved, then answers: a question mark that turns into a check.
+      qAns += ((chart.verdict ? 1 : 0) - qAns) * k;
+      halo(p.x, p.y, r * 2.2, '#f4f7ff', 0.22 * a);
+      ctx.save(); ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+      if (qAns < 0.99) { ctx.font = `600 ${Math.max(9, Math.round(r * 1.25))}px "Bricolage Grotesque", sans-serif`; ctx.fillStyle = hex('#f4f7ff', a * (1 - qAns)); ctx.fillText('?', p.x, p.y + r * 0.06); }
+      if (qAns > 0.01) { ctx.strokeStyle = hex('#5fcfb8', a * qAns); ctx.lineWidth = Math.max(1.6, r * 0.16); ctx.lineCap = 'round'; ctx.lineJoin = 'round'; ctx.beginPath(); ctx.moveTo(p.x - r * 0.42, p.y + r * 0.02); ctx.lineTo(p.x - r * 0.12, p.y + r * 0.32); ctx.lineTo(p.x + r * 0.45, p.y - r * 0.3); ctx.stroke(); }
+      ctx.restore();
+      ctx.strokeStyle = hex('#f4f7ff', 0.65 * a); ctx.lineWidth = 1.4; ctx.beginPath(); ctx.arc(p.x, p.y, r, 0, 6.283); ctx.stroke();
+      ctx.strokeStyle = hex('#f4f7ff', 0.16 * a); ctx.beginPath(); ctx.arc(p.x, p.y, r * 1.9, 0, 6.283); ctx.stroke();
+      if (chart.verdict) { ctx.strokeStyle = hex('#5fcfb8', 0.45 * a); ctx.lineWidth = 1.8; ctx.beginPath(); ctx.arc(p.x, p.y, r * 2.6, 0, 6.283); ctx.stroke(); }
+    } else if (n.type === 'source') {
+      glowDot(p.x, p.y, r, '#f4f7ff', a, n.glow);
+      if (n.data.dupOf && !n.mergeTo) { ctx.strokeStyle = hex('#f0a43a', 0.7 * a); ctx.setLineDash([2, 3]); ctx.lineWidth = 1.1; ctx.beginPath(); ctx.arc(p.x, p.y, r + 5, 0, 6.283); ctx.stroke(); ctx.setLineDash([]); }
+      if ((n.id === 'trip' && chart.sources.trip2?.merged) || (n.id === 'us' && chart.sources.us2?.merged)) { ctx.strokeStyle = hex('#f4f7ff', 0.3 * a); ctx.lineWidth = 1; ctx.beginPath(); ctx.arc(p.x, p.y, r + 5, 0, 6.283); ctx.stroke(); }
+      if (n.crossref) { ctx.strokeStyle = hex('#5fcfb8', (0.45 + 0.25 * Math.sin(T / 600)) * a); ctx.lineWidth = 1.4; ctx.beginPath(); ctx.arc(p.x, p.y, r + 9, 0, 6.283); ctx.stroke(); }
+    } else {
+      const st = n.status;
+      if (st === 'removed' || st === 'unsupported') diamond(p.x, p.y, r * 1.25, null, '#7f8ba3', a);
+      else if (st === 'contested') {
+        halo(p.x, p.y, r * 4, '#ff7466', 0.32 * a);
+        ctx.save(); ctx.beginPath(); ctx.rect(p.x - r * 2, p.y - r * 2, r * 2, r * 4); ctx.clip(); diamond(p.x, p.y, r * 1.3, '#9fcfff', null, a); ctx.restore();
+        ctx.save(); ctx.beginPath(); ctx.rect(p.x, p.y - r * 2, r * 2, r * 4); ctx.clip(); diamond(p.x, p.y, r * 1.3, '#ff7466', null, a); ctx.restore();
+      } else {
+        const col = st === 'pending' || st === 'revising' || st === 'checking' ? '#f0a43a' : '#cfe4ff';
+        halo(p.x, p.y, r * 3.6, col, 0.3 * a * n.glow);
+        diamond(p.x, p.y, r * 1.25, col, null, a);
+        if (st === 'revising') { ctx.save(); ctx.setLineDash([2, 3]); diamond(p.x, p.y, r * 2.1, null, '#f0a43a', a * 0.8); ctx.restore(); }
+      }
+      if (st === 'removed') { ctx.strokeStyle = hex('#7f8ba3', a); ctx.lineWidth = 1.1; ctx.beginPath(); ctx.moveTo(p.x - r * 1.4, p.y - r * 1.4); ctx.lineTo(p.x + r * 1.4, p.y + r * 1.4); ctx.stroke(); }
+    }
+    const showLabel = n.type !== 'question' && (n.type === 'claim' || p.s > 0.62 || hl?.has(n.id) || n.sel > 0.1 || n.pulse > 0);
+    // Labels go on once every point is drawn, so they can make room for each other (scenario 314).
+    if (showLabel && a > 0.2) labels.push({ n, p, r, a, lit: hover === n.id || !!hl?.has(n.id) || n.sel > 0.1 || n.pulse > 0 });
+  }
+  drawLabels(labels);
+
+  // Observers on the deck. Bigger than any evidence point, each its own shape.
+  for (const ag of Object.values(agents)) {
+    ag.a += ((ag.met && !P.explore ? 1 : 0) - ag.a) * k;
+    ag.speak += (Math.max(ag.speakT, hoverAgent === ag.id ? 0.7 : 0) - ag.speak) * k;
+    if (ag.a < 0.02) continue;
+    const cv = ag.slot.querySelector('.ic'), outer = ctx;
+    const g2 = cv.getContext('2d'); g2.setTransform(1, 0, 0, 1, 0, 0); g2.clearRect(0, 0, cv.width, cv.height); g2.setTransform(2, 0, 0, 2, 0, 0);
+    // Draw into the avatar's own canvas with the same helpers.
+    ctx = g2;
+    const sp = { s: 1 }, R0 = 11;
+    let x = 20, y = 20;
+    if (ag.manner === 'restless' && !RM) { x += Math.sin(T / 170) * 1.6 + Math.sin(T / 53) * 0.7; y += Math.cos(T / 210) * 1.3; }
+    const A = ag.a * (ag.slot.classList.contains('away') ? 0.55 : 1);
+    if (ag.manner === 'steady') {
+      // Researcher: a calm eye that breathes.
+      const breath = RM ? 0.5 : 0.5 + 0.5 * Math.sin(T / 1400);
+      halo(x, y, R0 * (2.4 + breath * 0.5 + ag.speak), ag.color, (0.18 + ag.speak * 0.25) * A);
+      ctx.strokeStyle = hex(ag.color, A); ctx.lineWidth = 2.2 * sp.s; ctx.beginPath(); ctx.arc(x, y, R0 * 0.8, 0, 6.283); ctx.stroke();
+      ctx.fillStyle = hex(ag.color, A); ctx.beginPath(); ctx.arc(x, y, R0 * 0.42, 0, 6.283); ctx.fill();
+      ctx.fillStyle = hex('#ffffff', 0.9 * A); ctx.beginPath(); ctx.arc(x - R0 * 0.1, y - R0 * 0.1, R0 * 0.14, 0, 6.283); ctx.fill();
+    } else if (ag.manner === 'restless') {
+      // Skeptic: a sharp four-point star that flickers and never quite settles.
+      const flick = RM ? 1 : 0.82 + 0.18 * Math.sin(T / 37) * Math.sin(T / 91);
+      halo(x, y, R0 * (2.2 + ag.speak), ag.color, (0.2 + ag.speak * 0.25) * A * flick);
+      const rot = RM ? 0 : Math.sin(T / 900) * 0.12;
+      ctx.save(); ctx.translate(x, y); ctx.rotate(rot); ctx.beginPath();
+      for (let q = 0; q < 8; q++) { const ang = q * Math.PI / 4 - Math.PI / 2, rr = q % 2 ? R0 * 0.32 : R0 * 1.05; ctx.lineTo(Math.cos(ang) * rr, Math.sin(ang) * rr); }
+      ctx.closePath(); ctx.fillStyle = hex(ag.color, A * flick); ctx.fill(); ctx.restore();
+    } else if (ag.manner === 'code') {
+      // Checks: brackets. Code, not a character.
+      ctx.strokeStyle = hex(ag.color, A); ctx.lineWidth = 2 * sp.s; ctx.beginPath();
+      const w2 = R0 * 0.8, h2 = R0 * 0.75, t2 = R0 * 0.35;
+      ctx.moveTo(x - w2 + t2, y - h2); ctx.lineTo(x - w2, y - h2); ctx.lineTo(x - w2, y + h2); ctx.lineTo(x - w2 + t2, y + h2);
+      ctx.moveTo(x + w2 - t2, y - h2); ctx.lineTo(x + w2, y - h2); ctx.lineTo(x + w2, y + h2); ctx.lineTo(x + w2 - t2, y + h2); ctx.stroke();
+      ctx.fillStyle = hex(ag.color, A * (0.5 + 0.5 * ag.speak)); ctx.fillRect(x - R0 * 0.18, y - R0 * 0.18, R0 * 0.36, R0 * 0.36);
+    } else if (ag.manner === 'twin') {
+      // Analyst: the Researcher's twin. The same eye, looking the other way, with a second ring.
+      const breath = RM ? 0.5 : 0.5 + 0.5 * Math.sin(T / 1400 + Math.PI);
+      halo(x, y, R0 * (2.4 + breath * 0.5 + ag.speak), ag.color, (0.18 + ag.speak * 0.25) * A);
+      ctx.strokeStyle = hex(ag.color, A); ctx.lineWidth = 2.2; ctx.beginPath(); ctx.arc(x, y, R0 * 0.8, 0, 6.283); ctx.stroke();
+      ctx.save(); ctx.setLineDash([2, 3]); ctx.lineWidth = 1.2; ctx.beginPath(); ctx.arc(x, y, R0 * 1.05, 0, 6.283); ctx.stroke(); ctx.restore();
+      ctx.fillStyle = hex(ag.color, A); ctx.beginPath(); ctx.arc(x, y, R0 * 0.42, 0, 6.283); ctx.fill();
+      ctx.fillStyle = hex('#ffffff', 0.9 * A); ctx.beginPath(); ctx.arc(x + R0 * 0.1, y - R0 * 0.1, R0 * 0.14, 0, 6.283); ctx.fill();
+    } else if (ag.manner === 'lens') {
+      // Reviewer: a magnifying lens over a line of text.
+      halo(x, y, R0 * (2.2 + ag.speak), ag.color, (0.16 + ag.speak * 0.25) * A);
+      ctx.strokeStyle = hex(ag.color, 0.5 * A); ctx.lineWidth = 1.4; ctx.beginPath(); ctx.moveTo(x - R0 * 0.95, y + R0 * 0.1); ctx.lineTo(x + R0 * 0.2, y + R0 * 0.1); ctx.stroke();
+      ctx.strokeStyle = hex(ag.color, A); ctx.lineWidth = 2.2; ctx.beginPath(); ctx.arc(x - R0 * 0.15, y - R0 * 0.15, R0 * 0.55, 0, 6.283); ctx.stroke();
+      ctx.lineWidth = 2.8; ctx.beginPath(); ctx.moveTo(x + R0 * 0.25, y + R0 * 0.25); ctx.lineTo(x + R0 * 0.85, y + R0 * 0.85); ctx.stroke();
+    } else if (ag.manner === 'analyst') {
+      // Analyst: two overlapping rings, weighing one thing against another.
+      halo(x, y, R0 * (2.2 + ag.speak), ag.color, (0.18 + ag.speak * 0.25) * A);
+      const sway = RM ? 0 : Math.sin(T / 1700) * 1.2;
+      ctx.lineWidth = 2.2; ctx.strokeStyle = hex(ag.color, A);
+      ctx.beginPath(); ctx.arc(x - R0 * 0.36, y + sway, R0 * 0.6, 0, 6.283); ctx.stroke();
+      ctx.beginPath(); ctx.arc(x + R0 * 0.36, y - sway, R0 * 0.6, 0, 6.283); ctx.stroke();
+      ctx.save(); ctx.beginPath(); ctx.arc(x - R0 * 0.36, y + sway, R0 * 0.6, 0, 6.283); ctx.clip(); ctx.beginPath(); ctx.arc(x + R0 * 0.36, y - sway, R0 * 0.6, 0, 6.283); ctx.fillStyle = hex(ag.color, 0.75 * A); ctx.fill(); ctx.restore();
+    } else if (ag.id === 'scout') {
+      // Scout: a triangle, pointing the way.
+      halo(x, y, R0 * (2.2 + ag.speak), ag.color, (0.18 + ag.speak * 0.25) * A);
+      ctx.beginPath(); ctx.moveTo(x, y - R0); ctx.lineTo(x + R0 * 0.9, y + R0 * 0.62); ctx.lineTo(x - R0 * 0.9, y + R0 * 0.62); ctx.closePath(); ctx.fillStyle = hex(ag.color, A); ctx.fill();
+    } else if (ag.id === 'referee') {
+      // Referee: a diamond with a bar across it, as on home and About. It makes the call.
+      halo(x, y, R0 * (2.2 + ag.speak), ag.color, (0.18 + ag.speak * 0.25) * A);
+      ctx.strokeStyle = hex(ag.color, A); ctx.lineWidth = 2;
+      ctx.beginPath(); ctx.moveTo(x, y - R0); ctx.lineTo(x + R0, y); ctx.lineTo(x, y + R0); ctx.lineTo(x - R0, y); ctx.closePath(); ctx.stroke();
+      ctx.beginPath(); ctx.moveTo(x - R0 * 0.45, y); ctx.lineTo(x + R0 * 0.45, y); ctx.stroke();
+    } else {
+      // Editor: a page with a folded corner.
+      halo(x, y, R0 * (2.2 + ag.speak), ag.color, (0.18 + ag.speak * 0.25) * A);
+      const w2 = R0 * 0.72, h2 = R0 * 0.92, f = R0 * 0.36;
+      ctx.beginPath(); ctx.moveTo(x - w2, y - h2); ctx.lineTo(x + w2 - f, y - h2); ctx.lineTo(x + w2, y - h2 + f); ctx.lineTo(x + w2, y + h2); ctx.lineTo(x - w2, y + h2); ctx.closePath(); ctx.fillStyle = hex(ag.color, A); ctx.fill();
+      ctx.strokeStyle = hex('#05080f', 0.5 * A); ctx.lineWidth = 1.2; ctx.beginPath(); ctx.moveTo(x - w2 * 0.5, y); ctx.lineTo(x + w2 * 0.5, y); ctx.moveTo(x - w2 * 0.5, y + h2 * 0.4); ctx.lineTo(x + w2 * 0.3, y + h2 * 0.4); ctx.stroke();
+    }
+    if (ag.speak > 0.6 && !RM && P.t >= 0) { const w = (T / 1100) % 1; ctx.strokeStyle = hex(ag.color, (1 - w) * 0.6 * A); ctx.lineWidth = 1.2; ctx.beginPath(); ctx.arc(x, y, R0 * 1.15 + w * 6, 0, 6.283); ctx.stroke(); }
+    ctx = outer;
+  }
+  if (P.i >= 0 && FLAT[P.i].si === 1 && dustA > 0.05 && agents.researcher.a > 0.2) {
+    const p = seat(agents.researcher);
+    for (let i = 0; i < 9; i++) { const d = dust[(i * 97 + Math.floor(T / 800) * 13) % dust.length], q = project(d.p); ctx.strokeStyle = `rgba(121,184,255,${0.1 * dustA})`; ctx.lineWidth = 1; ctx.beginPath(); ctx.moveTo(p.x, p.y); ctx.lineTo(q.x, q.y); ctx.stroke(); }
+  }
+  placeCallout(dt);
+  requestAnimationFrame(frame);
+}
+
+// The transmission sits beside whoever is speaking: the agent, or for a check, the thing
+// being checked. A thin leader joins them.
+const co = { x: 0, y: 0, init: false, snap: true };   // snap: the line was hidden, so it is placed, not slid, as it shows
+function placeCallout(dt) {
+  const el = $('line');
+  if (P.i < 0 || el.style.opacity === '0') return;
+  const ag = agents[P.cardFor || seatOf(FLAT[P.i].l)], sp = seat(ag), deck = $('deck').getBoundingClientRect();
+  const w = el.offsetWidth, h = el.offsetHeight;
+  let x, y;
+  if (W <= 960) { x = Math.max(12, Math.min(W - 12 - w, sp.x - 24)); y = deck.bottom + 12; }
+  else { x = deck.right + 16; y = Math.max(128, Math.min(H - 80 - h, sp.y - 26)); }
+  // An open claim leaves the line open beside it, so the two can be read together; only where the claim's
+  // window would cover the line (a phone's bottom sheet) does the line step aside until it closes.
+  const insp = $('inspector');
+  if (!insp.hidden) {
+    const r = insp.getBoundingClientRect();
+    const covered = x < r.right && x + w > r.left && y < r.bottom && y + h > r.top;
+    el.style.visibility = covered ? 'hidden' : '';
+    if (covered) return;
+  } else el.style.visibility = '';
+  if (!co.init || RM || co.snap) { co.x = x; co.y = y; co.init = true; co.snap = false; } else { const k = 1 - Math.pow(0.002, dt / 1000); co.x += (x - co.x) * k; co.y += (y - co.y) * k; }
+  el.style.transform = `translate(${Math.round(co.x)}px, ${Math.round(co.y)}px)`;
+}
+
+for (const c of document.querySelectorAll('.legend canvas')) {
+  const g = c.getContext('2d'), kind = c.dataset.key; g.scale(2, 2);
+  const L = (col, dash) => { g.strokeStyle = col; g.lineWidth = 1.4; g.setLineDash(dash || []); g.beginPath(); g.moveTo(2, 9); g.lineTo(32, 9); g.stroke(); };
+  const D = (x, y, r, fill, stroke) => { g.beginPath(); g.moveTo(x, y - r); g.lineTo(x + r, y); g.lineTo(x, y + r); g.lineTo(x - r, y); g.closePath(); if (fill) { g.fillStyle = fill; g.fill(); } if (stroke) { g.strokeStyle = stroke; g.stroke(); } };
+  if (kind === 'source') { g.fillStyle = '#f4f7ff'; g.beginPath(); g.arc(9, 9, 6, 0, 6.283); g.fill(); g.beginPath(); g.arc(25, 9, 3, 0, 6.283); g.fill(); }
+  if (kind === 'claim') { D(9, 9, 6, '#cfe4ff'); D(25, 9, 6, 'rgba(207,228,255,0.5)'); }
+  if (kind === 'supports') L('#9fcfff');
+  if (kind === 'qualifies') L('#c0c9dc', [3, 4]);
+  if (kind === 'contradicts') L('#ff7466', [6, 3]);
+  if (kind === 'contested') { g.save(); g.beginPath(); g.rect(10, 0, 7, 18); g.clip(); D(17, 9, 7, '#9fcfff'); g.restore(); g.save(); g.beginPath(); g.rect(17, 0, 8, 18); g.clip(); D(17, 9, 7, '#ff7466'); g.restore(); }
+  if (kind === 'removed') { D(17, 9, 6, null, '#7f8ba3'); g.strokeStyle = '#7f8ba3'; g.beginPath(); g.moveTo(10, 2); g.lineTo(24, 16); g.stroke(); }
+}
+
+// The wordmark: THE OBSERVATORI, with an eyepiece for the O and the A and I lit as AI.
+const RETICLE = '<svg class="o" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9.2" fill="none" stroke="currentColor" stroke-width="3.2"/><path d="M12 2.8v4.4M12 16.8v4.4M2.8 12h4.4M16.8 12h4.4" stroke="currentColor" stroke-width="1.8"/></svg>';
+const WORDMARK = `<span class="sr" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)">The Observatori</span><span aria-hidden="true">observ<span class="ai">a</span>tor<span class="ai i2">i</span><span class="dot"></span></span>`;
+for (const el of document.querySelectorAll('[data-wm]')) el.innerHTML = WORDMARK;
+
+// The wordmark goes home: the page fades to night, then the home page fades in.
+const HOME_URL = '/';
+function goHome() {
+  try { window.top.location.href = HOME_URL; } catch { window.open(HOME_URL, '_blank', 'noopener'); }
+}
+document.querySelector('.masthead .home-link').addEventListener('click', (e) => {
+  if (e.metaKey || e.ctrlKey || e.shiftKey || e.button) return;   // new-tab clicks behave as links
+  e.preventDefault();
+  if (RM || document.body.classList.contains('homing')) { goHome(); return; }
+  document.body.classList.add('homing');
+  setTimeout(() => {
+    goHome();
+    // Still here a moment later (the home page opened in a new tab): show this page again.
+    setTimeout(() => document.body.classList.remove('homing'), 1500);
+  }, 400);   // once the fade has run
+});
+// Back from the home page (the browser may restore this page as it was left): show it again.
+addEventListener('pageshow', () => document.body.classList.remove('homing'));
+
+// Opening: everything in its own place, nothing flies. The wordmark rises in at the top left, then the question under
+// it, then the date line. Then, one at a time, each a slow fade in the place it stays (scenario 210, John, October 28,
+// 2026: "everything else kind of piles in"): the sky, the observers, the chapter bar, the buttons, the first line, and
+// the log under it once there is something in it. Times are milliseconds from the start; the opening pauses with the
+// play button. With reduced motion everything is there at once.
+const INTRO = [[600, showQuestion], [1300, showClock], [1900, () => reveal('#sky')], [2500, () => reveal('.deck')], [3000, () => reveal('.bar')],
+  [3500, () => reveal('.topright')], [4000, firstLine], [4600, () => reveal('.log')]], INTRO_TOTAL = 4600;
+function introSteps(from, to) { for (const [t, fn] of INTRO) if (from < t && t <= to) fn(); }
+const OPEN_UI = ['#sky', '.deck', '.bar', '.topright', '.log'];
+function reveal(...sels) { for (const sel of sels) document.querySelector(sel)?.classList.remove('opening-hide'); }
+function revealUI() { reveal(...OPEN_UI); }
+function firstLine() { if (P.i < 0) enter(0); }
+function startIntro(first) {
+  const q = $('question'), m = document.querySelector('.masthead');
+  setLine(null); for (const a of Object.values(agents)) { a.met = false; a.a = 0; a.slot.classList.remove('in', 'away', 'talking'); }
+  applyChart(blankChart(), true); P.i = -1; renderLog(-1); renderSteps();
+  if (RM) { P.intro = 0; m.classList.remove('pre', 'opening'); q.classList.remove('hidden-q'); revealUI(); firstLine(); return; }
+  // The wordmark only rises in on arrival; "Start over" keeps it, and the sky, where they are.
+  if (first) m.classList.add('pre');
+  m.classList.add('opening'); q.classList.add('hidden-q');
+  for (const sel of OPEN_UI) if (first || sel !== '#sky') document.querySelector(sel).classList.add('opening-hide');
+  void m.offsetWidth;   // commit the hidden state, so the first line animates in rather than appearing
+  m.classList.remove('pre');
+  P.intro = INTRO_TOTAL; P.playing = true; updatePaused();
+}
+function showQuestion() { $('question').classList.remove('hidden-q'); }
+function showClock() { document.querySelector('.masthead').classList.remove('opening'); }
+// Everything in at once (the opening's end, or skipped). Safe to repeat.
+function endIntro(silent) {
+  P.intro = 0;
+  document.querySelector('.masthead').classList.remove('pre'); showQuestion(); showClock(); revealUI();
+  if (!silent) firstLine();
+}
+
+$('clock').textContent = 'Oct 30, 2026';
+renderLog(-1); renderSteps();
+setLine(null);
+applyChart(blankChart(), true);
+requestAnimationFrame(frame);
+// A link ending in #finding (the home page's "Read the finding") opens straight on the answer.
+(document.fonts?.ready || Promise.resolve()).then(() => {
+  // Portfolio embed: #peek shows the finished room first, then blinks and plays from the start once in view.
+  if (location.hash === '#peek') {
+    endIntro(true);
+    if (RM) { goTo(0); return; }
+    finish(); clearTimeout(answerTimer);
+    const start = () => {
+      document.body.style.transition = 'opacity 160ms ease';
+      document.body.style.opacity = '0';
+      setTimeout(() => { goTo(0); document.body.style.opacity = '1'; }, 190);
+    };
+    const io = new IntersectionObserver((es) => { if (es[0].isIntersecting) { io.disconnect(); setTimeout(start, 1100); } }, { threshold: 0.35 });
+    io.observe(document.body);
+  }
+  else if (location.hash === '#finding') { endIntro(true); finish(); } else requestAnimationFrame(() => startIntro(true));
+});
+</script>
+<div class="grain" aria-hidden="true"></div>
+<script>document.addEventListener("click",function(e){var a=e.target.closest&&e.target.closest("a[href^='https://']");if(a){a.target="_blank";a.rel="noopener";}},true);</script></body>
+</html>

@@ -1646,13 +1646,19 @@ class Component extends DCLogic {
         },
         {
           t: 'media', width: 'full',
-          m: { embed: 'observatori/07/thread/#peek', ratio: 1.6, mRatio: 0.5, badge: 'Prototype · real investigation', caption: 'Investigation .07, "Is AI making people smarter, or dumbing them down?", as a 1.5-minute thematic cut that follows one argument from the real run.', alt: 'A 1.5-minute thematic cut of Observatori investigation .07, an interactive star chart of studies and claims', link: { label: 'Open the full investigation ↗', href: 'https://www.theobservatori.com/investigations/07/' } }
+          m: { embed: 'observatori/pilot/room-4/replay/#peek', ratio: 1.6, mRatio: 0.5, badge: 'Preview · current build', caption: 'The current build, in private preview: Claude hosts GPT, Gemini and Grok in a conversation about whether social media use is harming teenagers\' mental health. 22 turns and one research trip, every line in the model\'s own words.', alt: 'A replay of an Observatori room: four AI models in a hosted conversation, with the evidence they found charted as a constellation' }
+        },
+        {
+          t: 'text',
+          paras: [
+            'The latest direction is a room: the same models, in conversation, with research trips when they need evidence. Below is how the research format got here.'
+          ]
         },
         {
           t: 'facts',
           facts: [
             { k: 'My role', v: 'Founder. I came up with the concept, set the rules the lab runs by, designed how people follow and judge an investigation, and built it with Claude Code: writing the plans, reviewing what came back, and sending it back when it wasn\'t right.' },
-            { k: 'Status', v: 'Live at theobservatori.com as an early soft launch, with five published investigations.' },
+            { k: 'Status', v: 'Live at theobservatori.com as an early soft launch, with five published investigations. The room format is in private preview.' },
             { k: 'Built', v: 'October 2026.' }
           ]
         },
@@ -1679,11 +1685,12 @@ class Component extends DCLogic {
           ]
         },
         {
-          t: 'versions', width: 'wide', title: 'From characters to evidence',
+          t: 'versions', width: 'wide', title: 'From characters to conversation',
           items: [
             { label: 'First concept · Big If True', embed: 'observatori/prototypes/big-if-true.html', date: 'First concept.', note: 'A pixel-art lab where the agents are characters walking between rooms. The evidence was a backdrop.', badge: 'Explored concept' },
             { label: 'Star chart', embed: 'observatori/prototypes/constellation-v1.html', date: 'The switch.', note: 'The investigation as an evidence star chart: studies, claims and the lines between them.', badge: 'Prototype' },
             { label: 'Observers deck', embed: 'observatori/prototypes/constellation-v4-observers.html', date: 'The direction carried forward.', note: 'The agents move outside the chart and watch it, so the evidence stays the subject.', badge: 'Prototype' },
+            { label: 'Shorter edits', embed: 'observatori/07/thread/#peek', date: 'Shorter edits work better.', note: 'Investigation .07 cut to one argument in about 1.5 minutes, instead of the 8-minute edited replay.', badge: 'Prototype · real investigation' },
             { label: 'Debate format', embed: 'observatori/prototypes/debate-02/', date: 'The next experiment.', note: 'A debate format to make live runs more engaging: the agents argue one question in their own voices. Piloted, then taken off the public site while I evaluate it.', badge: 'Pilot' }
           ]
         },
@@ -1730,8 +1737,8 @@ class Component extends DCLogic {
         {
           t: 'text',
           paras: [
-            'I built Observatori in about a week. The direction moved quickly: the pixel lab became a star chart, a Skeptic and then a Referee joined, the site launched privately before going public, and the edited replay followed. When one run didn\'t answer its question, with 8 of 14 claims failing the number check, I took it down and tightened the checks.',
-            'It\'s live, but it hasn\'t been tested with an outside audience. What I want to learn next: whether people find the disagreement compelling or overwhelming, whether an edited replay builds trust, and which questions deserve a team rather than a single model.'
+            'I built Observatori in about a week. The direction moved quickly: the pixel lab became a star chart, a Skeptic and then a Referee joined, the site launched privately before going public, the edited replay followed, then shorter cuts, a debate pilot and the room format. When one run didn\'t answer its question, with 8 of 14 claims failing the number check, I took it down and tightened the checks.',
+            'It\'s live, but it hasn\'t been tested with an outside audience. What I want to learn next: whether people find the disagreement compelling or overwhelming, whether an edited replay builds trust, whether a conversation holds attention better than a research run, and which questions deserve a team rather than a single model.'
           ]
         },
         {
