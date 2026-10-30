@@ -3196,7 +3196,9 @@ class Component extends DCLogic {
         anchor: b.id || 'b' + i,
         accent: b.accent || accent,
         wrap: { padding: pad, marginTop: gapTop + 'px', boxSizing: 'border-box', scrollMarginTop: '132px' },
-        inner: { maxWidth: w, margin: '0 auto', width: '100%' },
+        inner: w === widths.text
+          ? { maxWidth: '760px', width: '100%', marginLeft: 'max(0px, calc((100% - 1200px) / 2))', marginRight: 'auto' }
+          : { maxWidth: w, margin: '0 auto', width: '100%' },
         paraStyle: { fontSize: mobile ? '17px' : '18px', lineHeight: 1.7, color: 'rgba(243,242,238,0.82)', margin: '0 0 18px', textWrap: 'pretty' },
         paras: (b.paras || []).map(p => this.storyRich(p)),
         isHero: b.t === 'hero', isChapter: b.t === 'chapter', isText: b.t === 'text', isMedia: b.t === 'media', isSplit: b.t === 'split',
@@ -3223,7 +3225,8 @@ class Component extends DCLogic {
       }
       if (b.t === 'chapter') {
         chapterN++;
-        o.num = String(chapterN).padStart(2, '0');
+        const navIdx = cs.subnav ? cs.subnav.items.findIndex(it => it.target === b.id) : -1;
+        o.num = cs.subnav ? (navIdx >= 0 ? String(navIdx + 1).padStart(2, '0') : '') : String(chapterN).padStart(2, '0');
         o.titleStyle = { fontFamily: "'Space Grotesk',sans-serif", fontWeight: 700, fontSize: 'clamp(2rem,4.6vw,3.6rem)', lineHeight: 1.02, letterSpacing: '-0.02em', margin: '22px 0 0', color: '#F3F2EE', maxWidth: '20ch', textWrap: 'balance' };
         o.ledeStyle = { fontSize: mobile ? '18px' : '21px', lineHeight: 1.5, color: 'rgba(243,242,238,0.7)', maxWidth: '52ch', margin: '20px 0 0', textWrap: 'pretty' };
       }
@@ -3294,7 +3297,7 @@ class Component extends DCLogic {
         const lastPlain = plain.length % 2 === 1 ? plain[plain.length - 1][0] : null;
         o.rows = b.rows.map(([k, v]) => ({ k, v, color: colors[k] || accent, style: { background: isEnd(k) ? '#10201A' : '#121212', padding: '20px 22px', gridColumn: !mobile && (isEnd(k) || k === lastPlain) ? '1 / -1' : 'auto' } }));
       }
-      if (b.t === 'quote') o.inner = { ...o.inner, margin: '0 auto', padding: '0 0 0 24px', borderLeft: '3px solid ' + (b.accent || accent) };
+      if (b.t === 'quote') o.inner = { ...o.inner, paddingLeft: '24px', borderLeft: '3px solid ' + (b.accent || accent) };
       if (b.t === 'cols') {
         const cc = ['#05D9E8', '#E8B84B', '#A594FF', '#7BD88F'];
         o.grid = { display: 'grid', gridTemplateColumns: mobile ? '1fr' : 'repeat(' + b.items.length + ', minmax(0,1fr))', gap: mobile ? '28px' : '36px' };
