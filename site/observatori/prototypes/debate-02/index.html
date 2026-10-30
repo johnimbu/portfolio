@@ -194,7 +194,15 @@ footer .note { flex-basis: 100%; margin: 0; color: var(--ink-3); font-size: 14px
   :is(.cta-primary, .play-btn, .cta-secondary, nav.top .links a.pill, .cta-tertiary, .finding-link), :is(.cta-primary, .play-btn, .cta-secondary, nav.top .links a.pill, .cta-tertiary, .finding-link) * { transform: none !important; }
 }
 </style>
-<style>/* portfolio embed: hide the site menu */ nav.top[aria-label="Site"] { visibility: hidden !important; }</style></head>
+<style>/* portfolio embed: a compact top so the debate itself is on screen */
+nav.top { display: none !important; }
+.open { padding-block: 18px 6px !important; }
+.open .kicker { margin-bottom: 8px !important; font-size: 10px !important; }
+.open h1 { font-size: clamp(18px, 1.9vw, 26px) !important; line-height: 1.2 !important; }
+.open .found, .open .label, .open .go { display: none !important; }
+.stage { gap: 12px !important; padding-block: 8px 16px !important; }
+.seat .br { display: none !important; }
+</style></head>
 <body>
 <nav class="top gut" aria-label="Site">
   <a class="wm" href="https://www.theobservatori.com/" aria-label="The Observatori, home">observatori<span class="dot" aria-hidden="true"></span></a>
@@ -312,10 +320,11 @@ function play() {
   stage.classList.add('playing');
   paused = false; ended = false;
   $('#pause').textContent = 'Pause';
-  stage.scrollIntoView({ behavior: RM ? 'auto' : 'smooth', block: 'start' });
   tick();
 }
 $('#watch').addEventListener('click', () => { at = -1; play(); });
+// portfolio embed: the debate starts when it's opened
+setTimeout(() => { at = -1; play(); }, 400);
 $('#pause').addEventListener('click', () => { paused = !paused; $('#pause').textContent = paused ? 'Play' : 'Pause'; if (!paused) tick(); else clearTimeout(timer); });
 $('#skip').addEventListener('click', () => { clearTimeout(timer); ending(); });
 for (const c of document.querySelectorAll('.chapters button')) c.addEventListener('click', () => {
